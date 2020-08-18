@@ -1,0 +1,7 @@
+<div class="table-of-content" id="tof" style="display: none;">
+    <ul>
+        {% for s in page.sub-sections%}
+        <li><a href="#{{ s.sub-section-title | downcase | replace: ' ', '-'}}">{{ s.sub-section-title }}</a></li>
+        {% endfor %}
+    </ul>
+</div>

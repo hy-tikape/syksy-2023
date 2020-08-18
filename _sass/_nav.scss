@@ -1,0 +1,129 @@
+.side-nav {
+    position: fixed;
+    width: 15em;
+    overflow-y: scroll;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    overflow-x: hidden;
+    background-color: rgb(255, 255, 255);
+    display: block;
+    overscroll-behavior: none;
+}
+
+.side-nav h2 {
+    text-align: center;
+    padding: 1em 1em 1em 1em;
+}
+
+.side-nav ol {
+    list-style-type: none;
+    padding-left: 0;
+    color: black;
+}
+
+nav a {
+    color: black;
+    text-decoration: none;
+    outline: none;
+    display: block;
+    padding: 0 0 0.5em 1em;
+}
+
+nav li:hover {
+    background-color: rgb(148, 148, 148);
+}
+
+.current {
+    background-color: rgb(209, 209, 209);
+  }
+
+.side-nav-obj {
+    display: block;
+    color: #000;
+}
+
+.side-nav-obj hr {
+    border: none;
+}
+
+.side-nav-sub-obj {
+    display: block;
+    color: #000;
+    padding-left: 1em;
+}
+
+.side-nav button {
+    display: none;
+}
+
+.side-nav #show {
+    display: none;
+}
+
+.side-nav-hidden {
+    position: fixed;
+    width: 4em;
+    overflow-y: hidden;
+    background-color: transparent;
+    overflow-x: hidden;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.side-nav-hidden button {
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    margin-top: 0;
+    overflow-x: hidden;
+    background-image: url(../img/menu-icon.svg);
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 4em;
+    width: 4em;
+}
+
+.side-nav-hidden h2 {
+    display: none;
+}
+
+.side-nav-hidden ol {
+    display: none;
+}
+
+.no-nav {
+    display: none;
+}
+
+.side-nav-hidden #hide {
+    display: none;
+}
+
+@media screen and (max-width: 500px) {
+
+    .side-nav button {
+        display: grid;
+        box-shadow: none;
+        border: none;
+        font-size: larger;
+        background-color: transparent;
+        margin: 1em 0 0 8em;
+    }
+
+    .side-nav-hidden button {
+        text-align: center;
+        background-color: transparent;
+        border: none;
+        font-size: 3em;
+        font-weight: bolder;
+        margin-top: 0;
+        height: 1em;
+        width: 1em;
+    }
+
+    .side-nav {
+        width: 13em;
+    }
+}

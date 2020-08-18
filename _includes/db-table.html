@@ -1,0 +1,13 @@
+<div class='db-table'>
+    {% assign a =   include.table | split:'|' %}
+    <table>
+        <thead>
+            <tr><th> {{ include.otsikko }}</th></tr>
+        </thead>
+        <tbody>
+{% tablerow b in a cols:3 %}
+{{ b }}
+{% endtablerow %}
+        </tbody>
+    </table>
+</div>

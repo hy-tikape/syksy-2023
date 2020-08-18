@@ -1,0 +1,28 @@
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>
+    {% if page.nav-title %}
+    {{page.nav-title}} - {{site.title}}
+    {% elsif page.title == site.title %}
+    {{page.title}}
+    {% else %}
+    {{page.title}} - {{site.title}}
+    {% endif %}
+  </title>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: {
+          scale: 87
+        }
+      });
+      </script>
+  <script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <link rel='stylesheet' type='text/css' media='screen' href={{ '/assets/css/main.css'  | relative_url }}>
+  <link rel='stylesheet' type='text/css' media='screen' href={{ '/assets/css/syntax.css'  | relative_url }}>
+
+  <script src={{ '/assets/js/main.js'  | relative_url }}></script>
+
+</head>
