@@ -758,7 +758,7 @@ SQLite-tulkki on ohjelma, jonka kautta voi käyttää SQLite-tietokantaa. Tulkki
 
 Jos käyttämälläsi koneella ei ole vielä SQLite-tulkkia, voit asentaa sen tästä:
 
-* https://www.sqlite.org/download.html
+* [https://www.sqlite.org/download.html](https://www.sqlite.org/download.html)
 
 Valitse oman käyttöjärjestelmäsi mukainen paketti, jonka vieressä on otsikko _command-line tools_ (eli komentorivityökalut). Tarvittava tiedosto on se, jonka nimi alkaa `sqlite3`.
 
