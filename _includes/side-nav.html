@@ -18,7 +18,6 @@
         {% if page.nav-title%}
         <li class="side-nav-obj" id="{{ page.nav-title }}nav"><a href="{{ page.url | relative_url }}">{{ page.nav-title }}</a></li>
         {% endif%}
-        r
         {% if page.sub-sections %}
             {% for s in page.sub-sections %}
             <li class="side-nav-sub-obj" id="{{ s.sub-section-title  }}nav"><a href="{{ page.url | relative_url }}#{{ s.sub-section-title | downcase | replace: ' ', '-' | remove: ':' }}">{{ s.sub-section-title }}</a></li>
