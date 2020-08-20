@@ -142,17 +142,15 @@ hakee tuotteet, joiden nimen osana esiintyy merkkijono "ri" (kuten nauris ja sel
 
 Lausekkeiden osana voi esiintyä myös funktioita samaan tapaan kuin ohjelmoinnissa. Tässä on esimerkkinä joitakin SQLiten funktioita:
 
-funktio | toiminta
-------- | -------
-`ABS(x)` | antaa luvun `x` itseisarvon
-`LENGTH(s)` | antaa merkkijonon `s` pituuden
-`LOWER(s)` | muuttaa merkkijonon `s` kirjaimet pieniksi
-`MAX(x,y)` | antaa suuremman luvuista `x` ja `y`
-`MIN(x,y)` | antaa pienemmän luvuista `x` ja `y`
-`RANDOM()` | antaa satunnaisen luvun
-`ROUND(x,d)` | antaa luvun `x` pyöristettynä `d` desimaalin tarkkuudelle
-`SUBSTR(s,a,b)` | antaa merkkijonon `s` kohdasta `a` alkaen `b` merkkiä
-`UPPER(s)` | muuttaa merkkijonon `s` kirjaimet suuriksi
+* `ABS(x)` antaa luvun `x` itseisarvon
+* `LENGTH(s)` antaa merkkijonon `s` pituuden
+* `LOWER(s)` muuttaa merkkijonon `s` kirjaimet pieniksi
+* `MAX(x,y)` antaa suuremman luvuista `x` ja `y`
+* `MIN(x,y)` antaa pienemmän luvuista `x` ja `y`
+* `RANDOM()` antaa satunnaisen luvun
+* `ROUND(x,d)` antaa luvun `x` pyöristettynä `d` desimaalin tarkkuudelle
+* `SUBSTR(s,a,b)` antaa merkkijonon `s` kohdasta `a` alkaen `b` merkkiä
+* `UPPER(s)` muuttaa merkkijonon `s` kirjaimet suuriksi
 
 Esimerkiksi kysely
 
