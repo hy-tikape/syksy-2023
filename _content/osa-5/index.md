@@ -368,6 +368,19 @@ SELECT SUM(S.op) FROM Suoritukset S, Opiskelijat O WHERE S.opiskelija_id=O.id AN
 
 Tämä on kuitenkin kokonaisuutena hyvä muutos, koska nyt voimme huoletta muutella suorituksia ja luottaa siihen, että saamme aina haettua oikean tiedon opiskelijan opintopisteistä.
 
+### Muutokset vs. kyselyt
+
+Vaikka ihanteena on, että tietokannassa ei ole toisteista tietoa, joskus kuitenkin toisteista tietoa tarvitaan hakujen tehostamiseksi. Toisteinen tieto vaikeuttaa tietokannan muuttamista mutta helpottaa kyselyjen tekemistä.
+
+Usein esiintyvä ilmiö tietojenkäsittelytieteessä on, että joudumme tasapainoilemaan sen kanssa,
+haluammeko muuttaa vai hakea tehokkaasti tietoa ja paljonko tilaa voimme käyttää. Tämä tulee tietokantojen lisäksi vastaan esimerkiksi algoritmien suunnittelussa.
+
+Jos tietokannassa ei ole toisteista tietoa, muutokset ovat helppoja, koska jokainen tieto on vain yhdessä paikassa eli riittää muuttaa vain yhden taulun yhtä riviä. Myös hyvänä puolena tietokanta vie vähän tilaa. Toisaalta kyselyt voivat olla monimutkaisia ja hitaita, koska halutut tiedot pitää kerätä kasaan eri puolilta tietokantaa.
+
+Kun sitten lisäämme toisteista tietoa, pystymme nopeuttamaan kyselyjä mutta toisaalta muutokset hidastuvat, koska muutettu tieto pitää päivittää useaan paikkaan. Samaan aikaan myös tietokannan tilankäyttö kasvaa toisteisen tiedon takia.
+
+Ei ole mitään yleistä sääntöä, paljonko toisteista tietoa kannattaa lisätä, vaan tämä riippuu tietokannan sisällöstä ja halutuista kyselyistä. Yksi hyvä tapa on aloittaa tilanteesta, jossa toisteista tietoa ei ole, ja lisätä sitten toisteista tietoa tarvittaessa, jos osoittautuu, että kyselyt eivät muuten ole riittävän tehokkaita.
+
 ## Lisää suunnittelusta
 
 Tässä luvussa esitellyt periaatteet ovat hyödyllisiä ja johtavat usein toimiviin ratkaisuihin,

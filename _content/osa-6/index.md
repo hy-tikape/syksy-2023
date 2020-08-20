@@ -506,18 +506,7 @@ että kun taulun sisältö muuttuu, niin muutos täytyy myös päivittää kaikk
 Hyvä syy indeksin luontiin on, että haluamme suorittaa usein tietynlaisia kyselyitä ja ne toimivat hitaasti, koska tietokantajärjestelmä joutuu käymään läpi turhaan jonkin taulun kaikki rivit kyselyn aikana. Tällöin voimme lisätä taululle indeksin, jonka avulla tällaiset kyselyt toimivat jatkossa tehokkaasti.
 
 Indekseillä on käytännössä suuri vaikutus tietokantojen tehokkuuteen. Moni tietokanta toimii hitaasti sen takia, että siitä puuttuu oleellisia indeksejä.
+le riittävän tehokkaita.
 
-### Muutokset vs. kyselyt
-
-Usein esiintyvä ilmiö tietojenkäsittelytieteessä on, että joudumme tasapainoilemaan sen kanssa,
-haluammeko muuttaa vai hakea tehokkaasti tietoa ja paljonko tilaa voimme käyttää. Tämä tulee tietokantojen lisäksi vastaan esimerkiksi algoritmien suunnittelussa.
-
-Jos tietokannassa ei ole toisteista tietoa, muutokset ovat helppoja, koska jokainen tieto on vain yhdessä paikassa eli riittää muuttaa vain yhden taulun yhtä riviä. Myös hyvänä puolena tietokanta vie vähän tilaa. Toisaalta kyselyt voivat olla monimutkaisia ja hitaita,
-koska halutut tiedot pitää kerätä kasaan eri puolilta tietokantaa.
-
-Kun sitten lisäämme toisteista tietoa, pystymme nopeuttamaan kyselyjä mutta toisaalta muutokset hidastuvat, koska muutettu tieto pitää päivittää useaan paikkaan. Samaan aikaan myös tietokannan tilankäyttö kasvaa toisteisen tiedon takia.
-
-Ei ole mitään yleistä sääntöä, paljonko toisteista tietoa kannattaa lisätä, vaan tämä riippuu tietokannan sisällöstä ja halutuista kyselyistä. Yksi hyvä tapa on aloittaa tilanteesta, jossa toisteista tietoa ei ole, ja lisätä sitten toisteista tietoa tarvittaessa, jos osoittautuu, että kyselyt eivät muuten ole riittävän tehokkaita.
-
-Huomaa, että indeksit ovat myös yksi esimerkki siitä, miten toisteinen tieto voi tehostaa kyselyjä. Niissä kuitenkaan toisteista tietoa ei tallenneta tauluun vaan
+Huomaa, että indeksit ovat myös yksi esimerkki siitä, miten toisteinen tieto voi tehostaa kyselyjä. Indekseissä kuitenkaan toisteista tietoa ei tallenneta tauluun vaan
 taulun ulkopuolelle erilliseen hakemistorakenteeseen.

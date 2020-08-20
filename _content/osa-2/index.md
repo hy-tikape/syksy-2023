@@ -1,12 +1,12 @@
 ---
-nav-title: 2. SQL:n perusteet
+nav-title: 2. SQL-kielen perusteet
 sub-sections:
       - sub-section-title: Peruskomennot
       - sub-section-title: Yhteenveto ja ryhmittely
       - sub-section-title: SQLite-tietokanta
 ---
 
-# 2. SQL:n perusteet
+# 2. SQL-kielen perusteet
 
 ## Peruskomennot
 

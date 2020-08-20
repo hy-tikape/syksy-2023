@@ -1,5 +1,5 @@
 ---
-nav-title: 4. Lisää SQL:stä
+nav-title: 4. Lisää SQL-kielestä
 sub-sections:
       - sub-section-title: Tyypit ja lausekkeet
       - sub-section-title: NULL-arvot
@@ -7,7 +7,7 @@ sub-sections:
       - sub-section-title: Lisää tekniikoita
 ---
 
-# 4. Lisää SQL:stä
+# 4. Lisää SQL-kielestä
 
 ## Tyypit ja lausekkeet
 
