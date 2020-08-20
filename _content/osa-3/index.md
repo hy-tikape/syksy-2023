@@ -1,12 +1,12 @@
 ---
-nav-title: Monen taulun kyselyt
+nav-title: 3. Monen taulun kyselyt
 sub-sections:
       - sub-section-title: Taulujen viittaukset
       - sub-section-title: Liitostaulut
       - sub-section-title: JOIN-syntaksi
 ---
 
-# Monen taulun kyselyt
+# 3. Monen taulun kyselyt
 
 ## Taulujen viittaukset
 
