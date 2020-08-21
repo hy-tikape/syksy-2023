@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Tieto&shy;kantojen perusteet
+title: Tietokantojen perusteet <br> syksy 2020
 ---
 
 # Tietoa kurssista

@@ -4,8 +4,8 @@
   <title>
     {% if page.nav-title %}
     {{page.nav-title}} - {{site.title}}
-    {% elsif page.title == site.title %}
-    {{page.title}}
+    {% elsif page.layout == "default" %}
+    {{site.title}}
     {% else %}
     {{page.title}} - {{site.title}}
     {% endif %}
