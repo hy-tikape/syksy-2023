@@ -400,7 +400,7 @@ id          nimi
 
 Voisimme myös tallentaa etu- ja sukunimen erikseen näin:
 
-```x
+```
 id          etunimi     sukunimi  
 ----------  ----------  ----------
 1           Anna        Virtanen
