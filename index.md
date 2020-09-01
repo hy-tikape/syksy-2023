@@ -17,7 +17,7 @@ Jos suoritat kurssin Avoimen yliopiston kautta, saat ohjeet kurssisuorituksen re
 
 ## Luento ja ohjaus
 
-Kurssilla on yksi luento: verkkoluento ti 1.9.2020 klo 14–16. Luennon tarkoituksena on antaa yleiskuva kurssin aiheista ja suoritustavasta. [Linkki luentoon](https://helsinki.zoom.us/j/66550718743?pwd=dGVmbFAwaU55b0x4VUpsRW9PMzgyQT09)
+Kurssilla on yksi luento: verkkoluento ti 1.9.2020 klo 14–16. Luennon tarkoituksena on antaa yleiskuva kurssin aiheista ja suoritustavasta. [Luentotallenne](https://www.helsinki.fi/fi/unitube/video/c0bde27b-5967-4514-bb49-eb36fb548cd3)
 
 Kurssin Telegram-ryhmässä voit keskustella netissä muiden opiskelijoiden ja kurssin järjestäjien kanssa. [Liity ryhmään](https://t.me/tkt_tikape)
 
