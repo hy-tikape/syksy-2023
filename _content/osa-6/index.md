@@ -506,7 +506,6 @@ että kun taulun sisältö muuttuu, niin muutos täytyy myös päivittää kaikk
 Hyvä syy indeksin luontiin on, että haluamme suorittaa usein tietynlaisia kyselyitä ja ne toimivat hitaasti, koska tietokantajärjestelmä joutuu käymään läpi turhaan jonkin taulun kaikki rivit kyselyn aikana. Tällöin voimme lisätä taululle indeksin, jonka avulla tällaiset kyselyt toimivat jatkossa tehokkaasti.
 
 Indekseillä on käytännössä suuri vaikutus tietokantojen tehokkuuteen. Moni tietokanta toimii hitaasti sen takia, että siitä puuttuu oleellisia indeksejä.
-le riittävän tehokkaita.
 
 Huomaa, että indeksit ovat myös yksi esimerkki siitä, miten toisteinen tieto voi tehostaa kyselyjä. Indekseissä kuitenkaan toisteista tietoa ei tallenneta tauluun vaan
 taulun ulkopuolelle erilliseen hakemistorakenteeseen.
