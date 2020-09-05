@@ -11,7 +11,7 @@ sub-sections:
 
 ## Tyypit ja lausekkeet
 
-SQL-kielessä esiintyy tyyppejä ja lausekkeita  samaan tapaan kuin ohjelmoinnissa. Olemme jo nähneet monia esimerkkejä SQL-komennoista, mutta nyt on hyvä hetki tutustua syvällisemmin kielen rakenteeseen.
+SQL-kielessä esiintyy tyyppejä ja lausekkeita samaan tapaan kuin ohjelmoinnissa. Olemme jo nähneet monia esimerkkejä SQL-komennoista, mutta nyt on hyvä hetki tutustua syvällisemmin kielen rakenteeseen.
 
 Jokainen tietokantajärjestelmä toteuttaa tyypit ja lausekkeet vähän omalla tavallaan ja tietokantojen toiminnassa on paljon pieniä eroja. Niinpä aiheeseen liittyvät yksityiskohdat kannattaa tarkastaa käytetyn tietokannan dokumentaatiosta.
 
@@ -182,7 +182,7 @@ SELECT * FROM Tuotteet ORDER BY 1;
 
 rivit järjestetään lausekkeen `1` mukaan. Koska lausekkeen arvo on joka rivillä `1`, tämä ei tuottaisi mitään erityistä järjestystä. Näin ei kuitenkaan ole, vaan `1` järjestää rivit ensimmäisen sarakkeen mukaan, `2` toisen sarakkeen mukaan, jne. Tämä on siis vaihtoehtoinen tapa ilmaista sarake, johon järjestys perustuu.
 
-Kuitenkin jos lauseke on jotain muuta kuin yksittäinen luku (kuten `RANDOM()`), rivit järjestetään kyseisen lausekkeen mukaisesti.
+Kuitenkin jos `ORDER BY` -osassa oleva lauseke on jotain muuta kuin yksittäinen luku (kuten `RANDOM()`), rivit järjestetään kyseisen lausekkeen mukaisesti.
 
 ## NULL-arvot
 
@@ -261,7 +261,7 @@ Koska Dumbolla ei ole vuotta, emme saa sitä kummassakaan kyselyssä, mikä on y
 SELECT * FROM Elokuvat WHERE vuosi IS NULL;
 ```
 
-```x
+```
 id          nimi        vuosi     
 ----------  ----------  ----------
 4           Dumbo            
@@ -389,7 +389,12 @@ id          nimi        tulos
 Haluamme nyt selvittää ne pelaajat, jotka ovat saavuttaneet korkeimman tuloksen, eli kyselyn tulisi palauttaa Uolevi ja Liisa. Saamme tämän aikaan alikyselyllä seuraavasti:
 
 ```sql
-SELECT nimi, tulos FROM Tulokset WHERE tulos = (SELECT MAX(tulos) FROM Tulokset);
+SELECT
+  nimi, tulos
+FROM
+  Tulokset
+WHERE
+  tulos = (SELECT MAX(tulos) FROM Tulokset);
 ```
 
 Kyselyn tuloksena on:
@@ -401,7 +406,7 @@ Uolevi      120
 Liisa       120       
 ```
 
-Tässä tapauksessa alikysely on `SELECT MAX(tulos) FROM Tulokset`, joka antaa suurimman taulussa olevan tuloksen eli tässä tapauksessa arvon 120. Huomaa, että alikysely tulee kirjoittaa sulkujen sisään, jotta se ei sekoitu pääkyselyyn.
+Tässä kyselyssä alikysely on `SELECT MAX(tulos) FROM Tulokset`, joka antaa suurimman taulussa olevan tuloksen eli tässä tapauksessa arvon 120. Huomaa, että alikysely tulee kirjoittaa sulkujen sisään, jotta se ei sekoitu pääkyselyyn.
 
 ### Alikyselyn laatiminen
 
@@ -412,7 +417,10 @@ Alikysely voi esiintyä melkein missä tahansa kohtaa kyselyssä, ja se voi tila
 Seuraavassa kyselyssä alikyselyn avulla luodaan kolmas sarake, joka näyttää pelaajan tuloksen eron ennätystulokseen:
 
 ```sql
-SELECT nimi, tulos, (SELECT MAX(tulos) FROM Tulokset)-tulos FROM Tulokset;
+SELECT
+  nimi, tulos, (SELECT MAX(tulos) FROM Tulokset)-tulos
+FROM
+  Tulokset;
 ```
 
 ```
@@ -431,7 +439,10 @@ Seuraavassa kyselyssä alikysely luo taulun, jossa on kolme parasta tulosta.
 Näiden tulosten summa (120+120+115) lasketaan pääkyselyssä.
 
 ```sql
-SELECT SUM(tulos) FROM (SELECT * FROM Tulokset ORDER BY tulos DESC LIMIT 3);
+SELECT
+  SUM(tulos)
+FROM
+  (SELECT * FROM Tulokset ORDER BY tulos DESC LIMIT 3);
 ```
 
 ```
@@ -439,6 +450,8 @@ SUM(tulos)
 ----------
 355
 ```
+
+Tässä avainsana `LIMIT` rajaa tulostaulua niin, että siinä on vain kolme ensimmäistä riviä.
 
 Huomaa, että yhtä kyselyä käyttämällä saisimme väärän tuloksen:
 
@@ -452,16 +465,19 @@ SUM(tulos)
 480     
 ```
 
-Tässä tulostaulussa on vain yksi rivi, jossa on kaikkien tulosten summa (480).
-Niinpä kyselyn lopussa oleva `LIMIT 3` ei vaikuta mitenkään tulokseen.
+Tässä tulostaulussa on vain yksi rivi, jossa on kaikkien tulosten summa (480). Niinpä kyselyn lopussa oleva `LIMIT 3` ei vaikuta mitenkään tulokseen.
 
 #### Alikysely listana
 
-Seuraava kysely hakee pelaajat, joiden tulos kuuluu kolmen parhaimman joukkoon.
-Alikysely palauttaa listan tuloksista IN-lauseketta varten.
+Seuraava kysely hakee pelaajat, joiden tulos kuuluu kolmen parhaimman joukkoon. Alikysely palauttaa listan tuloksista IN-lauseketta varten.
 
 ```sql
-SELECT nimi FROM Tulokset WHERE tulos IN (SELECT tulos FROM Tulokset ORDER BY tulos DESC LIMIT 3);
+SELECT
+  nimi
+FROM
+  Tulokset
+WHERE
+  tulos IN (SELECT tulos FROM Tulokset ORDER BY tulos DESC LIMIT 3);
 ```
 
 ```
@@ -477,7 +493,10 @@ Kaaleppi
 Alikysely on mahdollista toteuttaa myös niin, että sen toiminta riippuu pääkyselyssä käsiteltävästä rivistä. Näin on seuraavassa kyselyssä:
 
 ```sql
-SELECT nimi, tulos, (SELECT COUNT(*) FROM Tulokset WHERE tulos > T.tulos) FROM Tulokset T;
+SELECT
+  nimi, tulos, (SELECT COUNT(*) FROM Tulokset WHERE tulos > T.tulos)
+FROM
+  Tulokset T;
 ```
 
 Tämän kysely laskee jokaiselle pelaajalle, monenko pelaajan tulos on parempi kuin pelaajan oma tulos. Esimerkiksi Maijalle vastaus on 3, koska Uolevin, Liisan ja Kaalepin tulos on parempi. Kysely antaa seuraavan tuloksen:
@@ -499,18 +518,28 @@ Koska taulu `Tulokset` esiintyy kahdessa roolissa alikyselyssä, pääkyselyn ta
 Melko usein alikysely on vaihtoehtoinen tapa toteuttaa kysely, jonka voisi tehdä jotenkin muutenkin. Esimerkiksi molemmat seuraavat kyselyt hakevat tuotteiden nimet asiakkaan 1 ostoskorissa:
 
 ```sql
-SELECT T.nimi FROM Tuotteet T, Ostokset O WHERE T.id = O.tuote_id AND O.asiakas_id = 1;
+SELECT
+  T.nimi
+FROM
+  Tuotteet T, Ostokset O
+WHERE
+  T.id = O.tuote_id AND O.asiakas_id = 1;
 ```
 
 ```sql
-SELECT nimi FROM Tuotteet WHERE id IN (SELECT tuote_id FROM Ostokset WHERE asiakas_id = 1);
+SELECT
+  nimi
+FROM
+  Tuotteet
+WHERE
+  id IN (SELECT tuote_id FROM Ostokset WHERE asiakas_id = 1);
 ```
 
 Ensimmäinen kysely on tyypillinen kahden taulun kysely, kun taas toinen kysely valikoi tuotteet alikyselyn avulla. Kumpi kysely on parempi?
 
 Ensimmäinen kysely on parempi, koska tämä on tarkoitettu tapa hakea SQL:ssä tietoa tauluista viittausten avulla. Toinen kysely toimii sinänsä, mutta se poikkeaa totutusta eikä tietokantajärjestelmä myöskään pysty ehkä suorittamaan sitä yhtä tehokkaasti.
 
-Alikyselyä kannattaa käyttää vain silloin, kun siihen on todellinen syy. Jos kyselyn voi tehdä usean taulun kyselyllä, tämä on yleensä parempi ratkaisu.
+Alikyselyä kannattaa käyttää vain silloin, kun siihen on todellinen syy. Jos kyselyn voi tehdä helposti usean taulun kyselyllä, tämä on yleensä parempi ratkaisu.
 
 ## Lisää tekniikoita
 
@@ -599,9 +628,7 @@ CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT);
 ALTER TABLE Tuotteet ADD COLUMN hinta INTEGER;
 ```
 
-Tietokannan rakenteen muuttuminen on tavallinen asia sovelluksen kehityksessä. Jos sovellus on jo käytössä, tämä ei ole välttämättä helppoa, koska tauluissa on tietoa, jota käyttäjät käsittelevät.
-
-_Migraatio_ tarkoittaa prosessia, jonka avulla hallitaan tietokannan muutoksia ja niiden käyttöönottoa. Tutustumme aiheeseen tarkemmin tulevilla kursseilla.
+Tietokannan rakenteen muuttuminen on tavallinen asia sovelluksen kehityksessä. Jos sovellus on jo käytössä, tämä ei ole välttämättä helppoa, koska tauluissa on tietoa, jota käyttäjät käsittelevät. _Migraatio_ tarkoittaa prosessia, jonka avulla hallitaan tietokannan muutoksia ja niiden käyttöönottoa. Tutustumme aiheeseen tarkemmin tulevilla kursseilla.
 
 ### Näkymät
 

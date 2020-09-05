@@ -42,9 +42,12 @@ id          nimi              opettaja_id
 Voimme nyt hakea kurssit opettajineen seuraavalla kyselyllä, joka hakee tietoa samaan aikaan tauluista `Kurssit` ja `Opettajat`:
 
 ```sql
-SELECT Kurssit.nimi, Opettajat.nimi
-FROM Kurssit, Opettajat
-WHERE Kurssit.opettaja_id = Opettajat.id;
+SELECT
+  Kurssit.nimi, Opettajat.nimi
+FROM
+  Kurssit, Opettajat
+WHERE
+  Kurssit.opettaja_id = Opettajat.id;
 ```
 
 Koska kyselyssä on monta taulua, ilmoitamme sarakkeiden taulut. Esimerkiksi `Kurssit.nimi` viittaa taulun `Kurssit` sarakkeeseen `nimi`.
@@ -70,7 +73,10 @@ Ideana on, että kun kyselyssä on monta taulua, kyselyn tulosrivien lähtökoht
 Hyvä tapa saada ymmärrystä monen taulun kyselyn toiminnasta on tarkastella ensin kyselyä, joka hakee kaikki sarakkeet ja jossa ei ole `WHERE`-osaa. Yllä olevassa esimerkkitilanteessa tällainen kysely on seuraava:
 
 ```sql
-SELECT * FROM Kurssit, Opettajat;
+SELECT
+  *
+FROM
+  Kurssit, Opettajat;
 ```
 
 Koska taulussa `Kurssit` on 5 riviä ja taulussa `Opettajat` on 4 riviä, kyselyn tulostaulussa on 5 * 4 = 20 riviä. Tulostaulu sisältää kaikki mahdolliset tavat valita ensin jokin rivi taulusta `Kurssit` ja sitten jokin rivi taulusta `Opettajat`:
@@ -103,8 +109,12 @@ id          nimi              opettaja_id  id          nimi
 Suurin osa tulosriveistä ei ole kuitenkaan kiinnostavia, koska ne eivät liity toisiinsa mitenkään. Esimerkiksi ensimmäinen tulosrivi kertoo vain, että on olemassa kurssi Laskennan mallit ja toisaalta on olemassa opettaja Kaila. Tämän vuoksi rajaamme hakua niin, että opettajan id-numeron tulee olla sama kummankin taulun riveissä:
 
 ```sql
-SELECT * FROM Kurssit, Opettajat
-WHERE Kurssit.opettaja_id = Opettajat.id;
+SELECT
+  *
+FROM
+  Kurssit, Opettajat
+WHERE
+  Kurssit.opettaja_id = Opettajat.id;
 ```
 
 Tämän seurauksena kysely alkaa antaa mielekkäitä tuloksia:
@@ -119,12 +129,15 @@ id          nimi              opettaja_id  id          nimi
 5           Tietorakenteet j  3            3           Kivinen   
 ```
 
-Tämän jälkeen voimme vielä parantaa kyselyä ilmoittamalla meitä kiinnostavat sarakkeet:
+Tämän jälkeen voimme vielä parantaa kyselyä valitsemalla meitä kiinnostavat sarakkeet:
 
 ```sql
-SELECT Kurssit.nimi, Opettajat.nimi
-FROM Kurssit, Opettajat
-WHERE Kurssit.opettaja_id = Opettajat.id;
+SELECT
+  Kurssit.nimi, Opettajat.nimi
+FROM
+  Kurssit, Opettajat
+WHERE
+  Kurssit.opettaja_id = Opettajat.id;
 ```
 
 Näin päädymme samaan tulokseen kuin aiemmin:
@@ -144,9 +157,12 @@ Tietorakenteet j  Kivinen
 Monen taulun kyselyissä `WHERE`-osa kytkee toisiinsa meitä kiinnostavat taulujen rivit, mutta lisäksi voimme laittaa `WHERE`-osaan muita ehtoja samaan tapaan kuin ennenkin. Esimerkiksi voimme suorittaa seuraavan kyselyn:
 
 ```sql
-SELECT Kurssit.nimi, Opettajat.nimi
-FROM Kurssit, Opettajat
-WHERE Kurssit.opettaja_id = Opettajat.id AND Opettajat.nimi = 'Kivinen';
+SELECT
+  Kurssit.nimi, Opettajat.nimi
+FROM
+  Kurssit, Opettajat
+WHERE
+  Kurssit.opettaja_id = Opettajat.id AND Opettajat.nimi = 'Kivinen';
 ```
 
 Näin saamme haettua kurssit, joiden opettajana on Kivinen:
@@ -163,25 +179,34 @@ Tietorakenteet j  Kivinen
 Voimme tiivistää monen taulun kyselyä antamalla tauluille vaihtoehtoiset lyhyet nimet, joiden avulla voimme viitata niihin kyselyssä. Esimerkiksi kysely
 
 ```sql
-SELECT Kurssit.nimi, Opettajat.nimi
-FROM Kurssit, Opettajat
-WHERE Kurssit.opettaja_id = Opettajat.id;
+SELECT
+  Kurssit.nimi, Opettajat.nimi
+FROM
+  Kurssit, Opettajat
+WHERE
+  Kurssit.opettaja_id = Opettajat.id;
 ```
 
 voidaan esittää lyhemmin näin:
 
 ```sql
-SELECT K.nimi, O.nimi
-FROM Kurssit AS K, Opettajat AS O
-WHERE K.opettaja_id = O.id;
+SELECT
+  K.nimi, O.nimi
+FROM
+  Kurssit AS K, Opettajat AS O
+WHERE
+  K.opettaja_id = O.id;
 ```
 
-Itse asiassa sana `AS` ei ole pakollinen, eli voimme lyhentää kyselyä lisää:
+Sana `AS` ei ole pakollinen, eli voimme lyhentää kyselyä lisää:
 
 ```sql
-SELECT K.nimi, O.nimi
-FROM Kurssit K, Opettajat O
-WHERE K.opettaja_id = O.id;
+SELECT
+  K.nimi, O.nimi
+FROM
+  Kurssit K, Opettajat O
+WHERE
+  K.opettaja_id = O.id;
 ```
 
 ### Saman taulun toistaminen
@@ -227,24 +252,27 @@ Taulujen välillä esiintyy yleensä kahdenlaisia suhteita:
    Taulun A rivi voi liittyä useaan taulun B riviin.
    Taulun B rivi voi liittyä useaan taulun A riviin.
 
-Tapauksessa 1 voimme lisätä tauluun A sarakkeen, joka viittaa tauluun B, kuten teimme edellisen aliluvun esimerkissä. Tapauksessa 2 tilanne on kuitenkin hankalampi, koska yksittäinen viittaus kummankaan taulun rivissä ei riittäisi. Ratkaisuna on luoda kolmas _liitostaulu_, joka sisältää tiedot viittauksista.
+Tapauksessa 1 voimme lisätä tauluun A sarakkeen, joka viittaa tauluun B, kuten teimme edellisen osion esimerkissä. Tapauksessa 2 tilanne on kuitenkin hankalampi, koska yksittäinen viittaus kummankaan taulun rivissä ei riittäisi. Ratkaisuna on luoda kolmas _liitostaulu_, joka sisältää tiedot viittauksista.
 
 ### Esimerkki
 
 Tarkastellaan esimerkkinä tilannetta, jossa verkkokaupassa on tuotteita ja asiakkaita ja jokainen asiakas on valinnut tiettyjä tuotteita ostoskoriin. Tietyn asiakkaan korissa voi olla useita tuotteita, ja toisaalta tietty tuote voi olla usean asiakkaan korissa.
 
-Rakennamme tietokannan niin, että siinä on kolme taulua: `Tuotteet`, `Asiakkaat` ja `Ostokset`.
-Liitostaulu `Ostokset` ilmaisee, mitä tuotteita on kunkin asiakkaan ostoskorissa. Sen jokainen rivi esittää yhden parin muotoa "asiakkaan _x_ korissa on tuote _y_".
+Rakennamme tietokannan niin, että siinä on kolme taulua: `Tuotteet`, `Asiakkaat` ja `Ostokset`. Liitostaulu `Ostokset` ilmaisee, mitä tuotteita on kunkin asiakkaan ostoskorissa. Sen jokainen rivi esittää yhden parin muotoa "asiakkaan _x_ korissa on tuote _y_".
 
 Oletamme, että taulujen sisällöt ovat seuraavat:
 
-<img src="../osa-1/taulut.png">
+{% include_relative example.md %}
 
 Nyt voimme hakea asiakkaat ja tuotteet seuraavasti:
 
 ```sql
-SELECT A.nimi, T.nimi FROM Asiakkaat A, Tuotteet T, Ostokset O
-WHERE A.id = O.asiakas_id AND T.id = O.tuote_id;
+SELECT
+  A.nimi, T.nimi
+FROM
+  Asiakkaat A, Tuotteet T, Ostokset O
+WHERE
+  A.id = O.asiakas_id AND T.id = O.tuote_id;
 ```
 
 Kyselyn ideana on hakea tauluista `Asiakkaat` ja `Tuotteet` taulun `Ostokset` rivejä vastaavat tiedot. Jotta saamme mielekkäitä tuloksia, kytkemme rivit yhteen kahden ehdon avulla. Kysely tuottaa seuraavan tulostaulun:
@@ -261,15 +289,16 @@ Maija       selleri
 
 ### Miten kysely toimii?
 
-Voimme taas tutkia kyselyn toimintaa hakemalla kaikki sarakkeet ja
-poistamalla ehdot:
+Voimme taas tutkia kyselyn toimintaa hakemalla kaikki sarakkeet ja poistamalla ehdot:
 
 ```sql
-SELECT * FROM Asiakkaat A, Tuotteet T, Ostokset O;
+SELECT
+  *
+FROM
+  Asiakkaat A, Tuotteet T, Ostokset O;
 ```
 
-Tämän kyselyn tulostaulussa on kaikki tavat valita jokin asiakas, tuote ja ostokset.
-Tulostaulussa on 5 * 3 * 5 = 75 riviä ja se alkaa näin:
+Tämän kyselyn tulostaulussa on kaikki tavat valita jokin asiakas, tuote ja ostokset. Tulostaulussa on 5 * 3 * 5 = 75 riviä ja se alkaa näin:
 
 
 ```
@@ -296,8 +325,12 @@ id          nimi        id          nimi        hinta       asiakas_id  tuote_id
 Sitten kun lisäämme kyselyyn ehdot, saamme rajattua kiinnostavat rivit:
 
 ```sql
-SELECT * FROM Asiakkaat A, Tuotteet T, Ostokset O
-WHERE A.id = O.asiakas_id AND T.id = O.tuote_id;
+SELECT
+  *
+FROM
+  Asiakkaat A, Tuotteet T, Ostokset O
+WHERE
+  A.id = O.asiakas_id AND T.id = O.tuote_id;
 ```
 
 ```
@@ -313,8 +346,12 @@ id          nimi        id          nimi        hinta       asiakas_id  tuote_id
 Kun vielä määritämme halutut sarakkeet, tuloksena on lopullinen kysely:
 
 ```sql
-SELECT A.nimi, T.nimi FROM Asiakkaat A, Tuotteet T, Ostokset O
-WHERE A.id = O.asiakas_id AND T.id = O.tuote_id;
+SELECT
+  A.nimi, T.nimi
+FROM
+  Asiakkaat A, Tuotteet T, Ostokset O
+WHERE
+  A.id = O.asiakas_id AND T.id = O.tuote_id;
 ```
 
 ```
@@ -332,9 +369,12 @@ Maija       selleri
 Voimme lisätä kyselyyn lisää ehtoja, jos haluamme saada selville muuta ostoskoreista. Esimerkiksi seuraava kysely hakee Maijan korissa olevat tuotteet:
 
 ```sql
-SELECT T.nimi
-FROM Asiakkaat A, Tuotteet T, Ostokset O
-WHERE A.id = O.asiakas_id AND T.id = O.tuote_id AND A.nimi = 'Maija';
+SELECT
+  T.nimi
+FROM
+  Asiakkaat A, Tuotteet T, Ostokset O
+WHERE
+  A.id = O.asiakas_id AND T.id = O.tuote_id AND A.nimi = 'Maija';
 ```
 
 ```
@@ -348,9 +388,12 @@ selleri
 Seuraava kysely puolestaan kertoo, keiden korissa on selleri:
 
 ```sql
-SELECT A.nimi
-FROM Asiakkaat A, Tuotteet T, Ostokset O
-WHERE A.id = O.asiakas_id AND T.id = O.tuote_id AND T.nimi = 'selleri';
+SELECT
+  A.nimi
+FROM
+  Asiakkaat A, Tuotteet T, Ostokset O
+WHERE
+  A.id = O.asiakas_id AND T.id = O.tuote_id AND T.nimi = 'selleri';
 ```
 
 ```
@@ -366,18 +409,21 @@ Voimme käyttää koostefunktioita ja ryhmittelyä myös usean taulun kyselyiss�
 
 #### Esimerkki
 
-Tarkastellaan edelleen tietokantaa,
-jossa on tuotteita, asiakkaita ja ostoksia:
+Tarkastellaan edelleen tietokantaa, jossa on tuotteita, asiakkaita ja ostoksia:
 
-<img src="../osa-1/taulut.png">
+{% include_relative example.md %}
 
 Seuraava kysely luo yhteenvedon, joka näyttää jokaisesta asiakkaasta, montako tuotetta hänen ostoskorissaan on ja mikä on tuotteiden yhteishinta.
 
 ```sql
-SELECT A.nimi, COUNT(T.id), SUM(T.hinta)
-FROM Asiakkaat A, Tuotteet T, Ostokset O
-WHERE A.id = O.asiakas_id AND T.id = O.tuote_id
-GROUP BY A.id;
+SELECT
+  A.nimi, COUNT(T.id), SUM(T.hinta)
+FROM
+  Asiakkaat A, Tuotteet T, Ostokset O
+WHERE
+  A.id = O.asiakas_id AND T.id = O.tuote_id
+GROUP BY
+  A.id;
 ```
 
 Kyselyn tulos on seuraava:
@@ -396,8 +442,12 @@ Uolevin korissa on siis 2 tavaraa, joiden yhteishinta on 9, ja Maijan korissa on
 Kyselyn perusta on tässä:
 
 ```sql
-SELECT * FROM Asiakkaat A, Tuotteet T, Ostokset O
-WHERE A.id = O.asiakas_id AND T.id = O.tuote_id;
+SELECT
+  *
+FROM
+  Asiakkaat A, Tuotteet T, Ostokset O
+WHERE
+  A.id = O.asiakas_id AND T.id = O.tuote_id;
 ```
 
 ```
@@ -428,11 +478,9 @@ id          nimi        id          nimi        hinta       asiakas_id  tuote_id
 2           Maija       5           selleri     4           2           5     
 ```
 
-Näille ryhmille lasketaan sitten tuotteiden määrä (`COUNT(T.id)`) sekä ostosten yhteishinta (`SUM(T.hinta)`).
+Näille ryhmille lasketaan sitten tuotteiden määrä `COUNT(T.id)` sekä ostosten yhteishinta `SUM(T.hinta)`.
 
-Tässä kyselyssä ryhmittely tapahtuu sarakkeen `A.id` mukaan, mutta kyselyssä haetaan sarake `A.nimi`. Tämä on sinänsä järkevää, koska sarake `A.id` määrää sarakkeen `A.nimi`, ja kysely toimii mainiosti SQLitessä.
-
-Muissa tietokannoissa (kuten PostgreSQL:ssä) vaatimuksena voi kuitenkin olla, että sellaisenaan haettavan sarakkeen tulee aina esiintyä myös ryhmittelyssä. Tässä tapauksessa ryhmittelyn tulisi olla `GROUP BY A.id, A.nimi`.
+Huomaa, että kyselyssä ryhmittely tapahtuu sarakkeen `A.id` mukaan, mutta kyselyssä haetaan sarake `A.nimi`. Tämä on sinänsä järkevää, koska sarake `A.id` määrää sarakkeen `A.nimi`, ja kysely toimii mainiosti SQLitessä. Muissa tietokannoissa vaatimuksena voi kuitenkin olla, että sellaisenaan haettavan sarakkeen tulee aina esiintyä myös ryhmittelyssä. Tällöin ryhmittelyn tulisi olla `GROUP BY A.id, A.nimi`.
 
 #### Puuttuvan rivin ongelma
 
@@ -458,14 +506,19 @@ Tähän mennessä olemme hakeneet tietoa tauluista listaamalla taulut kyselyn `F
 Seuraavassa on kaksi tapaa toteuttaa sama kysely, ensin käyttäen ennestään tuttua tapaa ja sitten käyttäen `JOIN`-syntaksia.
 
 ```sql
-SELECT Kurssit.nimi, Opettajat.nimi
-FROM Kurssit, Opettajat
-WHERE Kurssit.opettaja_id = Opettajat.id;
+SELECT
+  Kurssit.nimi, Opettajat.nimi
+FROM
+  Kurssit, Opettajat
+WHERE
+  Kurssit.opettaja_id = Opettajat.id;
 ```
 
 ```sql
-SELECT Kurssit.nimi, Opettajat.nimi
-FROM Kurssit JOIN Opettajat ON Kurssit.opettaja_id = Opettajat.id;
+SELECT
+  Kurssit.nimi, Opettajat.nimi
+FROM
+  Kurssit JOIN Opettajat ON Kurssit.opettaja_id = Opettajat.id;
 ```
 
 `JOIN`-syntaksissa taulujen nimien välissä esiintyy sana `JOIN` ja lisäksi taulujen rivit toisiinsa kytkevä ehto annetaan erillisessä `ON`-osassa.
@@ -502,8 +555,10 @@ Ratkaisu ongelmaan on käyttää `LEFT JOIN` -syntaksia, joka tarkoittaa, että 
 Tässä tapauksessa voimme toteuttaa kyselyn näin:
 
 ```sql
-SELECT Kurssit.nimi, Opettajat.nimi
-FROM Kurssit LEFT JOIN Opettajat ON Kurssit.opettaja_id = Opettajat.id;
+SELECT
+  Kurssit.nimi, Opettajat.nimi
+FROM
+  Kurssit LEFT JOIN Opettajat ON Kurssit.opettaja_id = Opettajat.id;
 ```
 
 Nyt tulostauluun ilmestyy myös kurssi Tietokantojen perusteet ilman opettajaa:
@@ -523,7 +578,10 @@ Tietorakenteet j  Kivinen
 Jälleen hyvä tapa saada selkoa kyselystä on yksinkertaistaa sitä:
 
 ```sql
-SELECT * FROM Kurssit LEFT JOIN Opettajat ON Kurssit.opettaja_id = Opettajat.id;
+SELECT
+  *
+FROM
+  Kurssit LEFT JOIN Opettajat ON Kurssit.opettaja_id = Opettajat.id;
 ```
 
 ```
@@ -557,8 +615,10 @@ SQLiten rajoituksena on kuitenkin, että vain kaksi ensimmäistä kyselytapaa ov
 Sana `ON` on oleellinen `LEFT JOIN` -kyselyssä, koska se asettaa ehdon niin, että mukaan otetaan myös vasemman taulun ylimääräiset rivit:
 
 ```sql
-SELECT Kurssit.nimi, Opettajat.nimi
-FROM Kurssit LEFT JOIN Opettajat ON Kurssit.opettaja_id = Opettajat.id;
+SELECT
+  Kurssit.nimi, Opettajat.nimi
+FROM
+  Kurssit LEFT JOIN Opettajat ON Kurssit.opettaja_id = Opettajat.id;
 ```
 
 ```
@@ -574,8 +634,12 @@ Tietorakenteet j  Kivinen
 Jos käytämme sen sijasta sanaa `WHERE`, ylimääräiset rivit jäävät pois:
 
 ```sql
-SELECT Kurssit.nimi, Opettajat.nimi
-FROM Kurssit LEFT JOIN Opettajat WHERE Kurssit.opettaja_id = Opettajat.id;
+SELECT
+  Kurssit.nimi, Opettajat.nimi
+FROM
+  Kurssit LEFT JOIN Opettajat
+WHERE
+  Kurssit.opettaja_id = Opettajat.id;
 ```
 
 ```
@@ -590,9 +654,12 @@ Tietorakenteet j  Kivinen
 Sinänsä kyselyssä voi esiintyä sekä `ON` että `WHERE`:
 
 ```sql
-SELECT Kurssit.nimi, Opettajat.nimi
-FROM Kurssit LEFT JOIN Opettajat ON Kurssit.opettaja_id = Opettajat.id
-WHERE Kurssit.nimi <> 'Ohjelmoinnin perusteet';
+SELECT
+  Kurssit.nimi, Opettajat.nimi
+FROM
+  Kurssit LEFT JOIN Opettajat ON Kurssit.opettaja_id = Opettajat.id
+WHERE
+  Kurssit.nimi <> 'Ohjelmoinnin perusteet';
 ```
 
 Tällöin `ON`-osa hoitaa taulujen yhdistämisen ja `WHERE`-osa rajaa tuloksia lisää:
@@ -609,9 +676,11 @@ Tietorakenteet j  Kivinen
 Jos molemmat ehdot ovatkin `ON`-osassa, kyselyn tulos muuttuu taas:
 
 ```sql
-SELECT Kurssit.nimi, Opettajat.nimi
-FROM Kurssit LEFT JOIN Opettajat ON Kurssit.opettaja_id = Opettajat.id
-AND Kurssit.nimi <> 'Ohjelmoinnin perusteet';
+SELECT
+  Kurssit.nimi, Opettajat.nimi
+FROM
+  Kurssit LEFT JOIN Opettajat ON Kurssit.opettaja_id = Opettajat.id AND 
+                                 Kurssit.nimi <> 'Ohjelmoinnin perusteet';
 ```
 
 ```
@@ -628,15 +697,19 @@ Tietorakenteet j  Kivinen
 
 Nyt voimme pureutua aiempaan ongelmaan, jossa yhteenvetokyselystä puuttui tietoa. Tietokannassamme on edelleen seuraavat taulut:
 
-<img src="../osa-1/taulut.png">
+{% include_relative example.md %}
 
 Muodostimme yhteenvedon ostoskoreista seuraavalla kyselyllä:
 
 ```sql
-SELECT A.nimi, COUNT(T.id), SUM(T.hinta)
-FROM Asiakkaat A, Tuotteet T, Ostokset O
-WHERE A.id = O.asiakas_id AND T.id = O.tuote_id
-GROUP BY A.id;
+SELECT
+  A.nimi, COUNT(T.id), SUM(T.hinta)
+FROM
+  Asiakkaat A, Tuotteet T, Ostokset O
+WHERE
+  A.id = O.asiakas_id AND T.id = O.tuote_id
+GROUP BY
+  A.id;
 ```
 
 Kuitenkin ongelmaksi tuli, että Aapeli puuttuu yhteenvedosta:
@@ -653,10 +726,13 @@ Maija       3            19
 Ongelman syynä on, että Aapelin ostoskori on _tyhjä_ eli kun kysely valitsee yhdistelmiä taulujen riveistä, ei ole mitään sellaista riviä, jolla esiintyisi Aapeli. Ratkaisu ongelmaan on käyttää `LEFT JOIN` -syntaksia näin:
 
 ```sql
-SELECT A.nimi, COUNT(T.id), SUM(T.hinta)
-FROM Asiakkaat A LEFT JOIN Ostokset O ON A.id = O.asiakas_id
-                 LEFT JOIN Tuotteet T ON T.id = O.tuote_id
-GROUP BY A.id;
+SELECT
+  A.nimi, COUNT(T.id), SUM(T.hinta)
+FROM
+  Asiakkaat A LEFT JOIN Ostokset O ON A.id = O.asiakas_id
+              LEFT JOIN Tuotteet T ON T.id = O.tuote_id
+GROUP BY
+  A.id;
 ```
 
 Nyt myös Aapeli ilmestyy mukaan yhteenvetoon:
@@ -672,10 +748,13 @@ Aapeli      0
 Koska Aapelin ostoskorissa ei ole tuotteita, hintojen summaksi tulee `NULL`. Voimme vielä parantaa kyselyä `IFNULL`-funktion avulla:
 
 ```sql
-SELECT A.nimi, COUNT(T.id), IFNULL(SUM(T.hinta),0)
-FROM Asiakkaat A LEFT JOIN Ostokset O ON A.id = O.asiakas_id
-                 LEFT JOIN Tuotteet T ON T.id = O.tuote_id
-GROUP BY A.id;
+SELECT
+  A.nimi, COUNT(T.id), IFNULL(SUM(T.hinta),0)
+FROM
+  Asiakkaat A LEFT JOIN Ostokset O ON A.id = O.asiakas_id
+              LEFT JOIN Tuotteet T ON T.id = O.tuote_id
+GROUP BY
+  A.id;
 ```
 
 Tämän seurauksena mahdollinen `NULL` muuttuu arvoksi 0:
@@ -695,7 +774,10 @@ Palaamme `NULL`-arvojen käsittelyyn tarkemmin myöhemmin.
 Kun kyselyssä on useita `LEFT JOIN` -osia, tulkintana on, että ne yhdistävät tauluja vasemmalta oikealle. Yllä olevassa kyselyssä voimme ajatella, että ensimmäinen vaihe yhdistää taulut `Asiakkaat` ja `Ostokset`:
 
 ```sql
-SELECT * FROM Asiakkaat A LEFT JOIN Ostokset O ON A.id = O.asiakas_id;
+SELECT
+  *
+FROM
+  Asiakkaat A LEFT JOIN Ostokset O ON A.id = O.asiakas_id;
 ```
 
 ```
@@ -712,8 +794,11 @@ id          nimi        asiakas_id  tuote_id
 Toinen vaihe puolestaan yhdistää yllä olevan tulostaulun ja taulun `Tuotteet`:
 
 ```sql
-SELECT * FROM Asiakkaat A LEFT JOIN Ostokset O ON A.id = O.asiakas_id
-                          LEFT JOIN Tuotteet T ON T.id = O.tuote_id;
+SELECT
+  *
+FROM
+  Asiakkaat A LEFT JOIN Ostokset O ON A.id = O.asiakas_id
+              LEFT JOIN Tuotteet T ON T.id = O.tuote_id;
 ```
 
 ```

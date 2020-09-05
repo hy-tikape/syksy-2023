@@ -5,9 +5,9 @@ hidden: true
 
 # SQLite Pythonissa
 
-Pythonin standardikirjaston osana on kirjasto `sqlite3`,
+Pythonin standardikirjaston osana on moduuli `sqlite3`,
 jonka kautta pystyy käsittelemään SQLite-tietokantaa.
-Tämä sivu kertoo perusasiat kirjaston käyttämisestä,
+Tämä sivu kertoo perusasiat moduulin käyttämisestä,
 ja voit halutessasi etsiä lisätietoa Pythonin dokumentaatiosta.
 
 ## Esimerkki

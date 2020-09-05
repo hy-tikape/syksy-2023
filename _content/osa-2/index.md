@@ -10,7 +10,7 @@ sub-sections:
 
 ## Peruskomennot
 
-Tutustumme seuraavaksi tavallisimpiin SQL-komentoihin, joiden avulla voimme lisätä, hakea, muuttaa ja poistaa tietokannan sisältöä. Nämä komennot muodostavat perustan tietokannan käyttämiselle.
+Tässä luvussa tutustumme tavallisimpiin SQL-komentoihin, joiden avulla voimme lisätä, hakea, muuttaa ja poistaa tietokannan sisältöä. Nämä komennot muodostavat perustan tietokannan käyttämiselle.
 
 ### Taulun luonti
 
@@ -26,11 +26,9 @@ Jokaisesta sarakkeesta ilmoitetaan nimen lisäksi tyyppi. Tässä taulussa sarak
 
 #### Pääavain
 
-Tietokannan taulun _pääavain_ voi olla mikä tahansa sarake tai sarakkeiden yhdistelmä, joka yksilöi taulun jokaisen rivin. Käytännössä hyvin tavallinen valinta pääavaimeksi on kokonaislukumuotoinen id-numero.
+Tietokannan taulun _pääavain_ on jokin sarake (tai sarakkeiden yhdistelmä), joka yksilöi taulun jokaisen rivin eli millään kahdella rivillä ei ole samaa pääavainta. Käytännössä hyvin tavallinen valinta pääavaimeksi on kokonaislukumuotoinen id-numero.
 
-Usein haluamme lisäksi, että id-numerolla on _juokseva numerointi_. Tämä tarkoittaa, että kun tauluun lisätään rivejä, ensimmäinen rivi saa automaattisesti id-numeron 1, toinen rivi saa id-numeron 2, jne.
-
-Juoksevan numeroinnin toteuttaminen riippuu tietokantajärjestelmästä. Esimerkiksi SQLite-tietokannassa `INTEGER PRIMARY KEY` -tyyppinen sarake saa automaattisesti juoksevan numeroinnin.
+Usein haluamme lisäksi, että id-numerolla on _juokseva numerointi_. Tämä tarkoittaa, että kun tauluun lisätään rivejä, ensimmäinen rivi saa automaattisesti id-numeron 1, toinen rivi saa id-numeron 2, jne. Juoksevan numeroinnin toteuttaminen riippuu tietokantajärjestelmästä. Esimerkiksi SQLite-tietokannassa `INTEGER PRIMARY KEY` -tyyppinen sarake saa automaattisesti juoksevan numeroinnin.
 
 ### Tiedon lisääminen
 
@@ -40,7 +38,7 @@ Komento `INSERT` lisää uuden rivin tauluun. Esimerkiksi seuraava komento lisä
 INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',7);
 ```
 
-Tässä annamme arvot lisättävän rivin sarakkeille `nimi` ja `hinta`. Kun oletamme, että sarakkeessa `id` on juokseva numerointi, se saa automaattisesti arvon 1, kun kyseessä on taulun ensimmäinen rivi. Niinpä tauluun ilmestyy seuraava rivi:
+Tässä annamme arvot lisättävän rivin sarakkeille `nimi` ja `hinta`. Kun sarakkeessa `id` on juokseva numerointi, se saa automaattisesti arvon 1, kun kyseessä on taulun ensimmäinen rivi. Niinpä tauluun ilmestyy seuraava rivi:
 
 ```
 id          nimi        hinta     
@@ -62,7 +60,7 @@ id          nimi        hinta
 1           retiisi     
 ```
 
-#### Esimerkkitaulu
+### Esimerkkitaulu
 
 Oletamme tämän osion tulevissa esimerkeissä, että olemme lisänneet tauluun `Tuotteet` seuraavat viisi riviä:
 
@@ -162,8 +160,7 @@ id          nimi        hinta
 4           lanttu      8        
 ```
 
-Ehdoissa voi käyttää vertailuja ja sanoja `AND` ja `OR` samaan tapaan kuin ohjelmoinnissa.
-Esimerkiksi seuraava kysely etsii tuotteet, joiden hinta on välillä 4...6:
+Ehdoissa voi käyttää vertailuja ja sanoja `AND` ja `OR` samaan tapaan kuin ohjelmoinnissa. Esimerkiksi seuraava kysely etsii tuotteet, joiden hinta on välillä 4...6:
 
 ```sql
 SELECT * FROM Tuotteet WHERE hinta>=4 AND hinta<=6;
@@ -217,12 +214,9 @@ id          nimi        hinta
 4           lanttu      8         
 ```
 
-Tietokantakielessä järjestys on joko _nouseva_ (_ascending_) eli pienimmästä suurimpaan
-tai _laskeva_ (_descending_) eli suurimmasta pienimpään. Oletuksena järjestys on nouseva, ja
-avainsana `DESC` tarkoittaa siis laskevaa järjestystä.
+Tietokantakielessä järjestys on joko _nouseva_ (_ascending_) eli pienimmästä suurimpaan tai _laskeva_ (_descending_) eli suurimmasta pienimpään. Oletuksena järjestys on nouseva, ja avainsana `DESC` tarkoittaa siis laskevaa järjestystä.
 
-Itse asiassa SQL-kielessä on myös avainsana `ASC`, joka tarkoittaa nousevaa järjestystä.
-Seuraavat kyselyt toimivat siis samalla tavalla:
+SQL-kielessä on myös avainsana `ASC`, joka tarkoittaa nousevaa järjestystä. Seuraavat kyselyt toimivat siis samalla tavalla:
 
 ```sql
 SELECT * FROM Tuotteet ORDER BY nimi;
@@ -293,38 +287,36 @@ hinta
 
 ### Tiedon muuttaminen
 
-Komento `UPDATE` muuttaa taulun rivejä, jotka täsmäävät haluttuun ehtoon. Esimerkiksi seuraava komento muuttaa nauriin hinnaksi 6:
+Komento `UPDATE` muuttaa taulun rivejä, jotka täsmäävät haluttuun ehtoon. Esimerkiksi seuraava komento muuttaa tuotteen 2 hinnaksi 6:
 
 ```sql
-UPDATE Tuotteet SET hinta=6 WHERE nimi='nauris';
+UPDATE Tuotteet SET hinta=6 WHERE id=2;
 ```
 
-Useita sarakkeita voi muuttaa yhdistämällä muutokset pilkuilla. Esimerkiksi seuraava komento muuttaa nauriin nimeksi ananas ja hinnaksi 9:
+Useita sarakkeita voi muuttaa yhdistämällä muutokset pilkuilla. Esimerkiksi seuraava komento muuttaa tuotteen 2 nimeksi ananas ja hinnaksi 9:
 
 ```sql
-UPDATE Tuotteet SET nimi='ananas', hinta=9 WHERE nimi='nauris';
+UPDATE Tuotteet SET nimi='ananas', hinta=9 WHERE id=2;
 ```
 
-Muutos voidaan myös laskea aiemman arvon perusteella. Esimerkiksi seuraava komento kasvattaa
-nauriin hintaa yhdellä:
+Muutos voidaan myös laskea aiemman arvon perusteella. Esimerkiksi seuraava komento kasvattaa tuotteen 2 hintaa yhdellä:
 
 ```sql
-UPDATE Tuotteet SET hinta=hinta+1 WHERE nimi='nauris';
+UPDATE Tuotteet SET hinta=hinta+1 WHERE id=2;
 ```
 
-Jos komennossa ei ole ehtoa, se vaikuttaa _kaikkiin_ riveihin. Esimerkiksi seuraava komento muuttaa jokaisen tuotteen hinnaksi 3:
+Jos komennossa ei ole ehtoa, se vaikuttaa _kaikkiin_ riveihin. Esimerkiksi seuraava komento kasvattaa jokaisen tuotteen hintaa yhdellä:
 
 ```sql
-UPDATE Tuotteet SET hinta=3;
+UPDATE Tuotteet SET hinta=hinta+1;
 ```
 
 ### Tiedon poistaminen
 
-Komento `DELETE` poistaa taulusta rivit, jotka täsmäävät annettuun ehtoon.
-Esimerkiksi seuraava komento poistaa porkkanan tuotteista:
+Komento `DELETE` poistaa taulusta rivit, jotka täsmäävät annettuun ehtoon. Esimerkiksi seuraava komento poistaa taulusta tuotteen 5:
 
 ```sql
-DELETE FROM Tuotteet WHERE nimi='porkkana';
+DELETE FROM Tuotteet WHERE id=5;
 ```
 
 Kuten muuttamisessa, jos ehtoa ei ole, niin komento vaikuttaa kaikkiin riveihin. Seuraava komento siis poistaa _kaikki_ tuotteet taulusta:
@@ -341,10 +333,9 @@ DROP TABLE Tuotteet;
 
 ## Yhteenveto ja ryhmittely
 
-Yhteenvetokysely laskee jonkin yksittäisen arvon taulun riveistä. Esimerkiksi voimme laskea taulun rivien määrän tai sarakkeen kaikkien arvojen summan. Tällaisen kyselyn tulostaulussa on vain yksi rivi.
+Yhteenvetokysely laskee jonkin yksittäisen arvon taulun riveistä, kuten taulun rivien määrän tai sarakkeen kaikkien arvojen summan. Tällaisen kyselyn tulostaulussa on vain yksi rivi.
 
-Yhteenvetokyselyn perustana on _koostefunktio_, joka laskee yhteenvetoarvon taulun riveistä.
-Tavallisimmat koostefunktiot ovat seuraavat:
+Yhteenvetokyselyn perustana on _koostefunktio_, joka laskee yhteenvetoarvon taulun riveistä. Tavallisimmat koostefunktiot ovat seuraavat:
 
 * `COUNT()` laskee rivien määrän
 * `SUM()` laskee summan arvoista
@@ -353,7 +344,7 @@ Tavallisimmat koostefunktiot ovat seuraavat:
 
 ### Esimerkkejä
 
-Tarkastellaan taas edellisessä aiempaa taulua `Tuotteet`:
+Tarkastellaan taas taulua `Tuotteet`:
 
 ```
 id          nimi        hinta     
@@ -440,7 +431,7 @@ COUNT(hinta)
 3
 ```
 
-Voimme myös käyttää sanaa `DISTINCT`, jotta saamme laskettua, montako eri arvoa sarakkeessa on:
+Voimme myös käyttää sanaa `DISTINCT`, jotta saamme laskettua, montako eri arvoa jossakin sarakkeessa on:
 
 ```sql
 SELECT COUNT(DISTINCT hinta) FROM Tuotteet;
@@ -454,8 +445,7 @@ COUNT(DISTINCT hinta)
 
 ### Ryhmittely
 
-Ryhmittelyn avulla voimme yhdistää rivikohtaista ja koostefunktion antamaa tietoa.
-Ideana on, että rivit jaetaan ryhmiin `GROUP BY` -osassa annettujen sarakkeiden mukaan ja tämän jälkeen koostefunktion arvo lasketaan jokaiselle ryhmälle erikseen.
+Ryhmittelyn avulla voimme yhdistää rivikohtaista ja koostefunktion antamaa tietoa. Ideana on, että rivit jaetaan ryhmiin `GROUP BY` -osassa annettujen sarakkeiden mukaan ja tämän jälkeen koostefunktion arvo lasketaan jokaiselle ryhmälle erikseen.
 
 #### Esimerkki
 
@@ -533,8 +523,7 @@ Facebook    Vihtori
 Google      Maija    
 ```
 
-Koska sarake `nimi` ei kuulu ryhmittelyyn, sillä voi olla useita arvoja ryhmässä ja tulostauluun
-tulee yksi niistä. Tällainen kysely ei kuitenkaan toimi esimerkiksi PostgreSQL-tietokannassa.
+Koska sarake `nimi` ei kuulu ryhmittelyyn, sillä voi olla useita arvoja ryhmässä ja tulostauluun tulee yksi niistä. Tällainen kysely ei kuitenkaan toimi kaikissa tietokannoissa.
 
 #### Lisää kyselyjä
 
@@ -585,7 +574,7 @@ Facebook    5000
 Google      9500       
 ```
 
-Itse asiassa sana `AS` ei ole pakollinen, eli voisimme kirjoittaa kyselyn myös näin:
+Sana `AS` ei ole pakollinen, eli voisimme kirjoittaa kyselyn myös näin:
 
 ```sql
 SELECT yritys, MAX(palkka) korkein FROM Tyontekijat GROUP BY yritys;
@@ -647,15 +636,21 @@ id          projekti_id  tarkeys
 8           3            5   
 ```
 
-Seuraava kysely etsii projektit, joissa on vähintään kaksi kriittistä tehtävää, ja järjestää ne id-numeron mukaan:
+Seuraava kysely etsii projektit, joissa on vähintään kaksi kriittistä tehtävää, ja järjestää ne projektin id-numeron mukaan:
 
 ```sql
-SELECT projekti_id, COUNT(*)
-FROM Tehtavat
-WHERE tarkeys >= 3
-GROUP BY projekti_id
-HAVING COUNT(*) >= 2
-ORDER BY projekti_id;
+SELECT
+  projekti_id, COUNT(*)
+FROM
+  Tehtavat
+WHERE
+  tarkeys >= 3
+GROUP BY
+  projekti_id
+HAVING
+  COUNT(*) >= 2
+ORDER BY
+  projekti_id;
 ```
 
 Kyselyn tulos on tässä:
@@ -724,16 +719,7 @@ id          projekti_id  tarkeys
 8           3            5   
 ```
 
-Tulostauluun valitaan joka ryhmästä sarake `projekti_id` sekä funktion `COUNT(*)` arvo:
-
-```
-projekti_id  COUNT(*)  
------------  ----------
-1            3       
-3            2         
-```
-
-Järjestystapa on `ORDER BY projekti_id`, joten rivit järjestetään projektin id-numeron mukaan:
+Tulostauluun valitaan joka ryhmästä sarake `projekti_id` sekä funktion `COUNT(*)` arvo, ja `ORDER BY projekti_id` järjestää rivit projektin id-numeron mukaan:
 
 ```
 projekti_id  COUNT(*)  
@@ -747,14 +733,13 @@ projekti_id  COUNT(*)
 SQLite on yksinkertainen avoimesti saatavilla oleva tietokantajärjestelmä, joka soveltuu hyvin SQL-kielen opetteluun. Voit kokeilla helposti SQL-kieleen liittyviä asioita SQLiten avulla,
 ja käytämme sitä tämän kurssin harjoituksissa.
 
-SQLite on mainio valinta SQL-kielen harjoitteluun, mutta siinä on tiettyjä rajoituksia,
-jotka voivat aiheuttaa ongelmia todellisissa sovelluksissa. Laajasti käytettyjä avoimia tietokantajärjestelmiä ovat MySQL ja PostgreSQL. Niissä on suuri määrä ominaisuuksia, jotka puuttuvat SQLitestä, mutta toisaalta niiden asentaminen ja käyttäminen on vaikeampaa.
+SQLite on mainio valinta SQL-kielen harjoitteluun, mutta siinä on tiettyjä rajoituksia, jotka voivat aiheuttaa ongelmia todellisissa sovelluksissa. Muita suosittuja avoimia tietokantajärjestelmiä ovat MySQL ja PostgreSQL. Niissä on suuri määrä ominaisuuksia, jotka puuttuvat SQLitestä, mutta toisaalta niiden asentaminen ja käyttäminen on vaikeampaa.
 
-Eri tietokantajärjestelmien välillä siirtyminen on onneksi helppoa, koska kaikissa on samantapainen SQL-kieli. Tutustumme PostgreSQL-tietokannan käyttämiseen myöhemmin Tietokantasovellus-kurssilla.
+Eri tietokantajärjestelmien välillä siirtyminen on onneksi helppoa, koska kaikissa on samantapainen SQL-kieli. Tutustumme PostgreSQL-tietokannan käyttämiseen myöhemmin _Tietokantasovellus_-kurssilla.
 
 ### SQLite-tulkki
 
-SQLite-tulkki on ohjelma, jonka kautta voi käyttää SQLite-tietokantaa. Tulkki käynnistyy antamalla komentorivillä komento `sqlite3`. Tämän jälkeen voit kirjoittaa joko suoritettavia SQL-komentoja tai pisteellä alkavia SQLite-tulkin omia komentoja.
+SQLite-tulkki on ohjelma, jonka kautta voidaan käyttää SQLite-tietokantaa. Tulkki käynnistyy antamalla komentorivillä komento `sqlite3`. Tämän jälkeen tulkkiin voi kirjoittaa joko suoritettavia SQL-komentoja tai pisteellä alkavia SQLite-tulkin omia komentoja.
 
 Jos käyttämälläsi koneella ei ole vielä SQLite-tulkkia, voit asentaa sen tästä:
 
@@ -858,7 +843,7 @@ id          nimi        hinta
 
 ### SQLiten käyttö ohjelmoinnissa
 
-Tavallinen tilanne on, että tietokantaa käytetään ohjelmointikielen kautta. Tässä on aiheeseen liittyvää materiaalia:
+Tavallinen tilanne on, että tietokantaa käytetään ohjelmointikielen kautta. Tässä on aiheeseen liittyvää materiaalia, josta on apua kurssin harjoitustyössä:
 
 * [SQLite Javassa](../../pages/sqlite_java)
 * [SQLite Pythonissa](../../pages/sqlite_python)

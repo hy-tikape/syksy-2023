@@ -18,7 +18,7 @@ _Tietokanta_ (_database_) on tietokoneella oleva kokoelma tietoa, johon voidaan 
 * päivittäin mitatut säätiedot eri paikoissa
 * lentoyhtiön lentoaikataulut ja varaustilanne
 
-Tietokantoja onkin nykyään valtavasti, ja useimmat ihmiset ovat tavallisen päivän aikana yhteydessä lukuisiin tietokantoihin.
+Tietokantoja on nykyään valtavasti, ja useimmat ihmiset ovat tavallisen päivän aikana yhteydessä lukuisiin tietokantoihin.
 
 ### Tietokantojen haasteet
 
@@ -43,20 +43,17 @@ _Tietokantajärjestelmä_ pitää huolta tietokannan sisällöstä ja tarjoaa ti
 
 Useimmat käytössä olevat tietokannat perustuvat relaatiomalliin ja SQL-kieleen, joihin tutustumme tällä kurssilla. Esimerkiksi MySQL, PostgreSQL ja SQLite ovat tällaisia tietokantajärjestelmiä. Näiden tietokantojen teoreettinen perusta syntyi 1970-luvulla.
 
-Termi _NoSQL_ viittaa tietokantaan, joka perustuu muuhun kuin relaatiomalliin ja SQL-kieleen. Esimerkiksi MongoDB ja Redis ovat saavuttaneet viime aikoina suosiota.
-Emme kuitenkaan käsittele NoSQL-tietokantoja tarkemmin tällä kurssilla.
+Termi _NoSQL_ viittaa tietokantaan, joka perustuu muuhun kuin relaatiomalliin ja SQL-kieleen. Esimerkiksi MongoDB ja Redis ovat saavuttaneet viime aikoina suosiota. Tällä kurssilla emme kuitenkaan juurikaan käsittele NoSQL-tietokantoja.
 
 ## Tee-se-itse-tietokanta
 
-Ennen kuin tutustumme olemassa oleviin tietokantajärjestelmiin on hyvä miettiä, mitä tarvetta tällaisille järjestelmille on. Miksi emme voisi vain toteuttaa tietokantaa itse vaikkapa tallentamalla tietokannan sisällön tekstitiedostoon sopivassa muodossa?
+Ennen tutustumista olemassa oleviin tietokantajärjestelmiin on hyvä miettiä, mitä tarvetta tällaisille järjestelmille on. Miksi emme voisi vain toteuttaa tietokantaa itse vaikkapa tallentamalla tietokannan sisällön tekstitiedostoon sopivassa muodossa?
 
 ### Esimerkki
 
-Haluamme tallentaa tietokantaan tietoa kurssin opiskelijoiden ratkaisuista kurssin tehtäviin.
-Kun opiskelija lähettää ratkaisun, tietokantaan tallennetaan opiskelijanumero, tehtävän numero, ratkaisun lähetysaika sekä ratkaisun tuottama pistemäärä.
+Haluamme tallentaa tietokantaan tietoa kurssin opiskelijoiden ratkaisuista kurssin tehtäviin. Kun opiskelija lähettää ratkaisun, tietokantaan tallennetaan opiskelijanumero, tehtävän numero, ratkaisun lähetysaika sekä ratkaisun tuottama pistemäärä.
 
-Yksinkertainen tapa toteuttaa tietokanta on luoda yksi tekstitiedosto, jonka jokaisella rivillä on yksi lähetys. Aina kun joku opiskelija lähettää ratkaisun, tiedostoon lisätään yksi rivi.
-Voisimme käytännössä tallentaa tietokannan CSV-tiedostona tähän tapaan:
+Yksinkertainen tapa toteuttaa tietokanta on luoda yksi tekstitiedosto, jonka jokaisella rivillä on yksi lähetys. Aina kun joku opiskelija lähettää ratkaisun, tiedostoon lisätään yksi rivi. Voisimme käytännössä tallentaa tietokannan CSV-tiedostona tähän tapaan:
 
 ```
 012121212;1;2020-05-03 12:50:32;100
@@ -99,23 +96,22 @@ Tällainen CSV-tiedostoa käyttävä tietokanta on periaatteessa toimiva, mutta 
 
 #### Tiedon määrä
 
-Kun tiedon määrä kasvaa, tiedon hakeminen CSV-tiedostosta voi muodostua ongelmaksi.
-Tämä johtuu siitä, että joudumme useimmissa tilanteissa käymään läpi koko tiedoston sisällön alusta loppuun.
+Kun tiedon määrä kasvaa, tiedon hakeminen CSV-tiedostosta voi muodostua ongelmaksi. Tämä johtuu siitä, että joudumme useimmissa tilanteissa käymään läpi koko tiedoston sisällön alusta loppuun, kun haluamme saada haettua tietyn asian.
 
-Esimerkiksi jos haluamme selvittää, minkä pistemäärän opiskelija 012341234 on saanut tehtävästä 2, joudumme käymään läpi tiedoston kaikki rivit, jotta löydämme oikeat rivit. Joudumme tekemään näin, koska rivit ovat sekalaisessa järjestyksessä eikä meillä ole etukäteen tietoa, missä haluamamme rivit ovat.
+Esimerkiksi jos haluamme selvittää, minkä pistemäärän opiskelija 012341234 on saanut tehtävästä 2, joudumme käymään läpi tiedoston _kaikki_ rivit, jotta löydämme oikeat rivit. Joudumme tekemään näin, koska rivit ovat sekalaisessa järjestyksessä eikä meillä ole etukäteen tietoa, missä haluamamme rivit ovat.
 
-Tiedoston läpikäynti ei ole ongelma, jos tiedosto on pieni. Esimerkiksi jos tiedostossa on tuhat riviä, läpikäynti sujuu hyvin nopeasti. Mutta jos tiedostossa on miljoona riviä, alkaa olla jo työlästä käydä kaikki rivit läpi aina kun haluamme saada selville jotain tiedostosta.
+Tiedoston läpikäynti ei ole ongelma, jos tiedosto on pieni. Esimerkiksi jos tiedostossa on sata riviä, läpikäynti sujuu hyvin nopeasti. Mutta tiedoston koon kasvaessa alkaa olla työlästä käydä kaikki rivit läpi aina, kun haluamme saada selville jotain tiedostosta.
 
 #### Samanaikaisuus
 
-Mitä tapahtuu, jos kaksi opiskelijaa lähettävät ratkaisun samaan aikaan? Tällöin tiedoston loppuun pitäisi tulla kaksi riviä tietoa:
+Mitä tapahtuu, jos kaksi opiskelijaa lähettävät ratkaisun samaan aikaan? Tällöin tiedoston loppuun pitäisi tulla kaksi riviä tietoa seuraavaan tapaan:
 
 ```
 012341234;3;2020-05-07 15:42:02;0
 013371337;7;2020-05-07 15:42:02;0
 ```
 
-Jos käy huonosti, tulos voikin olla seuraava:
+Jos käy huonosti, voi kuitenkin käydä näin:
 
 ```
 012341234;3;2020013371337;7;2020-05-07 15:42:02;0
@@ -137,8 +133,7 @@ Mitä jos sähköt katkeavat juuri, kun olemme kirjoittaneet puolet riveistä ta
 
 Yksinkertainen tekstitiedosto ei ole sinänsä huono tapa tallentaa tietoa, mutta se ei sovellu kaikkiin käyttötarkoituksiin. Tämän vuoksi tarvitsemme erillisiä tietokantajärjestelmiä, joihin tutustumme tällä kurssilla.
 
-Järjestelmien kehittäjät ovat miettineet tarkasti, miten tietokanta kannattaa toteuttaa,
-jotta pääsemme käsiksi tietoon tehokkaasti, samanaikaiset käyttäjät eivät aiheuta ongelmia eikä tietoa katoa yllättävissä tilanteissa. Kun käytämme tietokantajärjestelmää, meidän ei tarvitse huolehtia tästä kaikesta itse.
+Tietokantajärjestelmien kehittäjät ovat miettineet tarkasti, miten järjestelmä kannattaa toteuttaa, jotta tietoon pääsee käsiksi tehokkaasti, samanaikaiset käyttäjät eivät aiheuta ongelmia eikä tietoa katoa yllättävissä tilanteissa. Kun käytämme tietokantajärjestelmää, meidän ei tarvitse huolehtia tästä kaikesta itse.
 
 ## Relaatiomalli ja SQL-kieli
 
@@ -153,9 +148,9 @@ Relaatiomallissa tietokanta muodostuu _tauluista_ (_table_), joissa on kiinteät
 
 Seuraavassa kuvassa on esimerkki tietokannasta, jota voisi käyttää osana verkkokaupan toteutusta. Tauluissa `Tuotteet`, `Asiakkaat` ja `Ostokset` on tietoa tuotteista, asiakkaista ja heidän ostoskoriensa sisällöstä.
 
-<img src="taulut.png">
+{% include_relative example.md %}
 
-Tauluissa `Tuotteet` ja `Asiakkaat` jokaisella rivillä on yksilöllinen id-numero, jonka avulla niihin voi viitata. Tämän ansiosta taulussa `Ostokset` voidaan esittää id-numeroiden avulla, mitä tuotteita kukin asiakas on valinnut. Tässä esimerkissä Uolevin korissa on porkkana ja selleri ja Maijan korissa on retiisi, lanttu ja selleri.
+Tauluissa `Tuotteet` ja `Asiakkaat` jokaisella rivillä on yksilöllinen id-numero, jonka avulla niihin voi viitata. Tämä on yleinen tapa tietokantojen suunnittelussa. Tämän ansiosta taulussa `Ostokset` voidaan esittää id-numeroiden avulla, mitä tuotteita kukin asiakas on valinnut. Tässä esimerkissä Uolevin korissa on porkkana ja selleri ja Maijan korissa on retiisi, lanttu ja selleri.
 
 ### SQL-kieli
 
@@ -168,13 +163,15 @@ SQL-komennot muodostuvat avainsanoista (kuten `SELECT` ja `WHERE`), taulujen ja 
 SELECT hinta FROM Tuotteet WHERE nimi='retiisi';
 ```
 
-hakee tietokannan tuotteista retiisin hinnan. Komentojen lopussa on puolipiste `;` ja voimme
-käyttää välilyöntejä ja rivinvaihtoja haluamallamme tavalla. Esimerkiksi voisimme kirjoittaa äskeisen komennon myös näin kolmelle riville:
+hakee tietokannan tuotteista retiisin hinnan. Komentojen lopussa on puolipiste `;` ja voimme käyttää välilyöntejä ja rivinvaihtoja haluamallamme tavalla. Esimerkiksi voisimme kirjoittaa äskeisen komennon myös näin usealle riville:
 
 ```sql
-SELECT hinta
-FROM Tuotteet
-WHERE nimi='retiisi';
+SELECT
+  hinta
+FROM
+  Tuotteet
+WHERE
+  nimi='retiisi';
 ```
 
 Tutustumme SQL-kieleen tarkemmin materiaalin luvuissa 2–4.
@@ -186,7 +183,7 @@ Tällaisia piirteitä ovat esimerkiksi:
 - Avainsanoissa kirjainkoolla ei ole väliä. Esimerkiksi `SELECT`, `select` ja `Select` tarkoittavat samaa. Avainsanat on tapana kirjoittaa kokonaan suurilla kirjaimilla.
 - Merkki `=` tarkoittaa sekä asetusta että yhtäsuuruusvertailua (nykyään ohjelmoinnissa yhtäsuuruusvertailu on yleensä `==`).
 
-SQL-kielestä on olemassa _standardi_, joka pyrkii antamaan yhteisen pohjan kielelle. Käytännössä jokainen toteutus toimii kuitenkin hieman omalla tavallaan. Tällä kurssilla keskitymme SQL:n ominaisuuksiin, jotka ovat yleisesti käytettävissä eri tietokannoissa.
+SQL-kielestä on olemassa _standardeja_, jotka pyrkivät antamaan yhteisen pohjan kielelle. Käytännössä jokainen SQL-kielen toteutus toimii kuitenkin hieman omalla tavallaan. Tällä kurssilla keskitymme SQL:n ominaisuuksiin, jotka ovat yleisesti käytettävissä eri tietokannoissa.
 
 ### Tietokannan sisäinen toiminta
 
@@ -195,4 +192,4 @@ Tietokantajärjestelmän tehtävänä on käsitellä käyttäjän antamat SQL-ko
 SQL-kielen hienoutena on, että käyttäjän riittää _kuvailla_, mitä tietoa hän haluaa, minkä jälkeen tietokantajärjestelmä hoitaa likaisen työn ja hankkii tiedot tietokannan uumenista. Tämä on mukavaa käyttäjälle, koska hänen ei tarvitse tietää mitään tietokannan sisäisestä toiminnasta
 vaan voi luottaa tietokantajärjestelmään.
 
-Tietokantajärjestelmän toteuttaminen on vaikea tehtävä, koska järjestelmän täytyy sekä osata käsitellä tehokkaasti SQL-komentoja että huolehtia siitä, että kaikki toimii oikein, kun tietokannalla on useita samanaikaisia käyttäjiä. Tällä kurssilla tutustumme tietokantoihin lähinnä tietokannan käyttäjän näkökulmasta emmekä perehdy niiden sisäiseen toimintaan.
+Tietokantajärjestelmän toteuttaminen on vaikea tehtävä, koska järjestelmän täytyy sekä osata käsitellä tehokkaasti SQL-komentoja että huolehtia siitä, että kaikki toimii oikein samanaikaisilla käyttäjillä ja yllättävissä tilanteissa. Tällä kurssilla tutustumme tietokantoihin lähinnä tietokannan käyttäjän näkökulmasta emmekä perehdy niiden sisäiseen toimintaan.
