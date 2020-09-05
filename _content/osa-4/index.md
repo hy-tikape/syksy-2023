@@ -183,7 +183,6 @@ SELECT * FROM Tuotteet ORDER BY 1;
 rivit järjestetään lausekkeen `1` mukaan. Koska lausekkeen arvo on joka rivillä `1`, tämä ei tuottaisi mitään erityistä järjestystä. Näin ei kuitenkaan ole, vaan `1` järjestää rivit ensimmäisen sarakkeen mukaan, `2` toisen sarakkeen mukaan, jne. Tämä on siis vaihtoehtoinen tapa ilmaista sarake, johon järjestys perustuu.
 
 Kuitenkin jos lauseke on jotain muuta kuin yksittäinen luku (kuten `RANDOM()`), rivit järjestetään kyseisen lausekkeen mukaisesti.
-ls
 
 ## NULL-arvot
 
