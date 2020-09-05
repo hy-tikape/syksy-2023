@@ -141,7 +141,7 @@ CREATE TABLE Kurssit (id INTEGER PRIMARY KEY, nimi TEXT,
                       opettaja_id INTEGER REFERENCES Opettajat ON DELETE CASCADE);
 ```
 
-Nyt jos tietokannasta poistetaan opettaja, niin samalla poistetaan automaattisesti kaikki kurssit, joita hän opettaa. Tämä on kuitenkin usein kyseenalainen vaihtoehto, koska tämän seurauksena tietokannan tauluista voi kadota yllättäen tietoa.
+Nyt jos tietokannasta poistetaan opettaja, niin samalla poistetaan automaattisesti kaikki kurssit, joita hän opettaa. Tämä voi kuitenkin olla kyseenalainen vaihtoehto, koska tämän seurauksena tietokannan tauluista voi kadota yllättäen tietoa.
 
 Mahdollisia vaihtoehtoja `ON DELETE` -osassa ovat:
 
@@ -176,12 +176,12 @@ UPDATE Tuotteet SET hinta=hinta+1;
 
 Koska komento suoritetaan transaktiona, voimme luottaa siihen, että joko jokaisen tuotteen hinta todella kasvaa yhdellä tai sitten minkään tuotteen hinta ei muutu. Jälkimmäinen voi tapahtua esimerkiksi silloin, kun sähköt katkeavat kesken päivityksen. Siinäkään tapauksessa ei siis voi käydä niin, että vain _osa_ hinnoista muuttuu.
 
-Usein kuitenkin sana transaktio viittaa erityisesti siihen, että kokonaisuuteen kuuluu useampi SQL-komento. Tällöin annamme ensin komennon `BEGIN TRANSACTION`, joka aloittaa transaktion, sitten kaikki transaktioon kuuluvat komennot tavalliseen tapaan ja lopuksi komennon `COMMIT`, joka päättää transaktion.
+Usein kuitenkin sana transaktio viittaa erityisesti siihen, että kokonaisuuteen kuuluu useampi SQL-komento. Tällöin annamme ensin komennon `BEGIN`, joka aloittaa transaktion, sitten kaikki transaktioon kuuluvat komennot tavalliseen tapaan ja lopuksi komennon `COMMIT`, joka päättää transaktion.
 
 Klassinen esimerkki transaktiosta on tilanne, jossa pankissa siirretään rahaa tililtä toiselle. Esimerkiksi seuraava transaktio siirtää 100 euroa Maijan tililtä Uolevin tilille:
 
 ```sql
-BEGIN TRANSACTION;
+BEGIN;
 UPDATE Tilit SET saldo=saldo-100 WHERE omistaja='Maija';
 UPDATE Tilit SET saldo=saldo+100 WHERE omistaja='Uolevi';
 COMMIT;
@@ -202,7 +202,7 @@ sqlite> INSERT INTO Tilit (omistaja,saldo) VALUES ('Maija',600);
 sqlite> SELECT * FROM Tilit;
 1|Uolevi|350
 2|Maija|600
-sqlite> BEGIN TRANSACTION;
+sqlite> BEGIN;
 sqlite> UPDATE Tilit SET saldo=saldo-100 WHERE omistaja='Maija';
 sqlite> SELECT * FROM Tilit;
 1|Uolevi|350
@@ -211,7 +211,7 @@ sqlite> ROLLBACK;
 sqlite> SELECT * FROM Tilit;
 1|Uolevi|350
 2|Maija|600
-sqlite> BEGIN TRANSACTION;
+sqlite> BEGIN;
 sqlite> UPDATE Tilit SET saldo=saldo-100 WHERE omistaja='Maija';
 sqlite> UPDATE Tilit SET saldo=saldo+100 WHERE omistaja='Uolevi';
 sqlite> COMMIT;
@@ -255,8 +255,8 @@ Transaktiot ovat täysin eristettyjä ja komennot käyttäytyvät samoin kuin jo
 Tarkastellaan tilannetta, jossa tuotteen 1 hinta on aluksi 8 ja kaksi käyttäjää suorittaa samaan aikaan komentoja transaktioiden sisällä (käyttäjän 1 komennot ovat vasemmalla ja käyttäjän 2 komennot ovat oikealla):
 
 ```prompt
-BEGIN TRANSACTION;
-                                         BEGIN TRANSACTION;
+BEGIN;
+                                         BEGIN;
                                          UPDATE Tuotteet SET hinta=5 WHERE id=1;
 SELECT hinta FROM Tuotteet WHERE id=1;
                                          UPDATE Tuotteet SET hinta=7 WHERE id=1;
@@ -286,8 +286,8 @@ Hyvää tietoa rinnakkaisten transaktioiden toiminnasta saa perehtymällä käyt
 Seuraava keskustelu näyttää edellisen esimerkin tuloksen kahdessa rinnakkain käynnissä olevassa SQLite-tulkissa:
 
 ```prompt
-BEGIN TRANSACTION;
-                                         BEGIN TRANSACTION;
+BEGIN;
+                                         BEGIN;
                                          UPDATE Tuotteet SET hinta=5 WHERE id=1;
 SELECT hinta FROM Tuotteet WHERE id=1;
 8
@@ -299,14 +299,13 @@ SELECT hinta FROM Tuotteet WHERE id=1;
 COMMIT;
 ```
 
-Tästä näkee, että ensimmäinen transaktio tosiaan saa kummastakin kyselystä tuloksen 8.
-Toista transaktiota ei sen sijaan saada vietyä loppuun, vaan tulee virheviesti `database is locked`, koska tietokanta on lukittuna samanaikaisen transaktion takia. Eristys toimii siis hyvin, mutta toista transaktiota pitäisi yrittää viedä loppuun uudestaan.
+Tästä näkee, että ensimmäinen transaktio tosiaan saa kummastakin kyselystä tuloksen 8. Toista transaktiota ei sen sijaan saada vietyä loppuun, vaan tulee virheviesti `Error: database is locked`, koska tietokanta on lukittuna samanaikaisen transaktion takia. Eristys toimii siis hyvin, mutta toista transaktiota pitäisi yrittää viedä loppuun uudestaan.
 
 Vertailun vuoksi tässä on vastaava keskustelu PostgreSQL-tulkeissa (tasolla 2):
 
 ```prompt
-BEGIN TRANSACTION;
-                                         BEGIN TRANSACTION;
+BEGIN;
+                                         BEGIN;
                                          UPDATE Tuotteet SET hinta=5 WHERE id=1;
 SELECT hinta FROM Tuotteet WHERE id=1;
 8
@@ -325,7 +324,7 @@ Transaktioiden toteuttaminen on kiehtova tekninen haaste tietokannoissa. Tavalla
 
 Yksi keskeinen ajatus tietokantojen taustalla on tallentaa muutoksia kahdella tavalla. Ensin kuvaus muutoksesta kirjataan _lokitiedostoon_ (_write-ahead log_), jota voi ajatella luettelona suoritetuista komennoista. Vasta tämän jälkeen muutokset tehdään tietokannan varsinaisiin tietorakenteisiin. Nyt jos jälkimmäisessä vaiheessa sattuu jotain yllättävää, muutokset ovat jo tallessa lokitiedostossa ja ne voidaan suorittaa myöhemmin uudestaan.
 
-Transaktioiden yhteydessä tietokantajärjestelmän täytyy myös pitää kirjaa siitä, mitkä muutokset ovat minkäkin meneillään olevan transaktion tekemiä. Käytännössä tauluihin voidaan tallentaa rivimuutoksia, jotka näkyvät vain tietylle transaktiolle. Sitten jos transaktio pääsee loppuun asti, nämä muutokset liitetään taulun pysyväksi sisällöksi.
+Transaktioiden yhteydessä tietokantajärjestelmän täytyy myös pitää kirjaa siitä, mitkä muutokset ovat minkäkin meneillään olevan transaktion tekemiä. Käytännössä tauluihin voidaan tallentaa rivimuutoksia, jotka näkyvät vain tietyille transaktioille. Sitten jos transaktio pääsee loppuun asti, nämä muutokset liitetään taulun pysyväksi sisällöksi.
 
 ## Kyselyjen suoritus
 
@@ -388,7 +387,7 @@ SELECT K.nimi, O.nimi FROM Kurssit K, Opettajat O WHERE K.opettaja_id = O.id;
 
 Koska kysely kohdistuu kahteen tauluun, olemme ajatelleet kyselyn toiminnan niin, että se muodostaa ensin kaikki rivien yhdistelmät tauluista `Kurssit` ja `Opettajat` ja valitsee sitten ne rivit, joilla pätee ehto `K.opettaja_id = O.id`. Tämä on hyvä ajattelutapa, mutta tämä _ei_ vastaa sitä, miten kunnollinen tietokantajärjestelmä toimii.
 
-Ongelmana on, että tauluissa `Kurssit` ja `Opettajat` voi molemmissa olla suuri määrä rivejä. Esimerkiksi jos kummassakin taulussa on miljoona riviä, rivien yhdistelmiä olisi miljoona miljoonaa ja veisi valtavasti aikaa käydä läpi kaikki yhdistelmät.
+Ongelmana on, että tauluissa `Kurssit` ja `Opettajat` voi molemmissa olla suuri määrä rivejä. Esimerkiksi jos kummassakin taulussa on miljoona riviä, rivien yhdistelmiä olisi miljoona miljoonaa ja veisi valtavasti aikaa muodostaa ja käydä läpi kaikki yhdistelmät.
 
 Tässä tilanteessa tietokantajärjestelmän pitääkin ymmärtää, mitä käyttäjä oikeastaan on hakemassa ja miten kyselyssä annettu ehto rajoittaa tulosrivejä. Käytännössä riittää käydä läpi kaikki taulun `Kurssit` rivit ja etsiä jokaisen rivin kohdalla jotenkin tehokkaasti yksittäinen haluttu rivi taulusta `Opettajat`.
 
@@ -476,7 +475,7 @@ selectid    order       from        detail
 
 Indeksin ansiosta suunnitelmassa ei lue enää `SCAN TABLE` vaan `SEARCH TABLE`. Suunnitelmassa näkyy myös, että aikomuksena on hyödyntää indeksiä `idx_hinta`.
 
-#### Lisää käyttötapoja
+### Lisää käyttötapoja
 
 Voimme käyttää indeksiä myös kyselyissä, joissa haemme pienempiä tai suurempia arvoja. Esimerkiksi sarakkeelle `hinta` luodun indeksin avulla voimme etsiä vaikkapa rivejä, joille pätee ehto `hinta<3` tai `hinta>=8`.
 
@@ -489,7 +488,7 @@ CREATE INDEX idx_hinta ON Tuotteet (hinta,nimi);
 Tässä indeksissä rivit on järjestetty ensisijaisesti hinnan ja toissijaisesti nimen mukaan.
 Indeksi tehostaa hakuja, joissa hakuperusteena on joko pelkkä hinta tai yhdessä hinta ja nimi. Kuitenkaan indeksi ei tehosta hakuja, joissa hakuperusteena on pelkkä nimi.
 
-#### Miten indeksi toimii?
+### Miten indeksi toimii?
 
 Indeksi tarvitsee tuekseen hakemistorakenteen, josta voi hakea tehokkaasti rivejä sarakkeen
 arvon perusteella. Tämä voidaan toteuttaa esimerkiksi puurakenteena, jonka avaimina on sarakkeiden arvoja.
