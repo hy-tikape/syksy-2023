@@ -1,38 +1,44 @@
 ---
 nav-title: 5. Tietokannan suunnittelu
 sub-sections:
-      - sub-section-title: Taulujen valinta
-      - sub-section-title: Sarakkeiden sisältö
-      - sub-section-title: Viittausten toteutus
+      - sub-section-title: Taulut ja sarakkeet
+      - sub-section-title: Tiedon atomisuus
       - sub-section-title: Toisteinen tieto
-      - sub-section-title: Lisää suunnittelusta
+      - sub-section-title: Suunnitteluesimerkki
 ---
       
 # 5. Tietokannan suunnittelu
 
-## Taulujen valinta
+## Taulut ja sarakkeet
 
-Tietokannan suunnittelussa meidän tulee päättää tietokannan rakenne: mitä tauluja tietokannassa on sekä mitä sarakkeita kussakin taulussa on. Tähän on sinänsä suuri määrä mahdollisuuksia, mutta tuntemalla muutaman periaatteen ja maalaisjärjellä pärjää pitkälle.
+Tietokannan suunnittelussa meidän tulee päättää tietokannan rakenne: mitä tauluja tietokannassa on sekä mitä sarakkeita kussakin taulussa on. Tähän on sinänsä suuri määrä mahdollisuuksia, mutta tuntemalla muutaman periaatteen pääsee pitkälle.
 
 Hyvä tavoite suunnittelussa on, että tuloksena olevaa tietokantaa on mukavaa käyttää SQL-kielen avulla. Tietokannan rakenteen tulisi olla sellainen, että pystymme hakemaan ja muuttamaan tietoa näppärästi SQL-komennoilla.
+
+Tietokannan suunnittelun periaatteet ovat hyödyllisiä ja johtavat usein toimiviin ratkaisuihin. Kuitenkin aina kannattaa miettiä, mikä periaatteissa on taustalla ja milloin kannattaa mahdollisesti tehdä toisin. Tavoitteen tulisi olla aina se, että tietokanta on käyttötarkoitukseen sopiva, eikä että noudatetaan periaatteita ilman omaa ajattelua.
+
 
 ### Taulu vs. luokka
 
 Tietokannan taulu ja olio-ohjelmoinnin luokka ovat samantapaisia käsitteitä. Molemmissa on kyse siitä, että määrittelemme tiedon _tyypin_. Esimerkiksi seuraava SQL-komento ja Java-koodi vastaavat toisiaan:
 
 ```sql
-CREATE TABLE Elokuvat (id INTEGER PRIMARY KEY, nimi TEXT, vuosi INTEGER);
+CREATE TABLE Elokuvat (
+    id INTEGER PRIMARY KEY, 
+    nimi TEXT,
+    vuosi INTEGER
+);
 ```
 
 ```java
 public class Elokuva {
-	private String nimi;
-	private int vuosi;
+    private String nimi;
+    private int vuosi;
 
-	public Elokuva(String nimi, int vuosi) {
-	    this.nimi = nimi;
-	    this.vuosi = vuosi;
-	}
+    public Elokuva(String nimi, int vuosi) {
+        this.nimi = nimi;
+        this.vuosi = vuosi;
+    }
 }
 ```
 
@@ -50,13 +56,13 @@ Elokuva b = new Elokuva("Fantasia",1940);
 Elokuva c = new Elokuva("Pinocchio",1940);
 ```
 
-Huomaa, että ohjelmoinnissa luokissa ei ole tarvetta id-kentälle, koska voimme viitata muutenkin luokasta luotuihin olioihin. Esimerkiksi yllä olevassa koodissa muuttujat `a`, `b` ja `c` sisältävät viittaukset olioihin.
+Huomaa, että ohjelmoinnissa luokissa ei ole tarvetta id-muuttujalle, koska voimme viitata muutenkin luokasta luotuihin olioihin. Esimerkiksi yllä olevassa koodissa muuttujat `a`, `b` ja `c` sisältävät viittaukset olioihin.
 
 ### Yksi vai useita tauluja?
 
 Periaatteena tietokannan suunnittelussa on, että kaikki saman tyyppiset rivit ovat _yhdessä_ taulussa. Tämän ansiosta voimme käsitellä rivejä kätevästi SQL-komennoilla.
 
-Esimerkiksi jos tietokannassa on elokuvia, hyvä ratkaisu on tallentaa kaikki elokuvat samaan tauluun:
+Esimerkiksi jos tietokannassa on elokuvia, hyvä ratkaisu on tallentaa kaikki elokuvat samaan tauluun `Elokuvat`:
 
 ```
 id          nimi        vuosi     
@@ -98,14 +104,126 @@ SELECT nimi FROM Elokuvat WHERE vuosi BETWEEN 1940 AND 1950;
 
 Kun elokuvat ovat yhdessä taulussa, pystymme käsittelemään niitä monipuolisesti yksittäisillä SQL-komennoilla, mikä ei olisi mahdollista, jos tauluja olisi useita.
 
-## Sarakkeiden sisältö
+### Viittausten toteutus
+
+Ohjelmoinnissa olion sisällä voi olla viittaus toiseen olioon, ja vastaavasti tietokannan taulun rivillä voi olla viittaus toiseen riviin. Tavallinen tapa toteuttaa viittaukset tietokannassa on
+antaa jokaiselle riville id-numero (pääavain), jolla voimme viitata siihen muualta.
+
+#### Yksi moneen -suhde
+
+Tarkastellaan tilannetta, jossa tallennamme tietokantaan kursseja ja opettajia. Taulujen välillä on yksi moneen -suhde: jokaisella kurssilla on yksi opettaja, kun taas yhdellä opettajalla voi olla monta kurssia. Javassa voimme luoda tarvittavat luokat seuraavasti:
+
+```java
+public class Opettaja {
+    private String nimi;
+    
+    public class Opettaja(String nimi) {
+        this.nimi = nimi;
+    }
+}
+
+public class Kurssi {
+    private String nimi;
+    private Opettaja opettaja;
+    
+    public class Kurssi(String nimi, Opettaja opettaja) {
+        this.nimi = nimi;
+        this.opettaja = opettaja;
+    }
+}
+```
+
+Vastaavasti voimme luoda tietokannan taulut näin:
+
+```sql
+CREATE TABLE Opettajat (
+    id INTEGER PRIMARY KEY, 
+    nimi TEXT
+);
+
+CREATE TABLE Kurssit (
+    id INTEGER PRIMARY KEY,
+    nimi TEXT,
+    opettaja_id INTEGER REFERENCES Opettajat
+);
+```
+
+Taulussa `Kurssit` sarake `opettaja_id` viittaa tauluun `Opettajat`, eli siinä on jonkin opettajan id-numero. Ilmaisemme viittauksen `REFERENCES`-määreellä, joka kertoo, että sarakkeessa oleva kokonaisluku viittaa nimenomaan tauluun `Opettajat`.
+
+Voisimme laittaa tauluihin tietoa vaikkapa seuraavasti:
+
+```sql
+INSERT INTO Opettajat (nimi) VALUES ('Kaila');
+INSERT INTO Opettajat (nimi) VALUES ('Kivinen');
+INSERT INTO Opettajat (nimi) VALUES ('Laaksonen');
+INSERT INTO Kurssit (nimi, opettaja_id) VALUES ('Ohjelmoinnin perusteet',1);
+INSERT INTO Kurssit (nimi, opettaja_id) VALUES ('Ohjelmoinnin jatkokurssi',1);
+INSERT INTO Kurssit (nimi, opettaja_id) VALUES ('Tietokantojen perusteet',3);
+INSERT INTO Kurssit (nimi, opettaja_id) VALUES ('Tietorakenteet ja algoritmit',2);
+```
+
+#### Monta moneen -suhde
+
+Tarkastellaan sitten tilannetta, jossa useampi opettaja voi järjestää kurssin yhteisesti. Tällöin kyseessä on monta moneen -suhde, koska kurssilla voi olla monta opettajaa ja opettajalla voi olla monta kurssia.
+
+Javassa voisimme toteuttaa tämän muutoksen helposti muuttamalla luokkaa `Kurssi` niin, että siinä on yhden opettajan sijasta lista opettajista:
+
+```java
+public class Kurssi {
+    private String nimi;
+    private ArrayList<Opettaja> opettaja;
+    
+    public class Kurssi(String nimi) {
+        this.nimi = nimi;
+        this.opettaja = new ArrayList<>();
+    }
+}
+```
+
+Tietokannoissa tilanne on kuitenkin toinen, koska emme voi tallentaa järkevästi taulun sarakkeeseen listaa viittauksista. Tämän sijasta meidän täytyy luoda uusi taulu viittauksille:
+
+```sql
+CREATE TABLE Opettajat (
+    id INTEGER PRIMARY KEY,
+    nimi TEXT
+);
+
+CREATE TABLE Kurssit (
+    id INTEGER PRIMARY KEY,
+    nimi TEXT
+);
+
+CREATE TABLE KurssinOpettajat (
+    kurssi_id INTEGER REFERENCES Kurssit,
+    opettaja_id INTEGER REFERENCES Opettaja
+);
+```
+
+Muutoksena on, että taulussa `Kurssit` ei ole enää viittausta tauluun `Opettajat`, mutta sen sijaan tietokannassa on uusi taulu `KurssinOpettajat`, joka viittaa kumpaankin tauluun. Jokainen rivi tässä rivissä kuvaa yhden suhteen muotoa "kurssilla x opettaa opettaja y".
+
+Esimerkiksi voisimme ilmaista näin, että kurssilla on kaksi opettajaa:
+
+```sql
+INSERT INTO Opettajat (nimi) VALUES ('Kivinen');
+INSERT INTO Opettajat (nimi) VALUES ('Laaksonen');
+INSERT INTO Kurssit (nimi) VALUES ('Tietorakenteet ja algoritmit');
+INSERT INTO KurssinOpettajat VALUES (1,1);
+INSERT INTO KurssinOpettajat VALUES (1,2);
+```
+
+Huomaa, että voisimme käyttää tätä ratkaisua myös aiemmassa tilanteessa, jossa kurssilla on aina tasan yksi opettaja, joskin tietokannassa olisi silloin tavallaan turha taulu.
+
+
+## Tiedon atomisuus
 
 *Periaate*:
-Tietokannan taulun jokaisessa sarakkeessa on _yksittäinen_ (_atominen_) tieto, kuten yksi luku tai yksi merkkijono. Sarakkeessa ei saa olla esimerkiksi listaa tiedoista.
+Tietokannan taulun jokaisessa sarakkeessa on yksittäinen eli _atominen_ tieto, kuten yksi luku tai yksi merkkijono. Sarakkeessa ei saa olla esimerkiksi listaa tiedoista.
 
 Tämä periaate helpottaa tietokannan käsittelyä SQL-komentojen avulla: kun jokainen tieto on omassa sarakkeessaan, niin pystymme viittaamaan tietoon kätevästi komennoissa. Mutta mitä tehdä, jos haluaisimme tallentaa listan?
 
-### Esimerkki: Vaihe 1
+### Listan tallentaminen
+
+#### Vaihe 1
 
 Haluamme tallentaa tietokantaan opiskelijoiden tenttituloksia. Tentissä on neljä tehtävää, joista voi saada 0–6 pistettä. Voisimme koettaa tallentaa pisteet näin:
 
@@ -130,7 +248,7 @@ SELECT opiskelija_id, SUBSTR(pisteet,1,1)+
 
 Tässä funktio `SUBSTR` erottaa merkkijonosta tietyssä kohdassa olevan osajonon. Kysely on kuitenkin hankala ja lisäksi toimii vain, kun pisteitä on tasan neljä ja ne ovat yksinumeroisia. Tarvitsemme paremman tavan tallentaa pisteet.
 
-### Esimerkki: Vaihe 2
+#### Vaihe 2
 
 Seuraavassa taulussa pisteille on neljä saraketta, jolloin voimme käsitellä niitä yksitellen:
 
@@ -150,7 +268,7 @@ SELECT opiskelija_id, pisteet1+pisteet2+pisteet3+pisteet4 FROM Tulokset;
 
 Tämä ratkaisu on selkeästi parempaan suuntaan, mutta siinä on edelleen ongelmia. Vaikka pisteet ovat eri sarakkeissa, oletuksena on edelleen, että tehtäviä on tasan neljä. Jos tehtävien määrä muuttuu, joudumme muuttamaan taulun rakennetta ja kaikkia pisteisiin liittyviä SQL-komentoja, mikä ei ole hyvä tilanne.
 
-### Esimerkki: Vaihe 3
+#### Vaihe 3
 
 Kun haluamme tallentaa listan tietokantaan, hyvä ratkaisu on tallentaa jokainen listan alkio omalle rivilleen. Tämän esimerkin tapauksessa voimme luoda taulun, jonka jokainen rivi ilmaisee tietyn opiskelijan pisteet tietyssä tehtävässä:
 
@@ -179,98 +297,37 @@ SELECT opiskelija_id, SUM(pisteet) FROM Tulokset GROUP BY opiskelija_id;
 
 Tämä on _yleiskäyttöinen_ kysely eli se toimii yhtä hyvin riippumatta tehtävien määrästä. Pystymme hyödyntämään summan laskemisessa funktiota `SUM` sen sijaan, että meidän tulisi luetella kaikki tehtävät itse.
 
-Huomaa, että muutoksen seurauksena taulun rivien määrä kasvoi selvästi. Tätä ei kannata kuitenkaan hätkähtää: tietokantajärjestelmät on toteutettu niin, että ne toimivat hyvin, vaikka olisi paljon rivejä.
+Huomaa, että muutoksen seurauksena taulun rivien määrä kasvoi selvästi. Tätä ei kannata kuitenkaan hätkähtää: tietokantajärjestelmät on toteutettu niin, että ne toimivat hyvin, vaikka taulussa olisi paljon rivejä.
 
-## Viittausten toteutus
+### Mikä on atomista tietoa?
 
-Ohjelmoinnissa olion sisällä voi olla viittaus toiseen olioon, ja vastaavasti tietokannan taulun rivillä voi olla viittaus toiseen riviin. Tavallinen tapa toteuttaa viittaukset tietokannassa on
-antaa jokaiselle riville id-numero (pääavain), jolla voimme viitata siihen muualta.
+Atomisen tiedon käsite ei ole hyvin määritelty. Selkeästi lista ei ole atominen tieto, mutta onko sitten vaikka merkkijonokaan, jossa on useita sanoja?
 
-### Yksi moneen -suhde
+Tarkastellaan esimerkkinä tilannetta, jossa taulun sarakkeessa on käyttäjän nimi. Onko tämä huonoa suunnittelua, koska samassa sarakkeessa on etu- ja sukunimi?
 
-Tarkastellaan tilannetta, jossa tallennamme tietokantaan kursseja ja opettajia. Taulujen välillä on yksi moneen -suhde: jokaisella kurssilla on yksi opettaja, kun taas yhdellä opettajalla voi olla monta kurssia. Javassa voimme luoda tarvittavat luokat seuraavasti:
-
-```java
-public class Opettaja {
-    private String nimi;
-    
-    public class Opettaja(String nimi) {
-        this.nimi = nimi;
-    }
-}
-
-public class Kurssi {
-    private String nimi;
-    private Opettaja opettaja;
-    
-    public class Kurssi(String nimi, Opettaja opettaja) {
-        this.nimi = nimi;
-        this.opettaja = opettaja;
-    }
-}
+```
+id          nimi         
+----------  --------------
+1           Anna Virtanen
+2           Maija Korhonen
+3           Pasi Lahtinen
 ```
 
-Vastaavasti voimme luoda tietokannan taulut näin:
+Voisimme myös tallentaa etu- ja sukunimen erikseen näin:
 
-```sql
-CREATE TABLE Opettajat (id INTEGER PRIMARY KEY, nimi TEXT);
-CREATE TABLE Kurssit (id INTEGER PRIMARY KEY, nimi TEXT, opettaja INTEGER REFERENCES Opettajat);
+```
+id          etunimi     sukunimi  
+----------  ----------  ----------
+1           Anna        Virtanen
+2           Maija       Korhonen
+3           Pasi        Lahtinen
 ```
 
-Taulussa `Kurssit` sarake `opettaja` viittaa tauluun `Opettajat`, eli siinä on jonkin opettajan id-numero. Ilmaisemme viittauksen `REFERENCES`-määreellä, joka kertoo, että sarakkeessa oleva kokonaisluku viittaa nimenomaan tauluun `Opettajat`.
+Riippuu tilanteesta, kumpi taulu on parempi. Jos järjestelmässä on erityisesti tarvetta etsiä tietoa etu- tai sukunimen perusteella (esimerkiksi etsiä kaikki käyttäjät, joiden etunimi on Anna), jälkimmäinen taulu on parempi. Kuitenkaan usein ei ole näin eikä ole mitään pahaa tallentaa samaan sarakkeeseen etu- ja sukunimi.
 
-Voisimme laittaa tauluihin tietoa vaikkapa seuraavasti:
+Vastaavasti jos tietokantaan tallennetaan käyttäjän lähettämä viesti, siinä voi olla monia sanoja eli tavallaan viesti on lista sanoja, mutta on silti hyvä ratkaisu tallentaa koko viesti yhteen sarakkeeseen, koska viestiä käsitellään tietokannassa yhtenä kokonaisuutena. Olisi hyvin huono ratkaisu jakaa "atomisesti" viestin sanat omiin sarakkeisiin.
 
-```sql
-INSERT INTO Opettajat (nimi) VALUES ('Kaila');
-INSERT INTO Opettajat (nimi) VALUES ('Kivinen');
-INSERT INTO Opettajat (nimi) VALUES ('Laaksonen');
-INSERT INTO Kurssit (nimi, opettaja) VALUES ('Ohjelmoinnin perusteet',1);
-INSERT INTO Kurssit (nimi, opettaja) VALUES ('Ohjelmoinnin jatkokurssi',1);
-INSERT INTO Kurssit (nimi, opettaja) VALUES ('Tietokantojen perusteet',3);
-INSERT INTO Kurssit (nimi, opettaja) VALUES ('Tietorakenteet ja algoritmit',2);
-```
-
-### Monta moneen -suhde
-
-Tarkastellaan sitten tilannetta, jossa useampi opettaja voi järjestää kurssin yhteisesti. Tällöin kyseessä on monta moneen -suhde, koska kurssilla voi olla monta opettajaa ja opettajalla voi olla monta kurssia.
-
-Javassa voisimme toteuttaa tämän muutoksen helposti muuttamalla luokkaa `Kurssi` niin, että siinä on yhden opettajan sijasta lista opettajista:
-
-```java
-public class Kurssi {
-    private String nimi;
-    private ArrayList<Opettaja> opettaja;
-    
-    public class Kurssi(String nimi) {
-        this.nimi = nimi;
-        this.opettaja = new ArrayList<>();
-    }
-}
-```
-
-Tietokannoissa tilanne on kuitenkin toinen, koska emme voi tallentaa järkevästi taulun sarakkeeseen listaa viittauksista. Tämän sijasta meidän täytyy luoda uusi taulu viittauksille:
-
-```sql
-CREATE TABLE Opettajat (id INTEGER PRIMARY KEY, nimi TEXT);
-CREATE TABLE Kurssit (id INTEGER PRIMARY KEY, nimi TEXT);
-CREATE TABLE KurssinOpettajat (kurssi_id INTEGER REFERENCES Kurssit,
-                               opettaja_id INTEGER REFERENCES Opettaja);
-```
-
-Muutoksena on, että taulussa `Kurssit` ei ole enää viittausta tauluun `Opettajat`, mutta sen sijaan tietokannassa on uusi taulu `KurssinOpettajat`, joka viittaa kumpaankin tauluun. Jokainen rivi tässä rivissä kuvaa yhden suhteen muotoa "kurssilla x opettaa opettaja y".
-
-Esimerkiksi voisimme ilmaista näin, että kurssilla on kaksi opettajaa:
-
-```sql
-INSERT INTO Opettajat (nimi) VALUES ('Kivinen');
-INSERT INTO Opettajat (nimi) VALUES ('Laaksonen');
-INSERT INTO Kurssit (nimi) VALUES ('Tietorakenteet ja algoritmit');
-INSERT INTO KurssinOpettajat VALUES (1,1);
-INSERT INTO KurssinOpettajat VALUES (1,2);
-```
-
-Huomaa, että voisimme käyttää tätä ratkaisua myös aiemmassa tilanteessa, jossa kurssilla on aina tasan yksi opettaja, joskin tietokannassa olisi silloin tavallaan turha taulu.
+Kannattaakin ajatella asiaa niin, että jos jotain tietoa on tarvetta käsitellä erillisenä SQL-komennoissa, niin se on atominen tieto, jonka tulee olla omassa sarakkeessa. Jos taas tietoon ei viitata SQL-komennoissa, se voi olla sarakkeessa osana laajempaa kokonaisuutta.
 
 ## Toisteinen tieto
 
@@ -318,6 +375,22 @@ Tämän jälkeen käyttäjän nimen muuttaminen on helppoa, koska muutos riittä
 
 Tämä monimutkaistaa kyselyjä, koska meidän täytyy hakea tietoa useista tauluista, mutta ratkaisu on kuitenkin kokonaisuuden kannalta hyvä.
 
+#### Vieläkin toisteisuutta?
+
+Äskeisestä muutoksesta huolimatta tietokannassa saattaa esiintyä edelleen toisteisuutta. Esimerkiksi seuraavassa tilanteessa käyttäjät lähettävät samanlaisen viestin "Hei!". Pitäisikö tietokannan rakennetta parantaa?
+
+```
+id          kayttaja_id  viesti
+----------  -----------  --------------
+1           1            Hei!
+2           2            Hei!
+```
+
+Tässä tapauksessa _ei_ olisi hyvä idea toteuttaa tietokantaa niin, että jos kaksi käyttäjää lähettää saman sisältöisen viestin, viestin sisältö tallennetaan vain yhteen paikkaan.
+
+Vaikka viesteissä on sama sisältö, ne ovat erillisiä viestejä, joiden ei ole tarkoitus viitata samaan asiaan. Jos käyttäjä 1 muuttaa viestin sisältöä, muutoksen ei tule heijastua käyttäjän 2 viestiin, vaikka siinä sattuu olemaan sama sisältö.
+
+
 ### Esimerkki 2
 
 Tallennamme tietokantaan tietoa opiskelijoiden suorituksista. Tietokannasta voidaan kysyä, montako opintopistettä opiskelija on suorittanut.
@@ -363,7 +436,12 @@ id          nimi
 Tämän muutoksen seurauksena on vaikeampaa selvittää opiskelijan opintopisteet, koska meidän täytyy laskea tieto suorituksista lähtien:
 
 ```sql
-SELECT SUM(S.op) FROM Suoritukset S, Opiskelijat O WHERE S.opiskelija_id=O.id AND O.nimi='Maija';
+SELECT
+  SUM(S.op)
+FROM
+  Suoritukset S, Opiskelijat O
+WHERE
+  S.opiskelija_id=O.id AND O.nimi='Maija';
 ```
 
 Tämä on kuitenkin kokonaisuutena hyvä muutos, koska nyt voimme huoletta muutella suorituksia ja luottaa siihen, että saamme aina haettua oikean tiedon opiskelijan opintopisteistä.
@@ -381,101 +459,363 @@ Kun sitten lisäämme toisteista tietoa, pystymme nopeuttamaan kyselyjä mutta t
 
 Ei ole mitään yleistä sääntöä, paljonko toisteista tietoa kannattaa lisätä, vaan tämä riippuu tietokannan sisällöstä ja halutuista kyselyistä. Yksi hyvä tapa on aloittaa tilanteesta, jossa toisteista tietoa ei ole, ja lisätä sitten toisteista tietoa tarvittaessa, jos osoittautuu, että kyselyt eivät muuten ole riittävän tehokkaita.
 
-## Lisää suunnittelusta
+## Suunnitteluesimerkki
 
-Tässä luvussa esitellyt periaatteet ovat hyödyllisiä ja johtavat usein toimiviin ratkaisuihin,
-mutta vielä tärkeämpää on käyttää omaa järkeä. Tavoitteen tulisi olla aina se, että tietokanta on käyttötarkoitukseen sopiva, eikä että noudatetaan periaatteita ilman omaa ajattelua.
+Tarkastellaan lopuksi laajempaa esimerkkiä, jossa tavoitteemme on suunnitella tietokanta Facebookin kaltaista yhteisöpalvelua varten. Tietokannan tulee mahdollistaa seuraavat toiminnot:
 
-### Esimerkki 1
+* Käyttäjä voi kirjautua palveluun antamalla sähköpostiosoitteen ja salasanan.
+* Käyttäjällä on oma sivu, johon hän voi lähettää päivityksiä.
+* Käyttäjä voi lisätä profiiliinsa tietoa, kuten nimen, syntymäpäivän, asuinpaikan, jne.
+* Käyttäjä voi ystävystyä muiden palvelun käyttäjien kanssa.
+* Käyttäjä voi lähettää palveluun valokuvia ja valita yhden niistä profiilikuvaksi.
+* Käyttäjät voivat tykätä ja kommentoida toistensa päivityksiä ja kuvia.
+* Käyttäjät voivat lähettää toisilleen yksityisviestejä.
+* Palvelussa on myös ylläpitäjiä, joilla on enemmän oikeuksia kuin muilla käyttäjillä.
 
-Sarakkeessa tulisi olla vain yksittäinen tieto, joten onko seuraava taulu huonosti suunniteltu, koska samassa sarakkeessa on etu- ja sukunimi?
+### Suunnittelun vaiheet
 
-```
-id          nimi         
-----------  --------------
-1           Anna Virtanen
-2           Maija Korhonen
-3           Pasi Lahtinen
-```
+Tietokannan suunnittelu etenee yleensä pikkuhiljaa niin, että tietokantaan lisätään uusia tauluja ja sarakkeita aina, kun uusissa toiminnoissa on tarvetta niille.
 
-Voisimme myös tallentaa etu- ja sukunimen erikseen näin:
+Seuraavaksi näemme, miten esimerkkitietokanta rakentuu vaihe vaiheelta vaadittujen toimintojen perusteella.
 
-```
-id          etunimi     sukunimi  
-----------  ----------  ----------
-1           Anna        Virtanen
-2           Maija       Korhonen
-3           Pasi        Lahtinen
-```
+#### Kirjautuminen palveluun
 
-Riippuu tilanteesta, kumpi taulu on parempi. Jos järjestelmässä on erityisesti tarvetta etsiä
-tietoa etu- tai sukunimen perusteella (esimerkiksi etsiä kaikki käyttäjät, joiden etunimi on Anna), jälkimmäinen taulu voi olla parempi. Kuitenkaan usein ei ole näin eikä ole mitään pahaa tallentaa samaan sarakkeeseen etu- ja sukunimi.
+* Käyttäjä voi kirjautua palveluun antamalla sähköpostiosoitteen ja salasanan.
 
-### Esimerkki 2
-
-Seuraavassa taulussa näyttää olevan toisteista tietoa: kaksi kertaa sama viesti "Hei!". Pitäisikö tietokannan rakennetta parantaa?
-
-```
-id          kayttaja_id  viesti
-----------  -----------  --------------
-1           1            Hei!
-2           2            Hei!
-3           1            Missä olet?
-4           2            Bussissa
-```
-
-Tässä tapauksessa _ei_ olisi hyvä idea toteuttaa tietokantaa niin, että jos kaksi käyttäjää lähettää saman sisältöisen viestin, viestin sisältö tallennetaan vain yhteen paikkaan.
-
-Vaikka viesteissä on sama sisältö, ne ovat erillisiä viestejä. Jos käyttäjä 1 muuttaa viestin sisältöä, muutoksen ei ole tarkoitus heijastua käyttäjän 2 viestiin, vaikka siinä sattuu olemaan sama sisältö.
-
-### Esimerkki 3
-
-Yliopiston kurssijärjestelmällä on kahdenlaisia käyttäjiä: opettajia ja opiskelijoita. Kannattaako tehdä yksi yhteinen taulu kaikille käyttäjille vai eri taulut opettajille ja opiskelijoille?
-
-Tämä vastaa olio-ohjelmoinnissa tilannetta, jossa voisimme käyttää rajapintoja tai periytymistä,
-mutta SQL:ssä ei ole tarjolla tällaisia tekniikoita.
-
-Kokemus on osoittanut, että hyvä ratkaisu on tallentaa kaikki käyttäjät samaan tauluun. Tauluun tarvitaan jokin sarake, joka ilmaisee käyttäjän roolin. Esimerkiksi voimme sopia, että rooli 1 tarkoittaa opettajaa ja rooli 2 tarkoittaa opiskelijaa. Esimerkiksi seuraava kysely hakee tiedot opettajista:
+Tämä on hyvin tavallinen toiminto, josta on hyvä aloittaa tietokannan suunnittelu. Tarvitsemme taulun, jossa on käyttäjän tunnus (sähköpostiosoite) ja salasana:
 
 ```sql
-SELECT * FROM Kayttajat WHERE rooli=1;
+CREATE TABLE Kayttajat (
+    id INTEGER PRIMARY KEY,
+    tunnus TEXT,
+    salasana TEXT
+);
 ```
 
-Syynä tähän ratkaisuun on, että järjestelmässä on kuitenkin paikkoja, jotka ovat käyttäjille yhteisiä, ja olisi vaivalloista alkaa tehdä eri SQL-komentoja opettajia ja opiskelijoita varten näissä paikoissa.
+#### Päivitykset omalle sivulle
 
-Kun järjestelmä kehittyy, siihen saattaa tulla lisää rooleja, ja on myös mahdollista, että käyttäjällä on monta roolia (esimerkiksi käyttäjä voi olla samaan aikaan opiskelija ja opettaja). Tällöin voi olla hyvä idea luoda uusi taulu, joka kertoo, mitä eri rooleja kullakin käyttäjällä on.
+* Käyttäjällä on oma sivu, johon hän voi lähettää päivityksiä.
 
-### Esimerkki 4
+Tätä toimintoa varten tietokantaan täytyy pystyä tallentamaan käyttäjän päivityksiä. Hyvä ratkaisu on luoda taulu, joka sisältää kaikkien käyttäjien päivitykset id-numeron mukaan:
 
-Seuraavassa taulussa ei ole vielä mitään ongelmaa:
-
-```
-id          nimi           op          kuvaus    
-----------  -------------  ----------  ----------
-1           Ohjelmointi 1  5           ...       
-2           Ohjelmointi 2  5           ...       
-3           Tietokannat    10          ...       
-```
-
-Mutta kun järjestelmä kasvaa, niin tauluun voi alkaa ilmestyä lisää ja lisää sarakkeita sekalaista tietoa (kuten kurssin oppiaine, kirjallisuus, suoritustavat, jne.). Taulu voi alkaa tuntua sekavalta, jos siinä on suuri määrä sarakkeita.
-
-Yksi vaihtoehto olisi rakentaa taulu niin, että siinä onkin vain kiinteä määrä sarakkeita:
-
-```
-sqlite> SELECT * FROM Kurssit;
-id          avain       arvo
-----------  ----------  -------------
-1           nimi        Ohjelmointi 1
-1           op          5
-1           kuvaus      ...
-2           nimi        Ohjelmointi 2
-2           op          5
-2           kuvaus      ...
-3           nimi        Tietokannat
-3           op          10
-3           kuvaus      ...
+```sql
+CREATE TABLE Paivitykset (
+    id INTEGER PRIMARY KEY,
+    kayttaja_id INTEGER REFERENCES Kayttajat,
+    viesti TEXT,
+    aika DATETIME
+);
 ```
 
-Tämän ratkaisun etuna on, että voimme vapaasti lisätä uusia avaimia muuttamatta taulun rakennetta. Lisäksi jos jokin avain on käytössä vain harvoin, siihen ei tarvitse ottaa kantaa jokaisen kurssin kohdalla.
+Huomaa, että tietokantaan ei tarvitse tallentaa tietoa käyttäjän sivusta. Jokaisella käyttäjällä on sivu, joka sisältää käyttäjän päivitykset, mutta sivuun itsessään ei liity tietoa.
 
-Ratkaisussa on kuitenkin omat ongelmansa: kaikilla arvoilla on sama tyyppi (käytännössä niiden täytyy olla merkkijonoja) ja tietyn kurssin tietojen etsiminen on vaikeampaa kuin aiemmin. Kuitenkin jos sarakkeiden määrä uhkaa paisua hankalan suureksi, tämä ratkaisu voi olla pelastava enkeli.
+#### Profiilin tiedot
+
+* Käyttäjä voi lisätä profiiliinsa tietoa, kuten nimen, syntymäpäivän, asuinpaikan, jne.
+
+Yksi tapa toteuttaa tämä toiminto olisi laajentaa taulua `Kayttajat`:
+
+```sql
+CREATE TABLE Kayttajat (
+    id INTEGER PRIMARY KEY,
+    tunnus TEXT,
+    salasana TEXT,
+    nimi TEXT,
+    syntymapaiva DATE,
+    asuinpaikka TEXT,
+    ...
+);
+```
+
+Tämä on sinänsä toimiva tapa, mutta tässä voi tulla ongelmaksi, että profiilissa voi olla paljon vaihtelevaa tietoa, jolloin tauluun `Kayttajat` tulee suuri määrä sarakkeita. Tämän vuoksi teemme toisenlaisen ratkaisun ja luomme uuden taulun `KayttajanTiedot`:
+
+```sql
+CREATE TABLE KayttajanTiedot (
+    id INTEGER PRIMARY KEY,
+    kayttaja_id INTEGER REFERENCES Kayttajat,
+    avain TEXT,
+    arvo TEXT
+);
+```
+
+Nyt käyttäjän tietoja voidaan lisätä tähän tapaan:
+
+```sql
+INSERT INTO KayttajanTiedot (kayttaja_id, avain TEXT, arvo TEXT)
+            VALUES (1,'nimi','Maija Virtanen');
+INSERT INTO KayttajanTiedot (kayttaja_id, avain TEXT, arvo TEXT)
+            VALUES (1,'syntymapaiva','2000-01-01');
+INSERT INTO KayttajanTiedot (kayttaja_id, avain TEXT, arvo TEXT)
+            VALUES (1,'asuinpaikka','Helsinki');
+```
+
+Tämän ratkaisu ansiosta tietokannan rakenteessa ei tarvitse määritellä, mitä kaikkea tietoa profiiliin mahdollisesti voidaan tallentaa, mutta tiedot on tallettu kuitenkin erillisinä.
+
+#### Ystävyyssuhteet
+
+* Käyttäjä voi ystävystyä muiden palvelun käyttäjien kanssa.
+
+Tietokannassa täytyy olla tieto siitä, ketkä käyttäjät ovat ystäviä keskenään. Tämä onnistuu luomalla uusi taulu ystävyyssuhteita varten:
+
+```sql
+CREATE TABLE Ystavat (
+    id INTEGER PRIMARY KEY,
+    kayttaja1_id REFERENCES Kayttajat,
+    kayttaja2_id REFERENCES Kayttajat
+);
+```
+
+Tämä taulu viittaa kahdesti tauluun `Kayttajat`, koska ystävyyssuhde liittyy kahteen käyttäjään.
+
+#### Valokuvien lisääminen
+
+* Käyttäjä voi lähettää palveluun valokuvia ja valita yhden niistä profiilikuvaksi.
+
+Valokuvien lisääminen voidaan toteuttaa samaan tapaan kuin päivitysten lisääminen:
+
+```sql
+CREATE TABLE Valokuvat (
+    id INTEGER PRIMARY KEY,
+    kayttaja_id INTEGER REFERENCES Kayttajat,
+    kuva DATA
+);
+```
+
+Tässä ei oteta tarkemmin kantaa siihen, miten valokuva tallennetaan palvelimelle, vaan sarakkeen tyyppinä on vain `DATA`.
+
+Entä kuinka toteutamme profiilikuvan valitsemisen? Tähän on monia mahdollisia tapoja: voisimme lisätä tiedon asiasta tauluun `Kayttajat` tai `Valokuvat` tai luoda uuden taulun, joka kertoo, mikä kuva on kenenkin käyttäjän profiilikuva.
+
+Koska käyttäjällä on enintään yksi profiilikuva, uudelle taululle ei ole oikeastaan tarvetta. Päädymme lisäämään tiedon tauluun `Kayttajat`, koska jos tieto olisi taulussa `Valokuvat`, pitäisi jotenkin erikseen varmistaa, että usea kuva ei ole samaan aikaan profiilikuvana. Tämän seurauksena taulu `Kayttajat` muuttuu näin:
+
+```sql
+CREATE TABLE Kayttajat (
+    id INTEGER PRIMARY KEY,
+    tunnus TEXT,
+    salasana TEXT,
+    kuva_id INTEGER REFERENCES Valokuvat
+);
+```
+
+#### Tykkäykset ja kommentit
+
+* Käyttäjät voivat tykätä ja kommentoida toistensa päivityksiä ja kuvia.
+
+Tämän toiminnon toteuttamiseen on monia mahdollisuuksia. Seuraavassa ratkaisussa taulu `Tykkaykset` sisältää kaikki tykkäykset ja taulu `Kommentit` sisältää kaikki kommentit.
+
+```sql
+CREATE TABLE Tykkaykset (
+    id INTEGER PRIMARY KEY,
+    kayttaja_id INTEGER REFERENCES Kayttajat,
+    paivitys_id INTEGER REFERENCES Paivitykset,
+    kuva_id INTEGER REFERENCES Valokuvat
+);
+
+CREATE TABLE Kommentit (
+    id INTEGER PRIMARY KEY,
+    kayttaja_id INTEGER REFERENCES Kayttajat,
+    paivitys_id INTEGER REFERENCES Paivitykset,
+    kuva_id INTEGER REFERENCES Valokuvat,
+    viesti TEXT
+    aika DATETIME
+);
+```
+
+Ideana on, että jos tykkäys tai kommentti liittyy päivitykseen, niin sarake `paivitys_id` osoittaa päivitykseen ja sarake `kuva_id` on `NULL`. Vastaavasti jos tykkäys tai kommentti liittyy kuvaan, sarake `paivitys_id` on `NULL` ja sarake `kuva_id` osoittaa kuvaan.
+
+Vaihtoehtoinen ratkaisu olisi luoda kahden taulun sijasta neljä taulua niin, että päivitysten ja kuvien tiedot ovat omissa tauluissaan. Tämän etuna olisi, että riveillä ei ole `NULL`-arvoja, mutta tämä toisaalta mutkistaisi tietokannan rakennetta.
+
+#### Yksityisviestit
+
+* Käyttäjät voivat lähettää toisilleen yksityisviestejä.
+
+Tämän toiminnon saamme toteutettua samalla tavalla kuin ystävystymisen lisäämällä uuden taulun, joka viittaa kahteen käyttäjään.
+
+```sql
+CREATE TABLE Viestit (
+    id INTEGER PRIMARY KEY,
+    kayttaja1_id INTEGER REFERENCES Kayttajat,
+    kayttaja2_id INTEGER REFERENCES Kayttajat,
+    viesti TEXT,
+    aika DATETIME
+);
+```
+
+Tässä tulkintana on, että käyttäjä 1 on viestin lähettäjä ja käyttäjä 2 on viestin vastaanottaja.
+
+#### Ylläpitäjät
+
+* Palvelussa on myös ylläpitäjiä, joilla on enemmän oikeuksia kuin muilla käyttäjillä.
+
+Tämän toiminnon toteuttamiseen on periaatteessa kaksi vaihtoehtoa: kaikki käyttäjät (myös ylläpitäjät) ovat samassa taulussa tai ylläpitäjät ovat erillisessä taulussa.
+
+Kokemus on osoittanut, että parempi ratkaisu on tallentaa kaikki käyttäjät samaan tauluun, koska käyttäjillä on kuitenkin yhteisiä toimintoja, joiden toteuttaminen olisi hankalaa, jos tietoa pitäisi etsiä eri tauluista riippuen käyttäjän asemasta. Käyttäjät voidaan tallentaa samaan tauluun, kun tauluun lisätään sarake, joka ilmaisee käyttäjän roolin.
+
+```sql
+CREATE TABLE Kayttajat (
+    id INTEGER PRIMARY KEY,
+    tunnus TEXT,
+    salasana TEXT,
+    kuva_id INTEGER REFERENCES Valokuvat,
+    yllapitaja BOOLEAN
+);
+```
+
+### Tietokannan kuvaaminen
+
+Tietokannan rakenteen kuvaamiseen on kaksi tavallista tapaa: graafinen tietokantakaavio, joka esittää taulujen suhteet, sekä SQL-skeema, jossa on taulujen luontikomennot.
+
+#### Tietokantakaavio
+
+Tietokantakaavio on tietokannan graafinen esitys, jossa jokainen tietokannan taulu on laatikko, joka sisältää taulun nimen ja sarakkeet listana. Rivien viittaukset toisiinsa esitetään laatikoiden välisinä yhteyksinä.
+
+Tietokantakaavion piirtämiseen on monia vähän erilaisia tapoja. Seuraava kaavio on luotu netissä olevalla työkalulla [dbdiagram.io](https://dbdiagram.io/):
+
+<img src="kaavio.png">
+
+Tässä merkki `1` tarkoittaa, että sarakkeessa on eri arvo joka rivillä, ja merkki `*` puolestaan tarkoittaa, että sarakkeessa voi olla sama arvo usealla rivillä.
+
+#### SQL-skeema
+
+SQL-skeema sisältää `CREATE TABLE` -komennot, joiden avulla tietokanta voidaan muodostaa. Seuraava SQL-skeema vastaa tietokantaamme:
+
+```sql
+CREATE TABLE Kayttajat (
+    id INTEGER PRIMARY KEY,
+    tunnus TEXT,
+    salasana TEXT,
+    kuva_id INTEGER REFERENCES Valokuvat,
+    yllapitaja BOOLEAN
+);
+
+CREATE TABLE Paivitykset (
+    id INTEGER PRIMARY KEY,
+    kayttaja_id INTEGER REFERENCES Kayttajat,
+    viesti TEXT,
+    aika DATETIME
+);
+
+CREATE TABLE KayttajanTiedot (
+    id INTEGER PRIMARY KEY,
+    kayttaja_id INTEGER REFERENCES Kayttajat,
+    avain TEXT,
+    arvo TEXT
+);
+
+CREATE TABLE Ystavat (
+    id INTEGER PRIMARY KEY,
+    kayttaja1_id REFERENCES Kayttajat,
+    kayttaja2_id REFERENCES Kayttajat
+);
+
+CREATE TABLE Valokuvat (
+    id INTEGER PRIMARY KEY,
+    kayttaja_id INTEGER REFERENCES Kayttajat,
+    kuva DATA
+);
+
+CREATE TABLE Tykkaykset (
+    id INTEGER PRIMARY KEY,
+    kayttaja_id INTEGER REFERENCES Kayttajat,
+    paivitys_id INTEGER REFERENCES Paivitykset,
+    kuva_id INTEGER REFERENCES Valokuvat
+);
+
+CREATE TABLE Kommentit (
+    id INTEGER PRIMARY KEY,
+    kayttaja_id INTEGER REFERENCES Kayttajat,
+    paivitys_id INTEGER REFERENCES Paivitykset,
+    kuva_id INTEGER REFERENCES Valokuvat,
+    viesti TEXT
+    aika DATETIME
+);
+
+CREATE TABLE Viestit (
+    id INTEGER PRIMARY KEY,
+    kayttaja1_id INTEGER REFERENCES Kayttajat,
+    kayttaja2_id INTEGER REFERENCES Kayttajat,
+    viesti TEXT,
+    aika DATETIME
+);
+```
+
+<!--
+Table Kayttajat as K {
+  id INTEGER [pk]
+  tunnus TEXT
+  salasana TEXT
+  kuva_id INTEGER
+  yllapitaja BOOLEAN
+}
+
+Ref: K.kuva_id > V.id
+
+Table Paivitykset as P {
+  id INTEGER [pk]
+  kayttaja_id INTEGER
+  viesti TEXT
+  aika DATETIME
+}
+
+Ref: P.kayttaja_id > K.id
+
+Table KayttajanTiedot as KT {
+  id INTEGER [pk]
+  kayttaja_id INTEGER
+  avain TEXT
+  arvo TEXT
+}
+
+Ref: KT.kayttaja_id > K.id
+
+Table Ystavat as Y {
+  id INTEGER [pk]
+  kayttaja1_id INTEGER
+  kayttaja2_id INTEGER
+}
+
+Ref: Y.kayttaja1_id > K.id
+Ref: Y.kayttaja2_id > K.id
+
+Table Valokuvat as V {
+  id INTEGER [pk]
+  kayttaja_id INTEGER
+  kuva DATA
+}
+
+Ref: V.kayttaja_id > K.id
+
+Table Tykkaykset as T{
+  id INTEGER [pk]
+  kayttaja_id INTEGER
+  paivitys_id INTEGER
+  kuva_id INTEGER
+}
+
+Ref: T.kayttaja_id > K.id
+Ref: T.paivitys_id > P.id
+Ref: T.kuva_id > V.id
+
+Table Kommentit as Z {
+  id INTEGER [pk]
+  kayttaja_id INTEGER
+  paivitys_id INTEGER
+  kuva_id INTEGER
+  viesti TEXT
+  aika DATETIME
+}
+
+Ref: Z.kayttaja_id > K.id
+Ref: Z.paivitys_id > P.id
+Ref: Z.kuva_id > V.id
+
+Table Viestit as W {
+  id INTEGER [pk]
+  kayttaja1_id INTEGER
+  kayttaja2_id INTEGER
+  viesti TEXT
+  aika DATETIME
+}
+
+Ref: W.kayttaja1_id > K.id
+Ref: W.kayttaja2_id > K.id
+-->
