@@ -49,7 +49,7 @@ Koodin tulostus on seuraava:
 ```
 
 Koodi tarvitsee toimiakseen JDBC-ajurin, joka osaa muodostaa yhteyden SQLite-tietokantaan.
-Saat ladattua tarvittavan ajurin koneellesi [tästä](https://bitbucket.org/xerial/sqlite-jdbc/downloads/).
+Saat ladattua tarvittavan ajurin koneellesi [tästä](https://repo1.maven.org/maven2/org/xerial/sqlite-jdbc/).
 Oletamme seuraavaksi, että ajuritiedosto on `sqlite-jdbc-3.30.1.jar`
 (voit ladata myös mahdollisen uudemman version ajurista).
 
