@@ -21,6 +21,8 @@ Kurssilla on yksi luento: verkkoluento ti 1.9.2020 klo 14–16. Luennon tarkoitu
 
 Kurssin Telegram-ryhmässä voit keskustella netissä muiden opiskelijoiden ja kurssin järjestäjien kanssa. [Liity ryhmään](https://t.me/tkt_tikape)
 
+Voit osallistua myös keskiviikkoisin Zoom-ohjaukseen tietokantapajassa. [Lisätietoa](pages/paja.html)
+
 ## Tehtävät ja arvostelu
 
 Kurssin osasuoritukset ovat SQL-tehtävät ja harjoitustyö, jotka molemmat arvioidaan asteikolla 1–5. Kurssin arvosana on näiden keskiarvo (pyöristettynä ylöspäin).
