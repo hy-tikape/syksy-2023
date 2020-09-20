@@ -8,7 +8,7 @@ title: Tehtävät ja harjoitustyö
 
 Kurssi suoritetaan ratkomalla tehtäviä ja palauttamalla harjoitustyö. Molemmat osasuoritukset tehdään itsenäisesti kurssin materiaalin ja muiden lähteiden avulla.
 
-Kaikkien kurssin suoritusten deadline on ti 18.10.2020 klo 23:59.
+Kaikkien kurssin suoritusten deadline on su 18.10.2020 klo 23:59.
 
 ## Tehtävät
 

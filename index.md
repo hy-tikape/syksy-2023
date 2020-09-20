@@ -27,7 +27,7 @@ Voit osallistua myös keskiviikkoisin Zoom-ohjaukseen tietokantapajassa. [Lisät
 
 Kurssin osasuoritukset ovat SQL-tehtävät ja harjoitustyö, jotka molemmat arvioidaan asteikolla 1–5. Kurssin arvosana on näiden keskiarvo (pyöristettynä ylöspäin).
 
-Sinun tulee saada vähintään arvosana 1 kummastakin osasuorituksesta, jotta saat suorituksen kurssista. Osasuorituksilla on yhteinen deadline ti 18.10.2020.
+Sinun tulee saada vähintään arvosana 1 kummastakin osasuorituksesta, jotta saat suorituksen kurssista. Osasuorituksilla on yhteinen deadline su 18.10.2020.
 
 ## Yhteystiedot
 
