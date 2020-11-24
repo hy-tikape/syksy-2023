@@ -12,3 +12,14 @@ Tarkasta Tasks-järjestelmässä, että nimesi ja opiskelijanumerosi näkyy oike
 
 Jos et ole Helsingin yliopiston tutkinto-opiskelija ja haluat kurssista suorituksen, ilmoittaudu nyt kurssille [Avoimen yliopiston kautta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=136509002). Kurssin tulokset lähetetään eteenpäin ma 23.11.2020, joten ilmoittaudu kurssille tätä ennen.
 
+## Yhteenveto
+
+Kurssille osallistui 447 opiskelijaa, joista 203 (45.4 %) suoritti kurssin hyväksytysti.
+
+Arvosanajakauma:
+
+* arvosana 1: 7 opiskelijaa (3.4 %)
+* arvosana 2: 14 opiskelijaa (6.9 %)
+* arvosana 3: 51 opiskelijaa (25.1 %)
+* arvosana 4: 76 opiskelijaa (37.4 %)
+* arvosana 5: 55 opiskelijaa (27.1 %)
