@@ -1,7 +1,7 @@
 ---
-title: Tehtävät ja harjoitustyö
+title: Tehtävät
 ---
 
-# Tehtävät ja harjoitustyö
+# Tehtävät
 
 TODO
