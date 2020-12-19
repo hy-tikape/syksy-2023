@@ -1,16 +1,15 @@
 ---
 nav-title: 5. Tietokannat ohjelmoinnissa
 sub-sections:
-      - sub-section-title: Tietokannan käyttäminen
-      - sub-section-title: Parametrit
-      - sub-section-title: Virheenkäsittely
+      - sub-section-title: Python ja SQLite
+      - sub-section-title: Käyttöliittymä
 ---
       
 # 5. Tietokannat ohjelmoinnissa
 
-## Tietokannan käyttäminen
+## Python ja SQLite
 
-Python-kielen standardikirjastossa on moduuli `sqlite3`, jonka avulla voidaan käyttää SQLite-tietokantaa. Seuraava ohjelma esittelee moduulin käyttämistä:
+Python-kielen standardikirjastossa on moduuli `sqlite3`, jonka avulla voidaan käyttää SQLite-tietokantaa. Seuraava koodi on pohja tietokannan käyttämiselle:
 
 ```python
 import sqlite3
@@ -18,78 +17,114 @@ import sqlite3
 db = sqlite3.connect("testi.db")
 db.isolation_level = None
 
+# tietokantakomennot
+```
+
+Koodi luo olion `db`, jonka kautta voidaan käyttää tiedostossa `testi.db` olevaa tietokantaa. Jos tiedostoa ei ole valmiina olemassa, tiedosto luodaan ja tietokanta on aluksi tyhjä.
+
+Koodi myös määrittelee, että `isolation_level` on `None`, mikä tarkoittaa, että kun tietokantaan tehdään muutoksia, ne tulevat voimaan välittömästi samaan tapaan kuin SQLite-tulkissa.
+
+### Komentojen suoritus
+
+Metodi `execute` suorittaa halutun SQL-komennon tietokannassa. Esimerkiksi seuraavat komennot luovat taulun `Tuotteet` ja lisäävät sinne kolme riviä:
+
+```python
 db.execute("CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER)")
 
 db.execute("INSERT INTO Tuotteet (nimi, hinta) VALUES ('selleri', 5)")
 db.execute("INSERT INTO Tuotteet (nimi, hinta) VALUES ('nauris', 8)")
 db.execute("INSERT INTO Tuotteet (nimi, hinta) VALUES ('lanttu', 4)")
+```
 
+Samalla tavalla voidaan myös hakea tietoa tietokannasta. Metodi `fetchall` antaa kyselyn tulokset listana, jossa jokaista tulostaulun riviä vastaa tuple:
+
+```python
 tuotteet = db.execute("SELECT nimi, hinta FROM Tuotteet").fetchall()
 print(tuotteet)
+```
 
+```
+[('selleri', 5), ('nauris', 8), ('lanttu', 4)]
+```
+
+Metodi `fetchone` puolestaan palauttaa ensimmäisen tulosrivin tuplena. Tämä metodi on erityisen hyödyllinen kyselyissä, jotka palauttavat aina yhden rivin:
+
+```python
 hinta = db.execute("SELECT MAX(hinta) FROM Tuotteet").fetchone()
 print(hinta)
 ```
 
-Ohjelma toimii seuraavasti:
-
-```prompt
-[('selleri', 5), ('nauris', 8), ('lanttu', 4)]
+```
 (8,)
 ```
 
-Katsotaan seuraavaksi tarkemmin joitakin koodin osia:
+### Parametrit
 
-### Yhteys tietokantaan
-
-```python
-db = sqlite3.connect("testi.db")
-```
-
-Tämä koodi luo olion `db`, jonka kautta voidaan käyttää tiedostossa `testi.db` olevaa tietokantaa. Tiedoston tulee olla hakemistossa, jossa koodi suoritetaan. Jos tiedostoa ei ole olemassa, se luodaan ja tietokanta on aluksi tyhjä.
-
-### Komentojen suoritus 
+Seuraava koodi kysyy käyttäjältä tuotteen nimeä ja ilmoittaa sitten tuotteen hinnan tai tiedon siitä, että tuotetta ei ole tietokannassa.
 
 ```python
-db.isolation_level = None
+nimi = input("Tuotteen nimi: ")
+hinta = db.execute("SELECT hinta FROM Tuotteet WHERE nimi=?", [nimi]).fetchone()
+if hinta:
+    print("Hinta on", hinta[0])
+else:
+    print("Ei löytynyt")
 ```
 
-Tämä rivi määrittää, että SQL-komennon suorittaminen aiheuttaa välittömästi muutoksen tietokantaan, samaan tapaan kuin SQLite-tulkissa.
+Tässä käyttäjän antama tieto yhdistetään kyselyyn _parametrina_: kyselyssä tiedon kohdalla on merkki `?` ja sen kohdalle tuleva arvo annetaan listassa. Esimerkiksi jos käyttäjä antaa nimen `nauris`, kyselystä tulee `SELECT hinta FROM Tuotteet WHERE nimi='nauris'`. Tästä näkee, että merkkijonon tapauksessa `'`-merkit lisätään automaattisesti oikealla tavalla.
+
+Seuraava koodi puolestaan lisää uuden tuotteen tietokantaan:
 
 ```python
-db.execute(...)
+nimi = input("Tuotteen nimi: ")
+hinta = input("Tuotteen hinta: ")
+db.execute("INSERT INTO Tuotteet (nimi, hinta) VALUES (?, ?)", [nimi, hinta])
 ```
 
-Metodilla `execute` voi suorittaa SQL-komentoja, kuten luoda uuden taulun komennolla `CREATE TABLE` ja lisätä rivin tauluun komennolla `INSERT`.
+Kun parametreja on useita, ne tulevat listan arvoista samassa järjestyksessä.
 
-### Tiedon hakeminen
+Parametrien avulla tieto liitetään varmasti oikealla tavalla SQL-komennon osaksi. Esimerkiksi jos tuotteen nimi on `Pepe's Drink`, nimessä esiintyy `'`-merkki ja oikea tapa ilmoittaa nimi komennossa on `'Pepe\'s Drink'`. Kun tieto annetaan parametrina, tämä muutos tehdään automaattisesti. Erityisesti web-sovelluksissa parametrien käyttäminen estää myös SQL-injektion, jossa pahantahtoinen käyttäjä yrittää muuttaa komennon rakennetta. Tutustumme aiheeseen tarkemmin kurssilla [Tietokantasovellus](https://hy-tsoha.github.io/materiaali/).
+
+### Virheenkäsittely
+
+Tietokannassa suoritettava komento saattaa epäonnistua. Esimerkiksi seuraava komento epäonnistuu, jos taulu `Tuotteet` on jo olemassa:
 
 ```python
-tuotteet = db.execute("SELECT nimi, hinta FROM Tuotteet").fetchall()
+db.execute("CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER)")
 ```
 
-Metodi `fetchall` hakee kyselyn antamat rivit listana, jossa jokaista riviä vastaa yksi tuple. Tässä tapauksessa kysely antaa kolme riviä, joten listaan tulee kolme tuplea.
+Tällöin ohjelman suoritus päättyy seuraavaan virheeseen:
 
-```python
-hinta = db.execute("SELECT MAX(hinta) FROM Tuotteet").fetchone()
 ```
-
-Metodi `fetchone` hakee ensimmäisen kyselyn antaman rivin, ja sitä käytetään usein silloin, kun kysely palauttaa vain yhden rivin. Tässä tapauksessa kysely antaa suurimman hinnan.
-
-### Taulu on jo olemassa?
-
-Jos koodi suoritetaan uudestaan, tuleekin virheilmoitus:
-
-```prompt
 Traceback (most recent call last):
-  File "testi.py", line 11, in <module>
-    """)
+  File "testi.py", line 6, in <module>
+    db.execute("CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER)")
 sqlite3.OperationalError: table Tuotteet already exists
 ```
 
-Tämä johtuu siitä, että tietokannan sisältö säilyy tiedostossa `testi.db` ohjelman suorituskertojen välillä. Koska taulu on jo luotu, sitä ei voida luoda uudestaan. Kuitenkin tarvittaessa tiedoston `testi.db` voi aina poistaa, ja kaikki alkaa alusta.
+Virhe voidaan käsitellä myös Python-koodin puolella vaikkapa näin:
 
-## Parametrit
+```python
+try:
+    db.execute("CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER)")
+except:
+    print("Taulua ei voitu luoda")
+```
+
+Tällöin ohjelman suoritus jatkuu eteenpäin eikä pääty virheeseen.
+
+### Lisätyn rivin id-numero
+
+Seuraava koodi ilmoittaa tietokantaan lisätyn rivin id-numeron:
+
+```python
+tulos = db.execute("INSERT INTO Tuotteet (nimi, hinta) VALUES ('lanttu', 4)")
+print(tulos.lastrowid)
+```
+
+Tästä on hyötyä, jos tietokantaan lisätään tämän jälkeen muita rivejä, joka viittaavat ensin lisättyyn riviin.
+
+## Käyttöliittymä
 
 Seuraava ohjelma toteuttaa käyttöliittymän, jonka avulla käyttäjä voi lisätä tietokantaan tuotteita, hakea tuotteen hinnan tai poistua ohjelmasta. Ohjelma olettaa, että tiedostossa `testi.db` on valmiina olemassa taulu `Tuotteet`.
 
@@ -113,20 +148,19 @@ while True:
 
     if komento == "2":
         nimi = input("Tuotteen nimi: ")
-        tulos = db.execute("SELECT hinta FROM Tuotteet WHERE nimi=?", [nimi])
-        hinta = tulos.fetchone()
+        hinta = db.execute("SELECT hinta FROM Tuotteet WHERE nimi=?", [nimi]).fetchone()
         if hinta:
             print("Hinta on", hinta[0])
         else:
             print("Ei löytynyt")
-        
+
     if komento == "3":
         break
 ```
 
 Ohjelman suoritus voi näyttää seuraavalta:
 
-```prompt
+```
 1 - Lisää uusi tuote
 2 - Hae tuotteen hinta
 3 - Sulje ohjelma
@@ -138,31 +172,63 @@ Tuotteen nimi: palsternakka
 Ei löytynyt
 Anna komento: 1
 Tuotteen nimi: palsternakka
-Tuotteen hinta: 19
+Tuotteen hinta: 9
 Anna komento: 2 
 Tuotteen nimi: palsternakka
-Hinta on 19
+Hinta on 9
 Anna komento: 3
 ```
 
-Ohjelma liittää käyttäjän antamat tiedot SQL-komentoihin parametrien avulla. Parametri merkitään SQL-komentoon merkillä `?`, ja parametrien halutut arvot annetaan listassa `execute`-metodissa samassa järjestyksessä.
+### Koodin rakenne paremmaksi
 
-Esimerkiksi kun kysely on `SELECT hinta FROM Tuotteet WHERE nimi=?` ja muuttujan `nimi` sisältönä on `selleri`, kyselystä tulee `SELECT hinta FROM Tuotteet WHERE nimi='hinta'`. Parametri yhdistetään automaattisesti kyselyyn oikealla tavalla: esimerkiksi tässä tapauksessa merkkijonon ympärille tulee `'`-merkit.
+Usein pidetään hyvänä, että tietokannan käsittely ja käyttöliittymän toteutus ovat toisistaan erillään ohjelmassa. Seuraava koodi toteuttaa tämän niin, että moduuli `tuotteet.py` käsittelee tietokantaa ja moduuli `main.py` on pääohjelma, joka näyttää käyttöliittymän.
 
-### Miksi käyttää parametreja?
-
-Seuraavat kyselyt näyttävät päältä päin samanlaisilta:
-
+<p class="code-title">tuotteet.py</p>
 ```python
-tulos = db.execute("SELECT hinta FROM Tuotteet WHERE nimi=?", [nimi])
+import sqlite3
+
+db = sqlite3.connect("testi.db")
+db.isolation_level = None
+
+def lisaa_tuote(nimi, hinta):
+    db.execute("INSERT INTO Tuotteet (nimi, hinta) VALUES (?,?)", [nimi, hinta])
+
+def hae_hinta(nimi):
+    hinta = db.execute("SELECT hinta FROM Tuotteet WHERE nimi=?", [nimi]).fetchone()
+    if hinta:
+        return hinta[0]
+    else:
+        return None
 ```
 
+<p class="code-title">main.py</p>
 ```python
-tulos = db.execute(f"SELECT hinta FROM Tuotteet WHERE nimi='{nimi}'")
+import tuotteet
+
+print("1 - Lisää uusi tuote")
+print("2 - Hae tuotteen hinta")
+print("3 - Sulje ohjelma")
+
+while True:
+    komento = input("Anna komento: ")
+
+    if komento == "1":
+        nimi = input("Tuotteen nimi: ")
+        hinta = input("Tuotteen hinta: ")
+        tuotteet.lisaa_tuote(nimi, hinta)
+
+    if komento == "2":
+        nimi = input("Tuotteen nimi: ")
+        hinta = tuotteet.hae_hinta(nimi)
+        if hinta:
+            print("Hinta on", hinta)
+        else:
+            print("Ei löytynyt")
+
+    if komento == "3":
+        break
 ```
 
-Ensimmäisessä kyselyssä on käytetty parametria, kun taas toisessa kyselyssä muuttujan arvo on lisätty suoraan merkkijonon osaksi. Mitä hyötyä on käyttää parametria?
+Tällaisessa toteutuksessa käyttöliittymässä ei näy mitään siitä, että tiedot tallennetaan nimenomaan SQLite-tietokantaan, vaan tallennustapaa voisi periaatteessa muuttaa ilman, että käyttöliittymään tulisi mitään muutoksia.
 
-Syy käyttää parametria on, että silloin tieto liitetään varmasti oikealla tavalla kyselyn osaksi. Esimerkiksi jos tuotteen nimi on `Pepe's Drink`, nimessä esiintyy `'`-merkki ja oikea tapa antaa ehto kyselyssä on `nimi='Pepe\'s Drink'`. Kun tieto annetaan parametrina, tämä muutos tehdään automaattisesti.
-
-Erityisesti web-sovelluksissa parametrien käyttäminen estää myös SQL-injektion, jossa pahantahtoinen käyttäjä yrittää muuttaa kyselyn rakennetta. Tutustumme aiheeseen tarkemmin kurssilla [Tietokantasovellus](https://hy-tsoha.github.io/materiaali/).
+Laajemmassa sovelluksessa olisi mielekästä jakaa tietokannan käsittely useampaan tiedostoon. Tällaisia sovelluksia tehdään myöhemmillä tietojenkäsittelytieteen kursseilla.
