@@ -1,13 +1,14 @@
 ---
 nav-title: 5. Tietokannat ohjelmoinnissa
 sub-sections:
-      - sub-section-title: Python ja SQLite
+      - sub-section-title: Tietokannan käyttäminen
       - sub-section-title: Käyttöliittymä
+      - sub-section-title: Mitä tehdä missäkin?
 ---
       
 # 5. Tietokannat ohjelmoinnissa
 
-## Python ja SQLite
+## Tietokannan käyttäminen
 
 Python-kielen standardikirjastossa on moduuli `sqlite3`, jonka avulla voidaan käyttää SQLite-tietokantaa. Seuraava koodi on pohja tietokannan käyttämiselle:
 
@@ -232,3 +233,51 @@ while True:
 Tällaisessa toteutuksessa käyttöliittymässä ei näy mitään siitä, että tiedot tallennetaan nimenomaan SQLite-tietokantaan, vaan tallennustapaa voisi periaatteessa muuttaa ilman, että käyttöliittymään tulisi mitään muutoksia.
 
 Laajemmassa sovelluksessa olisi mielekästä jakaa tietokannan käsittely useampaan tiedostoon. Tällaisia sovelluksia tehdään myöhemmillä tietojenkäsittelytieteen kursseilla.
+
+## Mitä tehdä missäkin?
+
+Tietokannan ja koodin puolella voi usein tehdä samantapaisia asioita. Esimerkiksi seuraavassa on kaksi tapaa etsiä kalleimman tuotteen hinta tietokannasta:
+
+```python
+kallein = db.execute("SELECT MAX(hinta) FROM Tuotteet").fetchone()
+```
+
+```python
+hinnat = db.execute("SELECT hinta FROM Tuotteet").fetchall()
+kallein = max(hinnat)
+```
+
+Ensimmäisessä tavassa haetaan kallein hinta tietokannan puolella SQL:n `MAX`-funktiolla. Toisessa tavassa puolestaan haetaan tietokannasta kaikkien tuotteiden hinnat listaan ja etsitään sitten koodin puolella listan kallein hinta Pythonin `max`-funktiolla.
+
+Näistä kahdesta tavasta ensimmäinen tapa on selkeästi parempi: ei ole hyvä hakea turhaa tietoa koodin puolelle ja tehdä käsittelyä, jonka voi tehdä helposti myös tietokannassa.
+
+Erityisesti kannattaa välttää tilannetta, jossa suoritetaan turhaan useita SQL-komentoja, vaikka vain yksi komento riittäisi. Esimerkiksi seuraavassa on huono tapa hakea tietokannasta jokaisen opettajan nimi ja kurssien määrä:
+
+```python
+opettajat = db.execute("SELECT id, nimi FROM Opettajat").fetchall()
+for opettaja in opettajat:
+    maara = db.execute("SELECT COUNT(*) FROM Kurssit WHERE opettaja_id=?", [opettaja[0]])
+    print(opettaja[1], maara)
+```
+
+Koodi hakee ensin listaan kunkin opettajan id-numeron ja nimen ja sitten jokaisesta opettajasta erikseen niiden kurssien määrän, joita kyseinen opettaja opettaa. Koodi on kyllä toimiva mutta se tekee valtavasti turhaa työtä hakiessaan jokaisen tiedon erikseen. Parempi ratkaisu on muodostaa yksi kysely, joka hakee suoraan kaiken tarvittavan:
+
+```python
+tiedot = db.execute("SELECT O.nimi, COUNT(*) FROM Opettajat O LEFT JOIN Kurssit K ON O.id = K.opettaja_id GROUP BY O.id").fetchall()
+for rivi in tiedot:
+    print(rivi[0], rivi[1])
+```
+
+Tuloksena oleva kysely on monimutkaisempi, mutta sen avulla tietokantajärjestelmä voi optimoida kokonaisuutena halutun tiedon hakemisen ja toimittaa tiedon mahdollisimman tehokkaasti koodille.
+
+Kuitenkaan tietokannan puolella ei kannata tehdä kaikkea mahdollista, mikä on teoriassa mahdollista. Tästä esimerkkinä on seuraava koodi, joka hakee tietokannasta tuloslistan, jossa pelaajat on järjestettynä pistemäärän ja nimen mukaan. Tulostuksessa pelaajista näytetään myös sija (1, 2, 3, jne.) listalla.
+
+```python
+lista = db.execute("SELECT nimi, pisteet FROM Tulokset ORDER BY pisteet DESC, nimi").fetchall()
+sija = 1
+for tulos in lista:
+    print(sija, tulos[0], tulos[1])
+    sija += 1
+```
+
+Tässä tapauksessa pelaajien sijat lasketaan koodin puolella muuttujan `sija` avulla. Olisi mahdollista laatia monimutkainen SQL-kysely, jonka tulostaulussa on myös sijat, mutta tässä tapauksessa siitä tuskin olisi hyötyä, koska sijat voi laskea helposti ja tehokkaasti myös koodin puolella. Tällaisen kyselyn laatiminen on kuitenkin kiinnostava teoreettinen haaste, erityisesti käyttämättä ikkunafunktioita.
