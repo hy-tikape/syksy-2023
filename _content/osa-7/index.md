@@ -74,6 +74,30 @@ Error: CHECK constraint failed: Tuotteet
 
 Kun koetamme lisätä tauluun `Tuotteet` rivin, jossa hinta on negatiivinen, tämä rikkoo ehdon `hinta >= 0` ja SQLite ei salli rivin lisäämistä vaan antaa virheen `CHECK constraint failed: Tuotteet`. Samalla tavalla käy, jos koetamme muuttaa olemassa olevan rivin sarakkeen hinnan negatiiviseksi jälkeenpäin.
 
+### Ehdot ohjelmoinnissa
+
+Seuraava esimerkki näyttää, miten taulussa olevaa ehtoa voidaan hyödyntää ohjelmoinnissa. Haluamme, että tietokannan jokaisella tuotteella on eri nimi, minkä vuoksi sarakkeessa `nimi` on ehtona `UNIQUE`:
+
+```sql
+CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT UNIQUE, hinta INTEGER);
+```
+
+Nyt tuotteen lisäämisen tietokantaan voi toteuttaa näin:
+
+```python
+nimi = input("Anna nimi: ")
+hinta = input("Anna hinta: ")
+try:
+    db.execute("INSERT INTO Tuotteet (nimi, hinta) VALUES (?,?)", [nimi, hinta])
+except:
+    print("Lisäys ei onnistunut")
+```
+
+Tässä tapauksessa komento `INSERT` epäonnistuu siinä tapauksessa, että taulussa on jo valmiina samanniminen tuote. Niinpä koodi voi _yrittää_ lisätä tuotetta tutkimatta, onko tuote jo valmiina taulussa, ja jos tästä tulee virhe, tiedetään, että tuote oli valmiina.
+
+Tämä on selkeästi parempi toteutus kuin tutkia koodissa ennen lisäämistä `SELECT`-kyselyllä, onko tuotetta jo tietokannassa, koska `UNIQUE`-ehdon avulla tietokanta pitää luotettavasti huolen asiasta ja koodiakin tarvitaan vähemmän. Jos taulussa ei olisi `UNIQUE`-ehtoa ja sovellus suorittaisi komennot `SELECT` ja `INSERT`, olisi mahdollista, että joku ehtisi lisätä välissä saman tuotteen tauluun, jolloin taulussa olisikin kaksi tuotetta samalla nimellä. Kuitenkaan `UNIQUE`-ehdon kanssa näin ei voi tapahtua mitenkään.
+
+
 ### Viittausten ehdot
 
 Voimme liittää myös tauluihin ehtoja, jotka pitävät huolen siitä, että tauluissa olevat viittaukset viittaavat todellisiin riveihin. Tämä tapahtuu luomalla _viiteavain_ (_foreign key_), joka ilmaisee, mihin taulussa oleva rivi viittaa.
@@ -223,6 +247,21 @@ sqlite> SELECT * FROM Tilit;
 Alkutilanteessa Uolevin tilillä on 350 euroa ja Maijan tilillä on 600 euroa. Ensimmäisessä transaktiossa poistamme ensin Maijan tililtä 100 euroa, mutta sen jälkeen tulemme toisiin ajatuksiin ja keskeytämme transaktion. Niinpä transaktiossa tehty muutos peruuntuu ja tilien saldot ovat samat kuin alkutilanteessa. Toisessa transaktiossa viemme kuitenkin transaktion loppuun, minkä seurauksena Uolevin tilillä on 450 euroa ja Maijan tilillä on 500 euroa.
 
 Huomaa, että transaktion sisällä muutokset kyllä näkyvät, vaikka niitä ei olisi tehty vielä pysyvästi tietokantaan. Esimerkiksi ensimmäisen transaktion `SELECT`-kysely antaa Maijan tilin saldoksi 500 euroa, koska edellinen `UPDATE`-komento muutti saldoa.
+
+### Transaktiot ohjelmoinnissa
+
+Transaktiokomentoja (`BEGIN`, `COMMIT`, jne.) voi suorittaa ohjelmoinnissa samaan tapaan kuin muitakin SQL-komentoja. Esimerkiksi seuraava koodi lisää tauluun `Tuotteet` tuhat riviä for-silmukassa yhden transaktion sisällä:
+
+```python
+db.execute("BEGIN")
+for i in range(1,1000+1):
+    db.execute("INSERT INTO Tuotteet (nimi, hinta) VALUES (?,?)", ["tuote"+str(i), 1])
+db.execute("COMMIT")
+```
+
+Koska koodi on transaktion sisällä, koodi joko lisää kaikki rivit tietokantaan tai ei yhtään riviä, jos transaktio epäonnistuu jostain syystä.
+
+Tässä tapauksessa transaktion sivuvaikutuksena on myös, että koodi toimii nopeammin, koska jokaista riviä ei lisätä erillisen transaktion sisällä vaan lisäys tapahtuu kokonaisuutena. Tämä auttaa tietokantaa toteuttamaan rivien lisääminen tehokkaammin.
 
 ### Rinnakkaiset transaktiot
 
