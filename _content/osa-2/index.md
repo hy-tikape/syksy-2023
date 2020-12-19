@@ -840,10 +840,3 @@ id          nimi        hinta
 4           lanttu      8         
 5           selleri     4         
 ```
-
-### SQLiten käyttö ohjelmoinnissa
-
-Tavallinen tilanne on, että tietokantaa käytetään ohjelmointikielen kautta. Tässä on aiheeseen liittyvää materiaalia, josta on apua kurssin harjoitustyössä:
-
-* [SQLite Javassa](../../pages/sqlite_java)
-* [SQLite Pythonissa](../../pages/sqlite_python)
