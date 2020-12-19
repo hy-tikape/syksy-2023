@@ -1,7 +1,7 @@
 ---
 nav-title: 6. Tietokannan suunnittelu
 sub-sections:
-      - sub-section-title: Taulut ja sarakkeet
+      - sub-section-title: Suunnittelun periaatteet
       - sub-section-title: Tiedon atomisuus
       - sub-section-title: Toisteinen tieto
       - sub-section-title: Suunnitteluesimerkki
@@ -9,13 +9,15 @@ sub-sections:
       
 # 6. Tietokannan suunnittelu
 
+## Suunnittelun periaatteet
+
 Tietokannan suunnittelussa meidän tulee päättää tietokannan rakenne: mitä tauluja tietokannassa on sekä mitä sarakkeita kussakin taulussa on. Tähän on sinänsä suuri määrä mahdollisuuksia, mutta tuntemalla muutaman periaatteen pääsee pitkälle.
 
 Hyvä tavoite suunnittelussa on, että tuloksena olevaa tietokantaa on mukavaa käyttää SQL-kielen avulla. Tietokannan rakenteen tulisi olla sellainen, että pystymme hakemaan ja muuttamaan tietoa näppärästi SQL-komennoilla.
 
 Tietokannan suunnittelun periaatteet ovat hyödyllisiä ja johtavat usein toimiviin ratkaisuihin. Kuitenkin aina kannattaa miettiä, mikä periaatteissa on taustalla ja milloin kannattaa mahdollisesti tehdä toisin. Tavoitteen tulisi olla aina se, että tietokanta on käyttötarkoitukseen sopiva, eikä että noudatetaan periaatteita ilman omaa ajattelua.
 
-## Taulut ja sarakkeet
+### Taulu vs. luokka
 
 Tietokannan taulu ja olio-ohjelmoinnin luokka ovat samantapaisia käsitteitä. Molemmissa on kyse siitä, että määrittelemme tiedon _tyypin_. Taulun sarakkeet muistuttavat luokan attribuutteja, ja taulun rivi vastaa luokasta luotua oliota.
 
