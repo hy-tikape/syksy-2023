@@ -9,18 +9,17 @@ sub-sections:
       
 # 5. Tietokannan suunnittelu
 
-## Taulut ja sarakkeet
-
 Tietokannan suunnittelussa meidän tulee päättää tietokannan rakenne: mitä tauluja tietokannassa on sekä mitä sarakkeita kussakin taulussa on. Tähän on sinänsä suuri määrä mahdollisuuksia, mutta tuntemalla muutaman periaatteen pääsee pitkälle.
 
 Hyvä tavoite suunnittelussa on, että tuloksena olevaa tietokantaa on mukavaa käyttää SQL-kielen avulla. Tietokannan rakenteen tulisi olla sellainen, että pystymme hakemaan ja muuttamaan tietoa näppärästi SQL-komennoilla.
 
 Tietokannan suunnittelun periaatteet ovat hyödyllisiä ja johtavat usein toimiviin ratkaisuihin. Kuitenkin aina kannattaa miettiä, mikä periaatteissa on taustalla ja milloin kannattaa mahdollisesti tehdä toisin. Tavoitteen tulisi olla aina se, että tietokanta on käyttötarkoitukseen sopiva, eikä että noudatetaan periaatteita ilman omaa ajattelua.
 
+## Taulut ja sarakkeet
 
-### Taulu vs. luokka
+Tietokannan taulu ja olio-ohjelmoinnin luokka ovat samantapaisia käsitteitä. Molemmissa on kyse siitä, että määrittelemme tiedon _tyypin_. Taulun sarakkeet muistuttavat luokan attribuutteja, ja taulun rivi vastaa luokasta luotua oliota.
 
-Tietokannan taulu ja olio-ohjelmoinnin luokka ovat samantapaisia käsitteitä. Molemmissa on kyse siitä, että määrittelemme tiedon _tyypin_. Esimerkiksi seuraava SQL-komento ja Java-koodi vastaavat toisiaan:
+Esimerkiksi seuraava SQL-komento ja Python-koodi vastaavat toisiaan:
 
 ```sql
 CREATE TABLE Elokuvat (
@@ -30,19 +29,16 @@ CREATE TABLE Elokuvat (
 );
 ```
 
-```java
-public class Elokuva {
-    private String nimi;
-    private int vuosi;
-
-    public Elokuva(String nimi, int vuosi) {
-        this.nimi = nimi;
-        this.vuosi = vuosi;
-    }
-}
+```python
+class Elokuva:
+    def __init__(self, nimi : str, vuosi : int):
+        self.nimi = nimi
+        self.vuosi = vuosi
 ```
 
-Vastaavasti rivin lisääminen tietokannan tauluun ja olion luominen luokasta toimivat samalla periaatteella. Esimerkiksi voimme lisätä kolme riviä ja luoda kolme oliota seuraavasti:
+Huomaa, että luokassa ei ole attribuuttia `id`, koska ohjelmoinnissa olioilla on viittaukset, joiden avulla ne voidaan yksilöidä.
+
+Rivin lisääminen tietokannan tauluun vastaa uuden olion muodostamista luokasta. Esimerkiksi seuraavat komennot vastaavat toisiaan:
 
 ```sql
 INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Lumikki',1937);
@@ -50,17 +46,15 @@ INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Fantasia',1940);
 INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Pinocchio',1940);
 ```
 
-```java
-Elokuva a = new Elokuva("Lumikki",1937);
-Elokuva b = new Elokuva("Fantasia",1940);
-Elokuva c = new Elokuva("Pinocchio",1940);
+```python
+a = Elokuva("Lumikki",1937);
+b = Elokuva("Fantasia",1940);
+c = Elokuva("Pinocchio",1940);
 ```
-
-Huomaa, että ohjelmoinnissa luokissa ei ole tarvetta id-muuttujalle, koska voimme viitata muutenkin luokasta luotuihin olioihin. Esimerkiksi yllä olevassa koodissa muuttujat `a`, `b` ja `c` sisältävät viittaukset olioihin.
 
 ### Yksi vai useita tauluja?
 
-Periaatteena tietokannan suunnittelussa on, että kaikki saman tyyppiset rivit ovat _yhdessä_ taulussa. Tämän ansiosta voimme käsitellä rivejä kätevästi SQL-komennoilla.
+Ohjelmoinnissa kaikki saman tyyppiset oliot perustuvat samaan luokkaan, ja vastaavasti periaatteena tietokannan suunnittelussa on, että kaikki saman tyyppiset rivit ovat _yhdessä_ taulussa. Tämän ansiosta voimme käsitellä rivejä kätevästi SQL-komennoilla.
 
 Esimerkiksi jos tietokannassa on elokuvia, hyvä ratkaisu on tallentaa kaikki elokuvat samaan tauluun `Elokuvat`:
 
@@ -106,31 +100,21 @@ Kun elokuvat ovat yhdessä taulussa, pystymme käsittelemään niitä monipuolis
 
 ### Viittausten toteutus
 
-Ohjelmoinnissa olion sisällä voi olla viittaus toiseen olioon, ja vastaavasti tietokannan taulun rivillä voi olla viittaus toiseen riviin. Tavallinen tapa toteuttaa viittaukset tietokannassa on
-antaa jokaiselle riville id-numero (pääavain), jolla voimme viitata siihen muualta.
+Ohjelmoinnissa olion sisällä voi olla viittaus toiseen olioon, ja vastaavasti tietokannan taulun rivillä voi olla viittaus toiseen riviin. Kun jokaisella taulun rivillä on pääavaimena id-numero, riveihin on kätevää viitata muualta.
 
 #### Yksi moneen -suhde
 
-Tarkastellaan tilannetta, jossa tallennamme tietokantaan kursseja ja opettajia. Taulujen välillä on yksi moneen -suhde: jokaisella kurssilla on yksi opettaja, kun taas yhdellä opettajalla voi olla monta kurssia. Javassa voimme luoda tarvittavat luokat seuraavasti:
+Tarkastellaan tilannetta, jossa tallennamme tietokantaan kursseja ja opettajia. Taulujen välillä on yksi moneen -suhde: jokaisella kurssilla on yksi opettaja, kun taas yhdellä opettajalla voi olla monta kurssia. Pythonissa voisimme luoda luokat näin:
 
-```java
-public class Opettaja {
-    private String nimi;
-    
-    public class Opettaja(String nimi) {
-        this.nimi = nimi;
-    }
-}
+```python
+class Opettaja:
+    def __init__(self, nimi : str):
+        self.nimi = nimi
 
-public class Kurssi {
-    private String nimi;
-    private Opettaja opettaja;
-    
-    public class Kurssi(String nimi, Opettaja opettaja) {
-        this.nimi = nimi;
-        this.opettaja = opettaja;
-    }
-}
+class Kurssi:
+    def __init__(self, nimi : str, opettaja : Opettaja):
+        self.nimi = nimi
+        self.opettaja = opettaja
 ```
 
 Vastaavasti voimme luoda tietokannan taulut näin:
@@ -166,18 +150,16 @@ INSERT INTO Kurssit (nimi, opettaja_id) VALUES ('Tietorakenteet ja algoritmit',2
 
 Tarkastellaan sitten tilannetta, jossa useampi opettaja voi järjestää kurssin yhteisesti. Tällöin kyseessä on monta moneen -suhde, koska kurssilla voi olla monta opettajaa ja opettajalla voi olla monta kurssia.
 
-Javassa voisimme toteuttaa tämän muutoksen helposti muuttamalla luokkaa `Kurssi` niin, että siinä on yhden opettajan sijasta lista opettajista:
+Pythonissa voisimme toteuttaa tämän muutoksen helposti muuttamalla luokkaa `Kurssi` niin, että siinä on yhden opettajan sijasta lista opettajista:
 
 ```java
-public class Kurssi {
-    private String nimi;
-    private ArrayList<Opettaja> opettaja;
-    
-    public class Kurssi(String nimi) {
-        this.nimi = nimi;
-        this.opettaja = new ArrayList<>();
-    }
-}
+class Kurssi:
+    def __init__(self, nimi : str):
+        self.nimi = nimi
+        self.opettajat = []
+        
+    def lisaa_opettaja(self, opettaja : Opettaja):
+        self.opettajat.append(opettaja)
 ```
 
 Tietokannoissa tilanne on kuitenkin toinen, koska emme voi tallentaa järkevästi taulun sarakkeeseen listaa viittauksista. Tämän sijasta meidän täytyy luoda uusi taulu viittauksille:
@@ -199,7 +181,7 @@ CREATE TABLE KurssinOpettajat (
 );
 ```
 
-Muutoksena on, että taulussa `Kurssit` ei ole enää viittausta tauluun `Opettajat`, mutta sen sijaan tietokannassa on uusi taulu `KurssinOpettajat`, joka viittaa kumpaankin tauluun. Jokainen rivi tässä rivissä kuvaa yhden suhteen muotoa "kurssilla x opettaa opettaja y".
+Muutoksena on, että taulussa `Kurssit` ei ole enää viittausta tauluun `Opettajat`, mutta sen sijaan tietokannassa on uusi taulu `KurssinOpettajat`, joka viittaa kumpaankin tauluun. Jokainen rivi tässä rivissä kuvaa yhden suhteen muotoa "kurssilla _x_ opettaa opettaja _y_".
 
 Esimerkiksi voisimme ilmaista näin, että kurssilla on kaksi opettajaa:
 
@@ -213,15 +195,16 @@ INSERT INTO KurssinOpettajat VALUES (1,2);
 
 Huomaa, että voisimme käyttää tätä ratkaisua myös aiemmassa tilanteessa, jossa kurssilla on aina tasan yksi opettaja, joskin tietokannassa olisi silloin tavallaan turha taulu.
 
-
 ## Tiedon atomisuus
 
 *Periaate*:
-Tietokannan taulun jokaisessa sarakkeessa on yksittäinen eli _atominen_ tieto, kuten yksi luku tai yksi merkkijono. Sarakkeessa ei saa olla esimerkiksi listaa tiedoista.
+Tietokannan taulun jokaisessa sarakkeessa on yksittäinen eli _atominen_ tieto, kuten yksi luku tai yksi merkkijono. Sarakkeessa ei saa olla listaa tiedoista.
 
-Tämä periaate helpottaa tietokannan käsittelyä SQL-komentojen avulla: kun jokainen tieto on omassa sarakkeessaan, niin pystymme viittaamaan tietoon kätevästi komennoissa. Mutta mitä tehdä, jos haluaisimme tallentaa listan?
+Tämä periaate helpottaa tietokannan käsittelyä SQL-komentojen avulla: kun jokainen tieto on omassa sarakkeessaan, niin pystymme viittaamaan tietoon kätevästi komennoissa.
 
-### Listan tallentaminen
+Kun tietokantaan halutaan tallentaa listoja, luodaan uusi taulu, jossa jokainen rivi on jonkin listan yksittäinen alkio, kuten äskeinen taulu `KurssinOpettajat`. Mutta miksi emme voisi vain tallentaa listaa yhteen sarakkeeseen? Seuraava esimerkki selventää asiaa.
+
+### Esimerkki
 
 #### Vaihe 1
 
@@ -388,7 +371,7 @@ id          kayttaja_id  viesti
 
 Tässä tapauksessa _ei_ olisi hyvä idea toteuttaa tietokantaa niin, että jos kaksi käyttäjää lähettää saman sisältöisen viestin, viestin sisältö tallennetaan vain yhteen paikkaan.
 
-Vaikka viesteissä on sama sisältö, ne ovat erillisiä viestejä, joiden ei ole tarkoitus viitata samaan asiaan. Jos käyttäjä 1 muuttaa viestin sisältöä, muutoksen ei tule heijastua käyttäjän 2 viestiin, vaikka siinä sattuu olemaan sama sisältö.
+Vaikka viesteissä on sama sisältö, ne ovat erillisiä viestejä, joiden ei ole tarkoitus viitata samaan asiaan. Jos käyttäjä 1 muuttaa viestin sisältöä, muutoksen ei tule heijastua käyttäjän 2 viestiin, vaikka siinä sattuu olemaan tällä hetkellä sama sisältö.
 
 
 ### Esimerkki 2
