@@ -15,7 +15,7 @@ Jos olet Helsingin yliopiston tutkinto-opiskelija, ilmoittaudu kurssille WebOodi
 
 Jos suoritat kurssin Avoimen yliopiston kautta, saat ohjeet kurssisuorituksen rekisteröintiin kurssin lopussa.
 
-## Luento ja ohjaus
+## Luennot ja ohjaus
 
 Kurssilla järjestetään viikoittain Zoom-luento tiistaisin klo 10–12. Luentopäivät ovat 19.1., 26.1., 2.2., 9.2., 16.2., 23.2. ja 2.3.
 
