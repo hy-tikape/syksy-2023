@@ -1,510 +1,804 @@
 ---
-nav-title: 6. Tietokannan ominaisuudet
+nav-title: 6. Tietokannan suunnittelu
 sub-sections:
-      - sub-section-title: Tiedon eheys
-      - sub-section-title: Transaktiot
-      - sub-section-title: Kyselyjen suoritus
-      - sub-section-title: Indeksit
+      - sub-section-title: Taulut ja sarakkeet
+      - sub-section-title: Tiedon atomisuus
+      - sub-section-title: Toisteinen tieto
+      - sub-section-title: Suunnitteluesimerkki
 ---
+      
+# 6. Tietokannan suunnittelu
 
-# 6. Tietokannan ominaisuudet
+Tietokannan suunnittelussa meidän tulee päättää tietokannan rakenne: mitä tauluja tietokannassa on sekä mitä sarakkeita kussakin taulussa on. Tähän on sinänsä suuri määrä mahdollisuuksia, mutta tuntemalla muutaman periaatteen pääsee pitkälle.
 
-## Tiedon eheys
+Hyvä tavoite suunnittelussa on, että tuloksena olevaa tietokantaa on mukavaa käyttää SQL-kielen avulla. Tietokannan rakenteen tulisi olla sellainen, että pystymme hakemaan ja muuttamaan tietoa näppärästi SQL-komennoilla.
 
-Tiedon eheys viittaa siihen, että tietokannassa oleva tieto on paikkansa pitävää ja ristiriidatonta. Päävastuu tiedon laadusta on toki käyttäjällä tai sovelluksella, joka muuttaa tietokantaa, mutta myös tietokannan suunnittelija voi vaikuttaa asiaan lisäämällä tauluihin ehtoja, jotka tarkkailevat tietokantaan syötettävää tietoa.
+Tietokannan suunnittelun periaatteet ovat hyödyllisiä ja johtavat usein toimiviin ratkaisuihin. Kuitenkin aina kannattaa miettiä, mikä periaatteissa on taustalla ja milloin kannattaa mahdollisesti tehdä toisin. Tavoitteen tulisi olla aina se, että tietokanta on käyttötarkoitukseen sopiva, eikä että noudatetaan periaatteita ilman omaa ajattelua.
 
-### Sarakkeiden ehdot
+## Taulut ja sarakkeet
 
-Voimme määrittää taulun luonnin yhteydessä sarakkeisiin liittyviä ehtoja, joita tietokantajärjestelmä valvoo tiedon lisäämisen ja muuttamisen yhteydessä. Näillä ehdoilla voi ohjata sitä, millaista tietoa tietokantaan ilmestyy. Tyypillisiä ehtoja ovat seuraavat:
+Tietokannan taulu ja olio-ohjelmoinnin luokka ovat samantapaisia käsitteitä. Molemmissa on kyse siitä, että määrittelemme tiedon _tyypin_. Taulun sarakkeet muistuttavat luokan attribuutteja, ja taulun rivi vastaa luokasta luotua oliota.
 
-#### UNIQUE
-
-Ehto `UNIQUE` tarkoittaa, että kyseisessä sarakkeessa tulee olla eri arvo joka rivillä. Esimerkiksi seuraavassa taulussa vaatimuksena on, että joka tuotteella on eri nimi:
-
-```sql
-CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT UNIQUE, hinta INTEGER);
-```
-
-Ehto `UNIQUE` voi kohdistua myös useampaan sarakkeeseen, jolloin se merkitään erikseen sarakkeiden jälkeen:
+Esimerkiksi seuraava SQL-komento ja Python-koodi vastaavat toisiaan:
 
 ```sql
-CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER, UNIQUE(nimi,hinta));
+CREATE TABLE Elokuvat (
+    id INTEGER PRIMARY KEY, 
+    nimi TEXT,
+    vuosi INTEGER
+);
 ```
 
-Tämä tarkoittaa, että taulussa ei voi olla kahta riviä, joilla on sama nimi ja sama hinta.
+```python
+class Elokuva:
+    def __init__(self, nimi : str, vuosi : int):
+        self.nimi = nimi
+        self.vuosi = vuosi
+```
 
-#### NOT NULL ja DEFAULT
+Huomaa, että luokassa ei ole attribuuttia `id`, koska ohjelmoinnissa olioilla on viittaukset, joiden avulla ne voidaan yksilöidä.
 
-Ehto `NOT NULL` tarkoittaa, että kyseisessä sarakkeessa ei saa olla arvoa `NULL`. Esimerkiksi seuraavassa taulussa tuotteen hinta ei saa olla tyhjä:
+Rivin lisääminen tietokannan tauluun vastaa uuden olion muodostamista luokasta. Esimerkiksi seuraavat komennot vastaavat toisiaan:
 
 ```sql
-CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER NOT NULL);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Lumikki',1937);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Fantasia',1940);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Pinocchio',1940);
 ```
 
-Tähän liittyy myös määre `DEFAULT`, jonka seurauksena sarake saa tietyn oletusarvon, jos sille ei anneta arvoa rivin lisäämisessä. Esimerkiksi voimme määrittää oletusarvon 0 näin:
+```python
+a = Elokuva("Lumikki",1937);
+b = Elokuva("Fantasia",1940);
+c = Elokuva("Pinocchio",1940);
+```
+
+### Yksi vai useita tauluja?
+
+Ohjelmoinnissa kaikki saman tyyppiset oliot perustuvat samaan luokkaan, ja vastaavasti periaatteena tietokannan suunnittelussa on, että kaikki saman tyyppiset rivit ovat _yhdessä_ taulussa. Tämän ansiosta voimme käsitellä rivejä kätevästi SQL-komennoilla.
+
+Esimerkiksi jos tietokannassa on elokuvia, hyvä ratkaisu on tallentaa kaikki elokuvat samaan tauluun `Elokuvat`:
+
+```
+id          nimi        vuosi     
+----------  ----------  ----------
+1           Lumikki     1937      
+2           Fantasia    1940      
+3           Pinocchio   1940      
+4           Dumbo       1941      
+5           Bambi       1942    
+```
+
+Tästä taulusta voimme hakea esimerkiksi vuoden 1940 elokuvat näin:
 
 ```sql
-CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER DEFAULT 0);
+SELECT nimi FROM Elokuvat WHERE vuosi=1940;
 ```
 
-#### CHECK
-
-Yleisempi tapa luoda ehto on käyttää avainsanaa `CHECK`, jonka jälkeen voi kirjoittaa minkä tahansa ehtolausekkeen. Esimerkiksi seuraava komento luo taulun tuotteista, jossa rivin ehtona on `hinta >= 0` eli hinta ei saa olla negatiivinen:
+Mutta mitä kävisi, jos jakaisimmekin elokuvat moneen tauluun? Esimerkiksi voisimme jakaa elokuvat tauluihin vuosien mukaan. Tällöin taulussa `Elokuvat1940` olisi vuoden 1940 elokuvat, ja voisimme hakea ne näin:
 
 ```sql
-CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER, CHECK (hinta >= 0));
+SELECT nimi FROM Elokuvat1940;
 ```
 
-### Ehtojen valvonta
-
-Ehtojen hyötynä on, että tietokantajärjestelmä valvoo niitä ja kieltäytyy tekemästä lisäystä tai muutosta, joka rikkoisi ehdon. Seuraavassa on esimerkki tästä SQLitessä:
-
-```prompt
-sqlite> CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER, CHECK (hinta >= 0));
-sqlite> INSERT INTO Tuotteet(nimi,hinta) VALUES ('retiisi',4);
-sqlite> INSERT INTO Tuotteet(nimi,hinta) VALUES ('selleri',7);
-sqlite> INSERT INTO Tuotteet(nimi,hinta) VALUES ('nauris',-2);
-Error: CHECK constraint failed: Tuotteet
-sqlite> SELECT * FROM Tuotteet;
-1|retiisi|4
-2|selleri|7
-sqlite> UPDATE Tuotteet SET hinta=-2 WHERE id=2;
-Error: CHECK constraint failed: Tuotteet
-```
-
-Kun koetamme lisätä tauluun `Tuotteet` rivin, jossa hinta on negatiivinen, tämä rikkoo ehdon `hinta >= 0` ja SQLite ei salli rivin lisäämistä vaan antaa virheen `CHECK constraint failed: Tuotteet`. Samalla tavalla käy, jos koetamme muuttaa olemassa olevan rivin sarakkeen hinnan negatiiviseksi jälkeenpäin.
-
-### Viittausten ehdot
-
-Voimme liittää myös tauluihin ehtoja, jotka pitävät huolen siitä, että tauluissa olevat viittaukset viittaavat todellisiin riveihin. Tämä tapahtuu luomalla _viiteavain_ (_foreign key_), joka ilmaisee, mihin taulussa oleva rivi viittaa.
-
-Tarkastellaan esimerkkinä seuraavia tauluja:
+Tällainen ratkaisu toimii niin kauan, kuin haluamme hakea vain tietyn vuoden elokuvia. Kuitenkin tietokanta muuttuu vaikeakäyttöiseksi heti, jos haluamme tehdä jotain muita hakuja. Esimerkiksi jos haluamme hakea kaikki elokuvat vuosilta 1940–1950, tarvitsemme useita kyselyjä:
 
 ```sql
-CREATE TABLE Opettajat (id INTEGER PRIMARY KEY, nimi TEXT);
-CREATE TABLE Kurssit (id INTEGER PRIMARY KEY, nimi TEXT, opettaja_id INTEGER);
+SELECT nimi FROM Elokuvat1940;
+SELECT nimi FROM Elokuvat1941;
+SELECT nimi FROM Elokuvat1942;
+...
+SELECT nimi FROM Elokuvat1950;
 ```
 
-Tässä tarkoituksena on, että taulun `Kurssit` sarake `opettaja_id` viittaa taulun `Opettajat` sarakkeeseen `id`, mutta tietokannan käyttäjä voi antaa sarakkeen `opettaja_id` arvoksi mitä tahansa (esim. luvun 123), jolloin tietokannan sisältö muuttuu epämääräiseksi.
-
-Voimme parantaa tilannetta kertomalla taulun `Kurssit` luonnissa, että sarake `opettaja_id` on viiteavain tauluun `Opettajat`:
+Kuitenkin kun elokuvat ovat samassa taulussa, niin selviämme yhdellä kyselyllä:
 
 ```sql
-CREATE TABLE Kurssit (id INTEGER PRIMARY KEY, nimi TEXT, opettaja_id INTEGER REFERENCES Opettajat);
+SELECT nimi FROM Elokuvat WHERE vuosi BETWEEN 1940 AND 1950;
 ```
 
-Tämän jälkeen voimme luottaa siihen, että taulussa `Kurssit` sarakkeen `opettaja_id` arvot
-viittaavat todellisiin riveihin taulussa `Opettajat`.
+Kun elokuvat ovat yhdessä taulussa, pystymme käsittelemään niitä monipuolisesti yksittäisillä SQL-komennoilla, mikä ei olisi mahdollista, jos tauluja olisi useita.
 
-Huomaa, että historiallisista syistä SQLite _ei_ oletuksena valvo viiteavainten ehtoja, vaan meidän tulee ensin suorittaa seuraava komento:
+### Viittausten toteutus
 
-```prompt
-sqlite> PRAGMA foreign_keys = ON;
+Ohjelmoinnissa olion sisällä voi olla viittaus toiseen olioon, ja vastaavasti tietokannan taulun rivillä voi olla viittaus toiseen riviin. Kun jokaisella taulun rivillä on pääavaimena id-numero, riveihin on kätevää viitata muualta.
+
+#### Yksi moneen -suhde
+
+Tarkastellaan tilannetta, jossa tallennamme tietokantaan kursseja ja opettajia. Taulujen välillä on yksi moneen -suhde: jokaisella kurssilla on yksi opettaja, kun taas yhdellä opettajalla voi olla monta kurssia. Pythonissa voisimme luoda luokat näin:
+
+```python
+class Opettaja:
+    def __init__(self, nimi : str):
+        self.nimi = nimi
+
+class Kurssi:
+    def __init__(self, nimi : str, opettaja : Opettaja):
+        self.nimi = nimi
+        self.opettaja = opettaja
 ```
 
-Tämä on SQLiten erikoisuus, ja muissa tietokannoissa viiteavaimia valvotaan aina.
-
-Tässä on esimerkki viiteavaimen käyttämisestä:
-
-```prompt
-sqlite> PRAGMA foreign_keys = ON;
-sqlite> CREATE TABLE Opettajat (id INTEGER PRIMARY KEY, nimi TEXT);
-sqlite> CREATE TABLE Kurssit (id INTEGER PRIMARY KEY, nimi TEXT, opettaja_id INTEGER
-   ...>                       REFERENCES Opettajat);
-sqlite> INSERT INTO Opettajat (nimi) VALUES ('Kaila');
-sqlite> INSERT INTO Opettajat (nimi) VALUES ('Kivinen');
-sqlite> SELECT * FROM Opettajat;
-1|Kaila
-2|Kivinen
-sqlite> INSERT INTO Kurssit (nimi, opettaja_id) VALUES ('Laskennan mallit',2);
-sqlite> INSERT INTO Kurssit (nimi, opettaja_id) VALUES ('Ohjelmoinnin perusteet',123);
-Error: FOREIGN KEY constraint failed   
-```
-
-Taulussa `Opettaja` on kaksi opettajaa, joiden id-numerot ovat 1 ja 2. Niinpä kun koetamme lisätä tauluun `Kurssit` rivin, jossa `opettaja_id` on 123, SQLite ei salli tätä vaan saamme virheilmoituksen `FOREIGN KEY constraint failed`.
-
-### Viittaukset ja poistot
-
-Viittausten ehtoihin liittyy tavallisia sarakkeiden ehtoja mutkikkaampia tilanteita, koska viittaukset ovat kahden taulun välisiä. Erityisesti mitä tapahtuu, jos taulusta yritetään poistaa rivi, johon viitataan toisen taulun rivillä?
-
-Yleensä oletuksena tietokannoissa riviä ei voi poistaa, jos siihen on viittaus muualta. Esimerkiksi jos koetamme äskeisen esimerkin päätteeksi poistaa taulusta `Opettajat` rivin 2, tämä ei onnistu, koska siihen viitataan taulussa `Kurssit`:
-
-```prompt
-sqlite> DELETE FROM Opettajat WHERE id=2;
-Error: FOREIGN KEY constraint failed
-```
-
-Halutessamme voimme kuitenkin määrittää taulun luonnissa tarkemmin, mitä tapahtuu tässä tilanteessa. Esimerkiksi yksi vaihtoehto on `ON DELETE CASCADE`, mikä tarkoittaa, että rivin poistuessa myös siihen viittaavat rivit poistetaan. Saamme tämän aikaan näin:
+Vastaavasti voimme luoda tietokannan taulut näin:
 
 ```sql
-CREATE TABLE Kurssit (id INTEGER PRIMARY KEY, nimi TEXT,
-                      opettaja_id INTEGER REFERENCES Opettajat ON DELETE CASCADE);
+CREATE TABLE Opettajat (
+    id INTEGER PRIMARY KEY, 
+    nimi TEXT
+);
+
+CREATE TABLE Kurssit (
+    id INTEGER PRIMARY KEY,
+    nimi TEXT,
+    opettaja_id INTEGER REFERENCES Opettajat
+);
 ```
 
-Nyt jos tietokannasta poistetaan opettaja, niin samalla poistetaan automaattisesti kaikki kurssit, joita hän opettaa. Tämä voi kuitenkin olla kyseenalainen vaihtoehto, koska tämän seurauksena tietokannan tauluista voi kadota yllättäen tietoa.
+Taulussa `Kurssit` sarake `opettaja_id` viittaa tauluun `Opettajat`, eli siinä on jonkin opettajan id-numero. Ilmaisemme viittauksen `REFERENCES`-määreellä, joka kertoo, että sarakkeessa oleva kokonaisluku viittaa nimenomaan tauluun `Opettajat`.
 
-Mahdollisia vaihtoehtoja `ON DELETE` -osassa ovat:
-
-* `NO ACTION`: "älä tee mitään" (oletus)
-* `RESTRICT`: estä poistaminen
-* `CASCADE`: poista myös viittaavat rivit
-* `SET NULL`: muuta viittaukset arvoksi `NULL`
-* `SET DEFAULT`: muuta viittaukset oletusarvoksi
-
-Hämmentävä seikka on, että myös oletusvaihtoehto `NO ACTION` estää rivin poistamisen, vaikka nimestä voisi päätellä muuta. Vaihtoehdot `NO ACTION` ja `RESTRICT` toimivat käytännössä lähes samalla tavalla, mutta tietokannasta riippuen niiden toiminnassa voi olla eroja joissain erikoistilanteissa.
-
-## Transaktiot
-
-_Transaktio_ on joukko peräkkäisiä SQL-komentoja, jotka tietokantajärjestelmä lupaa suorittaa yhtenä kokonaisuutena. Tietokannan käyttäjä voi luottaa siihen, että joko (1) kaikki komennot suoritetaan ja muutokset jäävät pysyvästi tietokantaan tai (2) transaktio keskeytyy eivätkä komennot aiheuta mitään muutoksia tietokantaan.
-
-Transaktioiden yhteydessä esiintyy usein ihanteena kirjainyhdistelmä _ACID_, joka tulee seuraavista sanoista:
-
-* _Atomicity_: Transaktiossa olevat komennot suoritetaan
-  yhtenä kokonaisuutena.
-* _Consistency_: Transaktio säilyttää tietokannan sisällön eheänä.
-* _Isolation_: Transaktiot suoritetaan eristyksessä toisistaan.
-* _Durability_: Loppuun viedyn transaktion tekemät muutokset jäävät pysyviksi.
-
-
-### Transaktion vaiheet
-
-Itse asiassa transaktio on hyvin arkipäiväinen asia tietokannan käyttämisessä, sillä oletuksena _jokainen_ suoritettava SQL-komento on oma transaktionsa. Tarkastellaan esimerkiksi seuraavaa komentoa, joka kasvattaa jokaisen tuotteen hintaa yhdellä:
+Voisimme laittaa tauluihin tietoa vaikkapa seuraavasti:
 
 ```sql
-UPDATE Tuotteet SET hinta=hinta+1;
+INSERT INTO Opettajat (nimi) VALUES ('Kaila');
+INSERT INTO Opettajat (nimi) VALUES ('Kivinen');
+INSERT INTO Opettajat (nimi) VALUES ('Laaksonen');
+INSERT INTO Kurssit (nimi, opettaja_id) VALUES ('Ohjelmoinnin perusteet',1);
+INSERT INTO Kurssit (nimi, opettaja_id) VALUES ('Ohjelmoinnin jatkokurssi',1);
+INSERT INTO Kurssit (nimi, opettaja_id) VALUES ('Tietokantojen perusteet',3);
+INSERT INTO Kurssit (nimi, opettaja_id) VALUES ('Tietorakenteet ja algoritmit',2);
 ```
 
-Koska komento suoritetaan transaktiona, voimme luottaa siihen, että joko jokaisen tuotteen hinta todella kasvaa yhdellä tai sitten minkään tuotteen hinta ei muutu. Jälkimmäinen voi tapahtua esimerkiksi silloin, kun sähköt katkeavat kesken päivityksen. Siinäkään tapauksessa ei siis voi käydä niin, että vain _osa_ hinnoista muuttuu.
+#### Monta moneen -suhde
 
-Usein kuitenkin sana transaktio viittaa erityisesti siihen, että kokonaisuuteen kuuluu useampi SQL-komento. Tällöin annamme ensin komennon `BEGIN`, joka aloittaa transaktion, sitten kaikki transaktioon kuuluvat komennot tavalliseen tapaan ja lopuksi komennon `COMMIT`, joka päättää transaktion.
+Tarkastellaan sitten tilannetta, jossa useampi opettaja voi järjestää kurssin yhteisesti. Tällöin kyseessä on monta moneen -suhde, koska kurssilla voi olla monta opettajaa ja opettajalla voi olla monta kurssia.
 
-Klassinen esimerkki transaktiosta on tilanne, jossa pankissa siirretään rahaa tililtä toiselle. Esimerkiksi seuraava transaktio siirtää 100 euroa Maijan tililtä Uolevin tilille:
+Pythonissa voisimme toteuttaa tämän muutoksen helposti muuttamalla luokkaa `Kurssi` niin, että siinä on yhden opettajan sijasta lista opettajista:
+
+```java
+class Kurssi:
+    def __init__(self, nimi : str):
+        self.nimi = nimi
+        self.opettajat = []
+        
+    def lisaa_opettaja(self, opettaja : Opettaja):
+        self.opettajat.append(opettaja)
+```
+
+Tietokannoissa tilanne on kuitenkin toinen, koska emme voi tallentaa järkevästi taulun sarakkeeseen listaa viittauksista. Tämän sijasta meidän täytyy luoda uusi taulu viittauksille:
 
 ```sql
-BEGIN;
-UPDATE Tilit SET saldo=saldo-100 WHERE omistaja='Maija';
-UPDATE Tilit SET saldo=saldo+100 WHERE omistaja='Uolevi';
-COMMIT;
+CREATE TABLE Opettajat (
+    id INTEGER PRIMARY KEY,
+    nimi TEXT
+);
+
+CREATE TABLE Kurssit (
+    id INTEGER PRIMARY KEY,
+    nimi TEXT
+);
+
+CREATE TABLE KurssinOpettajat (
+    kurssi_id INTEGER REFERENCES Kurssit,
+    opettaja_id INTEGER REFERENCES Opettaja
+);
 ```
 
-Transaktion ideana on, että mitään pysyvää muutosta ei tapahdu ennen komentoa `COMMIT`. Niinpä yllä olevassa esimerkissä ei ole mahdollista, että Maija menettäisi 100 euroa mutta Uolevi ei saisi mitään. Joko kummankin tilin saldo muuttuu ja rahat siirtyvät onnistuneesti tai molemmat saldot säilyvät entisellään.
+Muutoksena on, että taulussa `Kurssit` ei ole enää viittausta tauluun `Opettajat`, mutta sen sijaan tietokannassa on uusi taulu `KurssinOpettajat`, joka viittaa kumpaankin tauluun. Jokainen rivi tässä rivissä kuvaa yhden suhteen muotoa "kurssilla _x_ opettaa opettaja _y_".
 
-Jos transaktio keskeytyy jostain syystä ennen komentoa `COMMIT`, kaikki transaktiossa tehdyt muutokset peruuntuvat. Yksi syy transaktion keskeytymiseen on jokin häiriö tietokoneen toiminnassa (kuten sähköjen katkeaminen), mutta voimme myös itse halutessamme keskeyttää transaktion antamalla komennon `ROLLBACK`.
+Esimerkiksi voisimme ilmaista näin, että kurssilla on kaksi opettajaa:
 
-### Transaktioiden kokeilu
-
-Hyvä tapa saada ymmärrystä transaktioista on kokeilla käytännössä, miten ne toimivat. Tässä on esimerkkinä yksi keskustelu SQLiten kanssa:
-
-```prompt
-sqlite> CREATE TABLE Tilit (id INTEGER PRIMARY KEY, omistaja TEXT, saldo INTEGER);
-sqlite> INSERT INTO Tilit (omistaja,saldo) VALUES ('Uolevi',350);
-sqlite> INSERT INTO Tilit (omistaja,saldo) VALUES ('Maija',600);
-sqlite> SELECT * FROM Tilit;
-1|Uolevi|350
-2|Maija|600
-sqlite> BEGIN;
-sqlite> UPDATE Tilit SET saldo=saldo-100 WHERE omistaja='Maija';
-sqlite> SELECT * FROM Tilit;
-1|Uolevi|350
-2|Maija|500
-sqlite> ROLLBACK;
-sqlite> SELECT * FROM Tilit;
-1|Uolevi|350
-2|Maija|600
-sqlite> BEGIN;
-sqlite> UPDATE Tilit SET saldo=saldo-100 WHERE omistaja='Maija';
-sqlite> UPDATE Tilit SET saldo=saldo+100 WHERE omistaja='Uolevi';
-sqlite> COMMIT;
-sqlite> SELECT * FROM Tilit;
-1|Uolevi|450
-2|Maija|500
+```sql
+INSERT INTO Opettajat (nimi) VALUES ('Kivinen');
+INSERT INTO Opettajat (nimi) VALUES ('Laaksonen');
+INSERT INTO Kurssit (nimi) VALUES ('Tietorakenteet ja algoritmit');
+INSERT INTO KurssinOpettajat VALUES (1,1);
+INSERT INTO KurssinOpettajat VALUES (1,2);
 ```
 
-Alkutilanteessa Uolevin tilillä on 350 euroa ja Maijan tilillä on 600 euroa. Ensimmäisessä transaktiossa poistamme ensin Maijan tililtä 100 euroa, mutta sen jälkeen tulemme toisiin ajatuksiin ja keskeytämme transaktion. Niinpä transaktiossa tehty muutos peruuntuu ja tilien saldot ovat samat kuin alkutilanteessa. Toisessa transaktiossa viemme kuitenkin transaktion loppuun, minkä seurauksena Uolevin tilillä on 450 euroa ja Maijan tilillä on 500 euroa.
+Huomaa, että voisimme käyttää tätä ratkaisua myös aiemmassa tilanteessa, jossa kurssilla on aina tasan yksi opettaja, joskin tietokannassa olisi silloin tavallaan turha taulu.
 
-Huomaa, että transaktion sisällä muutokset kyllä näkyvät, vaikka niitä ei olisi tehty vielä pysyvästi tietokantaan. Esimerkiksi ensimmäisen transaktion `SELECT`-kysely antaa Maijan tilin saldoksi 500 euroa, koska edellinen `UPDATE`-komento muutti saldoa.
+## Tiedon atomisuus
 
-### Rinnakkaiset transaktiot
+*Periaate*:
+Tietokannan taulun jokaisessa sarakkeessa on yksittäinen eli _atominen_ tieto, kuten yksi luku tai yksi merkkijono. Sarakkeessa ei saa olla listaa tiedoista.
 
-Lisämaustetta transaktioiden käsittelyyn tuo se, että tietokannalla voi olla useita käyttäjiä,
-joilla on meneillään samanaikaisia transaktioita. Missä määrin eri käyttäjien transaktiot tulisi eristää toisistaan?
+Tämä periaate helpottaa tietokannan käsittelyä SQL-komentojen avulla: kun jokainen tieto on omassa sarakkeessaan, niin pystymme viittaamaan tietoon kätevästi komennoissa.
 
-Tämä on kysymys, johon ei ole yhtä oikeaa vastausta, vaan vastaus riippuu käyttötilanteesta ja myös tietokannan ominaisuuksista. Tavallaan paras ratkaisu olisi eristää transaktiot täydellisesti toisistaan, mutta toisaalta tämä voi haitata tietokannan käyttämistä.
-
-SQL-standardi määrittelee transaktioiden eristystasot seuraavasti:
-
-#### Taso 1 (read uncommitted)
-
-On sallittua, että transaktio pystyy näkemään toisen transaktion tekemän muutoksen, vaikka toista transaktiota ei ole viety loppuun.
-
-#### Taso 2 (read committed)
-
-Toisin kuin tasolla 1, transaktio saa nähdä toisen transaktion tekemän muutoksen vain, jos toinen transaktio on viety loppuun.
-
-#### Taso 3 (repeatable read)
-
-Tason 2 vaatimus ja lisäksi jos transaktion aikana luetaan saman rivin sisältö useita kertoja,
-joka kerralla saadaan sama sisältö.
-
-#### Taso 4 (serializable)
-
-Transaktiot ovat täysin eristettyjä ja komennot käyttäytyvät samoin kuin jos transaktiot olisi suoritettu peräkkäin yksi kerrallaan jossain järjestyksessä.
+Kun tietokantaan halutaan tallentaa listoja, luodaan uusi taulu, jossa jokainen rivi on jonkin listan yksittäinen alkio, kuten äskeinen taulu `KurssinOpettajat`. Mutta miksi emme voisi vain tallentaa listaa yhteen sarakkeeseen? Seuraava esimerkki selventää asiaa.
 
 ### Esimerkki
 
-Tarkastellaan tilannetta, jossa tuotteen 1 hinta on aluksi 8 ja kaksi käyttäjää suorittaa samaan aikaan komentoja transaktioiden sisällä (käyttäjän 1 komennot ovat vasemmalla ja käyttäjän 2 komennot ovat oikealla):
+#### Vaihe 1
 
-```prompt
-BEGIN;
-                                         BEGIN;
-                                         UPDATE Tuotteet SET hinta=5 WHERE id=1;
-SELECT hinta FROM Tuotteet WHERE id=1;
-                                         UPDATE Tuotteet SET hinta=7 WHERE id=1;
-                                         COMMIT;
-SELECT hinta FROM Tuotteet WHERE id=1;
-COMMIT;
+Haluamme tallentaa tietokantaan opiskelijoiden tenttituloksia. Tentissä on neljä tehtävää, joista voi saada 0–6 pistettä. Voisimme koettaa tallentaa pisteet näin:
+
+```
+id          opiskelija_id  pisteet   
+----------  -------------  ----------
+1           1              6,5,1,4   
+2           2              3,6,6,6   
+3           3              6,4,0,6  
 ```
 
-Tasolla 1 käyttäjä 1 voi saada kyselyistä tulokset 5 ja 7, koska käyttäjän 2 tekemät muutokset voivat tulla näkyviin heti, vaikka käyttäjän 2 transaktioita ei ole viety loppuun.
+Ideana on, että sarakkeessa `pisteet` on merkkijono, jossa on lista pisteistä pilkuilla erotettuina. Tämä ratkaisu kuitenkin rikkoo periaatetta, että jokaisessa sarakkeessa on yksittäinen tieto. Mitä vikaa ratkaisussa on?
 
-Tasolla 2 käyttäjä 1 voi saada kyselyistä tulokset 8 ja 7, koska ensimmäisen kyselyn kohdalla toista transaktiota ei ole viety loppuun, kun taas toisen kyselyn kohdalla se on viety loppuun.
-
-Tasoilla 3 ja 4 käyttäjä 1 saa kyselyistä tulokset 8 ja 8, koska tämä on tilanne ennen transaktion alkua eikä välissä loppuun viety transaktio saa muuttaa luettua rivin sisältöä.
-
-### Transaktiot käytännössä
-
-Transaktioiden toteutustavat ja saatavilla olevat eristystasot riippuvat käytetystä tietokantajärjestelmästä. Esimerkiksi SQLitessä ainoa mahdollinen taso on 4, kun taas
-PostgreSQL toteuttaa tasot 2–4 ja oletuksena käytössä on taso 2.
-
-Eristystaso 4 on tavallaan selkeästi paras, koska silloin transaktioiden muutokset eivät voi
-näkyä mitenkään toisilleen. Miksi edes muut tasot ovat olemassa ja miksi esimerkiksi PostgreSQL:n oletustaso on 2?
-
-Hyvän eristämisen hintana on, että se voi hidastaa tai estää transaktioiden suorittamista, koska transaktion vieminen loppuun voisi aiheuttaa ristiriitaisen tilanteen. Toisaalta monissa käytännön tilanteissa riittää mainiosti heikompikin eristys, kunhan tietokannan käyttäjä on siitä tietoinen.
-
-Hyvää tietoa rinnakkaisten transaktioiden toiminnasta saa perehtymällä käytetyn tietokannan dokumentaatioon sekä testailemalla asioita itse käytännössä. Esimerkiksi voimme käynnistää itse _kaksi_ SQLite-tulkkia, avata niillä saman tietokannan ja sen jälkeen kirjoittaa transaktioita sisältäviä komentoja ja tehdä havaintoja.
-
-Seuraava keskustelu näyttää edellisen esimerkin tuloksen kahdessa rinnakkain käynnissä olevassa SQLite-tulkissa:
-
-```prompt
-BEGIN;
-                                         BEGIN;
-                                         UPDATE Tuotteet SET hinta=5 WHERE id=1;
-SELECT hinta FROM Tuotteet WHERE id=1;
-8
-                                         UPDATE Tuotteet SET hinta=7 WHERE id=1;
-                                         COMMIT;
-                                         Error: database is locked
-SELECT hinta FROM Tuotteet WHERE id=1;
-8
-COMMIT;
-```
-
-Tästä näkee, että ensimmäinen transaktio tosiaan saa kummastakin kyselystä tuloksen 8. Toista transaktiota ei sen sijaan saada vietyä loppuun, vaan tulee virheviesti `Error: database is locked`, koska tietokanta on lukittuna samanaikaisen transaktion takia. Eristys toimii siis hyvin, mutta toista transaktiota pitäisi yrittää viedä loppuun uudestaan.
-
-Vertailun vuoksi tässä on vastaava keskustelu PostgreSQL-tulkeissa (tasolla 2):
-
-```prompt
-BEGIN;
-                                         BEGIN;
-                                         UPDATE Tuotteet SET hinta=5 WHERE id=1;
-SELECT hinta FROM Tuotteet WHERE id=1;
-8
-                                         UPDATE Tuotteet SET hinta=7 WHERE id=1;
-                                         COMMIT;
-SELECT hinta FROM Tuotteet WHERE id=1;
-7
-COMMIT;
-```
-
-Nyt toisen transaktion muuttama arvo 7 ilmestyy ensimmäiseen transaktioon, mutta toisaalta molemmat transaktiot saadaan vietyä loppuun ongelmitta.
-
-### Miten transaktiot toimivat?
-
-Transaktioiden toteuttaminen on kiehtova tekninen haaste tietokannoissa. Tavallaan transaktion tulee tehdä muutoksia tietokantaan, koska komennot voivat riippua edellisistä komennoista, mutta toisaalta mitään ei saa muuttaa pysyvästi ennen transaktion viemistä loppuun.
-
-Yksi keskeinen ajatus tietokantojen taustalla on tallentaa muutoksia kahdella tavalla. Ensin kuvaus muutoksesta kirjataan _lokitiedostoon_ (_write-ahead log_), jota voi ajatella luettelona suoritetuista komennoista. Vasta tämän jälkeen muutokset tehdään tietokannan varsinaisiin tietorakenteisiin. Nyt jos jälkimmäisessä vaiheessa sattuu jotain yllättävää, muutokset ovat jo tallessa lokitiedostossa ja ne voidaan suorittaa myöhemmin uudestaan.
-
-Transaktioiden yhteydessä tietokantajärjestelmän täytyy myös pitää kirjaa siitä, mitkä muutokset ovat minkäkin meneillään olevan transaktion tekemiä. Käytännössä tauluihin voidaan tallentaa rivimuutoksia, jotka näkyvät vain tietyille transaktioille. Sitten jos transaktio pääsee loppuun asti, nämä muutokset liitetään taulun pysyväksi sisällöksi.
-
-## Kyselyjen suoritus
-
-SQL-kieli on tietokannan käyttäjälle mukava kyselyjen tekemisessä, koska käyttäjän riittää kuvata, mitä tietoa hän haluaa hakea, ja tietokantajärjestelmä hoitaa loput. Niinpä tietokantajärjestelmän on tärkeää pystyä löytämään jokin tehokas tapa toteuttaa käyttäjän antama kysely ja toimittaa kyselyn tulokset käyttäjälle.
-
-### Kyselyn suunnitelma
-
-Monet tietokantajärjestelmät kertovat pyydettäessä suunnitelmansa, miten annettu kysely aiotaan suorittaa. Tämän avulla voimme tutkia tietokantajärjestelmän sisäistä toimintaa.
-
-Tarkastellaan esimerkkinä kyselyä, joka hakee retiisin tiedot taulusta `Tuotteet`:
+Ratkaisun ongelmana on, että meidän on vaivalloista koettaa päästä pisteisiin käsiksi SQL-komennoissa, koska pisteet ovat merkkijonon sisällä. Esimerkiksi jos haluamme laskea jokaisen opiskelijan yhteispisteet, tarvitsemme seuraavan tapaisen kyselyn:
 
 ```sql
-SELECT * FROM Tuotteet WHERE nimi='retiisi';
+SELECT opiskelija_id, SUBSTR(pisteet,1,1)+
+                      SUBSTR(pisteet,3,1)+
+                      SUBSTR(pisteet,5,1)+
+                      SUBSTR(pisteet,7,1) FROM Tulokset;
 ```
 
-Kun laitamme SQLitessä kyselyn eteen sanan `EXPLAIN`, saamme seuraavan tapaisen selostuksen suunnitelmasta:
+Tässä funktio `SUBSTR` erottaa merkkijonosta tietyssä kohdassa olevan osajonon. Kysely on kuitenkin hankala ja lisäksi toimii vain, kun pisteitä on tasan neljä ja ne ovat yksinumeroisia. Tarvitsemme paremman tavan tallentaa pisteet.
 
-```prompt
-sqlite> EXPLAIN SELECT * FROM Tuotteet WHERE nimi='retiisi';
-addr  opcode         p1    p2    p3    p4             p5  comment      
-----  -------------  ----  ----  ----  -------------  --  -------------
-0     Init           0     12    0                    00  Start at 12  
-1     OpenRead       0     2     0     3              00  root=2 iDb=0; Tuotteet
-2     Rewind         0     10    0                    00               
-3       Column         0     1     1                    00  r[1]=Tuotteet.nimi
-4       Ne             2     9     1     (BINARY)       52  if r[2]!=r[1] goto 9
-5       Rowid          0     3     0                    00  r[3]=rowid   
-6       Copy           1     4     0                    00  r[4]=r[1]    
-7       Column         0     2     5                    00  r[5]=Tuotteet.hinta
-8       ResultRow      3     3     0                    00  output=r[3..5]
-9     Next           0     3     0                    01               
-10    Close          0     0     0                    00               
-11    Halt           0     0     0                    00               
-12    Transaction    0     0     1     0              01  usesStmtJournal=0
-13    TableLock      0     2     0     Tuotteet       00  iDb=0 root=2 write=0
-14    String8        0     2     0     retiisi        00  r[2]='retiisi'
-15    Goto           0     1     0                    00 
+#### Vaihe 2
+
+Seuraavassa taulussa pisteille on neljä saraketta, jolloin voimme käsitellä niitä yksitellen:
+
+```
+id          opiskelija_id  pisteet1    pisteet2    pisteet3    pisteet4  
+----------  -------------  ----------  ----------  ----------  ----------
+1           1              6           5           1           4         
+2           2              3           6           6           6         
+3           3              6           4           0           6     
 ```
 
-SQLite muuttaa kyselyn tietokannan sisäiseksi _ohjelmaksi_, joka hakee tietoa tauluista. Tässä tapauksessa ohjelman suoritus alkaa riviltä 12, jossa alkaa transaktio, ja sitten rivillä 14 rekisteriin 2 sijoitetaan hakuehdossa oleva merkkijono "retiisi". Tämän jälkeen suoritus siirtyy riville 1, jossa aloitetaan taulun `Tuotteet` käsittely, ja rivit 2–9 muodostavat silmukan, joka etsii hakuehtoa vastaavat rivit taulusta.
-
-Voimme myös pyytää tiiviimmän suunnitelman laittamalla kyselyn eteen sanat `EXPLAIN QUERY PLAN`. Tällöin tulos voi olla seuraava:
-
-```prompt
-sqlite> EXPLAIN QUERY PLAN SELECT * FROM Tuotteet WHERE nimi='retiisi';
-0|0|0|SCAN TABLE Tuotteet
-```
-
-Tässä `SCAN TABLE Tuotteet` tarkoittaa, että kysely käy läpi taulun `Tuotteet` rivit.
-
-### Kyselyn optimointi
-
-Jos kyselyssä haetaan tietoa vain yhdestä taulusta, kysely on yleensä helppo suorittaa, mutta todelliset haasteet tulevat vastaan usean taulun kyselyissä. Tällöin tietokantajärjestelmän tulee osata _optimoida_ kyselyn suorittamista eli muodostaa hyvä suunnitelma, jonka avulla halutut tiedot saadaan kerättyä tehokkaasti tauluista.
-
-Tarkastellaan esimerkkinä seuraavaa kyselyä, joka listaa kurssien ja opettajien nimet:
+Tämän ansiosta saamme jo toteutettua kyselyn mukavammin:
 
 ```sql
-SELECT K.nimi, O.nimi FROM Kurssit K, Opettajat O WHERE K.opettaja_id = O.id;
+SELECT opiskelija_id, pisteet1+pisteet2+pisteet3+pisteet4 FROM Tulokset;
 ```
 
-Koska kysely kohdistuu kahteen tauluun, olemme ajatelleet kyselyn toiminnan niin, että se muodostaa ensin kaikki rivien yhdistelmät tauluista `Kurssit` ja `Opettajat` ja valitsee sitten ne rivit, joilla pätee ehto `K.opettaja_id = O.id`. Tämä on hyvä ajattelutapa, mutta tämä _ei_ vastaa sitä, miten kunnollinen tietokantajärjestelmä toimii.
+Tämä ratkaisu on selkeästi parempaan suuntaan, mutta siinä on edelleen ongelmia. Vaikka pisteet ovat eri sarakkeissa, oletuksena on edelleen, että tehtäviä on tasan neljä. Jos tehtävien määrä muuttuu, joudumme muuttamaan taulun rakennetta ja kaikkia pisteisiin liittyviä SQL-komentoja, mikä ei ole hyvä tilanne.
 
-Ongelmana on, että tauluissa `Kurssit` ja `Opettajat` voi molemmissa olla suuri määrä rivejä. Esimerkiksi jos kummassakin taulussa on miljoona riviä, rivien yhdistelmiä olisi miljoona miljoonaa ja veisi valtavasti aikaa muodostaa ja käydä läpi kaikki yhdistelmät.
+#### Vaihe 3
 
-Tässä tilanteessa tietokantajärjestelmän pitääkin ymmärtää, mitä käyttäjä oikeastaan on hakemassa ja miten kyselyssä annettu ehto rajoittaa tulosrivejä. Käytännössä riittää käydä läpi kaikki taulun `Kurssit` rivit ja etsiä jokaisen rivin kohdalla jotenkin tehokkaasti yksittäinen haluttu rivi taulusta `Opettajat`.
+Kun haluamme tallentaa listan tietokantaan, hyvä ratkaisu on tallentaa jokainen listan alkio omalle rivilleen. Tämän esimerkin tapauksessa voimme luoda taulun, jonka jokainen rivi ilmaisee tietyn opiskelijan pisteet tietyssä tehtävässä:
 
-Voimme taas pyytää SQLiteä selittämään kyselyn suunnitelman:
-
-```prompt
-sqlite> EXPLAIN QUERY PLAN SELECT K.nimi, O.nimi FROM Kurssit K, Opettajat O WHERE K.opettaja_id = O.id;
-0|0|0|SCAN TABLE Kurssit AS K
-0|1|1|SEARCH TABLE Opettajat AS O USING INTEGER PRIMARY KEY (rowid=?)
+```
+id          opiskelija_id  tehtava_id  pisteet   
+----------  -------------  ----------  ----------
+1           1              1           6         
+2           1              2           5         
+3           1              3           1         
+4           1              4           4         
+5           2              1           3         
+6           2              2           6         
+7           2              3           6         
+8           2              4           6         
+9           3              1           6         
+10          3              2           4         
+11          3              3           0         
+12          3              4           6
 ```
 
-Tämä kysely käy läpi taulun `Kurssit` rivit (`SCAN TABLE Kurssit`) ja hakee tietoa taulusta `Opettajat` pääavaimen avulla (`SEARCH TABLE Opettajat`). Jälkimmäinen tarkoittaa, että kun käsittelyssä on tietty taulun `Kurssit` rivi, kysely hakee _tehokkaasti_ taulusta `Opettajat` rivin, jossa pääavain `O.id` on sama kuin `K.opettaja_id`.
-
-Mutta miten käytännössä taulusta `Opettajat` voi hakea tehokkaasti? Tämä onnistuu käyttämällä indeksiä, joihin tutustumme heti seuraavaksi.
-
-## Indeksit
-
-_Indeksi_ on tietokannan taulun yhteyteen tallennettu hakemistorakenne, jonka tavoitteena on tehostaa tauluun liittyvien kyselyiden suorittamista. Indeksin avulla tietokantajärjestelmä voi selvittää tehokkaasti, missä päin taulua on rivejä, jotka täsmäävät tiettyyn hakuehtoon.
-
-Indeksiä voi ajatella samalla tavalla kuin kirjan lopussa olevaa hakemistoa, jossa kerrotaan hakusanoista, millä kirjan sivuilla ne esiintyvät. Hakemiston avulla löydämme tietyn sanan sijainnit paljon nopeammin kuin lukemalla koko kirjan läpi.
-
-### Pääavaimen indeksi
-
-Kun tietokantaan luodaan taulu, sen pääavain saa automaattisesti indeksin. Tämän seurauksena voimme suorittaa tehokkaasti hakuja, joissa ehto liittyy pääavaimeen.
-
-Esimerkiksi kun luomme SQLitessä taulun
+Nyt voimme hakea kunkin opiskelijan yhteispisteet näin:
 
 ```sql
-CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
+SELECT opiskelija_id, SUM(pisteet) FROM Tulokset GROUP BY opiskelija_id;
 ```
 
-niin taululle luodaan indeksi sarakkeelle `id` ja voimme etsiä tehokkaasti tuotteita id-numeron perusteella. Tämän ansiosta esimerkiksi seuraava kysely toimii tehokkaasti:
+Tämä on _yleiskäyttöinen_ kysely eli se toimii yhtä hyvin riippumatta tehtävien määrästä. Pystymme hyödyntämään summan laskemisessa funktiota `SUM` sen sijaan, että meidän tulisi luetella kaikki tehtävät itse.
+
+Huomaa, että muutoksen seurauksena taulun rivien määrä kasvoi selvästi. Tätä ei kannata kuitenkaan hätkähtää: tietokantajärjestelmät on toteutettu niin, että ne toimivat hyvin, vaikka taulussa olisi paljon rivejä.
+
+### Mikä on atomista tietoa?
+
+Atomisen tiedon käsite ei ole hyvin määritelty. Selkeästi lista ei ole atominen tieto, mutta onko sitten vaikka merkkijonokaan, jossa on useita sanoja?
+
+Tarkastellaan esimerkkinä tilannetta, jossa taulun sarakkeessa on käyttäjän nimi. Onko tämä huonoa suunnittelua, koska samassa sarakkeessa on etu- ja sukunimi?
+
+```
+id          nimi         
+----------  --------------
+1           Anna Virtanen
+2           Maija Korhonen
+3           Pasi Lahtinen
+```
+
+Voisimme myös tallentaa etu- ja sukunimen erikseen näin:
+
+```
+id          etunimi     sukunimi  
+----------  ----------  ----------
+1           Anna        Virtanen
+2           Maija       Korhonen
+3           Pasi        Lahtinen
+```
+
+Riippuu tilanteesta, kumpi taulu on parempi. Jos järjestelmässä on erityisesti tarvetta etsiä tietoa etu- tai sukunimen perusteella (esimerkiksi etsiä kaikki käyttäjät, joiden etunimi on Anna), jälkimmäinen taulu on parempi. Kuitenkaan usein ei ole näin eikä ole mitään pahaa tallentaa samaan sarakkeeseen etu- ja sukunimi.
+
+Vastaavasti jos tietokantaan tallennetaan käyttäjän lähettämä viesti, siinä voi olla monia sanoja eli tavallaan viesti on lista sanoja, mutta on silti hyvä ratkaisu tallentaa koko viesti yhteen sarakkeeseen, koska viestiä käsitellään tietokannassa yhtenä kokonaisuutena. Olisi hyvin huono ratkaisu jakaa "atomisesti" viestin sanat omiin sarakkeisiin.
+
+Kannattaakin ajatella asiaa niin, että jos jotain tietoa on tarvetta käsitellä erillisenä SQL-komennoissa, niin se on atominen tieto, jonka tulee olla omassa sarakkeessa. Jos taas tietoon ei viitata SQL-komennoissa, se voi olla sarakkeessa osana laajempaa kokonaisuutta.
+
+## Toisteinen tieto
+
+*Periaate*:
+Jokainen tieto on tasan yhdessä paikassa tietokannassa. Tietokannassa ei ole tietoa, jonka voi laskea tai päätellä tietokannan muun sisällön perusteella.
+
+Tätä periaatetta seuraamalla tietokannan sisällön päivittäminen on helppoa, koska päivitys riittää tehdä yhteen paikkaan eikä se vaikuta tietokannan muihin osiin.
+
+### Esimerkki 1
+
+Tallennamme järjestelmään käyttäjien lähettämiä viestejä seuraavasti tauluun `Viestit`:
+
+```
+id          kayttaja    viesti     
+----------  ----------  --------------
+1           Anna123     Missä olet?
+2           Joulupukki  Bussissa vielä
+3           Anna123     Meneekö kauan?
+4           Joulupukki  5 min   
+```
+
+Tämä on muuten toimiva ratkaisu, mutta tietokannan sisältöä on hankalaa päivittää, jos käyttäjä päättää vaihtaa nimeään. Esimerkiksi jos Anna123 haluaa muuttaa nimeään, muutos täytyy tehdä jokaiseen viestiin, jonka hän on lähettänyt.
+
+Parempi ratkaisu on toteuttaa tietokanta niin, että käyttäjän nimi on vain yhdessä paikassa. Luonteva paikka tälle on taulu `Kayttajat`, joka sisältää käyttäjät:
+
+```
+id          nimi
+----------  ----------
+1           Anna123
+2           Joulupukki
+```
+
+Muissa tauluissa on vain viitteenä käyttäjän id-numero, joka on muuttumaton tieto. Esimerkiksi taulu `Viestit` näyttää nyt tältä:
+
+```
+id          kayttaja_id  viesti     
+----------  -----------  --------------
+1           1            Missä olet?
+2           2            Bussissa vielä
+3           1            Meneekö kauan?
+4           2            5 min   
+```
+
+Tämän jälkeen käyttäjän nimen muuttaminen on helppoa, koska muutos riittää tehdä taulun `Kayttajat` yhteen riviin ja muutos päivittyy heti kaikkialle, koska muissa tauluissa viitataan edelleen oikeaan riviin.
+
+Tämä monimutkaistaa kyselyjä, koska meidän täytyy hakea tietoa useista tauluista, mutta ratkaisu on kuitenkin kokonaisuuden kannalta hyvä.
+
+#### Vieläkin toisteisuutta?
+
+Äskeisestä muutoksesta huolimatta tietokannassa saattaa esiintyä edelleen toisteisuutta. Esimerkiksi seuraavassa tilanteessa käyttäjät lähettävät samanlaisen viestin "Hei!". Pitäisikö tietokannan rakennetta parantaa?
+
+```
+id          kayttaja_id  viesti
+----------  -----------  --------------
+1           1            Hei!
+2           2            Hei!
+```
+
+Tässä tapauksessa _ei_ olisi hyvä idea toteuttaa tietokantaa niin, että jos kaksi käyttäjää lähettää saman sisältöisen viestin, viestin sisältö tallennetaan vain yhteen paikkaan.
+
+Vaikka viesteissä on sama sisältö, ne ovat erillisiä viestejä, joiden ei ole tarkoitus viitata samaan asiaan. Jos käyttäjä 1 muuttaa viestin sisältöä, muutoksen ei tule heijastua käyttäjän 2 viestiin, vaikka siinä sattuu olemaan tällä hetkellä sama sisältö.
+
+
+### Esimerkki 2
+
+Tallennamme tietokantaan tietoa opiskelijoiden suorituksista. Tietokannasta voidaan kysyä, montako opintopistettä opiskelija on suorittanut.
+
+Seuraavassa tietokannassa jokaisen opiskelijan yhteyteen on tallennettu tieto, montako opintopistettä hän on suorittanut. Taulun `Opiskelijat` sisältönä on:
+
+```
+id          nimi        op        
+----------  ----------  ----------
+1           Maija       20        
+2           Uolevi      10   
+```
+
+Taulussa `Suoritukset` puolestaan on seuraavat rivit:
+
+```
+id          opiskelija_id  kurssi_id   op        
+----------  -------------  ----------  ----------
+1           1              1           5         
+2           1              2           5         
+3           1              4           10        
+4           2              1           5         
+5           2              3           5         
+```
+
+Tämän ansiosta on helppoa hakea opiskelijan opintopisteiden yhteismäärä:
 
 ```sql
-SELECT hinta FROM Tuotteet WHERE id=3;
+SELECT op FROM Opiskelijat WHERE nimi='Maija';
 ```
 
-Voimme varmistaa tämän kysymällä kyselyn suunnitelman:
+Kuitenkin tietokannassa on toisteista tietoa: taulun `Opiskelijat` sarakkeen `op` sisältö voidaan laskea taulun `Suoritukset` avulla. Ongelmana on, että jos lisäämme tai poistamme suorituksen, niin joudumme tekemään muutoksen kahteen eri tauluun. Jos muutos unohtuu tehdä tai epäonnistuu, tietokantaan tulee ristiriitaista tietoa.
 
-```prompt
-sqlite> EXPLAIN QUERY PLAN SELECT hinta FROM Tuotteet WHERE id=3;
-selectid    order       from        detail                                                   
-----------  ----------  ----------  ---------------------------------------------------------
-0           0           0           SEARCH TABLE Tuotteet USING INTEGER PRIMARY KEY (rowid=?)
+Pääsemme eroon toisteisesta tiedosta poistamalla sarakkeen `op` taulusta `Opiskelijat`:
+
+```
+id          nimi       
+----------  ---------- 
+1           Maija     
+2           Uolevi    
 ```
 
-Suunnitelmassa näkyy `SEARCH TABLE`, mikä tarkoittaa, että kysely pystyy hakemaan taulusta tietoa tehokkaasti indeksin avulla.
-
-### Indeksin luominen
-
-Pääavaimen indeksi on kätevä, mutta voimme haluta myös etsiä tietoa jonkin muun sarakkeen perusteella. Esimerkiksi seuraava kysely hakee rivit sarakkeen `hinta` perusteella:
+Tämän muutoksen seurauksena on vaikeampaa selvittää opiskelijan opintopisteet, koska meidän täytyy laskea tieto suorituksista lähtien:
 
 ```sql
-SELECT nimi FROM Tuotteet WHERE hinta=4;
+SELECT
+  SUM(S.op)
+FROM
+  Suoritukset S, Opiskelijat O
+WHERE
+  S.opiskelija_id=O.id AND O.nimi='Maija';
 ```
 
-Tämä kysely _ei_ ole oletuksena tehokas, koska sarakkeelle `hinta` ei ole indeksiä. Näemme tämän pyytämällä taas selitystä kyselystä:
+Tämä on kuitenkin kokonaisuutena hyvä muutos, koska nyt voimme huoletta muutella suorituksia ja luottaa siihen, että saamme aina haettua oikean tiedon opiskelijan opintopisteistä.
 
-```prompt
-sqlite> EXPLAIN QUERY PLAN SELECT nimi FROM Tuotteet WHERE hinta=4;
-selectid    order       from        detail             
-----------  ----------  ----------  -------------------
-0           0           0           SCAN TABLE Tuotteet
-```
+### Muutokset vs. kyselyt
 
-Nyt suunnitelmassa näkyy `SCAN TABLE`, mikä tarkoittaa, että kysely joutuu käymään läpi taulun kaikki rivit. Tämä on hidasta, jos taulussa on paljon rivejä.
+Vaikka ihanteena on, että tietokannassa ei ole toisteista tietoa, joskus kuitenkin toisteista tietoa tarvitaan hakujen tehostamiseksi. Toisteinen tieto vaikeuttaa tietokannan muuttamista mutta helpottaa kyselyjen tekemistä.
 
-Voimme kuitenkin luoda uuden indeksin, joka tehostaa saraketta `hinta` käyttäviä kyselyitä. Saamme luotua indeksin komennolla `CREATE INDEX` näin:
+Usein esiintyvä ilmiö tietojenkäsittelytieteessä on, että joudumme tasapainoilemaan sen kanssa,
+haluammeko muuttaa vai hakea tehokkaasti tietoa ja paljonko tilaa voimme käyttää. Tämä tulee tietokantojen lisäksi vastaan esimerkiksi algoritmien suunnittelussa.
+
+Jos tietokannassa ei ole toisteista tietoa, muutokset ovat helppoja, koska jokainen tieto on vain yhdessä paikassa eli riittää muuttaa vain yhden taulun yhtä riviä. Myös hyvänä puolena tietokanta vie vähän tilaa. Toisaalta kyselyt voivat olla monimutkaisia ja hitaita, koska halutut tiedot pitää kerätä kasaan eri puolilta tietokantaa.
+
+Kun sitten lisäämme toisteista tietoa, pystymme nopeuttamaan kyselyjä mutta toisaalta muutokset hidastuvat, koska muutettu tieto pitää päivittää useaan paikkaan. Samaan aikaan myös tietokannan tilankäyttö kasvaa toisteisen tiedon takia.
+
+Ei ole mitään yleistä sääntöä, paljonko toisteista tietoa kannattaa lisätä, vaan tämä riippuu tietokannan sisällöstä ja halutuista kyselyistä. Yksi hyvä tapa on aloittaa tilanteesta, jossa toisteista tietoa ei ole, ja lisätä sitten toisteista tietoa tarvittaessa, jos osoittautuu, että kyselyt eivät muuten ole riittävän tehokkaita.
+
+## Suunnitteluesimerkki
+
+Tarkastellaan lopuksi laajempaa esimerkkiä, jossa tavoitteemme on suunnitella tietokanta Facebookin kaltaista yhteisöpalvelua varten. Tietokannan tulee mahdollistaa seuraavat toiminnot:
+
+* Käyttäjä voi kirjautua palveluun antamalla sähköpostiosoitteen ja salasanan.
+* Käyttäjällä on oma sivu, johon hän voi lähettää päivityksiä.
+* Käyttäjä voi lisätä profiiliinsa tietoa, kuten nimen, syntymäpäivän, asuinpaikan, jne.
+* Käyttäjä voi ystävystyä muiden palvelun käyttäjien kanssa.
+* Käyttäjä voi lähettää palveluun valokuvia ja valita yhden niistä profiilikuvaksi.
+* Käyttäjät voivat tykätä ja kommentoida toistensa päivityksiä ja kuvia.
+* Käyttäjät voivat lähettää toisilleen yksityisviestejä.
+* Palvelussa on myös ylläpitäjiä, joilla on enemmän oikeuksia kuin muilla käyttäjillä.
+
+### Suunnittelun vaiheet
+
+Tietokannan suunnittelu etenee yleensä pikkuhiljaa niin, että tietokantaan lisätään uusia tauluja ja sarakkeita aina, kun uusissa toiminnoissa on tarvetta niille.
+
+Seuraavaksi näemme, miten esimerkkitietokanta rakentuu vaihe vaiheelta vaadittujen toimintojen perusteella.
+
+#### Kirjautuminen palveluun
+
+* Käyttäjä voi kirjautua palveluun antamalla sähköpostiosoitteen ja salasanan.
+
+Tämä on hyvin tavallinen toiminto, josta on hyvä aloittaa tietokannan suunnittelu. Tarvitsemme taulun, jossa on käyttäjän tunnus (sähköpostiosoite) ja salasana:
 
 ```sql
-CREATE INDEX idx_hinta ON Tuotteet (hinta);
+CREATE TABLE Kayttajat (
+    id INTEGER PRIMARY KEY,
+    tunnus TEXT,
+    salasana TEXT
+);
 ```
 
-Tässä `idx_hinta` on indeksin nimi, jolla voimme viitata siihen myöhemmin. Indeksi toimii luonnin jälkeen täysin automaattisesti, eli tietokantajärjestelmä osaa käyttää sitä kyselyissä
-ja huolehtii sen päivittämisestä.
+#### Päivitykset omalle sivulle
 
-Indeksin luomisen jälkeen voimme kysyä uudestaan kyselyn suunnitelmaa:
+* Käyttäjällä on oma sivu, johon hän voi lähettää päivityksiä.
 
-```prompt
-sqlite> EXPLAIN QUERY PLAN SELECT nimi FROM Tuotteet WHERE hinta=4;
-selectid    order       from        detail                                               
-----------  ----------  ----------  -----------------------------------------------------
-0           0           0           SEARCH TABLE Tuotteet USING INDEX idx_hinta (hinta=?)
-```
-
-Indeksin ansiosta suunnitelmassa ei lue enää `SCAN TABLE` vaan `SEARCH TABLE`. Suunnitelmassa näkyy myös, että aikomuksena on hyödyntää indeksiä `idx_hinta`.
-
-### Lisää käyttötapoja
-
-Voimme käyttää indeksiä myös kyselyissä, joissa haemme pienempiä tai suurempia arvoja. Esimerkiksi sarakkeelle `hinta` luodun indeksin avulla voimme etsiä vaikkapa rivejä, joille pätee ehto `hinta<3` tai `hinta>=8`.
-
-Indeksi on myös mahdollista luoda _usean_ sarakkeen perusteella. Esimerkiksi voisimme luoda indeksin näin:
+Tätä toimintoa varten tietokantaan täytyy pystyä tallentamaan käyttäjän päivityksiä. Hyvä ratkaisu on luoda taulu, joka sisältää kaikkien käyttäjien päivitykset id-numeron mukaan:
 
 ```sql
-CREATE INDEX idx_hinta ON Tuotteet (hinta,nimi);
+CREATE TABLE Paivitykset (
+    id INTEGER PRIMARY KEY,
+    kayttaja_id INTEGER REFERENCES Kayttajat,
+    viesti TEXT,
+    aika DATETIME
+);
 ```
 
-Tässä indeksissä rivit on järjestetty ensisijaisesti hinnan ja toissijaisesti nimen mukaan.
-Indeksi tehostaa hakuja, joissa hakuperusteena on joko pelkkä hinta tai yhdessä hinta ja nimi. Kuitenkaan indeksi ei tehosta hakuja, joissa hakuperusteena on pelkkä nimi.
+Huomaa, että tietokantaan ei tarvitse tallentaa tietoa käyttäjän sivusta. Jokaisella käyttäjällä on sivu, joka sisältää käyttäjän päivitykset, mutta sivuun itsessään ei liity tietoa.
 
-### Miten indeksi toimii?
+#### Profiilin tiedot
 
-Indeksi tarvitsee tuekseen hakemistorakenteen, josta voi hakea tehokkaasti rivejä sarakkeen
-arvon perusteella. Tämä voidaan toteuttaa esimerkiksi puurakenteena, jonka avaimina on sarakkeiden arvoja.
+* Käyttäjä voi lisätä profiiliinsa tietoa, kuten nimen, syntymäpäivän, asuinpaikan, jne.
 
-Asiaan liittyvää teoriaa käsitellään tarkemmin kurssilla _Tietorakenteet ja algoritmit_ binäärihakupuiden yhteydessä. Tyypillisiä tietokantojen yhteydessä käytettäviä puurakenteita ovat B-puu ja sen muunnelmat.
+Yksi tapa toteuttaa tämä toiminto olisi laajentaa taulua `Kayttajat`:
 
-### Milloin luoda indeksi?
+```sql
+CREATE TABLE Kayttajat (
+    id INTEGER PRIMARY KEY,
+    tunnus TEXT,
+    salasana TEXT,
+    nimi TEXT,
+    syntymapaiva DATE,
+    asuinpaikka TEXT,
+    ...
+);
+```
 
-Periaatteessa voisi ajatella, että taulun jokaiselle sarakkeelle kannattaa luoda indeksi, jolloin monenlaiset kyselyt ovat nopeita. Tämä ei ole kuitenkaan käytännössä hyvä idea.
+Tämä on sinänsä toimiva tapa, mutta tässä voi tulla ongelmaksi, että profiilissa voi olla paljon vaihtelevaa tietoa, jolloin tauluun `Kayttajat` tulee suuri määrä sarakkeita. Tämän vuoksi teemme toisenlaisen ratkaisun ja luomme uuden taulun `KayttajanTiedot`:
 
-Vaikka indeksit tehostavat kyselyitä, niissä on myös kaksi ongelmaa: indeksin hakemistorakenne vie tilaa ja indeksi myös hidastaa tiedon lisäämistä ja muuttamista. Jälkimmäinen johtuu siitä,
-että kun taulun sisältö muuttuu, niin muutos täytyy myös päivittää kaikkiin tauluun liittyviin indekseihin. Indeksiä ei siis kannata luoda huvin vuoksi.
+```sql
+CREATE TABLE KayttajanTiedot (
+    id INTEGER PRIMARY KEY,
+    kayttaja_id INTEGER REFERENCES Kayttajat,
+    avain TEXT,
+    arvo TEXT
+);
+```
 
-Hyvä syy indeksin luontiin on, että haluamme suorittaa usein tietynlaisia kyselyitä ja ne toimivat hitaasti, koska tietokantajärjestelmä joutuu käymään läpi turhaan jonkin taulun kaikki rivit kyselyn aikana. Tällöin voimme lisätä taululle indeksin, jonka avulla tällaiset kyselyt toimivat jatkossa tehokkaasti.
+Nyt käyttäjän tietoja voidaan lisätä tähän tapaan:
 
-Indekseillä on käytännössä suuri vaikutus tietokantojen tehokkuuteen. Moni tietokanta toimii hitaasti sen takia, että siitä puuttuu oleellisia indeksejä.
+```sql
+INSERT INTO KayttajanTiedot (kayttaja_id, avain TEXT, arvo TEXT)
+            VALUES (1,'nimi','Maija Virtanen');
+INSERT INTO KayttajanTiedot (kayttaja_id, avain TEXT, arvo TEXT)
+            VALUES (1,'syntymapaiva','2000-01-01');
+INSERT INTO KayttajanTiedot (kayttaja_id, avain TEXT, arvo TEXT)
+            VALUES (1,'asuinpaikka','Helsinki');
+```
 
-Huomaa, että indeksit ovat myös yksi esimerkki siitä, miten toisteinen tieto voi tehostaa kyselyjä. Indekseissä kuitenkaan toisteista tietoa ei tallenneta tauluun vaan
-taulun ulkopuolelle erilliseen hakemistorakenteeseen.
+Tämän ratkaisu ansiosta tietokannan rakenteessa ei tarvitse määritellä, mitä kaikkea tietoa profiiliin mahdollisesti voidaan tallentaa, mutta tiedot on tallettu kuitenkin erillisinä.
+
+#### Ystävyyssuhteet
+
+* Käyttäjä voi ystävystyä muiden palvelun käyttäjien kanssa.
+
+Tietokannassa täytyy olla tieto siitä, ketkä käyttäjät ovat ystäviä keskenään. Tämä onnistuu luomalla uusi taulu ystävyyssuhteita varten:
+
+```sql
+CREATE TABLE Ystavat (
+    id INTEGER PRIMARY KEY,
+    kayttaja1_id REFERENCES Kayttajat,
+    kayttaja2_id REFERENCES Kayttajat
+);
+```
+
+Tämä taulu viittaa kahdesti tauluun `Kayttajat`, koska ystävyyssuhde liittyy kahteen käyttäjään.
+
+#### Valokuvien lisääminen
+
+* Käyttäjä voi lähettää palveluun valokuvia ja valita yhden niistä profiilikuvaksi.
+
+Valokuvien lisääminen voidaan toteuttaa samaan tapaan kuin päivitysten lisääminen:
+
+```sql
+CREATE TABLE Valokuvat (
+    id INTEGER PRIMARY KEY,
+    kayttaja_id INTEGER REFERENCES Kayttajat,
+    kuva DATA
+);
+```
+
+Tässä ei oteta tarkemmin kantaa siihen, miten valokuva tallennetaan palvelimelle, vaan sarakkeen tyyppinä on vain `DATA`.
+
+Entä kuinka toteutamme profiilikuvan valitsemisen? Tähän on monia mahdollisia tapoja: voisimme lisätä tiedon asiasta tauluun `Kayttajat` tai `Valokuvat` tai luoda uuden taulun, joka kertoo, mikä kuva on kenenkin käyttäjän profiilikuva.
+
+Koska käyttäjällä on enintään yksi profiilikuva, uudelle taululle ei ole oikeastaan tarvetta. Päädymme lisäämään tiedon tauluun `Kayttajat`, koska jos tieto olisi taulussa `Valokuvat`, pitäisi jotenkin erikseen varmistaa, että usea kuva ei ole samaan aikaan profiilikuvana. Tämän seurauksena taulu `Kayttajat` muuttuu näin:
+
+```sql
+CREATE TABLE Kayttajat (
+    id INTEGER PRIMARY KEY,
+    tunnus TEXT,
+    salasana TEXT,
+    kuva_id INTEGER REFERENCES Valokuvat
+);
+```
+
+#### Tykkäykset ja kommentit
+
+* Käyttäjät voivat tykätä ja kommentoida toistensa päivityksiä ja kuvia.
+
+Tämän toiminnon toteuttamiseen on monia mahdollisuuksia. Seuraavassa ratkaisussa taulu `Tykkaykset` sisältää kaikki tykkäykset ja taulu `Kommentit` sisältää kaikki kommentit.
+
+```sql
+CREATE TABLE Tykkaykset (
+    id INTEGER PRIMARY KEY,
+    kayttaja_id INTEGER REFERENCES Kayttajat,
+    paivitys_id INTEGER REFERENCES Paivitykset,
+    kuva_id INTEGER REFERENCES Valokuvat
+);
+
+CREATE TABLE Kommentit (
+    id INTEGER PRIMARY KEY,
+    kayttaja_id INTEGER REFERENCES Kayttajat,
+    paivitys_id INTEGER REFERENCES Paivitykset,
+    kuva_id INTEGER REFERENCES Valokuvat,
+    viesti TEXT
+    aika DATETIME
+);
+```
+
+Ideana on, että jos tykkäys tai kommentti liittyy päivitykseen, niin sarake `paivitys_id` osoittaa päivitykseen ja sarake `kuva_id` on `NULL`. Vastaavasti jos tykkäys tai kommentti liittyy kuvaan, sarake `paivitys_id` on `NULL` ja sarake `kuva_id` osoittaa kuvaan.
+
+Vaihtoehtoinen ratkaisu olisi luoda kahden taulun sijasta neljä taulua niin, että päivitysten ja kuvien tiedot ovat omissa tauluissaan. Tämän etuna olisi, että riveillä ei ole `NULL`-arvoja, mutta tämä toisaalta mutkistaisi tietokannan rakennetta.
+
+#### Yksityisviestit
+
+* Käyttäjät voivat lähettää toisilleen yksityisviestejä.
+
+Tämän toiminnon saamme toteutettua samalla tavalla kuin ystävystymisen lisäämällä uuden taulun, joka viittaa kahteen käyttäjään.
+
+```sql
+CREATE TABLE Viestit (
+    id INTEGER PRIMARY KEY,
+    kayttaja1_id INTEGER REFERENCES Kayttajat,
+    kayttaja2_id INTEGER REFERENCES Kayttajat,
+    viesti TEXT,
+    aika DATETIME
+);
+```
+
+Tässä tulkintana on, että käyttäjä 1 on viestin lähettäjä ja käyttäjä 2 on viestin vastaanottaja.
+
+#### Ylläpitäjät
+
+* Palvelussa on myös ylläpitäjiä, joilla on enemmän oikeuksia kuin muilla käyttäjillä.
+
+Tämän toiminnon toteuttamiseen on periaatteessa kaksi vaihtoehtoa: kaikki käyttäjät (myös ylläpitäjät) ovat samassa taulussa tai ylläpitäjät ovat erillisessä taulussa.
+
+Kokemus on osoittanut, että parempi ratkaisu on tallentaa kaikki käyttäjät samaan tauluun, koska käyttäjillä on kuitenkin yhteisiä toimintoja, joiden toteuttaminen olisi hankalaa, jos tietoa pitäisi etsiä eri tauluista riippuen käyttäjän asemasta. Käyttäjät voidaan tallentaa samaan tauluun, kun tauluun lisätään sarake, joka ilmaisee käyttäjän roolin.
+
+```sql
+CREATE TABLE Kayttajat (
+    id INTEGER PRIMARY KEY,
+    tunnus TEXT,
+    salasana TEXT,
+    kuva_id INTEGER REFERENCES Valokuvat,
+    yllapitaja BOOLEAN
+);
+```
+
+### Tietokannan kuvaaminen
+
+Tietokannan rakenteen kuvaamiseen on kaksi tavallista tapaa: graafinen tietokantakaavio, joka esittää taulujen suhteet, sekä SQL-skeema, jossa on taulujen luontikomennot.
+
+#### Tietokantakaavio
+
+Tietokantakaavio on tietokannan graafinen esitys, jossa jokainen tietokannan taulu on laatikko, joka sisältää taulun nimen ja sarakkeet listana. Rivien viittaukset toisiinsa esitetään laatikoiden välisinä yhteyksinä.
+
+Tietokantakaavion piirtämiseen on monia vähän erilaisia tapoja. Seuraava kaavio on luotu netissä olevalla työkalulla [dbdiagram.io](https://dbdiagram.io/):
+
+<img src="kaavio.png">
+
+Tässä merkki `1` tarkoittaa, että sarakkeessa on eri arvo joka rivillä, ja merkki `*` puolestaan tarkoittaa, että sarakkeessa voi olla sama arvo usealla rivillä.
+
+#### SQL-skeema
+
+SQL-skeema sisältää `CREATE TABLE` -komennot, joiden avulla tietokanta voidaan muodostaa. Seuraava SQL-skeema vastaa tietokantaamme:
+
+```sql
+CREATE TABLE Kayttajat (
+    id INTEGER PRIMARY KEY,
+    tunnus TEXT,
+    salasana TEXT,
+    kuva_id INTEGER REFERENCES Valokuvat,
+    yllapitaja BOOLEAN
+);
+
+CREATE TABLE Paivitykset (
+    id INTEGER PRIMARY KEY,
+    kayttaja_id INTEGER REFERENCES Kayttajat,
+    viesti TEXT,
+    aika DATETIME
+);
+
+CREATE TABLE KayttajanTiedot (
+    id INTEGER PRIMARY KEY,
+    kayttaja_id INTEGER REFERENCES Kayttajat,
+    avain TEXT,
+    arvo TEXT
+);
+
+CREATE TABLE Ystavat (
+    id INTEGER PRIMARY KEY,
+    kayttaja1_id REFERENCES Kayttajat,
+    kayttaja2_id REFERENCES Kayttajat
+);
+
+CREATE TABLE Valokuvat (
+    id INTEGER PRIMARY KEY,
+    kayttaja_id INTEGER REFERENCES Kayttajat,
+    kuva DATA
+);
+
+CREATE TABLE Tykkaykset (
+    id INTEGER PRIMARY KEY,
+    kayttaja_id INTEGER REFERENCES Kayttajat,
+    paivitys_id INTEGER REFERENCES Paivitykset,
+    kuva_id INTEGER REFERENCES Valokuvat
+);
+
+CREATE TABLE Kommentit (
+    id INTEGER PRIMARY KEY,
+    kayttaja_id INTEGER REFERENCES Kayttajat,
+    paivitys_id INTEGER REFERENCES Paivitykset,
+    kuva_id INTEGER REFERENCES Valokuvat,
+    viesti TEXT
+    aika DATETIME
+);
+
+CREATE TABLE Viestit (
+    id INTEGER PRIMARY KEY,
+    kayttaja1_id INTEGER REFERENCES Kayttajat,
+    kayttaja2_id INTEGER REFERENCES Kayttajat,
+    viesti TEXT,
+    aika DATETIME
+);
+```
+
+<!--
+Table Kayttajat as K {
+  id INTEGER [pk]
+  tunnus TEXT
+  salasana TEXT
+  kuva_id INTEGER
+  yllapitaja BOOLEAN
+}
+
+Ref: K.kuva_id > V.id
+
+Table Paivitykset as P {
+  id INTEGER [pk]
+  kayttaja_id INTEGER
+  viesti TEXT
+  aika DATETIME
+}
+
+Ref: P.kayttaja_id > K.id
+
+Table KayttajanTiedot as KT {
+  id INTEGER [pk]
+  kayttaja_id INTEGER
+  avain TEXT
+  arvo TEXT
+}
+
+Ref: KT.kayttaja_id > K.id
+
+Table Ystavat as Y {
+  id INTEGER [pk]
+  kayttaja1_id INTEGER
+  kayttaja2_id INTEGER
+}
+
+Ref: Y.kayttaja1_id > K.id
+Ref: Y.kayttaja2_id > K.id
+
+Table Valokuvat as V {
+  id INTEGER [pk]
+  kayttaja_id INTEGER
+  kuva DATA
+}
+
+Ref: V.kayttaja_id > K.id
+
+Table Tykkaykset as T{
+  id INTEGER [pk]
+  kayttaja_id INTEGER
+  paivitys_id INTEGER
+  kuva_id INTEGER
+}
+
+Ref: T.kayttaja_id > K.id
+Ref: T.paivitys_id > P.id
+Ref: T.kuva_id > V.id
+
+Table Kommentit as Z {
+  id INTEGER [pk]
+  kayttaja_id INTEGER
+  paivitys_id INTEGER
+  kuva_id INTEGER
+  viesti TEXT
+  aika DATETIME
+}
+
+Ref: Z.kayttaja_id > K.id
+Ref: Z.paivitys_id > P.id
+Ref: Z.kuva_id > V.id
+
+Table Viestit as W {
+  id INTEGER [pk]
+  kayttaja1_id INTEGER
+  kayttaja2_id INTEGER
+  viesti TEXT
+  aika DATETIME
+}
+
+Ref: W.kayttaja1_id > K.id
+Ref: W.kayttaja2_id > K.id
+-->
