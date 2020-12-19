@@ -5,7 +5,7 @@ title: Materiaali
 
 # Materiaali
 
-Tämän sivuston verkkomateriaali riittää kurssin suorittamiseen. Materiaalin tekijä on Antti Laaksonen ja löydät materiaalin lähdekoodin [täältä](https://github.com/hy-tikape/syksy-2020).
+Tämän sivuston verkkomateriaali riittää kurssin suorittamiseen. Materiaalin tekijä on Antti Laaksonen ja löydät materiaalin lähdekoodin [täältä](https://github.com/hy-tikape/kevat-2021).
 
 Tietokannan käyttäjälle tärkeä lähde ovat tietokantojen dokumentaatiot, joissa kerrotaan tarkasti niiden ominaisuuksista:
 
