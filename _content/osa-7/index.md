@@ -95,8 +95,7 @@ except:
 
 Tässä tapauksessa komento `INSERT` epäonnistuu siinä tapauksessa, että taulussa on jo valmiina samanniminen tuote. Niinpä koodi voi _yrittää_ lisätä tuotetta tutkimatta, onko tuote jo valmiina taulussa, ja jos tästä tulee virhe, tiedetään, että tuote oli valmiina.
 
-Tämä on selkeästi parempi toteutus kuin tutkia koodissa ennen lisäämistä `SELECT`-kyselyllä, onko tuotetta jo tietokannassa, koska `UNIQUE`-ehdon avulla tietokanta pitää luotettavasti huolen asiasta ja koodiakin tarvitaan vähemmän. Jos taulussa ei olisi `UNIQUE`-ehtoa ja sovellus suorittaisi komennot `SELECT` ja `INSERT`, olisi mahdollista, että joku ehtisi lisätä välissä saman tuotteen tauluun, jolloin taulussa olisikin kaksi tuotetta samalla nimellä. Kuitenkaan `UNIQUE`-ehdon kanssa näin ei voi tapahtua mitenkään.
-
+Tämä on selkeästi parempi toteutus kuin tutkia koodissa ennen lisäämistä `SELECT`-kyselyllä, onko tuotetta jo tietokannassa, koska `UNIQUE`-ehdon avulla tietokanta pitää luotettavasti huolen asiasta ja koodiakin tarvitaan vähemmän. Jos taulussa ei olisi `UNIQUE`-ehtoa ja sovellus suorittaisi komennot `SELECT` ja `INSERT`, olisi mahdollista, että toinen tietokannan käyttäjä ehtisi lisätä välissä saman tuotteen tauluun, jolloin taulussa olisikin kaksi tuotetta samalla nimellä. Kuitenkaan `UNIQUE`-ehdon kanssa näin ei voi tapahtua mitenkään.
 
 ### Viittausten ehdot
 

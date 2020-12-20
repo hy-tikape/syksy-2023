@@ -256,8 +256,8 @@ Erityisesti kannattaa välttää tilannetta, jossa suoritetaan turhaan useita SQ
 ```python
 opettajat = db.execute("SELECT id, nimi FROM Opettajat").fetchall()
 for opettaja in opettajat:
-    maara = db.execute("SELECT COUNT(*) FROM Kurssit WHERE opettaja_id=?", [opettaja[0]])
-    print(opettaja[1], maara)
+    maara = db.execute("SELECT COUNT(*) FROM Kurssit WHERE opettaja_id=?", [opettaja[0]]).fetchone()
+    print(opettaja[1], maara[0])
 ```
 
 Koodi hakee ensin listaan kunkin opettajan id-numeron ja nimen ja sitten jokaisesta opettajasta erikseen niiden kurssien määrän, joita kyseinen opettaja opettaa. Koodi on kyllä toimiva mutta se tekee valtavasti turhaa työtä hakiessaan jokaisen tiedon erikseen. Parempi ratkaisu on muodostaa yksi kysely, joka hakee suoraan kaiken tarvittavan:
@@ -270,7 +270,7 @@ for rivi in tiedot:
 
 Tuloksena oleva kysely on monimutkaisempi, mutta sen avulla tietokantajärjestelmä voi optimoida kokonaisuutena halutun tiedon hakemisen ja toimittaa tiedon mahdollisimman tehokkaasti koodille.
 
-Kuitenkaan tietokannan puolella ei kannata tehdä kaikkea mahdollista, mikä on teoriassa mahdollista. Tästä esimerkkinä on seuraava koodi, joka hakee tietokannasta tuloslistan, jossa pelaajat on järjestettynä pistemäärän ja nimen mukaan. Tulostuksessa pelaajista näytetään myös sija (1, 2, 3, jne.) listalla.
+Kuitenkaan tietokannan puolella ei kannata tehdä kaikkea, mikä on teoriassa mahdollista. Tästä esimerkkinä on seuraava koodi, joka hakee tietokannasta tuloslistan, jossa pelaajat on järjestettynä pistemäärän ja nimen mukaan. Tulostuksessa pelaajista näytetään myös sija (1, 2, 3, jne.) listalla.
 
 ```python
 lista = db.execute("SELECT nimi, pisteet FROM Tulokset ORDER BY pisteet DESC, nimi").fetchall()
