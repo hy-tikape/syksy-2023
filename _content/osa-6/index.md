@@ -154,7 +154,7 @@ Tarkastellaan sitten tilannetta, jossa useampi opettaja voi järjestää kurssin
 
 Pythonissa voisimme toteuttaa tämän muutoksen helposti muuttamalla luokkaa `Kurssi` niin, että siinä on yhden opettajan sijasta lista opettajista:
 
-```java
+```python
 class Kurssi:
     def __init__(self, nimi : str):
         self.nimi = nimi
