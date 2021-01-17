@@ -17,13 +17,23 @@ Jos suoritat kurssin Avoimen yliopiston kautta, saat ohjeet kurssisuorituksen re
 
 ## Luennot ja ohjaus
 
-Kurssilla järjestetään viikoittain Zoom-luento tiistaisin klo 10–12. Luentopäivät ovat 19.1., 26.1., 2.2., 9.2., 16.2., 23.2. ja 2.3.
+Kurssilla järjestetään viikoittain Zoom-luento tiistaisin klo 10–12. Luentopäivät ovat 19.1., 26.1., 2.2., 9.2., 16.2., 23.2. ja 2.3. [Zoom-linkki](https://helsinki.zoom.us/j/69620764115?pwd=aXcydlBFZld1TDUxT3VhV0RMVEM3dz09)
 
 Kurssin Telegram-ryhmässä voit keskustella netissä muiden opiskelijoiden ja kurssin järjestäjien kanssa. [Liity ryhmään](https://t.me/tkt_tikape)
 
 ## Tehtävät ja arvostelu
 
-TODO
+Kurssin suoritus muodostuu SQL-tehtävistä ja harjoitustyöstä. Molemmissa osasuorituksissa maksimipistemäärä on 100 ja kurssin hyväksytty suoritus vaatii vähintään 60 pistettä.
+
+Arvosanarajat ovat:
+
+* 120–136 pistettä: 1
+* 137–154 pistettä: 2
+* 155–171 pistettä: 3
+* 172–189 pistettä: 4
+* 190–200 pistettä: 5
+
+Kaikilla suorituksilla on yhteinen deadline su 7.3.2021 klo 23:59.
 
 ## Yhteystiedot
 
