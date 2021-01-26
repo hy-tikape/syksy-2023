@@ -19,7 +19,7 @@ Jos suoritat kurssin Avoimen yliopiston kautta, saat ohjeet kurssisuorituksen re
 
 Kurssilla järjestetään viikoittain Zoom-luento tiistaisin klo 10–12. Luentopäivät ovat 19.1., 26.1., 2.2., 9.2., 16.2., 23.2. ja 2.3. [Zoom-linkki](https://helsinki.zoom.us/j/69620764115?pwd=aXcydlBFZld1TDUxT3VhV0RMVEM3dz09)
 
-Luentotallenteet: [luento 1](https://www.helsinki.fi/fi/unitube/video/6f3b1531-a909-4043-bae6-8459e690622f)
+Luentotallenteet: [luento 1](https://www.helsinki.fi/fi/unitube/video/6f3b1531-a909-4043-bae6-8459e690622f), [luento 2](https://www.helsinki.fi/fi/unitube/video/b22774c3-f858-4a32-ab54-def21db90598)
 
 Kurssin Telegram-ryhmässä voit keskustella netissä muiden opiskelijoiden ja kurssin järjestäjien kanssa. [Liity ryhmään](https://t.me/tkt_tikape)
 
