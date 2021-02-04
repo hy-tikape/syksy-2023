@@ -21,3 +21,5 @@ Harjoitustyön tehtävät palautetaan [Tasks](https://tasks.withmooc.fi/tikape-k
 Kun lähetät vastauksen, saat automaattisesti pisteet tehtävästä. Lähetä vastaus vasta sitten, kun olet vastannut kaikkiin tehtävän kohtiin mielestäsi järkevästi. Sitä ennen voit tallentaa luonnoksen, jota ei arvostella ja josta ei tule pisteitä.
 
 Harjoitustyön viimeisessä tehtävässä voit tarkastaa kurssin pistetilanteen sekä antaa kurssipalautteen.
+
+Jos käytät harjoitustyössä ohjelmointikielenä Javaa, löydät esimerkkejä asiasta [syksyn 2020 materiaalista](https://tikape.mooc.fi/syksy-2020/pages/sqlite_java).
