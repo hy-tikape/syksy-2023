@@ -660,7 +660,7 @@ Tämä tarkoittaa samaa kuin seuraava kysely suoraan taulusta:
 SELECT nimi, vuosi FROM Elokuvat WHERE vuosi < 1970;
 ```
 
-## Triggerit
+### Triggerit
 
 Triggeri aiheuttaa halutun toiminnon tietokannassa taulun muutoksen yhteydessä.
 
