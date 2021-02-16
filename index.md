@@ -23,6 +23,8 @@ Luentotallenteet: [luento 1](https://www.helsinki.fi/fi/unitube/video/6f3b1531-a
 
 Kurssin Telegram-ryhmässä voit keskustella netissä muiden opiskelijoiden ja kurssin järjestäjien kanssa. [Liity ryhmään](https://t.me/tkt_tikape)
 
+Kurssilla on tarjolla myös Zoom-ohjausta. Voit varata ohjausajan [sähköpostitse](mailto:ahslaaks@cs.helsinki.fi) ilmoittamalla muutaman sinulle sopivan ajan.
+
 ## Tehtävät ja arvostelu
 
 Kurssin suoritus muodostuu SQL-tehtävistä ja harjoitustyöstä. Molemmissa osasuorituksissa maksimipistemäärä on 100 ja kurssin hyväksytty suoritus vaatii vähintään 60 pistettä.
