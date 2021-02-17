@@ -49,9 +49,9 @@ INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Pinocchio',1940);
 ```
 
 ```python
-a = Elokuva("Lumikki",1937);
-b = Elokuva("Fantasia",1940);
-c = Elokuva("Pinocchio",1940);
+a = Elokuva("Lumikki",1937)
+b = Elokuva("Fantasia",1940)
+c = Elokuva("Pinocchio",1940)
 ```
 
 ### Yksi vai useita tauluja?
