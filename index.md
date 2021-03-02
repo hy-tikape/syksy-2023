@@ -19,7 +19,7 @@ Jos suoritat kurssin Avoimen yliopiston kautta, saat ohjeet kurssisuorituksen re
 
 Kurssilla järjestetään viikoittain Zoom-luento tiistaisin klo 10–12. Luentopäivät ovat 19.1., 26.1., 2.2., 9.2., 16.2., 23.2. ja 2.3. [Zoom-linkki](https://helsinki.zoom.us/j/69620764115?pwd=aXcydlBFZld1TDUxT3VhV0RMVEM3dz09)
 
-Luentotallenteet: [luento 1](https://www.helsinki.fi/fi/unitube/video/6f3b1531-a909-4043-bae6-8459e690622f), [luento 2](https://www.helsinki.fi/fi/unitube/video/b22774c3-f858-4a32-ab54-def21db90598), [luento 3](https://www.helsinki.fi/fi/unitube/video/3c341898-a0c8-4cfc-adbe-3c3d84a94d18), [luento 4](https://www.helsinki.fi/fi/unitube/video/ddcd92f1-cfbd-4438-b045-1653733a99a3), [luento 5](https://www.helsinki.fi/fi/unitube/video/3a3d671f-6d9b-458c-8c8c-cdc5a0003c13), [luento 6](https://www.helsinki.fi/fi/unitube/video/b5f9273b-dc7b-4c2f-a5ab-ab36bbe6bd27)
+Luentotallenteet: [luento 1](https://www.helsinki.fi/fi/unitube/video/6f3b1531-a909-4043-bae6-8459e690622f), [luento 2](https://www.helsinki.fi/fi/unitube/video/b22774c3-f858-4a32-ab54-def21db90598), [luento 3](https://www.helsinki.fi/fi/unitube/video/3c341898-a0c8-4cfc-adbe-3c3d84a94d18), [luento 4](https://www.helsinki.fi/fi/unitube/video/ddcd92f1-cfbd-4438-b045-1653733a99a3), [luento 5](https://www.helsinki.fi/fi/unitube/video/3a3d671f-6d9b-458c-8c8c-cdc5a0003c13), [luento 6](https://www.helsinki.fi/fi/unitube/video/b5f9273b-dc7b-4c2f-a5ab-ab36bbe6bd27), [luento 7](https://www.helsinki.fi/fi/unitube/video/635ff14a-fbdc-4bd1-8fcc-4286c960a083)
 
 Kurssin Telegram-ryhmässä voit keskustella netissä muiden opiskelijoiden ja kurssin järjestäjien kanssa. [Liity ryhmään](https://t.me/tkt_tikape)
 
