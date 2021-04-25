@@ -7,13 +7,8 @@ title: Tietokantojen perusteet <br> kesä 2021
 
 _Tietokantojen perusteet_ on 5 op laajuinen tietojenkäsittelytieteen perusopintokurssi, joka esittelee suurten tietomäärien käsittelyyn liittyviä tekniikoita ja haasteita. Tutustumme kurssilla relaatiotietokantoihin ja niihin liittyvään SQL-kieleen.
 
-Kesällä 2021 kurssi muodostuu automaattisesti tarkastettavista tehtävistä. Kurssi järjestetään etänä samalla tavalla Helsingin yliopiston tutkinto-opiskelijoille ja Avoimen yliopiston opiskelijoille.
-
-## Ilmoittautuminen
-
-Jos olet Helsingin yliopiston tutkinto-opiskelija, ilmoittaudu kurssille WebOodin kautta.
-
-Jos suoritat kurssin Avoimen yliopiston kautta, saat ohjeet kurssisuorituksen rekisteröintiin kurssin lopussa.
+Kesällä 2021 kurssi järjestetään etänä samalla tavalla Helsingin yliopiston tutkinto-opiskelijoille ja Avoimen yliopiston opiskelijoille.
+Kurssille ilmoittaudutaan kurssin lopussa (tarkemmat ohjeet julkaistaan myöhemmin).
 
 ## Luennot ja ohjaus
 
