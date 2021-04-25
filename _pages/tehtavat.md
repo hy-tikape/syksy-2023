@@ -6,7 +6,7 @@ title: Tehtävät
 
 Kurssi suoritetaan ratkomalla tehtäviä ja palauttamalla harjoitustyö. Molemmat osasuoritukset tehdään itsenäisesti kurssin materiaalin ja muiden lähteiden avulla.
 
-Kaikkien kurssin suoritusten deadline on su 7.3.2021 klo 23:59.
+Kaikkien kurssin suoritusten deadline on ma 28.6.2021 klo 23:59.
 
 ## SQL-tehtävät
 
@@ -16,6 +16,9 @@ Tehtävät 1–20 liittyvät materiaalin lukuun 2, tehtävät 21–40 liittyvät
 
 ## Harjoitustyö
 
+TODO
+
+<!--
 Harjoitustyön tehtävät palautetaan [Tasks](https://tasks.withmooc.fi/tikape-kevat-2021/)-järjestelmään. Näet jokaisessa tehtävässä, montako pistettä saat tehtävästä.
 
 Kun lähetät vastauksen, saat automaattisesti pisteet tehtävästä. Lähetä vastaus vasta sitten, kun olet vastannut kaikkiin tehtävän kohtiin mielestäsi järkevästi. Sitä ennen voit tallentaa luonnoksen, jota ei arvostella ja josta ei tule pisteitä.
@@ -23,3 +26,4 @@ Kun lähetät vastauksen, saat automaattisesti pisteet tehtävästä. Lähetä v
 Harjoitustyön viimeisessä tehtävässä voit tarkastaa kurssin pistetilanteen sekä antaa kurssipalautteen.
 
 Jos käytät harjoitustyössä ohjelmointikielenä Javaa, löydät esimerkkejä asiasta [syksyn 2020 materiaalista](https://tikape.mooc.fi/syksy-2020/pages/sqlite_java).
+-->
