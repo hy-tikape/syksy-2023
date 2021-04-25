@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Tietokantojen perusteet <br> kevät 2021
+title: Tietokantojen perusteet <br> kesä 2021
 ---
 
 # Tietoa kurssista
