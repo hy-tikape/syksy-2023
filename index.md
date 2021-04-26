@@ -16,7 +16,7 @@ Kurssin aloitusluento järjestetään Zoomissa 6.5.2021 klo 16:30–18:00.
 
 Kurssin Telegram-ryhmässä voit keskustella netissä muiden opiskelijoiden ja kurssin järjestäjien kanssa. [Liity ryhmään](https://t.me/tkt_tikape)
 
-Kurssilla on tarjolla myös Zoom-ohjausta. Voit varata ohjausajan [sähköpostitse](mailto:ahslaaks@cs.helsinki.fi) ilmoittamalla muutaman sinulle sopivan ajan.
+Kurssilla on tarjolla myös Zoom-ohjausta. Voit varata ohjausajan [sähköpostitse](mailto:ahslaaks@cs.helsinki.fi) luennoijalta. Ilmoita viestissä muutama sinulle sopiva ajankohta ohjaukselle.
 
 ## Tehtävät ja arvostelu
 
