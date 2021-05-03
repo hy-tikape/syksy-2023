@@ -16,7 +16,7 @@ Tehtävät 1–20 liittyvät materiaalin lukuun 2, tehtävät 21–40 liittyvät
 
 ## Harjoitustyö
 
-TODO
+Harjoitustyön ohjeet julkaistaan toukokuun aikana.
 
 <!--
 Harjoitustyön tehtävät palautetaan [Tasks](https://tasks.withmooc.fi/tikape-kevat-2021/)-järjestelmään. Näet jokaisessa tehtävässä, montako pistettä saat tehtävästä.
