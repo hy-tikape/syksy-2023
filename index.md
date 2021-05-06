@@ -12,7 +12,7 @@ Kurssille ilmoittaudutaan kurssin lopussa (tarkemmat ohjeet julkaistaan myöhemm
 
 ## Luennot ja ohjaus
 
-Kurssin aloitusluento järjestetään Zoomissa to 6.5.2021 klo 16:30–18:00. [Zoom-linkki](https://helsinki.zoom.us/j/69233011003?pwd=Y25mSElKU0pKaCtDT2tlazI0dFMzQT09)
+Kurssin aloitusluento järjestetään Zoomissa to 6.5.2021 klo 16:30–18:00. [Luentotallenne](https://www2.helsinki.fi/unitube/video/bd4b3f6b-2fee-4c9d-b900-55729589d769)
 
 Kurssin Telegram-ryhmässä voit keskustella netissä muiden opiskelijoiden ja kurssin järjestäjien kanssa. [Liity ryhmään](https://t.me/tkt_tikape)
 
