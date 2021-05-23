@@ -16,14 +16,10 @@ Tehtävät 1–20 liittyvät materiaalin lukuun 2, tehtävät 21–40 liittyvät
 
 ## Harjoitustyö
 
-Harjoitustyön ohjeet julkaistaan toukokuun aikana.
+Harjoitustyön tehtävät palautetaan [Tasks](https://tasks.withmooc.fi/tikape-kesa-2021/)-järjestelmään. Näet jokaisessa tehtävässä, montako pistettä saat tehtävästä.
 
-<!--
-Harjoitustyön tehtävät palautetaan [Tasks](https://tasks.withmooc.fi/tikape-kevat-2021/)-järjestelmään. Näet jokaisessa tehtävässä, montako pistettä saat tehtävästä.
-
-Kun lähetät vastauksen, saat automaattisesti pisteet tehtävästä. Lähetä vastaus vasta sitten, kun olet vastannut kaikkiin tehtävän kohtiin mielestäsi järkevästi. Sitä ennen voit tallentaa luonnoksen, jota ei arvostella ja josta ei tule pisteitä.
+Kun lähetät vastauksen, saat automaattisesti pisteet tehtävästä. Kurssin henkilökunta käy läpi tehtävät kurssin jälkeen, mutta pisteesi eivät muutu, ellet ole tahallisesti kiertänyt automaattista tarkastusta.
 
 Harjoitustyön viimeisessä tehtävässä voit tarkastaa kurssin pistetilanteen sekä antaa kurssipalautteen.
 
 Jos käytät harjoitustyössä ohjelmointikielenä Javaa, löydät esimerkkejä asiasta [syksyn 2020 materiaalista](https://tikape.mooc.fi/syksy-2020/pages/sqlite_java).
--->
