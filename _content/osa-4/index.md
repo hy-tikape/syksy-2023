@@ -3,6 +3,7 @@ nav-title: 4. Lisää SQL-kielestä
 sub-sections:
       - sub-section-title: Tyypit ja lausekkeet
       - sub-section-title: NULL-arvot
+      - sub-section-title: Tulosrivien rajaus
       - sub-section-title: Alikyselyt
       - sub-section-title: Lisää tekniikoita
 ---
@@ -367,6 +368,62 @@ COALESCE(NULL,NULL,NULL)
 
 ```
 
+## Tulosrivien rajaus
+
+Kun lisäämme kyselyn loppuun `LIMIT x`, kysely antaa vain `x` ensimmäistä tulosriviä. Esimerkiksi `LIMIT 3` tarkoittaa, että kysely antaa kolme ensimmäistä tulosriviä.
+
+Yleisempi muoto on `LIMIT x OFFSET y`, mikä tarkoittaa, että haluamme `x` riviä kohdasta `y` alkaen (0-indeksoituna). Esimerkiksi `LIMIT 3 OFFSET 1` tarkoittaa, että kysely antaa toisen, kolmannen ja neljännen tulosrivin.
+
+Tarkastellaan esimerkkinä kyselyä, joka hakee tuotteita halvimmasta kalleimpaan:
+
+```sql
+SELECT * FROM Tuotteet ORDER BY hinta;
+```
+
+Kyselyn tuloksena on seuraava tulostaulu:
+
+```
+id          nimi        hinta     
+----------  ----------  ----------
+3           nauris      2
+5           selleri     4         
+2           porkkana    5         
+1           retiisi     7         
+4           lanttu      8         
+```
+
+Saamme haettua kolme halvinta tuotetta seuraavasti:
+
+```sql
+SELECT * FROM Tuotteet ORDER BY hinta LIMIT 3;
+```
+
+Kyselyn tulos on seuraava:
+
+```
+id          nimi        hinta     
+----------  ----------  ----------
+3           nauris      2         
+5           selleri     4         
+2           porkkana    5      
+```
+
+Seuraava kysely puolestaan hakee kolme halvinta tuotetta toiseksi halvimmasta tuotteesta alkaen:
+
+```sql
+SELECT * FROM Tuotteet ORDER BY hinta LIMIT 3 OFFSET 1;
+```
+
+Tämän kyselyn tulos on seuraava:
+
+```
+id          nimi        hinta     
+----------  ----------  ----------
+5           selleri     4         
+2           porkkana    5         
+1           retiisi     7    
+```
+
 ## Alikyselyt
 
 _Alikysely_ on SQL-komennon osana oleva lauseke, jonka arvo syntyy jonkin kyselyn perusteella.
@@ -543,149 +600,204 @@ Alikyselyä kannattaa käyttää vain silloin, kun siihen on todellinen syy. Jos
 
 ## Lisää tekniikoita
 
-### Tulosrivien rajaaminen
+Tässä osiossa on lisää näytteitä SQL:n mahdollisuuksista. Näistä tekniikoista on hyötyä joidenkin SQL Trainerin vaikeiden tehtävien ratkaisemisessa.
 
-Kun lisäämme kyselyn loppuun `LIMIT x`, kysely antaa vain `x` ensimmäistä tulosriviä. Esimerkiksi `LIMIT 3` tarkoittaa, että kysely antaa kolme ensimmäistä tulosriviä.
+### Kumulatiivinen summa
 
-Yleisempi muoto on `LIMIT x OFFSET y`, mikä tarkoittaa, että haluamme `x` riviä kohdasta `y` alkaen (0-indeksoituna). Esimerkiksi `LIMIT 3 OFFSET 1` tarkoittaa, että kysely antaa toisen, kolmannen ja neljännen tulosrivin.
+Hyödyllinen taito SQL:ssä on osata laskea _kumulatiivinen summa_ eli jokaiselle riville summa sarakkeen luvuista kyseiselle riville asti. Tarkastellaan esimerkiksi seuraavaa taulua:
 
-Tarkastellaan esimerkkinä kyselyä, joka hakee tuotteita halvimmasta kalleimpaan:
+```
+id          tulos
+----------  ----------
+1           200
+2           100
+3           400
+4           100
+```
+
+Voimme laskea kumulatiivisen summan kahden taulun kyselyllä näin:
 
 ```sql
-SELECT * FROM Tuotteet ORDER BY hinta;
-```
-
-Kyselyn tuloksena on seuraava tulostaulu:
-
-```
-id          nimi        hinta     
-----------  ----------  ----------
-3           nauris      2
-5           selleri     4         
-2           porkkana    5         
-1           retiisi     7         
-4           lanttu      8         
-```
-
-Saamme haettua kolme halvinta tuotetta seuraavasti:
-
-```sql
-SELECT * FROM Tuotteet ORDER BY hinta LIMIT 3;
-```
-
-Kyselyn tulos on seuraava:
-
-```
-id          nimi        hinta     
-----------  ----------  ----------
-3           nauris      2         
-5           selleri     4         
-2           porkkana    5      
-```
-
-Seuraava kysely puolestaan hakee kolme halvinta tuotetta toiseksi halvimmasta tuotteesta alkaen:
-
-```sql
-SELECT * FROM Tuotteet ORDER BY hinta LIMIT 3 OFFSET 1;
-```
-
-Tämän kyselyn tulos on seuraava:
-
-```
-id          nimi        hinta     
-----------  ----------  ----------
-5           selleri     4         
-2           porkkana    5         
-1           retiisi     7    
-```
-
-### Ikkunafunktiot
-
-Ikkunafunktion avulla voimme laskea jokaiselle tulostaulun riville arvon, joka riippuu muista riveistä. Esimerkiksi funktio `ROW_NUMBER` kertoo, monesko rivi on järjestyksessä, ja funktio `RANK` toimii muuten samoin, mutta yhtä suuret rivit ovat samalla sijalla.
-
-Seuraavassa esimerkissä laskemme funktiolla `RANK` pelaajien sijoitukset järjestettynä tuloksen mukaan suurimmasta pienimpään:
-
-```sql
-SELECT nimi, tulos, RANK() OVER (ORDER BY tulos DESC) FROM Tulokset;
+SELECT
+  A.id, SUM(B.tulos)
+FROM
+  Tulokset A, Tulokset B
+WHERE
+  B.id <= A.id
+GROUP BY
+  A.id;
 ```
 
 ```
-nimi        tulos       RANK() OVER (ORDER BY tulos DESC)
-----------  ----------  ---------------------------------
-Uolevi      120         1                                
-Liisa       120         1                                
-Kaaleppi    115         3                                
-Maija       80          4                                
-Aapeli      45          5       
+id          SUM(B.tulos)
+----------  ------------
+1           200         
+2           300         
+3           700         
+4           800       
 ```
 
-### Taulun muuttaminen
+Tässä on ideana, että summa lasketaan taulun `A` riville ja taulusta `B` haetaan kaikki rivit, joiden `id` on pienempi tai sama kuin taulun `A` rivillä. Halutut summat saadaan laskettua `SUM`-funktiolla ryhmittelyn jälkeen.
 
-Voimme muuttaa taulun rakennetta `ALTER TABLE` -komennolla. Seuraavassa esimerkissä luomme ensin taulun `Tuotteet` tavalliseen tapaan. Tämän jälkeen vielä lisäämme siihen yhden sarakkeen.
+Vastaavaa tekniikkaa voi käyttää muissakin tilanteissa, jos haluamme laskea tuloksen, joka riippuu jotenkin kaikista "pienemmistä" riveistä taulussa.
 
-```sql
-CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT);
-ALTER TABLE Tuotteet ADD COLUMN hinta INTEGER;
-```
+### Sisäkkäiset koosteet
 
-Tietokannan rakenteen muuttuminen on tavallinen asia sovelluksen kehityksessä. Jos sovellus on jo käytössä, tämä ei ole välttämättä helppoa, koska tauluissa on tietoa, jota käyttäjät käsittelevät. _Migraatio_ tarkoittaa prosessia, jonka avulla hallitaan tietokannan muutoksia ja niiden käyttöönottoa. Tutustumme aiheeseen tarkemmin tulevilla kursseilla.
-
-### Näkymät
-
-Näkymä luo rajatun tavan hakea tietoa taulusta jonkin ehdon perusteella. Voimme hakea tietoa näkymästä samaan tapaan kuin taulusta, mutta haku kohdistuu kuitenkin todellisuudessa näkymän kohteena olevaan tauluun.
-
-Esimerkiksi seuraava komento luo tauluun `Elokuvat` näkymän `Klassikot`, jonka kautta pääsemme käsiksi vuotta 1970 vanhempiin elokuviin:
-
-```sql
-CREATE VIEW Klassikot AS SELECT * FROM Elokuvat WHERE vuosi < 1970;
-```
-
-Voimme hakea näkymän kautta tietoa vaikkapa näin:
-
-```sql
-SELECT nimi, vuosi FROM Klassikot;
-```
+Tarkastellaan tilannetta, jossa haluamme selvittää, mikä on suurin määrä elokuvia, jotka ovat ilmestyneet samana vuonna. Esimerkiksi seuraavassa taulussa haluttu tulos on 2, koska vuonna 1940 ilmestyi kaksi elokuvaa.
 
 ```
 id          nimi        vuosi     
 ----------  ----------  ----------
 1           Lumikki     1937      
-2           Pinocchio   1940      
-5           Bambi       1942    
+2           Fantasia    1940      
+3           Pinocchio   1940      
+4           Dumbo       1941      
+5           Bambi       1942      
 ```
 
-Tämä tarkoittaa samaa kuin seuraava kysely suoraan taulusta:
+Tämä on vähän hankalalta vaikuttava tilanne, koska meidän tulisi tehdä sisäkkäin kyselyt `COUNT`, joka laskee ilmestymismääriä, ja sitten `MAX`, joka hakee suurimman arvon. SQL ei salli kuitenkaan kyselyä `SELECT MAX(COUNT(vuosi))` tai vastaavaa.
+
+Voimme ottaa kuitenkin lähtökohdaksi kyselyn,
+joka ryhmittelee elokuvat vuoden mukaan ja hakee jokaisesta ryhmästä
+elokuvien määrän:
 
 ```sql
-SELECT nimi, vuosi FROM Elokuvat WHERE vuosi < 1970;
+SELECT COUNT(*) FROM Elokuvat GROUP BY vuosi;
 ```
 
-### Triggerit
+```
+COUNT(*)  
+----------
+1         
+2         
+1         
+1       
+```
 
-Triggeri aiheuttaa halutun toiminnon tietokannassa taulun muutoksen yhteydessä.
-
-Esimerkiksi seuraava triggeri saa aikaan, että kun taulussa `Tuotteet` muutetaan tuotteen hintaa, tästä kirjautuu automaattisesti tieto tauluun `Muutokset`. Tässä `OLD` viittaa rivin vanhaan sisältöön ja `NEW` viittaa rivin uuteen sisältöön.
+Näistä luvuista pitää vielä saada haettua suurin, mikä onnistuu alikyselyn avulla. Tässä tapauksessa kätevä tapa on käyttää alikyselyä niin, että sen tulos on pääkyselyn `FROM`-osassa, jolloin alikysely luo taulun, josta pääkysely hakee tietoa:
 
 ```sql
-CREATE TRIGGER hinta_muuttuu AFTER UPDATE ON Tuotteet WHEN OLD.hinta <> NEW.hinta
-BEGIN
-INSERT INTO Muutokset(tuote_id,vanha,uusi) VALUES (NEW.id,OLD.hinta,NEW.hinta);
-END;
+SELECT MAX(c) FROM (SELECT COUNT(*) c FROM Elokuvat GROUP BY vuosi);
 ```
 
-Tämän jälkeen kun suoritetaan komennot
+```
+MAX(c)    
+----------
+2       
+```
+
+Entä voisiko tehtävän ratkaista ilman alikyselyä? Kyllä, koska voimme järjestää tulokset suurimmasta pienimpään ja valita tulostaulun ensimmäisen rivin:
 
 ```sql
-INSERT INTO Tuotteet(nimi,hinta) VALUES ('selleri',5);
-UPDATE Tuotteet SET hinta=6 WHERE id=1;
-UPDATE Tuotteet SET hinta=3 WHERE id=1;
+SELECT COUNT(*) c FROM Elokuvat GROUP BY vuosi ORDER BY c DESC LIMIT 1;
 ```
 
-niin tauluun `Muutokset` ilmestyvät seuraavat rivit:
+```
+c         
+----------
+2          
+```
+
+### Sijaluvut
+
+Tarkastellaan taulua, jossa on pelaajia ja heidän tuloksiaan:
 
 ```
-id          tuote_id    vanha       uusi      
-----------  ----------  ----------  ----------
-1           1           5           6         
-2           1           6           3        
+id          nimi        tulos     
+----------  ----------  ----------
+1           Aapeli      45        
+2           Kaaleppi    115       
+3           Liisa       120       
+4           Maija       80        
+5           Uolevi      120   
 ```
+
+Tavoitteena on hakea rivit järjestyksessä tuloksen mukaan suurimmasta pienempään ja ilmoittaa lisäksi kunkin rivin _sijaluku_. Yksi tapa toteuttaa tämä on tehdä alikysely, joka laskee, monellako rivillä tulos on parempi, jolloin sija on yhtä suurempi kuin alikyselyn tulos:
+
+```sql
+SELECT
+  (SELECT COUNT(*) FROM Tulokset WHERE tulos > T.tulos)+1 sija, nimi, tulos
+FROM
+  Tulokset T
+ORDER BY
+  tulos DESC, nimi;
+```
+
+```
+sija        nimi        tulos     
+----------  ----------  ----------
+1           Liisa       120       
+1           Uolevi      120       
+3           Kaaleppi    115       
+4           Maija       80        
+5           Aapeli      45   
+```
+
+Samalla idealla voidaan laskea sijaluvut myös niin, että jokaisella on eri sija ja yhtä suuren tuloksen tapauksessa aakkosjärjestys ratkaisee sijan:
+
+```sql
+SELECT
+  (SELECT COUNT(*) FROM Tulokset WHERE tulos > T.tulos OR (tulos = T.tulos AND nimi < T.nimi))+1 sija, nimi, tulos
+FROM
+  Tulokset T
+ORDER BY
+  tulos DESC, nimi;
+```
+
+```
+sija        nimi        tulos     
+----------  ----------  ----------
+1           Liisa       120       
+2           Uolevi      120       
+3           Kaaleppi    115       
+4           Maija       80        
+5           Aapeli      45   
+```
+
+Vaihtoehtoinen tapa laskea sijalukuja on ikkunafunktio, jos käytetty tietokanta sallii sen. Esimerkiksi SQLiten uusissa versioissa ikkunafunktioiden `RANK` ja `ROW_NUMBER` avulla voidaan laskea vastaavat sijaluvut kuin äskeisissä esimerkeissä.
+
+### Listojen vertailu
+
+Tarkastellaan taulua, johon on tallennettu listojen sisältö. Esimerkiksi seuraavassa taulussa lista 1 sisältää luvut [2, 4, 5], lista 2 sisältää luvut [3, 5] ja lista 3 sisältää luvut [2, 4, 5]:
+
+```
+id          lista_id    luku     
+----------  ----------  ----------
+1           1           2         
+2           1           4         
+3           1           5         
+4           2           3         
+5           2           5         
+6           3           2         
+7           3           4         
+8           3           5     
+```
+
+Seuraava kysely laskee jokaiselle listaparille, montako _yhteistä_ tulosta niillä on:
+
+```sql
+SELECT
+  A.lista_id, B.lista_id, COUNT(*)
+FROM
+  Listat A, Listat B
+WHERE
+  A.luku=B.luku
+GROUP BY
+  A.lista_id, B.lista_id;
+```
+
+```
+lista_id    lista_id    COUNT(*)  
+----------  ----------  ----------
+1           1           3         
+1           2           1         
+1           3           3         
+2           1           1         
+2           2           2         
+2           3           1         
+3           1           3         
+3           2           1         
+3           3           3     
+```
+
+Tästä selviää, että esimerkiksi listoilla 1 ja 2 on yksi yhteinen luku (5) ja listoilla 1 ja 3 on kolme yhteistä lukua (2, 4, 5). Tällaista kyselyä laajentamalla voidaan vaikkapa vertailla, onko kahdella listalla täysin sama sisältö. Näin on silloin, kun listoilla on yhtä monta lukua ja yhteisten lukujen määrä on yhtä suuri kuin yksittäisen listan lukujen määrä.
