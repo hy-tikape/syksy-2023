@@ -3,7 +3,7 @@ nav-title: 5. Tietokannat ohjelmoinnissa
 sub-sections:
       - sub-section-title: Tietokannan käyttäminen
       - sub-section-title: Käyttöliittymä
-      - sub-section-title: Mitä tehdä missäkin?
+      - sub-section-title: Mitä tehdä missäkin
 ---
       
 # 5. Tietokannat ohjelmoinnissa
@@ -234,7 +234,7 @@ Tällaisessa toteutuksessa käyttöliittymässä ei näy mitään siitä, että 
 
 Laajemmassa sovelluksessa olisi mielekästä jakaa tietokannan käsittely useampaan tiedostoon. Tällaisia sovelluksia tehdään myöhemmillä tietojenkäsittelytieteen kursseilla.
 
-## Mitä tehdä missäkin?
+## Mitä tehdä missäkin
 
 Tietokannan ja koodin puolella voi usein tehdä samantapaisia asioita. Esimerkiksi seuraavassa on kaksi tapaa etsiä kalleimman tuotteen hinta tietokannasta:
 

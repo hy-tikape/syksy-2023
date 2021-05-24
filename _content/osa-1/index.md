@@ -1,14 +1,14 @@
 ---
 nav-title: 1. Johdanto
 sub-sections:
-      - sub-section-title: Mikä on tietokanta?
+      - sub-section-title: Mikä on tietokanta
       - sub-section-title: Tee-se-itse-tietokanta
       - sub-section-title: Relaatiomalli ja SQL-kieli
 ---
 
 # 1. Johdanto
 
-## Mikä on tietokanta?
+## Mikä on tietokanta
 
 _Tietokanta_ (_database_) on tietokoneella oleva kokoelma tietoa, johon voidaan suorittaa hakuja ja jonka sisältöä voidaan muuttaa. Tietokantoja ovat esimerkiksi:
 
