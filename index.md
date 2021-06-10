@@ -20,7 +20,7 @@ Kurssilla on tarjolla myös Zoom-ohjausta. Voit varata ohjausajan [sähköpostit
 
 ## Tehtävät ja arvostelu
 
-Kurssin suoritus muodostuu kahdesta osasuorituksesta (SQL-tehtävät ja harjoitustyö). Molemmissa osasuorituksissa maksimipistemäärä on 100 ja kurssin hyväksytty suoritus vaatii vähintään 60 pistettä.
+Kurssin suoritus muodostuu kahdesta osasuorituksesta (SQL-tehtävät ja harjoitustyö). Molemmissa osasuorituksissa maksimipistemäärä on 100, ja kurssin hyväksytty suoritus vaatii vähintään 60 pistettä kummastakin osasuorituksesta.
 
 Arvosanarajat ovat:
 
