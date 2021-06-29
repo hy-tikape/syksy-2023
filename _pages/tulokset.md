@@ -5,15 +5,15 @@ hidden: true
 
 # Kurssin tulokset
 
-Kurssille osallistui 699 opiskelijaa, joista 379 (54.2 %) suoritti kurssin hyväksytysti.
+Kurssille osallistui 366 opiskelijaa, joista 147 (40.2 %) suoritti kurssin hyväksytysti.
 
 ## Arvosanajakauma
 
-* Arvosana 1: 24 opiskelijaa (6.3 %)
-* Arvosana 2: 33 opiskelijaa (8.7 %)
-* Arvosana 3: 68 opiskelijaa (17.9 %)
-* Arvosana 4: 114 opiskelijaa (30.1 %)
-* Arvosana 5: 140 opiskelijaa (36.9 %)
+* Arvosana 1: 10 opiskelijaa (6.8 %)
+* Arvosana 2: 14 opiskelijaa (9.5 %)
+* Arvosana 3: 24 opiskelijaa (16.3 %)
+* Arvosana 4: 26 opiskelijaa (17.7 %)
+* Arvosana 5: 73 opiskelijaa (49.7 %)
 
 ## Pistejakauma
 
@@ -21,6 +21,6 @@ Kurssille osallistui 699 opiskelijaa, joista 379 (54.2 %) suoritti kurssin hyvä
 
 ## Ohjelmointikielet
 
-* Java: 85 opiskelijaa (22.4 %)
-* Python: 289 opiskelijaa (76.3 %)
-* muu: 5 opiskelijaa (1.3 %)
+* Java: 23 opiskelijaa (15.6 %)
+* Python: 122 opiskelijaa (83.0 %)
+* muu: 2 opiskelijaa (1.4 %)
