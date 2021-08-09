@@ -74,7 +74,7 @@ Tarkastellaan esimerkkinä taulua `Tuotteet`, jossa on tietoa tuotteista:
 
 Tämä taulu vastaa seuraavaa relaatiota:
 
-$$\{(1,retiisi,7),(2,porkkana,5),(3,nauris,4),(4,lanttu,8),(5,selleri,4)\}$$
+$$T=\{(1,retiisi,7),(2,porkkana,5),(3,nauris,4),(4,lanttu,8),(5,selleri,4)\}$$
 
 Tämän relaation taustalla on karteesinen tulo $$S_1 \times S_2 \times S_3$$. Nämä joukot määrittävät, mitä sisältöä riveissä voi olla eli kunkin sarakkeen tyypin.
 
@@ -94,6 +94,103 @@ Tietokantojen teoriassa näkee usein tauluja, joissa avain on jotain muuta kuin 
 
 ## Relaatio-operaatiot
 
+Relaatio-operaatioiden avulla olemassa olevista relaatioista voidaan muodostaa uusi relaatio. Tämä vastaa SQL:ssä kyselyä, jossa tauluista muodostetaan tulostaulu. Tutustumme seuraavaksi kolmeen keskeiseen relaatio-operaatioon: projektio, restriktio ja liitos.
 
+### Projektio
+
+Projektio $$\Pi$$ muodostaa relaation, jossa on tiettyjen sarakkeiden arvot joka riviltä. Projektio vastaa SQL-kyselyä, jossa valitaan tietyt sarakkeet taulusta. Esimerkiksi projektio $$\Pi_{nimi,hinta}(T)$$ vastaa SQL-kyselyä `SELECT nimi, hinta FROM Tuotteet`.
+
+Esimerkkejä:
+
+$$\Pi_{nimi}(T) = \{(retiisi),(porkkana),(nauris),(lanttu),(selleri)\}$$
+
+$$\Pi_{hinta}(T) = \{(7),(5),(4),(8)\}$$
+
+$$\Pi_{nimi,hinta}(T) = \{(retiisi,7),(porkkana,5),(nauris,4),(lanttu,8),(selleri,4)\}$$
+
+Huomaa, että projektion tulos on relaatio, joten mahdolliset toistuvat rivit suodattuvat siitä pois. Tämän takia projektiossa $$\Pi_{hinta}(T)$$ on vain neljä riviä, koska kahdella tuotteella on sama hinta.
+
+### Restriktio
+
+Restriktio $$\sigma$$ muodostaa relaation, jossa on tietyt ehdot täyttävät rivit. Restriktio vastaa SQL-kyselyä, jossa rivit valitaan `WHERE`-osassa. Esimerkiksi restriktio $$\sigma_{hinta \le 5}(T)$$ vastaa SQL-kyselyä `SELECT * FROM Tuotteet WHERE hinta <= 5`.
+
+Esimerkkejä:
+
+$$\sigma_{nimi = nauris}(T)=\{(3,nauris,4)\}$$
+
+$$\sigma_{hinta = 4}(T)=\{(3,nauris,4),(5,selleri,4)\}$$
+
+$$\sigma_{hinta \le 5}(T)=\{(2,porkkana,5),(3,nauris,4),(5,selleri,4)\}$$
+
+Yhdistämällä projektio ja restriktio saadaan vastine esimerkiksi SQL-kyselylle `SELECT nimi FROM Tuotteet WHERE hinta <= 5`:
+
+$$\Pi_{nimi}(\sigma_{hinta \le 5}(T))=\{(porkkana),(nauris),(selleri)\}$$
+
+### Liitos
+
+Liitos $$\bowtie$$ muodostaa relaation, jonka rivit on koostettu kahden relaation pohjalta. Tämä vastaa SQL:ssä kahden taulun kyselyä.
+
+Tarkastellaan esimerkkinä seuraavia tauluja `Henkilot` ja `Yritykset`:
+
+<table class="db-table">
+<thead>
+  <tr><th colspan="3" id="table-title">Henkilot</th></tr>
+  <tr><th width="30">id</th><th width="100">nimi</th><th width="70">yritys_id</th></tr>
+</thead>
+<tbody>
+  <tr><td>1</td><td>Maija</td><td>1</td></tr>
+  <tr><td>2</td><td>Liisa</td><td>1</td></tr>
+  <tr><td>3</td><td>Uolevi</td><td>3</td></tr>
+  <tr><td>4</td><td>Anna</td><td>2</td></tr>
+  <tr><td>5</td><td>Kaaleppi</td><td>3</td></tr>
+</tbody>
+</table>
+
+<table class="db-table">
+<thead>
+  <tr><th colspan="3" id="table-title">Yritykset</th></tr>
+  <tr><th width="30">id</th><th width="100">nimi</th></tr>
+</thead>
+<tbody>
+  <tr><td>1</td><td>Google</td></tr>
+  <tr><td>2</td><td>Amazon</td></tr>
+  <tr><td>3</td><td>Facebook</td></tr>
+</tbody>
+</table>
+
+Näitä tauluja vastaavat seuraavat relaatiot:
+
+$$H = \{(1,Maija,1),(2,Liisa,1),(3,Kaaleppi,3)\}$$
+
+$$Y = \{(1,Google),(2,Amazon),(3,Facebook)\}$$
+
+Nyt kyselyä `SELECT * FROM Henkilot H, Yritykset Y WHERE H.yritys_id = Y.id` vastaa seuraava relaatio-operaatio:
+
+$${H\ \bowtie\ Y \atop \small H.yritys\_id = Y.id} = \{(1,Maija,1,1,Google),(2,Liisa,1,1,Google),(3,Kaaleppi,3,3,Facebook)\}$$
+
+Yhdistämällä tähän projektion saamme haettua kunkin henkilön nimen ja yrityksen nimen:
+
+$$\Pi_{H.nimi,Y.nimi}({H\ \bowtie\ Y \atop \small H.yritys\_id = Y.id}) = \{(Maija,Google),(Liisa,Google),(Kaaleppi,Facebook)\}$$
+
+### Teoria vs. käytäntö
+
+Tässä esitettyjen ja muiden relaatio-operaatioiden avulla voidaan toteuttaa hakuja samaan tapaan kuin SQL-kyselyillä. Kuitenkaan olemassa olevat SQL-tietokannat eivät noudata täysin matemaattista relaatiomallia, vaan niissä on käytännön syistä johtuvia eroja.
+
+Yksi merkittävä ero on, että SQL:ssä taulun usean rivin sisältö voi olla sama, mikä ei ole mahdollista relaatiossa. Esimerkiksi voimme luoda seuraavasti taulun `Testi` ja lisätä siihen kolme samanlaista riviä:
+
+```prompt
+sqlite> CREATE TABLE Testi (x INTEGER);
+sqlite> INSERT INTO Testi VALUES (1);
+sqlite> INSERT INTO Testi VALUES (1);
+sqlite> INSERT INTO Testi VALUES (1);
+sqlite> SELECT * FROM Testi;
+1
+1
+1
+```
+
+Tällä on vaikutusta myös hakujen tuloksiin. Kuten näimme aiemmin, projektio $$\Pi_{hinta}(T)$$ sisältää jokaisen eri hinnan vain kerran, kun taas kyselyn `SELECT hinta FROM Tuotteet` tulostaulussa voi olla monta kertaa sama hinta. SQL:ssä haetaan oletuksena kaikki rivit ja toistuvat rivit voidaan poistaa sanan `DISTINCT` avulla. Tarkasti ottaen projektiota $$\Pi_{hinta}(T)$$ vastaa siis kysely `SELECT DISTINCT hinta FROM Tuotteet`.
+
+Toinen ero on, että SQL:ssä rivien järjestyksellä voi olla väliä, kun taas relaatiossa ei ole tiettyä järjestystä. Rivien järjestys näkyy SQL:ssä kyselyssä, jonka lopussa on osa `ORDER BY`. Tällainen kysely muodostaa tulostaulun, jossa rivit ovat halutussa järjestyksessä. Relaatio-operaatioilla ei ole mahdollista toteuttaa tällaista hakua. Järjestämisen mahdollisuus on mukana SQL:ssä, koska se on käytännössä hyödyllinen ominaisuus.
 
 ## Normaalimuodot
