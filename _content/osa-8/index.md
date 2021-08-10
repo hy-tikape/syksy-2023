@@ -82,16 +82,6 @@ Koska sarakkeissa $$1$$ ja $$3$$ on kokonaisluku, joukot $$S_1$$ ja $$S_3$$ sis�
 
 Tietokannan taulussa jokaisella sarakkeella on myös nimi. Tässä taulussa sarakkeen $$1$$ nimi on `id`, sarakkeen $$2$$ nimi on `nimi` ja sarakkeen $$3$$ nimi on `hinta`.
 
-### Taulun avain
-
-Avain on sarake tai sarakkeiden yhdistelmä, joka yksilöi taulun rivin eli joka rivillä on eri avain. Taulussa `Tuotteet` luonteva avain on sarake `id`, koska jokaisella rivillä on eri id-numero. Sen sijaan sarake `hinta` ei voisi olla avain, koska usealla tuotteella voi olla sama hinta.
-
-Huomaa, että myös vaikkapa yhdistelmä (`id`, `nimi`) on mahdollinen avain, koska jokaisella rivillä id-numeron ja nimen muodostama pari on erilainen. Koska pelkkä id-numero yksilöi rivin, niin varmasti myös id-numeron ja nimen yhdistelmä yksilöi rivin.
-
-Jos voidaan olettaa, että tietokannassa ei ole koskaan kahta tuotetta, joilla on sama nimi ja hinta, yhdistelmä (`nimi`, `hinta`) on mahdollinen avain. Tällöin taulussa ei olisi pakko olla saraketta `id`, koska myös nimi ja hinta yksilöivät tuotteen.
-
-Tietokantojen teoriassa näkee usein tauluja, joissa avain on jotain muuta kuin id-numero. Käytännössä kuitenkin avain on yleensä aina id-numero, koska olisi hankalaa ja tarpeetonta yrittää keksiä jokin sarakkeiden yhdistelmä, joka yksilöisi rivin id-numeron sijasta.
-
 ## Relaatio-operaatiot
 
 Relaatio-operaatioiden avulla olemassa olevista relaatioista voidaan muodostaa uusi relaatio. Tämä vastaa SQL:ssä kyselyä, jossa tauluista muodostetaan tulostaulu. Tutustumme seuraavaksi kolmeen keskeiseen relaatio-operaatioon: projektio, restriktio ja liitos.
@@ -194,3 +184,82 @@ Tällä on vaikutusta myös hakujen tuloksiin. Kuten näimme aiemmin, projektio 
 Toinen ero on, että SQL:ssä rivien järjestyksellä voi olla väliä, kun taas relaatiossa ei ole tiettyä järjestystä. Rivien järjestys näkyy SQL:ssä kyselyssä, jonka lopussa on osa `ORDER BY`. Tällainen kysely muodostaa tulostaulun, jossa rivit ovat halutussa järjestyksessä. Relaatio-operaatioilla ei ole mahdollista toteuttaa tällaista hakua. Järjestämisen mahdollisuus on mukana SQL:ssä, koska se on käytännössä hyödyllinen ominaisuus.
 
 ## Normaalimuodot
+
+### 1. normaalimuoto
+
+Taulu on 1. normaalimuodossa, jos jokaisella rivillä on samat sarakkeet ja missään sarakkeessa ei ole tietokannan kannalta rakenteellista tietoa.
+
+Käytännössä rakenteellinen tieto tarkoittaa taulua. Esimerkiksi seuraava taulu ei ole 1. normaalimuodossa, koska sarakkeessa `tyontekijat` on sisältönä taulu.
+
+<table class="db-table">
+<thead>
+  <tr><th colspan="3" id="table-title">Yritykset</th></tr>
+  <tr><th width="30">id</th><th width="100">nimi</th><th>tyontekijat</th></tr>
+</thead>
+<tbody>
+  <tr><td>1</td><td>Google</td><td>
+<table class="db-table">
+<thead>
+  <tr><th width="30">id</th><th width="100">nimi</th></tr>
+</thead>
+<tbody>
+  <tr><td>1</td><td>Maija</td></tr>
+  <tr><td>2</td><td>Liisa</td></tr>
+</tbody>
+</table>
+  </td></tr>
+  <tr><td>2</td><td>Amazon</td><td>
+<table class="db-table">
+<thead>
+  <tr><th width="30">id</th><th width="100">nimi</th></tr>
+</thead>
+<tbody>
+  <tr><td>1</td><td>Anna</td></tr>
+</tbody>
+</table>
+  </td></tr>
+  <tr><td>3</td><td>Facebook</td><td>
+<table class="db-table">
+<thead>
+  <tr><th width="30">id</th><th width="100">nimi</th></tr>
+</thead>
+<tbody>
+  <tr><td>1</td><td>Uolevi</td></tr>
+  <tr><td>2</td><td>Kaaleppi</td></tr>
+</tbody>
+</table>
+  </td></tr>
+</tbody>
+</table>
+
+Käytännössä 1. normaalimuoto on äärimmäisen helppoa saavuttaa, koska SQL:ssä jokaisessa taulussa on kiinteät sarakkeet eikä ole mahdollista, että sarakkeen sisältönä olisi taulu. Niinpä jokainen SQL:ssä luotu taulu on automaattisesti 1. normaalimuodossa.
+
+### 2. normaalimuoto
+
+Taulu on 2. normaalimuodossa, jos se on 1. normaalimuodossa ja siinä ei ole avaimeen kuulumatonta saraketta, jonka arvo voidaan päätellä avaimen osasta.
+
+Avain on sarake tai sarakkeiden yhdistelmä, joka yksilöi jokaisen taulun rivin ja jonka mikään osa ei riitä yksilöimään taulun rivejä. Tavallinen avain on rivin id-numero, mutta tietokantojen teorian kannalta avain voi olla muutakin.
+
+Seuraavassa on esimerkki taulusta, joka ei täytä 2. normaalimuotoa. Huomaa, että taulussa ei ole saraketta `id` kuten yleensä.
+
+<table class="db-table">
+<thead>
+  <tr><th colspan="4" id="table-title">Henkilot</th></tr>
+  <tr><th width="30">maakoodi</th><th width="100">puhelin</th><th width="100">nimi</th><th width="70">alue</th></tr>
+</thead>
+<tbody>
+  <tr><td>358</td><td>1234567</td><td>Maija</td><td>Eurooppa</td></tr>
+  <tr><td>358</td><td>7654321</td><td>Liisa</td><td>Eurooppa</td></tr>
+  <tr><td>81</td><td>1234567</td><td>Kaaleppi</td><td>Aasia</td></tr>
+</tbody>
+</table>
+
+Tämän taulun avain on (`maakoodi`, `puhelin`), koska maakoodin ja puhelinnumeron yhdistelmä yksilöi jokaisen rivin. Kuitenkin maakoodista (eli avaimen osasta) voidaan päätellä alue, minkä vuoksi taulu ei ole 2. normaalimuodossa.
+
+Käytännössä taulussa on yleensä aina sarake `id`, joka on taulun ainoa avain. Koska id-numero on vain yksi sarake, siinä ei ole osaa, joka yksilöisi rivit. Niinpä id-numeron käyttäminen takaa automaattisesti, että taulu täyttää 2. normaalimuodon.
+
+### 3. normaalimuoto
+
+### 4. normaalimuoto
+
+### 5. normaalimuoto
