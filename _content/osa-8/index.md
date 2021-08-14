@@ -4,6 +4,7 @@ sub-sections:
       - sub-section-title: Matemaattinen tausta
       - sub-section-title: Taulu relaationa
       - sub-section-title: Relaatio-operaatiot
+      - sub-section-title: Avaimet ja riippuvuudet
       - sub-section-title: Normaalimuodot
 ---
 
@@ -220,6 +221,36 @@ Kuten näimme aiemmin, projektio $$\Pi_{hinta}(T)$$ sisältää jokaisen eri hin
 Ensimmäinen tapa on oletus ja sanaa `ALL` ei käytetä yleensä, mutta toistuvat rivit voidaan poistaa sanan `DISTINCT` avulla. Tarkasti ottaen projektiota $$\Pi_{hinta}(T)$$ vastaa siis kysely `SELECT DISTINCT hinta FROM Tuotteet`.
 
 Lisäksi SQL:ssä rivien järjestyksellä voi olla väliä, kun taas relaation monikoilla ei ole järjestystä. Rivien järjestys näkyy SQL:ssä esimerkiksi kyselyssä, jonka lopussa on `ORDER BY`, jolloin tulostaulun rivit ovat halutussa järjestyksessä. Relaatio-operaatioilla ei ole mahdollista toteuttaa tällaista hakua.
+
+## Avaimet ja riippuvuudet
+
+_Yliavain_ (_superkey_) on attribuuttien yhdistelmä, joka on varmasti erilainen jokaisessa relaation monikossa. Yliavain yksilöi siis jokaisen relaatiossa olevan monikon.
+
+_Kandidaattiavain_ (_candidate key_) eli _avain_ (_key_) on minimaalinen yliavain. Tämä tarkoittaa, että jos poistetaan mikä tahansa attribuutti, niin kyseessä ei ole enää yliavain.
+
+_Pääavain_ (_primary key_) on yksi avaimista, joka on nostettu erikoisasemaan.
+
+### Esimerkki
+
+Tarkastellaan esimerkkinä tuotteita kuvaavaa relaatiota, jonka attribuutit ovat `id`, `nimi` ja `hinta`.
+
+Koska attribuutti `id` yksilöi jokaisen monikon, se on yliavain. Myös yhdistelmät (`id`, `nimi`), (`id`, `hinta`) ja (`id`, `nimi`, `hinta`) ovat yliavaimia, koska niiden osana on attribuutti `id`. Kuitenkin näistä yliavaimista vain `id` on avain, koska muut yliavaimet eivät ole minimaalisia.
+
+Attribuutti `hinta` ei selkeästi ole yliavain, koska monella tuotteella voi olla sama hinta. Attribuutti `nimi` on yliavain siinä tapauksessa, että usealla tuotteella ei voi olla samaa nimeä. Yhdistelmä (`nimi`, `hinta`) on yliavain, jos ei voi olla kahta tuotetta, joilla olisi sekä sama nimi että sama nimi. Riippuu siis tietoon liittyvistä oletuksista, mitkä attribuuttien yhdistelmät ovat yliavaimia.
+
+### Avaimen valinta
+
+Avain voi olla joko _luonnollinen avain_ (_natural key_) tai _sijaisavain_ (_surrogate key_). Luonnollinen avain muodostuu alkuperäisestä tiedosta, kun taas sijaisavain on lisätty mukaan nimenomaan sen takia, että siitä tulisi avain. Esimerkiksi `nimi` on luonnollinen avain, kun taas `id` on sijaisavain.
+
+Tietokantojen teoriassa näkee usein käytettävän luonnollisia avaimia, mutta käytännössä on hyvin tavallista käyttää id-numeroa tai vastaavaa sijaisavainta. Tässä on etuna, että id-numero on kompakti tieto, joka kelpaa varmasti avaimeksi. Jos valittaisiin luonnollinen avain, siihen kuuluisi ehkä monia attribuutteja ja pitäisi pohtia, riittävätkö attribuutit varmasti yksilöimään monikon kaikissa tapauksissa.
+
+### Funktionaalinen riippuvuus
+
+_Funktionaalinen riippuvuus_ (_functional dependency_) $$A \to B$$ tarkoittaa, että attribuutit $$A$$ määräävät attribuutit $$B$$. Toisin sanoen jos on kaksi monikkoa, joissa attribuutit $$A$$ ovat samat, niin myös attribuutit $$B$$ ovat samat.
+
+Esimerkiksi jos relaatiossa on attribuutit `postinumero` ja `kaupunki`, siinä on funktionaalinen riippuvuus `postinumero` $$\to$$ `kaupunki`, koska postinumerosta voidaan päätellä kaupunki. Ei voi olla kahta monikkoa, joissa olisi sama postinumero mutta eri kaupunki.
+
+Jos attribuutit $$A$$ muodostavat avaimen, niin $$A \to B$$ pätee mille tahansa attribuuteille $$B$$. Tämä johtuu siitä, että ei voi edes olla kahta monikkoa, jossa attribuutit $$A$$ olisivat samat, koska muuten ne eivät muodostaisi avainta.
 
 ## Normaalimuodot
 
