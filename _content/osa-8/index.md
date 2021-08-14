@@ -1,7 +1,8 @@
 ---
 nav-title: 8. Tietokantojen teoria
 sub-sections:
-      - sub-section-title: Joukot ja relaatiot
+      - sub-section-title: Matemaattinen tausta
+      - sub-section-title: Taulu relaationa
       - sub-section-title: Relaatio-operaatiot
       - sub-section-title: Normaalimuodot
 ---
@@ -10,51 +11,75 @@ sub-sections:
 
 Tietokannan sisällön esittäminen relaatiomallin mukaisesti tauluina ja riveinä tuntuu nykyään lähes itsestään selvältä tavalta, mutta tämä oli aikoinaan mullistava idea tietokanta-alalla. Tässä luvussa tutustumme relaatiomallin matemaattiseen taustaan, joka syntyi 1970-luvulla.
 
-## Joukot ja relaatiot
+## Matemaattinen tausta
 
-### Määritelmiä
+### Joukko
 
-#### Joukko
+_Joukko_ (_set_) on kokoelma alkioita. Esimerkiksi $$A=\{1,2,3,4,5\}$$ ja $$B=\{apina, banaani, cembalo\}$$ ovat joukkoja.
 
-Joukko on kokoelma alkioita. Esimerkiksi $$A=\{1,2,3,4,5\}$$ ja $$B=\{apina, banaani, cembalo\}$$ ovat joukkoja.
+Merkintä $$\mid S \mid$$ tarkoittaa joukon $$S$$ alkioiden määrää. Äskeisessä esimerkissä $$\mid A \mid=5$$ ja $$\mid B \mid =3$$.
 
-Merkintä $$\mid S \mid$$ tarkoittaa joukon $S$ alkioiden määrää. Äskeisessä esimerkissä $$\mid A \mid=5$$ ja $$\mid B \mid =3$$.
+Merkintä $$x \in S$$ tarkoittaa, että alkio $$x$$ kuuluu joukkoon $$S$$.
 
-Joukon alkioilla ei ole tiettyä järjestystä. Esimerkiksi $$\{1,2,3\}$$ ja $$\{2,3,1\}$$ tarkoittavat samaa joukkoa.
+Joukon alkioilla ei ole tiettyä järjestystä. Esimerkiksi $$\{1,2,3\}$$, $$\{1,3,2\}$$ ja $$\{2,3,1\}$$ tarkoittavat samaa joukkoa.
 
-Tietty alkio voi esiintyä joukossa enintään kerran. Esimerkiksi $$\{1,1,1\}$$ ei ole joukko, koska alkio $$1$$ esiintyy kolmesti.
+Tietty alkio voi esiintyä joukossa enintään kerran. Esimerkiksi $$\{1,2,1\}$$ ei ole joukko, koska alkio $$1$$ esiintyy kahdesti.
 
-#### Osajoukko
+### Osajoukko
 
-Osajoukko sisältää osan joukon alkioista. Esimerkiksi joukon $$\{1,2,3\}$$ osajoukot ovat $$\emptyset$$, $$\{1\}$$, $$\{2\}$$, $$\{3\}$$, $$\{1,2\}$$, $$\{1,3\}$$, $$\{2,3\}$$ ja $$\{1,2,3\}$$. Merkintä $$\emptyset$$ tarkoittaa tyhjää joukkoa.
+_Osajoukko_ (_subset_) sisältää osan joukon alkioista. Esimerkiksi joukon $$\{1,2,3\}$$ osajoukot ovat $$\emptyset$$, $$\{1\}$$, $$\{2\}$$, $$\{3\}$$, $$\{1,2\}$$, $$\{1,3\}$$, $$\{2,3\}$$ ja $$\{1,2,3\}$$. Merkintä $$\emptyset$$ tarkoittaa tyhjää joukkoa.
+
+Merkintä $$A \subset B$$ tarkoittaa, että joukko $$A$$ on joukon $$B$$ osajoukko.
+
+Osajoukko on _aito_ (_proper_), jos siinä ei ole kaikkia joukon alkioita.
 
 Kun joukossa on $$n$$ alkiota, siitä voidaan muodostaa $$2^n$$ osajoukkoa. Esimerkiksi joukossa $$\{1,2,3\}$$ on $$3$$ alkiota, joten osajoukkoja on $$2^3=8$$.
 
-#### Karteesinen tulo
+### Monikko
 
-Karteesinen tulo $$S_1 \times S_2 \times \dots \times S_k$$ sisältää kaikki yhdistelmät, jotka voidaan muodostaa valitsemalla järjestyksessä yksi alkio jokaisesta joukosta $$S_1,S_2,\dots,S_k$$.
+_Monikko_ (_tuple_) on lista alkioita tietyssä järjestyksessä. Esimerkiksi $$(1,3,2)$$ on monikko, jossa on $$3$$ alkiota.
 
-Esimerkiksi kun $$A=\{1,2,3\}$$ ja $$B=\{x,y,z\}$$, niin
+Monikossa alkioiden järjestyksellä on merkitystä. Esimerkiksi $$(1,2,3)$$, $$(1,3,2)$$ ja $$(2,3,1)$$ ovat kolme eri monikkoa.
+
+Monikossa sama alkio voi toistua monta kertaa. Esimerkiksi $$(1,2,1)$$ on monikko, jossa toistuu kahdesti alkio $$1$$.
+
+### Karteesinen tulo
+
+_Karteesinen tulo_ (_Cartesian product_) $$S_1 \times S_2 \times \dots \times S_k$$ sisältää kaikki monikot, jotka muodostuvat valitsemalla järjestyksessä yksi alkio jokaisesta joukosta $$S_1,S_2,\dots,S_k$$.
+
+Kun $$A=\{1,2,3\}$$ ja $$B=\{x,y,z\}$$, niin
 
 $$A \times B = \{(1,x),(1,y),(1,z),(2,x),(2,y),(2,z),(3,x),(3,y),(3,z)\}.$$
 
-Vastaavasti kun $$A=\{1,2,3\}$$, $$B=\{x\}$$ ja $$C=\{1,2\}$$, niin
+Kun $$A=\{1,2,3\}$$, $$B=\{x\}$$ ja $$C=\{1,2\}$$, niin
 
 $$A \times B \times C = \{(1,x,1), (1,x,2), (2,x,1), (2,x,2), (3,x,1), (3,x,2)\}.$$
 
-Karteesisen tulon alkioiden määrä on $$\mid S_1 \mid \cdot \mid S_2 \mid \dots \mid S_k \mid$$. Äskeisessä esimerkissä $$\mid A \mid = 3$$, $$\mid B \mid = 1$$ ja $$\mid C \mid = 2$$, joten karteesinen tulo $$A \times B \times C$$ muodostuu $$3 \cdot 1 \cdot 2 = 6$$ alkiosta.
+Karteesisen tulon alkioiden määrä on $$\mid S_1 \mid \cdot \mid S_2 \mid \dots \mid S_k \mid$$. Esimerkiksi kun $$\mid A \mid = 3$$, $$\mid B \mid = 1$$ ja $$\mid C \mid = 2$$, karteesinen tulo $$A \times B \times C$$ muodostuu $$3 \cdot 1 \cdot 2 = 6$$ alkiosta.
 
-#### Relaatio
+### Relaatio
 
-Relaatio on karteesisen tulon osajoukko. Esimerkiksi kun $$A=\{1,2,3\}$$ ja $$B=\{x,y,z\}$$, niin yksi karteesisen tulon $$A \times B$$ relaatio on $$(1,x),(2,x),(3,y),(2,z)$$.
+_Relaatio_ (_relation_) on karteesisen tulon osajoukko. Kun $$A=\{1,2,3\}$$ ja $$B=\{x,y,z\}$$, niin mahdollisia karteesisen tulon $$A \times B$$ relaatioita ovat esimerkiksi seuraavat:
 
-Relaatio tarkoittaa siis sitä, että valitaan jokin osa kaikista mahdollisista alkioiden yhdistelmistä.
+$$R_1 = \{(1,x),(1,y),(1,z)\}$$
+
+$$R_2 = \{(1,x),(2,x),(2,z),(3,y)\}$$
+
+$$R_3 = \{(2,y)\}$$
+
+Relaatio tarkoittaa siis sitä, että valitaan jokin osajoukko kaikista mahdollisista alkioiden muodostamista yhdistelmistä.
 
 Karteesisella tulolla $$S_1 \times S_2 \times \dots \times S_k$$ on kaikkiaan $$2^{\mid S_1 \mid \cdot \mid S_2 \mid \dots \mid S_k \mid}$$ mahdollista relaatiota.
 
-### Taulu relaationa
+## Taulu relaationa
 
-Tietokannan taulu voidaan esittää relaationa, jossa joukot $$S_1,S_2,\dots,S_k$$ ilmaisevat, mitä alkioita missäkin sarakkeessa voi olla, ja jokainen rivi kuuluu karteesiseen tuloon $$S_1 \times S_2 \times \dots \times S_k$$.
+Tietokannan taulu voidaan esittää matemaattisesti relaationa, jonka jokainen monikko vastaa yhtä taulun riviä. Kun taulussa on $$k$$ saraketta, relaatiossa jokaisessa monikossa on vastaavasti $$k$$ alkiota, joista käytetään nimeä attribuutti. Relaation taustalla on karteesinen tulo
+
+$$S_1 \times S_2 \times \dots \times S_k,$$
+
+jossa joukot $$S_1,S_2,\dots,S_k$$ ilmaisevat, mitä arvoja kussakin attribuutissa voi olla eli kunkin attribuutin tyypin.
+
+### Esimerkki
 
 Tarkastellaan esimerkkinä taulua `Tuotteet`, jossa on tietoa tuotteista:
 
@@ -72,23 +97,44 @@ Tarkastellaan esimerkkinä taulua `Tuotteet`, jossa on tietoa tuotteista:
 </tbody>
 </table>
 
-Tämä taulu vastaa seuraavaa relaatiota:
+Tämä taulu vastaa relaatiota
 
-$$T=\{(1,retiisi,7),(2,porkkana,5),(3,nauris,4),(4,lanttu,8),(5,selleri,4)\}$$
+$$T=\{(1,retiisi,7),(2,porkkana,5),(3,nauris,4),(4,lanttu,8),(5,selleri,4)\},$$
 
-Tämän relaation taustalla on karteesinen tulo $$S_1 \times S_2 \times S_3$$. Nämä joukot määrittävät, mitä sisältöä riveissä voi olla eli kunkin sarakkeen tyypin.
+jonka jokainen monikko muodostuu kolmesta attribuutista `id`, `nimi` ja `hinta`.
 
-Koska sarakkeissa $$1$$ ja $$3$$ on kokonaisluku, joukot $$S_1$$ ja $$S_3$$ sisältävät kaikki kokonaisluvut. Sarakkeessa $$2$$ on puolestaan merkkijono, joten joukko $$S_2$$ sisältää kaikki merkkijonot. Huomaa, että nämä ovat äärettömiä joukkoja, koska erilaisia kokonaislukuja ja merkkijonoja on äärettömästi.
+Tässä tapauksessa relaation taustalla on karteesinen tulo $$S_1 \times S_2 \times S_3$$. Joukot $$S_1,S_2,S_3$$ määrittelevät attribuuttien tyypit eli jokainen joukko sisältää kaikki arvot, joita vastaavassa attribuutissa voi olla.
 
-Tietokannan taulussa jokaisella sarakkeella on myös nimi. Tässä taulussa sarakkeen $$1$$ nimi on `id`, sarakkeen $$2$$ nimi on `nimi` ja sarakkeen $$3$$ nimi on `hinta`.
+Esimerkiksi attribuutti `id` on positiivinen kokonaisluku, joten $$S_1$$ voisi olla $$\{1,2,3,\dots\}$$ eli ääretön joukko, joka sisältää kaikki positiiviset kokonaisluvut. Toinen mahdollisuus on, että id-numerolla on yläraja, kuten yleensä käytännön tietokannoissa. Esimerkiksi jos id-numero on 64-bittinen kokonaisluku, $$S_1$$ voisi olla $$\{1,2,3,\dots,2^{64}-1\}$$.
+
+### Teoria vs. käytäntö
+
+SQL-tietokannat perustuvat relaatiomalliin, mutta ne eivät kuitenkaan täysin noudata sitä.
+
+Yksi ero on, että relaatiossa jokainen monikko on erilainen (koska relaatio on joukko), mutta SQL-taulussa ei ole tätä rajoitusta. Esimerkiksi voimme luoda seuraavasti taulun `Testi` ja lisätä siihen kolme samanlaista riviä:
+
+```prompt
+sqlite> CREATE TABLE Testi (x INTEGER);
+sqlite> INSERT INTO Testi VALUES (1);
+sqlite> INSERT INTO Testi VALUES (1);
+sqlite> INSERT INTO Testi VALUES (1);
+sqlite> SELECT * FROM Testi;
+1
+1
+1
+```
+
+Usein tosin SQL-taulussa on sarake `id`, joka takaa, että taulussa ei ole kahta samanlaista riviä, koska jokaisella rivillä on eri id-numero.
+
+Toinen ero on, että relaatiossa jokaisella monikon attribuutilla tulee olla arvo mutta SQL-taulussa sarakkeessa voi olla `NULL` eli arvo puuttuu.
 
 ## Relaatio-operaatiot
 
-Relaatio-operaatioiden avulla olemassa olevista relaatioista voidaan muodostaa uusi relaatio. Tämä vastaa SQL:ssä kyselyä, jossa tauluista muodostetaan tulostaulu. Tutustumme seuraavaksi kolmeen keskeiseen relaatio-operaatioon: projektio, restriktio ja liitos.
+Relaatio-operaatioiden avulla olemassa olevista relaatioista voidaan muodostaa uusi relaatio. Tämä vastaa SQL:ssä kyselyä, jossa tauluista muodostetaan tulostaulu. Tutustumme seuraavaksi esimerkkinä kolmeen keskeiseen relaatio-operaatioon: projektio, restriktio ja liitos.
 
 ### Projektio
 
-Projektio $$\Pi$$ muodostaa relaation, jossa on tiettyjen sarakkeiden arvot joka riviltä. Projektio vastaa SQL-kyselyä, jossa valitaan tietyt sarakkeet taulusta. Esimerkiksi projektio $$\Pi_{nimi,hinta}(T)$$ vastaa SQL-kyselyä `SELECT nimi, hinta FROM Tuotteet`.
+Projektio $$\Pi$$ muodostaa relaation, jossa monikoista valitaan tietyt attribuutit. Projektio vastaa SQL-kyselyä, jossa valitaan tietyt sarakkeet taulusta. Esimerkiksi projektio $$\Pi_{nimi,hinta}(T)$$ vastaa SQL-kyselyä `SELECT nimi, hinta FROM Tuotteet`.
 
 Esimerkkejä:
 
@@ -98,11 +144,11 @@ $$\Pi_{hinta}(T) = \{(7),(5),(4),(8)\}$$
 
 $$\Pi_{nimi,hinta}(T) = \{(retiisi,7),(porkkana,5),(nauris,4),(lanttu,8),(selleri,4)\}$$
 
-Huomaa, että projektion tulos on relaatio, joten mahdolliset toistuvat rivit suodattuvat siitä pois. Tämän takia projektiossa $$\Pi_{hinta}(T)$$ on vain neljä riviä, koska kahdella tuotteella on sama hinta.
+Huomaa, että mahdolliset toistuvat monikot suodattuvat pois projektiosta. Tämän takia projektiossa $$\Pi_{hinta}(T)$$ on vain neljä monikkoa, koska kahdella tuotteella on sama hinta.
 
 ### Restriktio
 
-Restriktio $$\sigma$$ muodostaa relaation, jossa on tietyt ehdot täyttävät rivit. Restriktio vastaa SQL-kyselyä, jossa rivit valitaan `WHERE`-osassa. Esimerkiksi restriktio $$\sigma_{hinta \le 5}(T)$$ vastaa SQL-kyselyä `SELECT * FROM Tuotteet WHERE hinta <= 5`.
+Restriktio $$\sigma$$ muodostaa relaation, jossa on tietyt ehdot täyttävät monikot. Restriktio vastaa SQL-kyselyä, jossa rivit valitaan `WHERE`-osassa. Esimerkiksi restriktio $$\sigma_{hinta \le 5}(T)$$ vastaa SQL-kyselyä `SELECT * FROM Tuotteet WHERE hinta <= 5`.
 
 Esimerkkejä:
 
@@ -118,7 +164,7 @@ $$\Pi_{nimi}(\sigma_{hinta \le 5}(T))=\{(porkkana),(nauris),(selleri)\}$$
 
 ### Liitos
 
-Liitos $$\bowtie$$ muodostaa relaation, jonka rivit on koostettu kahden relaation pohjalta. Tämä vastaa SQL:ssä kahden taulun kyselyä.
+Liitos $$\bowtie$$ muodostaa relaation, jonka monikot on koostettu kahden relaation pohjalta. Tämä vastaa SQL:ssä kahden taulun kyselyä.
 
 Tarkastellaan esimerkkinä seuraavia tauluja `Henkilot` ja `Yritykset`:
 
@@ -164,24 +210,16 @@ $$\Pi_{H.nimi,Y.nimi}({H\ \bowtie\ Y \atop \small H.yritys\_id = Y.id}) = \{(Mai
 
 ### Teoria vs. käytäntö
 
-Tässä esitettyjen ja muiden relaatio-operaatioiden avulla voidaan toteuttaa hakuja samaan tapaan kuin SQL-kyselyillä. Kuitenkaan olemassa olevat SQL-tietokannat eivät noudata täysin matemaattista relaatiomallia, vaan niissä on käytännön syistä johtuvia eroja.
+Relaatio-operaatioiden avulla voidaan toteuttaa hakuja samaan tapaan kuin SQL-kyselyillä, mutta tässäkin SQL-kielessä on joitakin eroja.
 
-Yksi merkittävä ero on, että SQL:ssä taulun usean rivin sisältö voi olla sama, mikä ei ole mahdollista relaatiossa. Esimerkiksi voimme luoda seuraavasti taulun `Testi` ja lisätä siihen kolme samanlaista riviä:
+Kuten näimme aiemmin, projektio $$\Pi_{hinta}(T)$$ sisältää jokaisen eri hinnan vain kerran, kun taas kyselyn `SELECT hinta FROM Tuotteet` tulostaulussa voi olla monta kertaa sama hinta. SQL:ssä on itse asiassa kaksi eri tapaa hakea tietoa:
 
-```prompt
-sqlite> CREATE TABLE Testi (x INTEGER);
-sqlite> INSERT INTO Testi VALUES (1);
-sqlite> INSERT INTO Testi VALUES (1);
-sqlite> INSERT INTO Testi VALUES (1);
-sqlite> SELECT * FROM Testi;
-1
-1
-1
-```
+* `SELECT ALL ...`: haetaan kaikki rivit, myös toistuvat rivit
+* `SELECT DISTINCT ...`: haetaan jokainen erilainen rivi vain kerran
 
-Tällä on vaikutusta myös hakujen tuloksiin. Kuten näimme aiemmin, projektio $$\Pi_{hinta}(T)$$ sisältää jokaisen eri hinnan vain kerran, kun taas kyselyn `SELECT hinta FROM Tuotteet` tulostaulussa voi olla monta kertaa sama hinta. SQL:ssä haetaan oletuksena kaikki rivit ja toistuvat rivit voidaan poistaa sanan `DISTINCT` avulla. Tarkasti ottaen projektiota $$\Pi_{hinta}(T)$$ vastaa siis kysely `SELECT DISTINCT hinta FROM Tuotteet`.
+Ensimmäinen tapa on oletus ja sanaa `ALL` ei käytetä yleensä, mutta toistuvat rivit voidaan poistaa sanan `DISTINCT` avulla. Tarkasti ottaen projektiota $$\Pi_{hinta}(T)$$ vastaa siis kysely `SELECT DISTINCT hinta FROM Tuotteet`.
 
-Toinen ero on, että SQL:ssä rivien järjestyksellä voi olla väliä, kun taas relaatiossa ei ole tiettyä järjestystä. Rivien järjestys näkyy SQL:ssä kyselyssä, jonka lopussa on osa `ORDER BY`. Tällainen kysely muodostaa tulostaulun, jossa rivit ovat halutussa järjestyksessä. Relaatio-operaatioilla ei ole mahdollista toteuttaa tällaista hakua. Järjestämisen mahdollisuus on mukana SQL:ssä, koska se on käytännössä hyödyllinen ominaisuus.
+Lisäksi SQL:ssä rivien järjestyksellä voi olla väliä, kun taas relaation monikoilla ei ole järjestystä. Rivien järjestys näkyy SQL:ssä esimerkiksi kyselyssä, jonka lopussa on `ORDER BY`, jolloin tulostaulun rivit ovat halutussa järjestyksessä. Relaatio-operaatioilla ei ole mahdollista toteuttaa tällaista hakua.
 
 ## Normaalimuodot
 
