@@ -246,18 +246,82 @@ Tietokantojen teoriassa näkee usein käytettävän luonnollisia avaimia, mutta 
 
 ### Funktionaalinen riippuvuus
 
-_Funktionaalinen riippuvuus_ (_functional dependency_) $$A \to B$$ tarkoittaa, että attribuutit $$A$$ määräävät attribuutit $$B$$. Toisin sanoen jos on kaksi monikkoa, joissa attribuutit $$A$$ ovat samat, niin myös attribuutit $$B$$ ovat samat.
+_Funktionaalinen riippuvuus_ (_functional dependency_) $$A \to B$$ tarkoittaa, että attribuutit $$A$$ määräävät attribuutit $$B$$. Toisin sanoen jos relaatiossa on kaksi monikkoa, joissa attribuutit $$A$$ ovat samat, niin myös attribuutit $$B$$ ovat samat.
 
 Esimerkiksi jos relaatiossa on attribuutit `postinumero` ja `kaupunki`, siinä on funktionaalinen riippuvuus `postinumero` $$\to$$ `kaupunki`, koska postinumerosta voidaan päätellä kaupunki. Ei voi olla kahta monikkoa, joissa olisi sama postinumero mutta eri kaupunki.
 
-Jos attribuutit $$A$$ muodostavat avaimen, niin $$A \to B$$ pätee mille tahansa attribuuteille $$B$$. Tämä johtuu siitä, että ei voi edes olla kahta monikkoa, jossa attribuutit $$A$$ olisivat samat, koska muuten ne eivät muodostaisi avainta.
+Attribuutit $$A$$ muodostavat yliavaimen tarkalleen silloin, kun $$A \to B$$ pätee mille tahansa attribuuteille $$B$$. Tässä tapauksessa koska $$A$$ on yliavain, relaatiossa ei voi olla kahta monikkoa, jossa attribuutit $$A$$ ovat samat.
 
 ## Normaalimuodot
 
-Normaalimuodot ovat tietokannan rakenteeseen liittyviä vaatimuksia, joiden tavoitteena
+Normaalimuodot ovat tietokannan suunnitteluun liittyviä vaatimuksia, joiden tavoitteena on edistää tiedon eheyttä ja helpottaa tietokannan käyttämistä.
 
-Tärkeä normaalimuoto on Boyce–Codd-normaalimuoto, joka vaatii, että jos relaatiossa on funktionaalinen riippuvuus $$X \to Y$$, niin $$Y \subset X$$ tai $$X$$ on yliavain.
+Ensimmäinen normaalimuoto vaatii, että tietokannassa on käytössä relaatiomalli. SQL:ssä määritelty taulu toteuttaa automaattisesti ensimmäisen normaalimuodon.
+
+Toinen ja kolmas normaalimuoto liittyvät attribuuttien riippuvuuksiin. Näiden pohjalta on edelleen kehitetty Boyce–Codd-normaalimuoto, johon tutustumme seuraavaksi.
+
+### Boyce–Codd-normaalimuoto
+
+Relaatio toteuttaa Boyce–Codd-normaalimuodon, jos jokaisessa siinä olevassa funktionaalisessa riippuvuudessa $$X \to Y$$ pätee, että $$Y \subset X$$ tai $$X$$ on yliavain.
+
+Ideana on varmistaa, että relaatiossa ei ole riippuvuuksia, jotka eivät liittyisi relaation avaimiin. Jos tällaisia riippuvuuksia on olemassa, ne tulisi esittää erillisessä relaatiossa.
+
+Jos $$Y \subset X$$, niin attribuutit $$Y$$ ovat osa attribuutteja $$X$$. Tällainen riippuvuus on voimassa aina, eli se ei kerro mitään erityistä. Esimerkki tästä on riippuvuus (`nimi`, `hinta`) $$\to$$ `hinta`.
+
+Jos $$X$$ on yliavain, niin riippuvuus $$X \to Y$$ kuuluu asiaan, koska yliavain määrää kaikki attribuutit. Esimerkki tästä on riippuvuus `id` $$\to$$ `nimi`.
+
+Jos relaatio toteuttaa Boyce–Codd-normaalimuodon, niin se toteuttaa myös ensimmäisen, toisen ja kolmannen normaalimuodon.
 
 ### Esimerkki
 
+Tarkastellaan esimerkkinä seuraavaa taulua `Suoritukset`, jossa on kurssisuorituksia:
+
+<table class="db-table">
+<thead>
+  <tr><th colspan="4" id="table-title">Suoritukset</th></tr>
+  <tr><th width="30">id</th><th width="100">opiskelija_id</th><th width="100">kurssi_id</th><th width="100">op</th></tr>
+</thead>
+<tbody>
+  <tr><td>1</td><td>123123</td><td>111</td><td>5</td></tr>
+  <tr><td>2</td><td>321321</td><td>111</td><td>5</td></tr>
+  <tr><td>3</td><td>123123</td><td>222</td><td>10</td></tr>
+  <tr><td>4</td><td>321321</td><td>333</td><td>5</td></tr>
+</tbody>
+</table>
+
+Oletetaan, että jokaisella kurssilla on kiinteä opintopisteiden määrä, jolloin taulussa on riippuvuus `kurssi_id` $$\to$$ `op`. Tämä on vastoin Boyce–Codd-normaalimuotoa, koska sarake `op` ei ole osa saraketta `kurssi_id` eikä sarake `kurssi_id` ole yliavain.
+
+Asia voidaan korjata tallentamalla kurssien opintopisteet erilliseen tauluun:
+
+<table class="db-table">
+<thead>
+  <tr><th colspan="3" id="table-title">Suoritukset</th></tr>
+  <tr><th width="30">id</th><th width="100">opiskelija_id</th><th width="100">kurssi_id</th></tr>
+</thead>
+<tbody>
+  <tr><td>1</td><td>123123</td><td>111</td></tr>
+  <tr><td>2</td><td>321321</td><td>111</td></tr>
+  <tr><td>3</td><td>123123</td><td>222</td></tr>
+  <tr><td>4</td><td>321321</td><td>333</td></tr>
+</tbody>
+</table>
+
+<table class="db-table">
+<thead>
+  <tr><th colspan="2" id="table-title">Kurssit</th></tr>
+  <tr><th width="50">id</th><th width="100">op</th></tr>
+</thead>
+<tbody>
+  <tr><td>111</td><td>5</td></tr>
+  <tr><td>222</td><td>10</td></tr>
+  <tr><td>333</td><td>5</td></tr>
+</tbody>
+</table>
+
+Tämän muutoksen jälkeen molemmat taulut noudattavat Boyce–Codd-normaalimuotoa.
+
 ### Teoria vs. käytäntö
+
+Normaalimuotojen merkityksenä on, että ne antavat matemaattisen näkökulman tietokantojen suunnitteluun. Esimerkiksi jos tietokanta ei toteuta Boyce–Codd-normaalimuotoa, tietokannan rakennetta voi luultavasti parantaa.
+
+Käytännössä tietokantoja ei kuitenkaan yleensä suunnitella normaalimuotojen avulla vaan luvun 6 periaatteiden tyylisesti. Normaalimuodot kuvaavat osan siitä, millainen ajattelutapa on pätevällä tietokantojen suunnittelijalla.
