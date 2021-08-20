@@ -13,9 +13,7 @@ Syksyllä 2021 kurssi järjestetään etänä samalla tavalla Helsingin yliopist
 
 Kurssin aloitusluento järjestetään Zoomissa ti 7.9.2021 klo 14:15–15:45. Linkki Zoomiin ilmestyy tähän lähempänä kurssin alkua.
 
-Kurssin Telegram-ryhmässä voit keskustella netissä muiden opiskelijoiden ja kurssin järjestäjien kanssa. [Liity ryhmään](https://t.me/tkt_tikape)
-
-Kurssin muusta ohjauksesta ilmoitetaan lähempänä kurssin alkua.
+Kurssin ohjausta järjestetään Discordissa, jossa voit keskustella kurssin järjestäjien ja muiden opiskelijoiden kanssa. [Liity ryhmään](https://study.cs.helsinki.fi/discord/join/tikape)
 
 ## Tehtävät ja arvostelu
 
@@ -33,4 +31,4 @@ Kaikilla suorituksilla on yhteinen deadline su 24.10.2021 klo 23:59.
 
 ## Yhteystiedot
 
-Kurssin luennoija syksyllä 2021 on Antti Laaksonen. Voit ottaa yhteyttä lähettämällä [sähköpostia](mailto:ahslaaks@cs.helsinki.fi) tai viestin Telegramissa. 
+Kurssin luennoija syksyllä 2021 on Antti Laaksonen. Voit ottaa yhteyttä lähettämällä [sähköpostia](mailto:ahslaaks@cs.helsinki.fi) tai viestin Discordissa.
