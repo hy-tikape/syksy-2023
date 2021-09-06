@@ -11,7 +11,7 @@ Syksyllä 2021 kurssi järjestetään etänä samalla tavalla Helsingin yliopist
 
 ## Luennot ja ohjaus
 
-Kurssin aloitusluento järjestetään Zoomissa ti 7.9.2021 klo 14:15–15:45. Linkki Zoomiin ilmestyy tähän lähempänä kurssin alkua.
+Kurssin aloitusluento järjestetään Zoomissa ti 7.9.2021 klo 14:15–15:45. [Zoom-linkki](https://helsinki.zoom.us/j/65850980008?pwd=bmFmd0VycEx2bWlnV2tHeVhkeStUZz09)
 
 Kurssin ohjausta järjestetään Discordissa, jossa voit keskustella kurssin järjestäjien ja muiden opiskelijoiden kanssa. [Liity ryhmään](https://study.cs.helsinki.fi/discord/join/tikape)
 
