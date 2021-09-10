@@ -646,7 +646,7 @@ Tietokantakaavio on tietokannan graafinen esitys, jossa jokainen tietokannan tau
 
 Tietokantakaavion piirtämiseen on monia vähän erilaisia tapoja. Seuraava kaavio on luotu netissä olevalla työkalulla [dbdiagram.io](https://dbdiagram.io/):
 
-<img src="kaavio.png">
+<img src="{{site.baseurl}}/assets/kaavio.png">
 
 Tässä merkki `1` tarkoittaa, että sarakkeessa on eri arvo joka rivillä, ja merkki `*` puolestaan tarkoittaa, että sarakkeessa voi olla sama arvo usealla rivillä.
 
