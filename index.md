@@ -15,6 +15,8 @@ Kurssin aloitusluento järjestetään Zoomissa ti 7.9.2021 klo 14:15–15:45. [L
 
 Kurssin ohjausta järjestetään Discordissa, jossa voit keskustella kurssin järjestäjien ja muiden opiskelijoiden kanssa. [Liity ryhmään](https://study.cs.helsinki.fi/discord/join/tikape)
 
+Voit saada myös ohjausta Kumpulassa (Exactum, B221) perjantaisin välillä 14–17.
+
 ## Tehtävät ja arvostelu
 
 Kurssin suoritus muodostuu kahdesta osasuorituksesta (SQL-tehtävät ja Tasks-tehtävät). Molemmissa osasuorituksissa maksimipistemäärä on 100, ja kurssin hyväksytty suoritus vaatii vähintään 60 pistettä kummastakin osasuorituksesta.
