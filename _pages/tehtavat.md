@@ -16,14 +16,10 @@ Tehtävät 1–20 liittyvät materiaalin lukuun 2, tehtävät 21–40 liittyvät
 
 ## Tasks-tehtävät
 
-Kurssin Tasks-tehtävät julkaistaan 19.9.2021 mennessä.
+Kurssin muut tehtävät palautetaan [Tasks](https://tasks.withmooc.fi/tikape-syksy-2021/)-järjestelmään.
+Näet jokaisessa tehtävässä, montako pistettä saat tehtävästä.
 
-<!--
-Harjoitustyön tehtävät palautetaan [Tasks](https://tasks.withmooc.fi/tikape-kesa-2021/)-järjestelmään. Näet jokaisessa tehtävässä, montako pistettä saat tehtävästä.
+Kun lähetät vastauksen, saat automaattisesti pisteet tehtävästä.
+Kurssin henkilökunta käy läpi tehtävät kurssin jälkeen, mutta pisteesi eivät muutu, ellet ole tahallisesti kiertänyt automaattista tarkastusta.
 
-Kun lähetät vastauksen, saat automaattisesti pisteet tehtävästä. Kurssin henkilökunta käy läpi tehtävät kurssin jälkeen, mutta pisteesi eivät muutu, ellet ole tahallisesti kiertänyt automaattista tarkastusta.
-
-Harjoitustyön viimeisessä tehtävässä voit tarkastaa kurssin pistetilanteen sekä antaa kurssipalautteen.
-
-Jos käytät harjoitustyössä ohjelmointikielenä Javaa, löydät esimerkkejä asiasta [syksyn 2020 materiaalista](https://tikape.mooc.fi/syksy-2020/pages/sqlite_java).
--->
+Viimeisessä tehtävässä on ohjeet kurssisuorituksen rekisteröintiin, ja voit tarkastaa kurssin pistetilanteen sekä antaa kurssipalautteen.
