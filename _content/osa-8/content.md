@@ -226,7 +226,7 @@ Tarkastellaan esimerkkinä tuotteita kuvaavaa relaatiota, jonka attribuutit ovat
 
 Koska attribuutti `id` yksilöi jokaisen monikon, se on yliavain. Myös yhdistelmät (`id`, `nimi`), (`id`, `hinta`) ja (`id`, `nimi`, `hinta`) ovat yliavaimia, koska niiden osana on attribuutti `id`. Kuitenkin näistä yliavaimista vain `id` on avain, koska muut yliavaimet eivät ole minimaalisia.
 
-Attribuutti `hinta` ei selkeästi ole yliavain, koska monella tuotteella voi olla sama hinta. Attribuutti `nimi` on yliavain siinä tapauksessa, että usealla tuotteella ei voi olla samaa nimeä. Yhdistelmä (`nimi`, `hinta`) on yliavain, jos ei voi olla kahta tuotetta, joilla olisi sekä sama nimi että sama nimi. Riippuu siis tietoon liittyvistä oletuksista, mitkä attribuuttien yhdistelmät ovat yliavaimia.
+Attribuutti `hinta` ei selkeästi ole yliavain, koska monella tuotteella voi olla sama hinta. Attribuutti `nimi` on yliavain siinä tapauksessa, että usealla tuotteella ei voi olla samaa nimeä. Yhdistelmä (`nimi`, `hinta`) on yliavain, jos ei voi olla kahta tuotetta, joilla olisi sekä sama nimi että sama hinta. Riippuu siis tietoon liittyvistä oletuksista, mitkä attribuuttien yhdistelmät ovat yliavaimia.
 
 ### Avaimen valinta
 
