@@ -167,9 +167,7 @@ Tarkastellaan esimerkkinä seuraavia tauluja `Henkilot` ja `Yritykset`:
 <tbody>
   <tr><td>1</td><td>Maija</td><td>1</td></tr>
   <tr><td>2</td><td>Liisa</td><td>1</td></tr>
-  <tr><td>3</td><td>Uolevi</td><td>3</td></tr>
-  <tr><td>4</td><td>Anna</td><td>2</td></tr>
-  <tr><td>5</td><td>Kaaleppi</td><td>3</td></tr>
+  <tr><td>3</td><td>Kaaleppi</td><td>3</td></tr>
 </tbody>
 </table>
 
