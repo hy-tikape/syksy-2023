@@ -1,9 +1,10 @@
 ---
 title: Tulokset ja palaute
-hidden: true
+hidden: false
 ---
 
 # Tulokset ja palaute
 
-* [Kurssin tulokset](tulokset.html)
+<!-- * [Kurssin tulokset](tulokset.html) -->
+
 * [Palautteen yhteenveto](palaute.html)
