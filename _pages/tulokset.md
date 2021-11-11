@@ -5,7 +5,7 @@ hidden: true
 
 # Kurssin tulokset
 
-Kurssille osallistui 161 opiskelijaa, joista 134 (83.2 %) suoritti kurssin hyväksytysti.
+Kurssille osallistui 339 opiskelijaa, joista 134 (39.5 %) suoritti kurssin hyväksytysti.
 
 ## Arvosanajakauma
 
