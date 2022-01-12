@@ -1,21 +1,19 @@
 ---
 layout: default
-title: Tietokantojen perusteet <br> syksy 2021
+title: Tietokantojen perusteet <br> kevät 2022
 ---
 
 # Tietoa kurssista
 
 _Tietokantojen perusteet_ on 5 op laajuinen tietojenkäsittelytieteen perusopintokurssi, joka esittelee suurten tietomäärien käsittelyyn liittyviä tekniikoita ja haasteita. Tutustumme kurssilla relaatiotietokantoihin ja niihin liittyvään SQL-kieleen.
 
-Syksyllä 2021 kurssi järjestetään etänä samalla tavalla Helsingin yliopiston tutkinto-opiskelijoille ja Avoimen yliopiston opiskelijoille. Ohjeet kurssisuorituksen rekisteröimiseen ilmestyvät kurssin aikana.
+Keväällä 2022 kurssi järjestetään etänä samalla tavalla Helsingin yliopiston tutkinto-opiskelijoille ja Avoimen yliopiston opiskelijoille. Ohjeet kurssisuorituksen rekisteröimiseen ilmestyvät kurssin aikana.
 
 ## Luennot ja ohjaus
 
-Kurssin aloitusluento järjestetään Zoomissa ti 7.9.2021 klo 14:15–15:45. [Luentotallenne](https://www2.helsinki.fi/unitube/video/7a9eea74-cc75-4014-ba11-6615a4a906fc)
+Kurssin aloitusluento järjestetään Zoomissa ti 18.1.2022 klo 10:15–11:45. (Zoom-linkki ilmestyy tähän lähempänä luentoa)
 
 Kurssin ohjausta järjestetään Discordissa, jossa voit keskustella kurssin järjestäjien ja muiden opiskelijoiden kanssa. [Liity ryhmään](https://study.cs.helsinki.fi/discord/join/tikape)
-
-Voit saada myös ohjausta Kumpulassa (Exactum, B221) perjantaisin välillä 14–17.
 
 ## Tehtävät ja arvostelu
 
@@ -29,8 +27,8 @@ Arvosanarajat ovat:
 * 172–189 pistettä: 4
 * 190–200 pistettä: 5
 
-Kaikilla suorituksilla on yhteinen deadline su 24.10.2021 klo 23:59.
+Kaikilla suorituksilla on yhteinen deadline su 6.3.2022 klo 23:59.
 
 ## Yhteystiedot
 
-Kurssin luennoija syksyllä 2021 on Antti Laaksonen. Voit ottaa yhteyttä lähettämällä [sähköpostia](mailto:ahslaaks@cs.helsinki.fi) tai viestin Discordissa.
+Kurssin luennoija keväällä 2022 on Antti Laaksonen. Voit ottaa yhteyttä lähettämällä [sähköpostia](mailto:ahslaaks@cs.helsinki.fi) tai viestin Discordissa.
