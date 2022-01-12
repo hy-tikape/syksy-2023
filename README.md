@@ -1,4 +1,4 @@
-# Tietokantojen perusteet, syksy 2021
+# Tietokantojen perusteet, kevät 2022
 
 * Materiaalin kirjoittaja: Antti Laaksonen
 * Kurssisivuston toteutus: Milla Kortelainen
