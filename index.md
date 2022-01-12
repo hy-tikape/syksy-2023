@@ -11,7 +11,7 @@ Keväällä 2022 kurssi järjestetään etänä samalla tavalla Helsingin yliopi
 
 ## Luennot ja ohjaus
 
-Kurssin aloitusluento järjestetään Zoomissa ti 18.1.2022 klo 10:15–11:45. (Zoom-linkki ilmestyy tähän lähempänä luentoa)
+Kurssin aloitusluento järjestetään Zoomissa ti 18.1.2022 klo 10:15–11:45. [Zoom-linkki](https://helsinki.zoom.us/j/66754349403?pwd=cjhLRTdXcThXSjlCRGJwQVZadjVFZz09)
 
 Kurssin ohjausta järjestetään Discordissa, jossa voit keskustella kurssin järjestäjien ja muiden opiskelijoiden kanssa. [Liity ryhmään](https://study.cs.helsinki.fi/discord/join/tikape)
 
