@@ -16,7 +16,7 @@ Tehtävät 1–20 liittyvät materiaalin lukuun 2, tehtävät 21–40 liittyvät
 
 ## Tasks-tehtävät
 
-TODO
+Tasks-tehtävät ilmestyvät tammikuun loppuun mennessä.
 
 <!--
 Kurssin muut tehtävät palautetaan [Tasks](https://tasks.withmooc.fi/tikape-syksy-2021/)-järjestelmään.
