@@ -5,6 +5,8 @@ hidden: true
 
 # Palautteen yhteenveto
 
+Kurssipalautteen antoi 224 opiskelijaa.
+
 TODO
 
 ## Numeerinen palaute
@@ -78,7 +80,7 @@ Kurssin kokonaisarvosana:
 * SQL-trainerin haastavissa tehtävissä voisi olla ehkä pieni vinkki?
 * Tasks-tehtävissä oli alkukankeutta, koska sivuaineopiskelijana taustalla oli osaaminen vain ohjelmoinnin perus- ja jatkokurssilta. Videot olivat siis toimiva lisä! Viimeinen teoriaosio oli myös ajoittain vähän hankala ymmärtää, luento aiheesta voisi ehkä auttaa? Varsinkin normaalimuodot jäivät jokseenkin epäselviksi, vaikka toisaalta googlaamalla löysin kyllä lisätietoa.  Kaiken kaikkiaan yksinkertainen toteutus on iso plussa, koska kurssille oli helppo osallistua eri tiedekunnasta käsin! Oli mukava kurssi :)
 * Tehtävien tekeminen sql-trainerissa oli toimivaa, mutta tehtävien suorittaminen omalla komentorivillä tai editorilla (esimerkiksi lataamalla valmiin db-tiedoston, jossa tarvittavat taulukot), josta tulokset voisi ohpe/ohja tyylisesti ladata palvelimelle, olisi varmasti miellyttämpää. 
-* * Tehtävät vaikeita verrattuna materaalin esimerkkeihin (esim. OhPe:ssa tämä oli hyvin tasapainossa) * Enemmän videoita ja esimerkkiratkaisuja ja rimaa vähän matalammalle (kuitenkin peruskurssi) * SQL-trainerin voisi upottaa suoraan materiaaliin, niin että ei tarvi koko ajan vaihdella sivuja edes takaisin * dbdiagram työkalun  ongelma "REFERENCES" kanssa
+* <span>*</span> Tehtävät vaikeita verrattuna materaalin esimerkkeihin (esim. OhPe:ssa tämä oli hyvin tasapainossa) * Enemmän videoita ja esimerkkiratkaisuja ja rimaa vähän matalammalle (kuitenkin peruskurssi) * SQL-trainerin voisi upottaa suoraan materiaaliin, niin että ei tarvi koko ajan vaihdella sivuja edes takaisin * dbdiagram työkalun  ongelma "REFERENCES" kanssa
 * Tasks Tehtävä 5: Tietokantojen teoria This part of the course was very frustrating. Since you had to get all questions right in the set, which made you question the right answers and if you understood anything. It felt more like systematical bruteforce was only option to see right answers and then backtrack why was it right. Maybe at that point it would've been way more helpful to ask help and clear some minor misunderstanding. I'm not sure how to improve, maybe add explanation of why it is the correct answer so at least in the end the questions can clear confusion.
 * Joihinkin task-tehtäviin ei löytynyt tarpeeksi apua.
 * Antaisin ehkä enemmän konkreettisia esimerkkejä tehtävistä.
