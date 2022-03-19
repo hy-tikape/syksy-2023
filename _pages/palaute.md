@@ -7,7 +7,13 @@ hidden: true
 
 Kurssipalautteen antoi 224 opiskelijaa.
 
-TODO
+Palautteen perusteella kurssilla on monia opiskelijoita, jotka kokevat kurssin materiaalin riittämättömäksi soveltavien tehtävien ratkaisemiseen. Erityisesti toiveena on, että materiaalissa olisi esimerkkejä, jotka antaisivat suorempia vinkkejä tehtäviin. Toisaalta kurssin työmäärää pidetään kokonaisuutena kuitenkin sopivana.
+
+Tulevaisuudessa olisi hyvä tuoda esille paremmin, että SQL Trainerin loppupään tehtävät ovat vaikeita ja niiden ratkaisemiseen voi joutua käyttämään paljon aikaa. Näiden tehtävien tarkoituksena on haastaa opiskelijoita, jotka haluavat tutustua syvemmin SQL-kieleen. Kuitenkin myös ratkaisematta näitä tehtäviä kurssin pääsee mainiosti läpi ja saa riittävät tiedot SQL-kielestä.
+
+Kurssin aikana Tasks-tehtävien tueksi lisättiin opetusvideoita, jotka olivat palautteen perusteella hyödyllisiä. Tällaisia videoita ilmestyy tulevaisuudessa enemmän. Lisäksi tietokannan suunnitteluun ja tietokantojen teoriaan liittyviä Tasks-tehtäviä on tarkoitus parantaa niin, että ne olisivat mielekkäämpiä oppimisen kannalta.
+
+Monet pitivät Discordissa järjestettyä etäohjausta hyvänä, mutta myös lähiohjausta toivottiin. Luultavasti tulevaisuudessa voidaan taas järjestää lähiohjausta Kumpulassa etäohjauksen lisäksi.
 
 ## Numeerinen palaute
 
