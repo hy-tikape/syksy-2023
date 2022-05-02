@@ -20,8 +20,7 @@
 
 title: Tietokantojen perusteet kesä 2022
 baseurl: "/kesa-2022" # the subpath of your site, e.g. /blog
-url: "https://hy-tikape.github.io/kesa-2022/" # the base hostname & protocol for your site, e.g. 
-http://example.com
+url: "https://hy-tikape.github.io/kesa-2022/" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Build settings
 plugins:
