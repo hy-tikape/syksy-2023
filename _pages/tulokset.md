@@ -1,6 +1,5 @@
 ---
 title: Kurssin tulokset
-hidden: true
 ---
 
 # Kurssin tulokset
