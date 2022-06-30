@@ -9,7 +9,7 @@ Kurssipalautteen antoi 60 opiskelijaa.
 
 Tämän ja aiemmilta kursseilta saadun palautteen perusteella Tasks-tehtäviä 2 (tietokannan suunnittelu) ja 5 (tietokantojen teoria) parannetaan ensi lukuvuotta varten. Suunnitelmana on muuttaa tehtävä 2 ohjelmointitehtäväksi, jolloin siihen pystyy toteuttamaan paremman automaattisen tarkastuksen, sekä parantaa tehtävän 5 materiaalia ja tehtävänantoja niin, että tehtävä olisi selkeämpi.
 
-Palautteessa on nostettu esille, että kurssimateriaali ei käsittele joitakin SQL-kyselyn osia, kuten EXIST, UNION ja INTERSECTION. Sinänsä näitä avainsanoja ilman pystyy ratkaisemaan kaikki kurssin tehtävät ja tulee muutenkin toimeen SQL-kyselyjen suunnittelussa, mutta kuitenkin olisi hyvä käsitellä myös nämä kurssilla, mikä tulee tapahtumaan tulevaisuudessa.
+Palautteessa on nostettu esille, että kurssimateriaali ei käsittele joitakin SQL-kyselyn osia, kuten EXISTS, UNION ja INTERSECTION. Sinänsä näitä avainsanoja ilman pystyy ratkaisemaan kaikki kurssin tehtävät ja tulee muutenkin toimeen SQL-kyselyjen suunnittelussa, mutta kuitenkin olisi hyvä käsitellä myös nämä kurssilla, mikä tulee tapahtumaan tulevaisuudessa.
 
 Kokonaisuutena vaikuttaa siltä, että kurssi on nykyisellään melko toimiva. Kurssin formaattin ei ole tulossa suuria muutoksia, mutta materiaalia ja tehtäviä kehitetään palautteen perusteella.
 
