@@ -1,5 +1,6 @@
 ---
 title: Palautteen yhteenveto
+hidden: true
 ---
 
 # Palautteen yhteenveto
