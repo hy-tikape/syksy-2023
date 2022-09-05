@@ -1,19 +1,21 @@
 ---
 layout: default
-title: Tietokantojen perusteet <br> kesä 2022
+title: Tietokantojen perusteet <br> syksy 2022
 ---
 
 # Tietoa kurssista
 
 _Tietokantojen perusteet_ on 5 op laajuinen tietojenkäsittelytieteen perusopintokurssi, joka esittelee suurten tietomäärien käsittelyyn liittyviä tekniikoita ja haasteita. Tutustumme kurssilla relaatiotietokantoihin ja niihin liittyvään SQL-kieleen.
 
-Kesällä 2022 kurssi järjestetään etänä samalla tavalla Helsingin yliopiston tutkinto-opiskelijoille ja Avoimen yliopiston opiskelijoille. Ohjeet kurssisuorituksen rekisteröimiseen ilmestyvät kurssin aikana.
+Syksyllä 2022 kurssi järjestetään samalla tavalla Helsingin yliopiston tutkinto-opiskelijoille ja Avoimen yliopiston opiskelijoille. Ohjeet kurssisuorituksen rekisteröimiseen ilmestyvät kurssin aikana.
 
 ## Luennot ja ohjaus
 
-Kurssin aloitusluento järjestetään Zoomissa to 5.5.2022 klo 16:30–18:00. [Luentotallenne](https://www2.helsinki.fi/fi/unitube/video/93f038cb-7db7-42fc-8420-c21533fc2543)
+Kurssin aloitusluento järjestetään ti 6.9.2022 klo 14:15–15:45 Exactumin salissa B123.
 
-Kurssin ohjausta järjestetään Discordissa, jossa voit keskustella kurssin järjestäjien ja muiden opiskelijoiden kanssa. [Liity ryhmään](https://study.cs.helsinki.fi/discord/join/tikape)
+Kurssin ohjausta järjestetään viikoittain ti 13–16 ja pe 13–16 Exactumin salissa B221.
+
+Lisäksi ohjausta järjestetään Discordissa, jossa voit keskustella kurssin järjestäjien ja muiden opiskelijoiden kanssa. [Liity ryhmään](https://study.cs.helsinki.fi/discord/join/tikape)
 
 ## Tehtävät ja arvostelu
 
@@ -27,8 +29,8 @@ Arvosanarajat ovat:
 * 172–189 pistettä: 4
 * 190–200 pistettä: 5
 
-Kaikilla suorituksilla on yhteinen deadline ma 27.6.2022 klo 23:59.
+Kaikilla suorituksilla on yhteinen deadline su 30.10.2022 klo 23:59.
 
 ## Yhteystiedot
 
-Kurssin luennoija kesällä 2022 on Antti Laaksonen. Voit ottaa yhteyttä lähettämällä [sähköpostia](mailto:ahslaaks@cs.helsinki.fi) tai viestin Discordissa.
+Kurssin luennoija syksyllä 2022 on Antti Laaksonen. Voit ottaa yhteyttä lähettämällä [sähköpostia](mailto:ahslaaks@cs.helsinki.fi) tai viestin Discordissa.

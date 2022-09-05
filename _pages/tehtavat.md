@@ -6,7 +6,7 @@ title: Tehtävät
 
 Kurssi suoritetaan ratkomalla SQL-tehtäviä ja Tasks-tehtäviä. Molemmat osasuoritukset tehdään itsenäisesti kurssin materiaalin ja muiden lähteiden avulla.
 
-Kaikkien kurssin suoritusten deadline on ma 27.6.2022 klo 23:59.
+Kaikkien kurssin suoritusten deadline on su 30.10.2022 klo 23:59.
 
 ## SQL-tehtävät
 
@@ -16,8 +16,12 @@ Tehtävät 1–20 liittyvät materiaalin lukuun 2, tehtävät 21–40 liittyvät
 
 ## Tasks-tehtävät
 
+Kurssin Tasks-tehtävät julkaistaan syyskuun puoliväliin mennessä.
+
+<!--
 Kurssin muut tehtävät palautetaan [Tasks](https://tasks.withmooc.fi/tikape-kesa-2022)-järjestelmään. Näet jokaisessa tehtävässä, montako pistettä saat tehtävästä.
 
 Kun lähetät vastauksen, saat automaattisesti pisteet tehtävästä. Kurssin henkilökunta käy läpi tehtävät kurssin jälkeen, mutta pisteesi eivät muutu, ellet ole tahallisesti kiertänyt automaattista tarkastusta.
 
 Viimeisessä tehtävässä on ohjeet kurssisuorituksen rekisteröintiin, ja voit tarkastaa kurssin pistetilanteen sekä antaa kurssipalautteen.
+-->
