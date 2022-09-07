@@ -11,7 +11,7 @@ Syksyllä 2022 kurssi järjestetään samalla tavalla Helsingin yliopiston tutki
 
 ## Luennot ja ohjaus
 
-Kurssin aloitusluento järjestetään ti 6.9.2022 klo 14:15–15:45 Exactumin salissa B123.
+Kurssin aloitusluento järjestetään ti 6.9.2022 klo 14:15–15:45 Exactumin salissa B123. [Luentotallenne](https://www2.helsinki.fi/fi/unitube/video/4b8af10f-1f97-4609-aba3-f7102afa5448)
 
 Kurssin ohjausta järjestetään viikoittain ti 13–16 ja pe 13–16 Exactumin salissa B221.
 
