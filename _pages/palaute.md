@@ -5,112 +5,151 @@ hidden: true
 
 # Palautteen yhteenveto
 
-Kurssipalautteen antoi 60 opiskelijaa.
+Kurssipalautteen antoi 99 opiskelijaa.
 
-Tämän ja aiemmilta kursseilta saadun palautteen perusteella Tasks-tehtäviä 2 (tietokannan suunnittelu) ja 5 (tietokantojen teoria) parannetaan ensi lukuvuotta varten. Suunnitelmana on muuttaa tehtävä 2 ohjelmointitehtäväksi, jolloin siihen pystyy toteuttamaan paremman automaattisen tarkastuksen, sekä parantaa tehtävän 5 materiaalia ja tehtävänantoja niin, että tehtävä olisi selkeämpi.
-
-Palautteessa on nostettu esille, että kurssimateriaali ei käsittele joitakin SQL-kyselyn osia, kuten EXISTS, UNION ja INTERSECTION. Sinänsä näitä avainsanoja ilman pystyy ratkaisemaan kaikki kurssin tehtävät ja tulee muutenkin toimeen SQL-kyselyjen suunnittelussa, mutta kuitenkin olisi hyvä käsitellä myös nämä kurssilla, mikä tulee tapahtumaan tulevaisuudessa.
-
-Kokonaisuutena vaikuttaa siltä, että kurssi on nykyisellään melko toimiva. Kurssin formaattin ei ole tulossa suuria muutoksia, mutta materiaalia ja tehtäviä kehitetään palautteen perusteella.
+TODO
 
 ## Numeerinen palaute
 
 Arvioi seuraavia väitteitä (1 = täysin eri mieltä, 5 = täysin samaa mieltä):
 
-* Osaamistavoitteet olivat selvät: 4.52
-* Toteutustapa tuki oppimistani: 4.43
-* Materiaalit tukivat oppimistani: 4.22
-* Arviointi mittasi oppimistani: 4.33
+* Osaamistavoitteet olivat selvät: 4.58
+* Toteutustapa tuki oppimistani: 4.47
+* Materiaalit tukivat oppimistani: 4.17
+* Arviointi mittasi oppimistani: 4.44
 
 Kurssin raskaus (1 = turhan kevyt, 5 = turhan raskas):
 
-* Työmäärältään opintojakso oli: 2.95
+* Työmäärältään opintojakso oli: 3.14
 
 Kurssin kokonaisarvosana:
 
-* Minkä arvosanan annat kurssille kokonaisuutena? 4.37
+* Minkä arvosanan annat kurssille kokonaisuutena? 4.33
 
 ## Sanallinen palaute
 
 ### Miten kehittäisit kurssia?
-* Hyvät on materiaalit, jos eläkeukkokin saa vitosen => olisipa ollut yhtä laadukasta oppimateriaalia silloin kun isoisä lampun osti. Tasks 2:ssa (tietokannan suunnittelu) vaatimuskenttien kokoa voisi suurentaa. Vähän hankala kirjoitella niihin, kun pitää välillä rullata sivua ja välillä milloin mitäkin tehtäväkenttää. Kaikki saisi suunnilleen mahtua näkymään ilman kenttien rullailua. Sama juttu SQL-trainerissa, jossa kentän korkeus ei riitä, jos pitkät kyselyt haluaa rytmittää lukukelpoisiksi useammalle riville. Yhtenä pötkönähän ne suunnilleen mahtuu, mutta helpompi niitä on aloittelijan ratkaistessa hahmottaa rivinvaihtojen kera. Tietokannan sisällön muuttamisen käytännönharjhoitukset jäi vähän vähiin => SQL traineriin mukaan pari INSERT- ja UPDATE-harjoitusta, niin ei jää luetun tiedon varaan että mitenkä ne ne toimii. Sitten vielä tasks 1:stä saatava pistemäärä on suhteettoman suuri sen jälkeen kun SQL-traineria on tahkonnut pari päivää ja kyselyt alkaa sujua. Vastaavasti tasks 5 (tietokantojen teoria) on vaikea ja sitä vastaavaa teoriaosuutta saa tankata aika moneen otteeseen ennen kuin kaikki tehtävät ratkeaa oikein. Pistejako noissä kahdessa (1 ja 5) voisi olla toisinpäin.
-* I would add more visualizations for joins and other concepts, although those can be found on the internet.
-* Jonkilaisia opetusvideoita/vast. omatoiminen on haastellinen mielestäni näissä koodaus asioissa, voisi olla edes jotain ohjaus/kysymys mahdollisuuksia.
-* Toinen ja kolmas normaalimuoto oli sivuutettu kurssimateriaalissa yhdellä lauseella, mutta silti tuntui, että ne olisivat olleet kurssilla opittavia asioita, koska niistä kysyttiin Tasks-tehtävässä. Eli ehkä nämäkin käsitteet voisi avata materiaalissa kunnolla (tarvittaessa viitaten ulkoisiin lähteisiin) tai sitten vaihtoehtoisesti poistaa ne tehtävistä.
-* Harjoituksissa enemmän Pythonia.
-* Olisi kivempi, jos toisen osan tehtävien automaattinen tarkistus olisi parempi; se usein antoi täydet pisteet selvästi väärille vastauksille, mikä johti epävarmuuteen vastausten pätevyydestä.
-* Task-tehtävistä Tietokantojen teoria -osion suorittaminen oli vaikeaa oppimateriaalin pohjalta. Tätä ei helpottanut, sivulla ei nähnyt, mihin oli jo vastannut oikein, vaan alkoi epäillä kaikkia vastauksiaan. Tätä osiota voisi siis parantaa.
-* Nothing comes to mind, making sqltrainer more visually pleasing
-* Jonkinlainen varoitus olisi paikallaan, että esim. SQL Trainer-tehtävissä 96 ja 97 tarvitaan kurssimateriaalin ulkopuolisia asioita
-* Some of the earlier assignments took almost no time or thought at all to complete.
-* Ei kehitysehdotuksia.
-* Tehtäviä varten materiaalissa pitäisi olla tosi paljon erilaisia esimerkkejä. Voisi olla esim. case-esimerkkejä. Voisi olla kiva, jos olisi esim SQL-Trainerin tyyppisesti jokin tehtävänanto, joka materiaalissa selkeästi ratkaistaan. Näitä pitäisi olla tosi paljon. Lisäksi luentoja pitäisi olla enemmän kuin aloitusluento. Löysin sattumalta kevät 2021 luentotallenteet ja ne olivat iso apu. Keväällä 2021 Tasks-tehtävät olivat kuitenkin erilaiset ja Tasks-tehtävien kanssa olinkin erityisen hukassa. Tasks-tehtävissä pitäisi mielestäni koodauksen ja SQL:n yhdistämisessä olla edes jokunen lämmittelytehtävä alkuun. Nyt ensimmäinen tehtävä vaadittavine hakuineen oli todella vaikea.
-* Toteutus mielestäni onnistunut. Onneksi discordissa Joel auttoi nopeasti aina kun oli kysyttävää.
-* More examples
-* selkeämmät määritelmät. Nyt materiaalit eivät tunnu vastaavan tehtävistä nouseviin kysymyksiin juri ollenkaan
-* Consider using the A+ system from Aalto. That way the materials and tasks can all be on the same page. More exercises involving inserting data into a DB with Python would be nice. Or generally more Python tasks.
-* I would add more videos to explain some tasks
-* Paljon on puhuttu Pythonin vs. Javan käyttämisestä kontrollikielenä moduuleissa (joissa sql:ää käytetään upotettuna kielenä).
-Parantaisin ohjeistusta näin: 
-(1) Jos olet suorittanut Pythonin, niin käytä mieluummin Pythonia.
-(2) Jos olet suorittanut Javan, niin
-2a. Kurssin ohjeet ovat Pythonilla, joten lienee helpompi käyttää Pythonia. Tätä ei kuitenkaan kannata todeta yliolkaisesti, vaan
-suositus on, että opiskelet samalla ainakin Python mooc peruskurssin aivan alkuaskelia mooc materiaaleista, jotta kokonaisuus selkiytyy.
-2b. Jos ehdottomasti haluat käyttää Javaa ja se luonnistuu sinulta näissä tehtävissä, niin käytä vaan.
-* Kurssimateriaali voisi paikoittain vastata paremmin vaatimuksia.
-* Kurssi oli kokonaisuutena hyvä ja kiinnostava ja opettaja oli Discordissa hyvin tavoitettavissa. SQL-trainerin tehtävät oli opettavaisia, kun systeemissä pystyi  tekemään omia kokeiluja ja rakentamaan kyselyä vaiheittain; oli siis oppimiselle edullista, että vastauskertoja ei ollut rajoitettu. Myös Task-tehtävät olivat hyödyllisiä. Ja kurssimateriaali verkkosivulla oli hyvä ja havainnoillinen. 
-Ilman Discordin kautta saatuja vinkkejä (vanhoista ja uusista keskusteluista) olisin kuitenkin ollut paljon paljon heikommilla ja saanut huomattavasti vähemmän tehtäviä ratkaistua. Samoin olisin ollut paljon paljon heikommilla jos ei olisi ollut tuota oman testaamisen ja hakemisen mahdollisuutta eli mahdollisuutta korjata ja lähettää vastaus aina uudestaan. Loppupään SQL-tehtävät kävivät myös huomattavan vaikeiksi.
-Olen sillä taustalla liikenteessä, että olen käynyt pari ohjelmoinnin peruskurssia Pythonilla (AMK ja LUT). Tällä osaamisella oli joitakin välejä, joihin saattoi välillä pudota, kun ei ole sellaista yleistä ATK-osaamista, kuten MS DOS:n käyttö. Tässä auttaisi, jos niitä apuvideoita, joita Discordista voi löytää, jos osaa sieltä etsiä, saisi jotenkin heti alussa paremmin esille. Toinen kehittämiskohde -subjektiivinen mielipiteeni- koskee MongoDB:tä. Aika tympeää opetella jotain kokonaan uutta kokonaisuutta pelkästään sen dokumentaatiosta, joka on paikoin vaikeatulkintaista. Eli siinä olisi ollut motivationaalista hyötyä, jos asiasta olisi ollut vaikka joku video. Ai niin, se vielä, että alikyselyasiaa olisi voinut avata vähän enemmän sekä aloitusvideolla että verkkomateriaalissa. Alikyselyjä on paljon erilaisia, mutta niitä on aika vaikea jäsentää. Eli siihen olisin kaivannut opetusta, että millaisia erityyppisiä alikyselyjä voi olla, ja miten niiden koodia oikein jäsennellään. 
-Mutta siis olen tyytyväinen kurssiin; se täytti tarkoituksensa.
-* Haastavimmat SQL-trainer tehtävät vaikuttivat kohtuullisen haastavilta ratkaistaviksi pelkästään kurssimateriaalin perusteella. Niiden ratkaisemiseksi voisi tarjota joitain yleisiä periaatteita (, jos sellaisia on olemassa). Muuten materiaalit ja tehtävät olivat mielestäni sopivan haastavia, mutta kuitenkin sellaisia, että niistä selviää. Lisäksi ensimmäisen Task-tehtävän kanssa oli aluksi haasteita, jotta sai tietokannan toimimaan Pythonin kautta. Tästä voisi lisätä esim. Taskin omalle sivulle myös lyhyen opastusvideon, jollainen kylläkin löytyi Discord-kanavalta.
-* Loppuihin task tehtäviin olisi hyvä saada video-ohjeistus
-* Lisään esimerkkejä tasks tehtäviä varten olisi kiva mutta on ihan hyvä siten miten kaikki on tehty nyt myös
-* Tehtäviä tukevaa aineistoa voisi mahdollisesti olla laajemmassa määrin.
-* 100 SQL exercises: some hints when code incorrect?
-* SQL-trainer järjestelmässä olevat tehtävät olivat todella hyviä, mutta kehittäisin task-järjestelmän tehtäviä. Tehtävänannot olivat hieman epäselviä. SQL:n liittämistä esim pythoniin olisin toivonut enemmän.
-* SQLTrainer tehtävät tehtävän 70 jälkeen olivat hyvin haastavia. Niihin olisin kaivannut tukea/vinkkiä
-* Yksin tehdessä vaikeammat SQL-tehtävät olivat välillä haastavia ja 10 niistä jäi tekemättä. En tiedä olisiko vihjeet hyvä asia tähän, kun kumminkin tarkoitus on oppia.
-* Jotain vinkkejä olisi voinut olla vaikeimpiin hakukyselyihin. Nyt ne jäivät kokonaan tekemättä kun ei keksinyt.
-* Ehkä enemmän esimerkkejä, siitä miten voi soveltaa tekniikoita tai enemmän teoriasta.
-* SQL Trainer on hyvä järjestelmä, mutta kun puolet kurssin pisteistä on sen ja itse kurssimateriaali sivun varassa, on vaikea saada vaikeimpia tehtäviä tehtyä. Ja mikäli haluaisin vain tietää jonkin tehtävän vastauksen (samalla toki luopua toivosta saada kyseisestä tehtävästä piste) sitä mahdollisuutta ei ole.
-* Olen käynyt vähän matkaa kurssia Jyväskylän yliopiston puolella ja siellä aloitettiin kurssi teoriasta. Pidän parempana lähestymistapana tehdä ensin SQL kyselyitä ja tutustua relaatiomalliin, kuin mikä JYssä oli. Tämän kurssin tehtävät ja materiaali olivat erinomaiset. Ehkä alkuluennolla oltaisiin voitu käydä hieman tarkemmin kurssin tavoitteet ja pyrkiä motivoimaan vielä lisää.
-* Vähän lisää syvemmän tason esimerkkejä auttamaan vaikeampien tehtävien kanssa. Videot tietokantojen toteutuksesta käytännössä olisi mukava.
-* Joidenkin task-tehtävien tarkastukseen toivoisi enemmän läpinäkyvyyttä. Etenkin Tietokannan suunnittelu -tehtävän ohjeistus jätti liikaa tulkinnanvaraa eikä tarkastuksen kriteereitä avattu tarpeeksi. Kyseinen tehtävä sinänsä hyvä ja mielenkiintoinen.
-* Hyvä kurssi. Ei tule mitään parannettavaa mieleen. Tietokantojen teoria osio oli mielestäni hieman vaikeaselkoinen, mutta tämä johtuu todennäköisesti siitä etten ole lukenut lukio-tason matematiikkaa.
-* Perhaps add more videotutorials.
-* Kurssilla voisi olla SQL Trainer tyyppinen sovellus missä voi helpommin käyttää SQL:ää. Esim voisi tehdä helposti jonkun taulun ja kirjoittaa sitä kautta hakuja ja muita. 60-100 SQL kysymyksiin olisi voinut olla enemmän apua.
-* Lisää videoita
-* Ei erityisemmin tule mieleen kehitettävää.
-* \+ SQLite on hyvä valinta. \+ Pienet koodaustehtävät olivat todella käytännöllisiä. Pelkkä SQL saattaisi jättää oppilaalle epäselväksi, miten teoriasta päästään käytännön ohjelmointiin. \+ SQL Trainer on erittäin viihdyttävä. Indeksien tärkeyttä voisi ehkä painottaa vielä enemmän. Jos mahdollista, olisi kiva jos SQL Traineriin lisättäisiin tehtäviä, joissa annetaan taulu ja kysely, ja tehtävänä on luoda indeksejä niin, että kyselystä tulee tehokas. Tai pelkkä taulu, ja tehtävänä olisi luoda sekä kysely että indeksit. En juurikaan lukenut materiaalia, joten siitä ei ole kommentteja.
-* Kurssin sql tehtävissä voisi olla laajempi määrä varioaatiota. Nyt 100 melko samanlaista tehtävää tuntuu melko puuduttavalta.
-* Perhaps more video lectures could have been helpful in some of the assignments.
-* Ehkä materiaalissa voisi olla vielä jokin yhteenveto tai sivu jossa kootaan eri komennot. Nyt joihinkin asioihin palaaminen oli hieman hakemista kun suoraan sisällyksen otsikoista ei enää muistanut, että missä kohtaa "tämä tietty juttu" mainittiin. Toki tälläisen muistilapun olisi voinut myös kirjoittaa itsellekin siinä kaiken lomassa. Noin muutoin materiaali siis oli oikein hyvä, sopivasti esimerkkejä mutta kuitenkin melko tiivis ja selkeä ja hyvin jäsennelty.
-* SQL Trainerin kanssa on helppo jäädä jumiin eri tehtävisää. Sitä voitaisiin jollain tapaa helpottaa.
-* Suurin osa materiaalista tuntui hyvin käsiä heiluttelevalta. Teoria itse tietokantojen toiminnasta oli mielestäni hyvin puutteellista; tiedän miten tehdä toimivia SQL-kyselyitä, mutta minulla on vain hämärä käsitys miksi ja miten ne toimivat. Miten indeksit oikeasti toimivat? Miten ne kannattaa muodostaa tietokannoissa joissa on esim. monen suhde moneen? Mitkä seikat hidastavat kyselyitä? Jne jne... Tuntuu että tiedän juuri ja juuri miten käyttää tietokantoja, mutta jos joutuisin käyttämään niitä oikeassa projektissa, törmäisin ongelmiin koska en tiedä mitä tietokanta oikeasti tekee.
-Tietokantojen teoria -luku on mielestäni hyvin heikko. Luvussa annetaan kasa määritelmiä mutta niitä ei juurikaan avata, eikä niistä näytetä mitään varsinaisia tuloksia tai todistuksia. Luvun tehtävissä myös kysytään 2. ja 3. normaalimuodosta, mutta luvussa selitetään vain 1. ja Boyce-Codd normaalimuodot. Ilman aiempaa matemaattista taustaani olisin todennäköisesti ollut hyvin eksyksissä kyseisen luvun suhteen.
-* Tasks tehtävät aavistuksen liian soveltavia
-* Osassa SQL-tehtävistä kysely "SELECT * FROM Taulu;" tuotti virheilmoituksen "Kyselysi palautti liian monta saraketta" tms. Olisi hyödyllistä pystyä käyttämään tämän tyyppistä kyselyä harjoitusmielessä ja katsoa, mitä se palauttaa. Loppupään tehtävissä se olikin mahdollista, mutta osassa tehtävistä minun piti luoda vastaavat taulukot SQLite-tulkkiin, jotta pystyin vapaasti tutkimaan erilaisia kyselyvaihtoehtoja.
-* Kaikkia SQL käskyjä joilla osa tehtävistä olisi ratkennut helpommin ei oltu kerrottu. Toki Googlailemalla löytyi helposti.
-* Transaktioista olisi voinut selittää yksityiskohtaisemmin, miten ne toimivat, kun kerran Tasks-tehtävässä piti niiden toimintaa ymmärtää. Materiaalista en itse ihan tajunnut, miksi ne toimivat niin kuin toimivat. Myös indeksit jäivät materiaalin pohjalta vähän epämääräisiksi. Mielestäni jos tehtävässä pitää selittää miksi jokin toimii, materiaalissa pitäisi olla kerrottu siitä tarpeeksi yksityiskohtaisesti.
-* I think the course was perfect to teach the basics of the databases.
-* Tekisin englannin kielisen version.
-* hyvä kurssi, en keksi parannettavaa
-* Komentoja, jotka helpottavat tehtäviä, voitaisiin edes mainita nimeltä kuten Exist ja Union.
-* Kurssi toimi mielestäni hyvänä johdantona tietokantojen ja SQL-kielen perusteisiin. Sivuston rakenne oli hyvä ja materiaali selkeää ja helppolukuista. Materiaalia olisi voinut olla hieman enemmänkin, joskin ymmärrettävästi sen tekeminen vie aikaa.
-* Esimerkkejä SQL-toteutuksista voisi olla vielä enemmän (esim. isompia kokonaisuuksia)
-* Lisää selityksiä sqltraineriin siitä, miten päädytään johonkin mallivastaukseen (varsinkin myöhempiin tehtäviin)
-* Hyvä kurssi. Tehtävät olivat alkuun helppoja jotta saatiin kerättyä vähän rutiinia ja sitten vaikeutuivat. Tehtävien pähkäily oli erittäin tehokasta opiskelua. SQL:stä jäi mielestäni puuttumaan mm. UNION ja INTERSECTION. Lisäksi erilaiset JOINit (LEFT, RIGHT, INNER, OUTER, CROSS, SELF) olisi voinut vielä vääntää rautalangasta esimerkkien ja Venn-diagrammien kera. Mielestäni kurssilla olisi voinut käsitellä vaikkapa lisämateriaalina enemmän erilaisia tietokantoja ja millaisia käytetään mihinkin sovellukseen. Toki on loogista että sql on pääosassa, mutta kurssin nimi oli kuitenkin tietokantojen perusteet eikä sql:n perusteet. Tietokantojen teoria osuudessa pitäisi mielestäni esittää täsmällisemmät määritelmät relaatiooperaatioille. Olin myös erittäin tyytyväinen ohjaukseen discordissa.
+
+* Kurssi oli hyvä!
+* Olisin opiskellut mielelläni kaikista aiheista lisää ja tehnyt vaikka kaksinkertaisen määrän tehtäviä, jos olisin saanut 10 op. Asiat käytiin ehkä hieman pintapuolisesti, mutta oli hauskaa ja opin paljon. 
+* Enemmän esimerkkejä vaikeammista sql-tehtävistä
+* Oppimista olisi tukenut jos kurssin jälkeen voisi katsoa vastaukset niihin tehtäviin joita ei saanut ratkaistua. Myöskin osa Task-tehtävistä vaati aika paljon Pythonin käyttöä sekä kertausta/opiskelua, mikä sinänsä oli mukavaa mutta ei varsinaisesti kait kurssin tavoite.
+* Not much to be honest, great course!
+* Selkeyttäisin ohjeita siihen, miten sql-tiedostoja käsitellään python-koodissa.
+* Hyppy ensimmäiseen Tasks-tehtävään oli huima, en tähän hätään osaa sanoa mitä muuttaisin
+* Hyvä kurssi, en suoralta kädeltä keksi parannettavaa!
+* Itseäni harmitti suuresti tehtävä- ja kysymysosiot, joista sai pisteitä vain jos kaikki osat oli oikein. Ymmärrän pointin tuossa (olisin mahdollisesti jättänyt etsimättä virheitä jos näin ei olisi ollut), mutta erityisesti teoriakysymyksissä se oli todella raskasta. Siltikin, hyvä opetusmetodi, mutta piinallinen. En ehdota sen poistamista, kunhan nurisen lämpimikseni koska kenttä on pakollinen.  Kehitysehdotuksia ei ole, kurssi on hyvä ja monipuolinen jo näin. 
+* Laajemmin materiaalia monen taulun kyselyistä; SQL Trainer tehtävissä 60-100 tarvittiin tekniikoita, joita ei omasta mielestäni käyty materiaaleissa kunnolla läpi. 
+* Oikein hyvä kurssi, jotkin asiat vaativat minulta hieman lisä opiskelua muista lähteistä. Mutta kurssin vaatimat asiat oli hyvin selitetty ja esitetty materiaalissa. Kurssin toteutus on oikein hyvä, ainut mitenkä voisi parantaa olisi jos tämänkin kurssin voisi suorittaa omalla tahdilla vuoden ympäri niinkuin ohjelmoinnin perusteet ja jatkokurssin. Ehdottomasti suosittelen muillekkin tietokannoista ja SQLästä kiinnostuneille.
+* Materiaaliin voisi laittaa esimerkin siitä mitä tapahtuu kun LEFT JOIN -syntaksia käytetään yhdessä pilkun ja mahdollisesti myös sulkeiden kanssa, esimerkiksi näin:  SELECT   A.nimi, COUNT(T.id), SUM(T.hinta) FROM   Asiakkaat A LEFT JOIN (Ostokset O, Tuotteet T) ON A.id = O.asiakas_id AND T.id = O.tuote_id GROUP BY   A.id;
+* Olisin kaivannut ehkä enemmän graafista materiaalia, erityisesti joidenkin lausekkeiden ymmärtäminen ja ajatteleminen olisi varmasti ollut helpompaa.
+* Hieman vähemmän toistoa SQL trainerissa tehdyissä tehtävissä
+* SQL-tehtävissä oli jyrkkä vaikeustason nousu tehtävän 60 jälkeen. Tätä voisi jotenkin loiventaa, kuten esimerkein tai vinkkejä haluttuun ratkaisutapaan.  Task-tehtävät olivat työläitä juuri sen takia että paljon aikaa kului tehtävänannon tulkitsemiseen. Ennenkuin ymmärsi mitä tehtävässä ajetaan takaa.
+* Olisin toivonut lisää linkkejä/viittauksia hyödyllisiin oheismateriaaleihin.
+* Opiskelumateriaalia ja erilaisia esimerkkejä voisi olla enemmän.
+* Ei tule mitään erityistä mieleen, tykkäsin kurssista. Discord-ryhmä oli hyödyllinen apuväline ja materiaalit olivat selkeitä 
+* Saattaa johtua siitä etten käyttänyt tarpeeksi aikaa kurssimateriaalin tutkimiseen, mutta en löytänyt vastauksia monivalintakysymyksiin tietokantojen matemaattisesta puolesta ja en myöskään tiedä missä olin väärässä, joten en voi lukea lisää aiheesta.  Joissakin tehtävissä meni helposti arvosana ja opintopisteet sekaisin, joka hämmensi fuksia. Myös miten oppilaan nimi ja opiskelijanumero on suhteessa toisiinsa on epäselvä.  Myös voi antaa esimerkkejä siitä, miten aikatauluttaa töiden tekeminen. Tämä ei toki avoimessa ole olennainen kaikille, mutta fuksina se auttaisi.
+* En keksi mitään kehitettävää, kurssi oli superhyvä!
+* En keksi kehitettävää, mielestäni kurssi on hyvin toteutettu ja sen suorittaminen oli mukavaa.
+* Kurssimateriaali voisi olla kattavampi ja enemmän esimerkkejä, kuin mitä nyt on materiaalissa. Videomateriaalia ei ollut linkitetty materiaaliin muuta kuin aloituspalaverista.
+* Vaikeimpien sql-kyselytehtävien ratkominen oli paikoin ylivoimaista. Materiaali ei tarjonnut riittävästi eväitä tähän ja ehkä oma käsitys oli asiasta vielä sen verran hatara että ahkera googlaaminenkaan ei tuottanut tulosta. En halunnut ottaa discordia käyttöön joten jäin paitsi vertaisavusta, mikä toki oma valintani. Aiemmissa mooc-kursseisssa käytössä on ollut.Telegram, olisi kiva jos näissä viestintäkanavavalinnoissa olisi yhtenäinen linja.
+* Mielestäni kurssi oli erinomaisesti järjestetty, ainakin tämmöiselle joka tykkää itsekseen opiskella. Harjoitustehtävät hyviä, ja mielestäni hyvin mitoitettuja. Opin paljon uutta vaikka suuri osa asiasta oli itselleni tuttua jo ennestään. Ehdottomasti plussaa myös siitä että tukea tehtäviin on saatavilla myös Discordissa. Ehkä ainoa mikä mietitytti oli NoSQL-tehtävien irrallisuus, kun niihin liittyvää teoriaa ei juuri esitelty. Jos asiat ovat uusia, jäänee opiskelijalle epäselväksi, miksi NoSQL-tietokantoja on edes kehitetty.
+* Materiaaleja olisi hyvä parantaa. Kielen logiikka jäi hieman epäselväksi ja opin sen kunnolla vasta, kun käytin muita resursseja.
+* En osaa sanoa
+* Sql-tehtäviin voisi olla enemmän käytännön esimerkkejä.
+* Ohjelmointitehtävien lisääminen voisi olla hyvä lisä.
+* En keksi kehitettävää. 
+* Lähes virheetön kurssi, en keksi mainittavaa parannuskohdetta.
+* Kurssi materiaalit olivat kohtalaiset, mutta tuntuivat riittämättömiltä vaikeimpiin sql-trainer tehtäviin.
+* Ehkä jotain videoluentoja? MongoDB jäi vähän hämäräksi itselle, vaikka yhtä vaille kaikki tehtävät teinkin.
+* Teoria/matematiikka jäi vähän epäselväksi materiaaleista/tehtävistä. Joku yhden luennon mittainen video auttaisi siinä valtavasti
+* Videomateriaalia voisi olla viiden minuutin edestä yksi aihetta kohti.
+* Joissain tehtävissä ohjeistus olisi voinut olla hieman ohjaavampi. Esim. jos jonkun tehtävän tulostuksessa on pakko käyttää Pythonin ominaisuuksia. Itse tulkitsin, että kun kerran on tietokantakurssista kyse, niin olisi "huijausta" käyttää Pytonia tulostuksen muotoilussa, mikä johti aivan turhaan tiedon etsimiseen ja pään seinään lyömiseen (def teacher_list()). 
+* SQL Trainer tehtävissä olisi mielestäni enemmän tarvetta tasaisemmalle vaikeustason nostolle. Nyt 60 ensimmäistä tehtävää menee materiaalin avulla, minkä jälkeen tuntui, että olisi viskottu altaan syvään päähän, kun opittu uimaan muutama metri.  Nykyisellä toteutustavalla viimeisenä Task-tehtävänä ollut MongoDB tuntui hyvin irralliselta osalta muusta kurssista. Lisäksi tehtävän tekemisessä häiritsi tulkin jatkuva yhteyden katkaiseminen, minkä myötä samat tiedot täytyi syöttää uudelleen ja uudelleen.
+* Kurssin asiat ytimekkäämmin? Jonkinlainen visuaalinen kohotus olisi myös hyvä. Selittävät videot kohdittain? Lisäksi joidenkin tasks-tehtävien ohjeita sai haeskella Discordista...
+* Mielestäni kurssi oli hyvä. En keksi kehitettävää.
+* Ihan loistava kurssi!
+* It is very good.
+* NoSQL tuli hieman puskista viimeiseen tehtävään, siihen olisi voinut olla hieman enemmän pohjustusta.
+* NoSQL voisi esitellä enemmän teoreettisesti
+* Lisää esimerkkejä materiaaliin, ehkä joku video aiheesta
+* Lisää tietoa matemaattisesta taustasta. Tehtävät 1-60 olivat mielestäni liian helppoja, niitä voisi vähän vaikeuttaa. Tasks-tehtävissä voisi olla hieman enemmän python-ohjelmointia, se oli mielestäni kivaa. NoSQL-tietokannoista olisin myös mielelläni lukenut materiaalista. Miksi niitä halutaan käyttää?
+* Ehkä muutamiin vaikeimpiin SQL Trainer tehtäviin hieman enemmän vinkkejä.
+* Kaikki oli hyvin.
+* Hmm, hankala sanoa mitään kehitysehdotuksia. Sen vain sanon että kurssi oli selkeästi haastavampi kuin ohjelmoinnin perus- ja jatkokurssi, koska minkäänlaisia visualisaattoreita ei ollut saatavilla.
+* NoSQL-tehtävä oli mielenkiintoinen osa Tasks-suorituksia ja olisin mieluusti voinut opiskella siihen liittyä asioita lisää.
+* Tarkempi palaute tehtäviä palauttaessa
+* osa kurssin tehtävistä oli vähän liian vaikeita omaan makuuni. SQL-trainerista sain vain vähän päälle tehtyä 70, mutta taskeista sain kuitenkin kaikki tehtyä.
+* Enemmän esimerkkejä koodeista sqlite3 ohjelmassa. Esimerkit ovat olleet aina kaikkein hyödyllisin tapa ymmärtää toimintoja. 
+* I'd give more concrete examples concerning the math part and some of the harder sql queries. 
+* Task-tehtävien 5. osassa (Tietokantojen teoria) kysymysten ja vastausvaihtoehtojen ymmärtäminen oli vaikeampaa kuin itse teorian ymmärtäminen. Varsinkin kaksinkertaiset kielteiset lauseet olivat hankalia eikä oikein mitanneet itse oppimista.
+* Olisi kiva, jos tehtävänä olisi suurempi tietokantaprojekti.
+* More examples on the text
+* Olisi kätevä jos jo kurssin teoriassa olisi koodiblokkeja joita voi itse testata ja muokata, vrt esim. DataCamp muoto. 
+* En osaa sanoa
+* Ilmoittelisin enemmän muillekin opintosuunnille, että tällaisia on menossa. Havaitsin kurssin olemassaolon vasta lokakuun alussa ja nopea toteutus oli aika stressaavaa.
+* Nykyiset ohjeet etenkin taskien osalta ei ole tarpeaksi selkeät. Minun mielestä pitäisi ottaa näiden osalta mallia ohjelmoinnin MOOCeissa jossa kädestä pitäen näytetäån miten järjestelmät asennetaan Windows/Mac/Linux. Nyt meni toista tuntia ihan vaan alkuun pääsemiseen. 
+* Mielestäni esim. tietokantojen suunnittelu -tehtävässä oli hieman kohtuutonta, että vasta kyselyistä sai pisteitä - itselläni ainakin meni itse kannan tekemiseen melko paljon aikaa, eikä siitä saanut yhtäkään pistettä. 
+* Lyhyitä videoluentoja/materiaaleja
+* Parempia ohjeita miten pääsee alkuun tehtävissä. Esim task 4. jouduin aika kauan googlailemaan miten saan sql toimimaan komentorivissä.
+* Useampi luento
+* Varsinkin loppupään SQL Trainer -tehtävät olivat todella kinkkisiä, joten olisi kiva, jos materiaalissa olisi muutama vaikeamman pään esimerkki lisää. Lisäksi monivalintatehtävää teoriasta oli melko vaikeaa tehdä pelkän kurssimateriaalin avulla, vaan piti tukeutua Googleen. Teoriaosio materiaalissa voisi siis olla hieman kattavampi.
+* En ole perehtynyt pedagogiikkaan tarpeeksi että osaisin mainita kattavia kehitysehdotuksia.
+* Lisäesimerkit tuskin ovat koskaan pahaksi? Mutta materiaalit olivat kyllä pätevät.
+* Allt var nog bra.
+* Ehkä vielä vähän selvennystä olisi kaivannut termistöön etenkin normaalimuotojen osalta teoriapuolella.
+* Voisi olla enemmän esimerkkejä, jotka helpottavat vaikeimpien SQL-tehtävien ratkomista. Task-tehtävistä ja SQL-tehtävistä, joita ei ole osannut, olisi hyvä saada mallivastaus esim. kurssin lopuksi.
+* Task -tehtävät 1 ja 2 (ja etenkin tuo jälkimmäinen) olivat vaikeita. Etenkin task2 ei olisi pystynyt tekemään pelkän materiaalin perusteella. Monesti tiesi mitä pitäisi tehdä mutta ei tiennyt miten. Aikaa meni hyvin paljon googlaamiseen. Onneksi apua sai ohjauksesta.  Kurssille kannattasi ottaa mukaan esim. zoom -luennot tai videotallenteet, joissa käytäisiin asioita läpi.  
+* Joku tietokantoja visualisoiva työkalu olisi hyväksi. Etenkin se, miten GROUP BY järjestely ja SUM,COUNT-funktiot laskevat sen jälkeen jäi minulle aika ajoin hämäräksi. Usein on vaikea mieltää, mitä kaikkea tulostustaulussa lopulta on ja se hämärtää oikeiden riippuvuuksien määrittämistä.  
+* Välillä tuntui että kurssimateriaalissa asioita oli selitetty mahdollisimman minimaalisesti, ja lisää tietoa piti hakea muualta. Materiaaleihin voisi myös lisätä reilusti lisää esimerkkejä. Yhtenä esimerkkinä 4. osiossa mainitaan ikkunafunktiot ja mitään esimerkkiä näistä ei ole, mutta SQL Trainer-tehtävissä niitä oli käytetty malliratkaisuissa.
+* SQL-Trainerissa tehtävien tekemistä helpottaisi hieman, jos tulostaulussa näkisi sarakkeiden nimet.
+* Olisi kiva, jos SQL Trainer-tehtävät tehtäisiin jonkin ladattavan tietokannan perusteella ja sitten voisi copypasteta omat SQL-koodit vastauskenttään. Trainer-näkymä on välillä aika häiritsevä, eikä kovin kätevä testailuun. 
+* Tasks-tehtävien arviointikriteereitä voisi parantaa, esimerkiksi 5-tehtävässä olisi voinut antaa pisteen jokaisesta oikeasta vastauksesta sen sijaan että antaa 5 pistettä jos on saanut osatehtävään kaikki oikeat vastaukset.
+* Joissain SQL-tehtävissä olisi voinut olla vinkki lähestymistavasta tai mallivastaus tehokkaasta tavasta toteuttaa kysely.
+* Olisin toivonut että materiaali olisi ollut paljon kattavampaa ja siinä olisi ollut enemmän esimerkkejä. Lisäksi olisin toivonut enemmän apua itse teknisiin asioihin, kuten esim. VS Coden asentaminen ja käyttöönotto.
+* Sql trainer tehtävät oli tosi vaikeita eikä ollut oikein tietoa tai materiaalia miten lähestyä tehtävää. Nro50 eteenpäin ihan random keksiikö ratkaisun heti vai ei ollenkaan. Mongodb tehtäviä ei tasks järjestelmä tarkistanut ja luulisi että sen voisi implementoida. Mongodb:n nettitulkkidisci koko ajan joka teki tehtävästä ärsyttävän.
+* Lisäisin tasks-tehtävien koodi-ikkunoihin napin sisällön automaattiseksi kopioimiseksi, jonka painaminen korvaisi tekstin maalaamisen ja kopioimisen käsin (tietyissä tehtävissä main-luokalle oli testauskoodi sekä lopullinen arviointikoodi, joiden välillä tuli toisinaan hypittyä edestakaisin).  Huomasin ratkaistuihin "SQL Trainer" -tehtäviin ilmestyvän mallivastaus-napin vasta aivan koko urakan loppupuolella, mikä jäi hieman harmittamaan minua. Mallivastauksen tarkastelu ja oman ratkaisun vertaaminen siihen nimittäin täydensi oppimista ratkaisevasti. Napista ei suinkaan tarvitse tehdä neon-väristä, mutta mainitsisin vähintään oppimateriaalissa neuvona ja suosituksena kyseisestä ominaisuudesta.
+* Tasks-tehtävissä oli kohta joka käsitteli aihetta, jota kurssimateriaalisssa ei ollut, mutta josta ei erikseen mainittu, että asia olisi pitänyt oppia jostain muualta (2. ja 3. normaalimuoto). Muissa tehtävissä, joissa tarvitsi ulkoisia materiaaleja se oli selkeästi mainittu.
+* I think that this is a good introductory course. It would be nice if sql trainer had linting and autofill
+* Materiaaleihin voisi sisältää enemmän esimerkkejä.
+* Yksi mahdollisuus parantaa kurssin materiaalia kauttaaltaan on lisätä visuaalista opetusmateriaalia. Tietokannat ovat varsin visuaalisesti hahmotettava kokonaisuus ja siksi materiaalissa olisi mielestäni paljonkin parantamisen potentiaalia tällä saralla. 
+* Laajentaisin kurssimateriaaliin oman termipankin jotta erilaisten komentojen haku olisi nopeampaa.
+* Koin aiempien toteutuksien luentotallenteen hyödyllisiksi - linkkaisin nämä kurssimateriaalisivulle. Päivittäisin myös SQLTrainerin ulkoasun käyttäjäystävällisemmäksi.
+* Task-tehtävien arviointi on täysi mysteeri. En edelleenkään saa task2:n tehtävistä pisteitä, vaikka olen tehnyt 10 pisteen edestä (5kpl) toimivia funktioita. En tiedä mitä voisin asialle tehdä ?? 
+* Tehtävänannoissa oli hieman epäselvyyksiä, joten niitä voisi kehittää vähän selkeämmiksi. Lisää tekniikoita osassa listojen vertailu -kohta oli todella epäselvä. Se jäi itselle hämärän peittoon.
+* Tasks tehtävään 2 olisi ehkä voinut antaa tarkemmat alustavat tiedot, miten tehtävää tulisi lähestyä. Muuten kurssi oli mielestäni toteutukseltaan täydellinen. 
+* Luennot olisivat mukavia.
+* Task tehtävistä olisi hieno saada mallivastauksia
+* Tasks 6 tuli hieman puskista kun ollaan koko muu kurssi väännetty SQL:ää. Olisi ehkä hyvä jos tästä olisi jokin ohje joko tekstinä tai videona kurssin omissa materiaaleissa. MongoDB:n dokumentoinnin kauttahan tehtävä ratkesi näppärästi mutta oli hieman yllättävää ettei kurssin omissa materiaaleissa sen enempää käsitelty noSQL-juttuja.
 
 ### Muita huomioita
 
-* Erinomainen kurssi kaiken kaikkiaan! Mukavan joustava ja mielenkiintoinen. Itsensä tarkistavat tehtävät joita saa kokeilla rajattomasti ovat aina mukavia.
-* Materiaali oli erittäin laadukas.
-* Tasks tehtävien aloittaminen oli haastavaa
-* SQL-trainerin tehtävät olivat erinomaosia ja tukivat oppimista!
-* Projektiluontoiset tehtävät ovat tämän kurssin parhaita tehtäviä. Näitä kannattaa vaalia tällä ja muillakin kursseilla. Hyvää kesän jatkoa.
-* Tämä oli oikein hyvä ja aiheeseen innostava kurssi! Toteutus tuki omaa oppimistapaani erinomaisesti.
-* SQL Trainer on mainio järjestelmä, jossa oli ilo tehdä tehtäviä. Vain yksi pieni käytettävyysparannusehddotus SQL Traineriin: sarakkeiden nimet näkyviin tulostaulukossa. Tämä auttaisi monimutkaisten JOIN:ien korjailussa :) Kiitos kurssista!
-* Olisin kaivannut lisää matematiikkaa ja tietokantojen teoriaa. Nyt tietokantojen teoria -osiota on aika vaikeaa ymmärtää, sillä niitä tietoja ei aktiivisesti treenata tai käytetä missään muualla. Itselleni olisi myös ollut helpompaa ymmärtää esim. miten monen taulukon kyselyt toimii jos olisin alusta asti nähnyt miten liitokset toimivat matemaattisesti.
-* Ei muita huomioita.
-* Thank you for this great course!
-* Iso kiitos nopeasta ja hyvästä avusta discordissa! Tykkäsin kurssista kyllä ja tehtäviä oli tarpeeksi eikä liikaa
+* hyvä kurssi, discord tuki todella hyvä!
+* Päädyin jostain syystä eräässä vaiheessa vanhalle task sivustolle ja olin saada sydärin (tämä siis ilmoittautumisen jälkeen), kun pisteitä ei näkynytkään. Ehkä vain tällaisena huomiona, en edes muista, mitä linkkiä käytin, että kaikki linkit esim. ilmoittautumisessa jne. on ajantasalla.
+* Tosi kiva, käytännönläheinen sisältö. Kaikki taidot heti käyttöön työelämässä. Erinomainen tuki chatissa,  vaikka kynnys siellä huuteluun aluksi itsellä ainakin korkea. En tiedä miten siellä tukisi myös sellaista kulttuuria, että opiskelijat keskustelisivat tehtävistä ideoita pallotellen eikä kysymyksiä osoitettaisi vain ohjaajille? Ehkä jotkut sovitut opiskelijoiden yhteisopiskeluajat, jolloin kannustettaisiin keskustelemaan tehtävistä yhdessä chatissa?
+* Kiitokset kivasta kurssista! Nämä verkon kautta itsenäisesti tehtävät kurssit ovat parhaita, opin paljon tehokkaammin kun pystyn keskittymään paremmin.
+* Kurssi oli hyvin tehty, mikä teki opiskelusta mukavaa!
+* Ero vaadittavissa pisteissä ja suorituksessa arvosanojen 4 ja 5 välillä oli aika huikea,etenkin kun tehtävät vaikeutuivat loppua kohti. Mutta pidin kurssista ja tehtävät olivat sopivan haastavia.
+* Vaikka sql on jollain tasolla tuttua, niin mielestäni kurssi opin silti lisää ja tehtävät olivat mukavan haastavia.
+* Helsingin yliopiston sivut avoimen tai MOOCin tai DEFAn opiskelijoille on todella sekava ja linkkeja sivuilla niin että helposti päätyy kiertämään kehää eikä löydä haluamaansa tietoa.
+* Kurssi oli mukava ja erityisesti tykkäsin, että mukaan oli otettu python tehtäviä. Näistä python tehtävistä sai paremman käsityksen mihin sql:ää voidaan hyödyntää.
+* Hyvä oli
+* Monissa Tasks-tehtävissä koodataan pythonilla. Jos tämä ei ole kurssin esitietovaatimuksissa, kurssi saattaa tuottaa yllätyksiä. En ole tosin varma onko se mainittu.
+* Kiitos! 
+* Discord-assarointi on todella hyvä, etenkin kun haulla löytää usein tarvitsemansa vinkin ihan ilman assarin häiritsemistäkin. 
+* Assarit Joel ja Janika olivat todella mukavia ja auttavaisia 
+* SQL trainerin jotkut tehtävät olivat todella haastavia. Ehkä 10/100:sta. Meinasi hermo mennä :) Mutta vastaavasti kehittivät ajattelua paljon. 
+* Kurssi antoi hyviä valmiuksia tietokantaosaamisen kehittämiseen!
+* Arvostan 3. tasks-tehtävän vapaamuotoisuutta toteutettavan ohjelman koodikielen ja teknologian suhteen. Pienimuotoinen omatoiminen suunnittelu teki hyvää.
+* Näin avoimen puolen opiskelijana tämä toteutustapa sopii itselleni loistavasti. Aikataulun ja tahdin voi valita vapaasti, kurssin puitteissa tosin.
+* Kurssialusta on hyvä ja selkeä ja tehtävien jako kahteen osaan oli myös järkevää. Osa SQL trainer -tehtävistä oli oikeasti TOSI vaikeita, mutta kai se on sitten hinta siitä että saa hyvän arvosanan :D Ja kyllähän apua on ollut saatavilla.
+* Opin paljon, kiitoksia!
+* Toivottavasti kurssin kevättoteutuksessa on enemmän kuin 1 ohjaaja ns. pajassa. Ohjaaja oli tosi mukava ja hyvä, mutta usein apua joutui jonottamaan, eikä meitä edes ollut yleensä kovin montaa paikalla.
+* Erittäin hyvä kurssi, toteutustapa oli minulle uusi mutta koin sen mielekkääksi
+* Loistava! SQL Trainerin pulmat olivat hauskoja pikku pähkinöitä joita oli helppo lähteä tekemään. Koko kurssin ajan tuntui että konkreettisesti edistyy kun näki pistesaldoja ja pieniä vihreitä merkintöjä. Kiitos tästä!
+* Thank you for the well structured and clear material and challenging hands on tasks. I learned so much! Have a nice Autumn. :) 
+* Thank you for the online course!
+* MongoDB tehtävät olivat mukava lisä!
+* Tosi kiva ja opettavainen kurssi, kunhan tekniset ohjeet saisivat kuntoon. 
+* Kurssilla oli melko suuri painotus kyselyiden tekemiseen tyylillä SELECT x FROM a, b (ja taulujen yhdistys WHERE:ssä) sen sijaan että käytettäisiin aina JOIN-syntaksia. Ymmärrän toki, että niissä harvoissa tapauksissa missä pitää saada 'karteesinen tulo' käytettäisiin ensin mainittua, mutta muuten lähes aina tuntuisi omaan näkemykseeni järkevämmältä käyttää suoraan JOIN:ia ja opettaa, että taulujen yhdistäminen lähtökohtaisesti tapahtuisi sillä.
+* Tasks-tehtävät oli tosi hyviä. 
