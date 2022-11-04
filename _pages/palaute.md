@@ -9,7 +9,7 @@ Kurssipalautteen antoi 99 opiskelijaa.
 
 Palautteen perusteella kurssin sisältöä pidetään hyödyllisenä ja toteutustapaa pidetään toimivana. Kehitettävää on kurssin materiaalissa, jonka toivottaisiin olevan nykyistä laajempi. Erityisesti toivottaisiin enemmän materiaalia vaikeimpien SQL-tehtävien tueksi sekä tietokantojen teoriaan ja NoSQL-tietokantoihin liittyvää materiaalia.
 
-Tällä kurssilla oli ensimmäistä kertaa käytössä tietokannan suunnitteluun liittyvä tehtävä, jossa toteuttaa Python-kielinen suunniteltua tietokantaa käyttävä ohjelma. Palautteen perusteella tämä on hyvä muutos verrattuna aiempaan tehtävään, jossa tietokannan rakenne tuli kuvata sanallisesti. Tämänkin tehtävän tueksi kuitenkin olisi hyvä olla enemmän materiaalia.
+Tällä kurssilla oli ensimmäistä kertaa käytössä tietokannan suunnitteluun liittyvä tehtävä, jossa tuli toteuttaa Python-kielinen suunniteltua tietokantaa käyttävä ohjelma. Palautteen perusteella tämä on hyvä muutos verrattuna aiempaan tehtävään, jossa tietokannan rakenne tuli kuvata sanallisesti. Tämänkin tehtävän tueksi kuitenkin olisi hyvä olla enemmän materiaalia.
 
 Tärkein kehityskohde kurssin seuraavia toteutuksia varten on tietokantojen teorian ja NoSQL-tietokantojen materiaalin ja tehtävien parantaminen. Vaikuttaa siltä, että nämä aiheet jäävät tällä hetkellä liian vähälle käsittelylle kurssilla. Palautteessa on myös monia pienempiä ehdotuksia, joita toteutetaan tulevaisuudessa.
 
