@@ -1,6 +1,5 @@
 ---
 title: Tulokset ja palaute
-hidden: true
 ---
 
 # Tulokset ja palaute
