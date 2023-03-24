@@ -9,7 +9,7 @@ Kurssipalautteen antoi 225 opiskelijaa.
 
 Palautteen perusteella kurssin nykyinen toteutus on toimiva, mutta siinä voi kuitenkin parantaa monia asioita. Kurssin materiaalia ja tehtäviä kehitetään tulevaisuudessa palautteen perusteella.
 
-Yksi tulevaisuuden kehityskohde on Tasks-tehtävien tarkastaminen. Tavoitteena on kehittää tarkastamista niin, että ratkaisuja testattaisiin perusteellisemmin. Tällä hetkellä esimerkiksi PostgreSQL-tehtävää ei testata suorittamalla kyselyjä, minkä vuoksi siitä saattaa saada pisteitä, vaikka kyselyt eivät olisi todellisuudessa toimivia.
+Yksi tulevaisuuden kehityskohde on Tasks-tehtävien tarkastaminen. Tavoitteena on kehittää tarkastamista niin, että ratkaisuja testattaisiin perusteellisemmin. Tällä hetkellä esimerkiksi MongoDB-tehtävää ei testata suorittamalla kyselyjä, minkä vuoksi siitä saattaa saada pisteitä, vaikka kyselyt eivät olisi todellisuudessa toimivia.
 
 Palautteen perusteella kurssin osana olevat videot ovat hyödyllisiä ja niitä toivotaan lisää. Tulevaisuudessa videoita on tarkoitus tehdä aiheista, jotka kokemuksen perusteella tuottavat vaikeuksia kurssin suorittamisessa. Yksi tällainen aihe on tietokantatiedoston käsittely ohjelmoinnissa.
 
