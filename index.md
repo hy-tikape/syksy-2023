@@ -11,7 +11,7 @@ Kesällä 2023 kurssi järjestetään samalla tavalla Helsingin yliopiston tutki
 
 ## Luennot ja ohjaus
 
-Kesällä 2023 kurssilla ei ole luentoja, vaan kurssi suoritetaan verkkomateriaalin perusteella.
+Kurssin aloitusluento järjestetään to 4.5.2023 klo 16:30–18:00 Zoomissa. [Zoom-linkki](https://helsinki.zoom.us/j/69309206783?pwd=UE8xbG1uYUpyVWQ1NFNiYUxodHY4QT09)
 
 Ohjausta järjestetään Discordissa, jossa voit keskustella kurssin järjestäjien ja muiden opiskelijoiden kanssa. [Liity ryhmään](https://study.cs.helsinki.fi/discord/join/tikape)
 
