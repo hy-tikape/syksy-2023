@@ -1,21 +1,19 @@
 ---
 layout: default
-title: Tietokantojen perusteet <br> kevät 2023
+title: Tietokantojen perusteet <br> kesä 2023
 ---
 
 # Tietoa kurssista
 
 _Tietokantojen perusteet_ on 5 op laajuinen tietojenkäsittelytieteen perusopintokurssi, joka esittelee suurten tietomäärien käsittelyyn liittyviä tekniikoita ja haasteita. Tutustumme kurssilla relaatiotietokantoihin ja niihin liittyvään SQL-kieleen.
 
-Keväällä 2023 kurssi järjestetään samalla tavalla Helsingin yliopiston tutkinto-opiskelijoille ja Avoimen yliopiston opiskelijoille. Ohjeet kurssisuorituksen rekisteröimiseen ilmestyvät kurssin aikana.
+Kesällä 2023 kurssi järjestetään samalla tavalla Helsingin yliopiston tutkinto-opiskelijoille ja Avoimen yliopiston opiskelijoille. Ohjeet kurssisuorituksen rekisteröimiseen ilmestyvät kurssin aikana.
 
 ## Luennot ja ohjaus
 
-Keväällä 2023 kurssilla ei ole luentoja, vaan kurssi suoritetaan verkkomateriaalin perusteella.
+Kesällä 2023 kurssilla ei ole luentoja, vaan kurssi suoritetaan verkkomateriaalin perusteella.
 
-Kurssin ohjausta järjestetään viikoittain ti 13–16 ja pe 13–16 Exactumin salissa BK107.
-
-Lisäksi ohjausta järjestetään Discordissa, jossa voit keskustella kurssin järjestäjien ja muiden opiskelijoiden kanssa. [Liity ryhmään](https://study.cs.helsinki.fi/discord/join/tikape)
+Ohjausta järjestetään Discordissa, jossa voit keskustella kurssin järjestäjien ja muiden opiskelijoiden kanssa. [Liity ryhmään](https://study.cs.helsinki.fi/discord/join/tikape)
 
 ## Tehtävät ja arvostelu
 
@@ -29,8 +27,8 @@ Arvosanarajat ovat:
 * 172–189 pistettä: 4
 * 190–200 pistettä: 5
 
-Kaikilla suorituksilla on yhteinen deadline su 12.3.2023 klo 23:59.
+Kaikilla suorituksilla on yhteinen deadline su 26.6.2023 klo 23:59.
 
 ## Yhteystiedot
 
-Kurssin luennoija keväällä 2023 on Antti Laaksonen. Voit ottaa yhteyttä lähettämällä [sähköpostia](mailto:ahslaaks@cs.helsinki.fi) tai viestin Discordissa.
+Kurssin luennoija kesällä 2023 on Antti Laaksonen. Voit ottaa yhteyttä lähettämällä [sähköpostia](mailto:ahslaaks@cs.helsinki.fi) tai viestin Discordissa.
