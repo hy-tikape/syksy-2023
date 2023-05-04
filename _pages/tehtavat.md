@@ -6,6 +6,8 @@ title: Tehtävät
 
 Kurssi suoritetaan ratkomalla SQL-tehtäviä ja Tasks-tehtäviä. Molemmat osasuoritukset tehdään itsenäisesti kurssin materiaalin ja muiden lähteiden avulla.
 
+Kaikissa tehtävissä voit lähettää vastauksia uudestaan ilman rajoituksia eikä yritysten määrä vaikuta pisteisiin.
+
 Kaikkien kurssin suoritusten deadline on ma 26.6.2023 klo 23:59.
 
 ## SQL-tehtävät
