@@ -5,15 +5,15 @@ hidden: true
 
 # Kurssin tulokset
 
-Kurssille osallistui 649 opiskelijaa, joista 305 (47.0 %) suoritti kurssin hyväksytysti.
+Kurssille osallistui 294 opiskelijaa, joista 117 (39.8 %) suoritti kurssin hyväksytysti.
 
 ## Arvosanajakauma
 
-* Arvosana 1: 29 opiskelijaa (9.5 %)
-* Arvosana 2: 25 opiskelijaa (8.2 %)
-* Arvosana 3: 42 opiskelijaa (13.8 %)
-* Arvosana 4: 68 opiskelijaa (22.3 %)
-* Arvosana 5: 141 opiskelijaa (46.2 %)
+* Arvosana 1: 8 opiskelijaa (6.8 %)
+* Arvosana 2: 17 opiskelijaa (14.5 %)
+* Arvosana 3: 22 opiskelijaa (18.8 %)
+* Arvosana 4: 28 opiskelijaa (23.9 %)
+* Arvosana 5: 42 opiskelijaa (35.9 %)
 
 ## Pistejakauma
 
