@@ -4,7 +4,7 @@ title: Tehtävät
 
 # Tehtävät
 
-Kurssi suoritetaan ratkomalla SQL-tehtäviä ja Tasks-tehtäviä. Molemmat osasuoritukset tehdään itsenäisesti kurssin materiaalin ja muiden lähteiden avulla.
+Kurssi suoritetaan ratkomalla SQL-tehtäviä ja Tasks-tehtäviä. Molemmat osasuoritukset tehdään itsenäisesti kurssin materiaalin ja muiden lähteiden avulla. Kurssilla ei ole sallittua palauttaa toisen henkilön tai tekoälyn antamia vastauksia.
 
 Kaikissa tehtävissä voit lähettää vastauksia uudestaan ilman rajoituksia eikä yritysten määrä vaikuta pisteisiin.
 
