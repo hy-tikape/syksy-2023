@@ -9,7 +9,7 @@ _Tietokantojen perusteet_ on 5 op laajuinen tietojenkäsittelytieteen perusopint
 
 Syksyn 2023 kurssi järjestetään samalla tavalla Helsingin yliopiston tutkinto-opiskelijoille ja Avoimen yliopiston opiskelijoille. Ohjeet kurssisuorituksen rekisteröimiseen ilmestyvät kurssin aikana.
 
-Ohjausta järjestetään Discordissa, jossa voit keskustella kurssin järjestäjien ja muiden opiskelijoiden kanssa. [Liity ryhmään](https://study.cs.helsinki.fi/discord/join/tikape)
+Ohjausta järjestetään [Discordissa](https://study.cs.helsinki.fi/discord/join/tikape), jossa voit keskustella kurssin järjestäjien ja muiden opiskelijoiden kanssa. Lisäksi järjestetään pajaohjausta 11.9. alkaen ma, to ja pe klo 13–16 Exactumin salissa BK107.
 
 ## Tehtävät ja arvostelu
 
