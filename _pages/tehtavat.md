@@ -18,12 +18,8 @@ Tehtävät 1–20 liittyvät materiaalin lukuun 2, tehtävät 21–40 liittyvät
 
 ## Tasks-tehtävät
 
-Kurssin Tasks-tehtävät julkaistaan syyskuun puoliväliin mennessä.
-
-<!--
 Kurssin muut tehtävät palautetaan [Tasks](https://tasks.withmooc.fi/tikape-syksy-2023)-järjestelmään. Näet jokaisessa tehtävässä, montako pistettä saat tehtävästä.
 
 Kun lähetät vastauksen, saat automaattisesti pisteet tehtävästä. Kurssin henkilökunta käy läpi tehtävät kurssin jälkeen, mutta pisteesi eivät muutu, ellet ole tahallisesti kiertänyt automaattista tarkastusta.
 
 Viimeisessä tehtävässä on ohjeet kurssisuorituksen rekisteröintiin, ja voit tarkastaa kurssin pistetilanteen sekä antaa kurssipalautteen.
--->
