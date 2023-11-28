@@ -7,7 +7,11 @@ hidden: true
 
 Kurssipalautteen antoi 146 opiskelijaa.
 
-TODO
+Tällä hetkellä monet kurssin opiskelijat ovat tyytyväisiä kurssiin, ja kurssin toteutustapa tulee säilymään samana myös tulevaisuudessa. Palautteessa on monia hyödyllisiä kommentteja ja ehdotuksia, joiden avulla kurssia pystytään kehittämään tulevaisuudessa.
+
+Palautteen perusteella kurssin suurin kehitystarve liittyy NoSQL-tietokantojen ja tietokantojen teorian opettamiseen. Ensi vuonna kurssin materiaali siirretään uudelle alustalle, minkä yhteydessä materiaalia kehitetään erityisesti näihin aiheisiin liittyen. Materiaaliin on tarkoitus myös täydentää joitakin SQL-kielen ominaisuuksia.
+
+Tulevaisuudessa on suunnitelmana myös kehittää kurssin tehtäviä. Ohjelmointitehtävät tulevat siirtymään toiselle alustalle, jossa on mahdollista suorittaa koodi ja testata sen toimintaa kattavammin. Kurssille on tulossa uudet tehtävät NoSQL-tietokantoihin ja tietokantojen teoriaan liittyen.
 
 ## Numeerinen palaute
 
