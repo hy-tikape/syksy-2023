@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>
+    
+    5. Tietokannat ohjelmoinnissa - Tietokantojen perusteet syksy 2023
+    
+  </title>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: {
+          scale: 87
+        }
+      });
+      </script>
+  <script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <link rel='stylesheet' type='text/css' media='screen' href=/syksy-2023/assets/css/main.css>
+  <link rel='stylesheet' type='text/css' media='screen' href=/syksy-2023/assets/css/syntax.css>
+
+  <script src=/syksy-2023/assets/js/main.js></script>
+
+</head>
+
+
+<body id="chapter">
+    
+<nav class="no-nav" id="side-nav" >
+    <button id="hide" onclick="hideSideNav()"> &#x2715;</button>
+    <button id="show" onclick="showSideNav()"> </button>
+    <h2>Tietokantojen perusteet syksy 2023</h2>
+    
+    <ol>
+
+        <li class="side-nav-obj" id="indexnav"><a href=/syksy-2023/index>Etusivu </a></li>
+        
+        
+        
+        <li class="side-nav-obj" id="Materiaalinav"><a href="/syksy-2023/pages/materiaali.html">Materiaali</a></li>
+        
+        
+        
+        
+        
+        <li class="side-nav-obj" id="Tehtävätnav"><a href="/syksy-2023/pages/tehtavat.html">Tehtävät</a></li>
+        
+        
+        
+        
+        
+        <li class="side-nav-obj" id="Tulokset ja palautenav"><a href="/syksy-2023/pages/tulokset_palaute.html">Tulokset ja palaute</a></li>
+        
+        
+        <br>
+        
+        
+        <li class="side-nav-obj" id="1. Johdantonav"><a href="/syksy-2023/content/osa-1/index.html">1. Johdanto</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Mikä on tietokantanav"><a href="/syksy-2023/content/osa-1/index.html#mikä-on-tietokanta">Mikä on tietokanta</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Tee-se-itse-tietokantanav"><a href="/syksy-2023/content/osa-1/index.html#tee-se-itse-tietokanta">Tee-se-itse-tietokanta</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Relaatiomalli ja SQL-kielinav"><a href="/syksy-2023/content/osa-1/index.html#relaatiomalli-ja-sql-kieli">Relaatiomalli ja SQL-kieli</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="2. SQL-kielen perusteetnav"><a href="/syksy-2023/content/osa-2/index.html">2. SQL-kielen perusteet</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Peruskomennotnav"><a href="/syksy-2023/content/osa-2/index.html#peruskomennot">Peruskomennot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Yhteenveto ja ryhmittelynav"><a href="/syksy-2023/content/osa-2/index.html#yhteenveto-ja-ryhmittely">Yhteenveto ja ryhmittely</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="SQLite-tietokantanav"><a href="/syksy-2023/content/osa-2/index.html#sqlite-tietokanta">SQLite-tietokanta</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="3. Monen taulun kyselytnav"><a href="/syksy-2023/content/osa-3/index.html">3. Monen taulun kyselyt</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Taulujen viittauksetnav"><a href="/syksy-2023/content/osa-3/index.html#taulujen-viittaukset">Taulujen viittaukset</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Liitostaulutnav"><a href="/syksy-2023/content/osa-3/index.html#liitostaulut">Liitostaulut</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="JOIN-syntaksinav"><a href="/syksy-2023/content/osa-3/index.html#join-syntaksi">JOIN-syntaksi</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="4. Lisää SQL-kielestänav"><a href="/syksy-2023/content/osa-4/index.html">4. Lisää SQL-kielestä</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Tyypit ja lausekkeetnav"><a href="/syksy-2023/content/osa-4/index.html#tyypit-ja-lausekkeet">Tyypit ja lausekkeet</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="NULL-arvotnav"><a href="/syksy-2023/content/osa-4/index.html#null-arvot">NULL-arvot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Tulosrivien rajausnav"><a href="/syksy-2023/content/osa-4/index.html#tulosrivien-rajaus">Tulosrivien rajaus</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Alikyselytnav"><a href="/syksy-2023/content/osa-4/index.html#alikyselyt">Alikyselyt</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Lisää tekniikoitanav"><a href="/syksy-2023/content/osa-4/index.html#lisää-tekniikoita">Lisää tekniikoita</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="5. Tietokannat ohjelmoinnissanav"><a href="/syksy-2023/content/osa-5/index.html">5. Tietokannat ohjelmoinnissa</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Tietokannan käyttäminennav"><a href="/syksy-2023/content/osa-5/index.html#tietokannan-käyttäminen">Tietokannan käyttäminen</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Käyttöliittymänav"><a href="/syksy-2023/content/osa-5/index.html#käyttöliittymä">Käyttöliittymä</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Mitä tehdä missäkinnav"><a href="/syksy-2023/content/osa-5/index.html#mitä-tehdä-missäkin">Mitä tehdä missäkin</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="6. Tietokannan suunnittelunav"><a href="/syksy-2023/content/osa-6/index.html">6. Tietokannan suunnittelu</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Suunnittelun periaatteetnav"><a href="/syksy-2023/content/osa-6/index.html#suunnittelun-periaatteet">Suunnittelun periaatteet</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Tiedon atomisuusnav"><a href="/syksy-2023/content/osa-6/index.html#tiedon-atomisuus">Tiedon atomisuus</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Toisteinen tietonav"><a href="/syksy-2023/content/osa-6/index.html#toisteinen-tieto">Toisteinen tieto</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Suunnitteluesimerkkinav"><a href="/syksy-2023/content/osa-6/index.html#suunnitteluesimerkki">Suunnitteluesimerkki</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="7. Tietokannan ominaisuudetnav"><a href="/syksy-2023/content/osa-7/index.html">7. Tietokannan ominaisuudet</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Tiedon eheysnav"><a href="/syksy-2023/content/osa-7/index.html#tiedon-eheys">Tiedon eheys</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Transaktiotnav"><a href="/syksy-2023/content/osa-7/index.html#transaktiot">Transaktiot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Kyselyjen suoritusnav"><a href="/syksy-2023/content/osa-7/index.html#kyselyjen-suoritus">Kyselyjen suoritus</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Indeksitnav"><a href="/syksy-2023/content/osa-7/index.html#indeksit">Indeksit</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="8. Tietokantojen teorianav"><a href="/syksy-2023/content/osa-8/index.html">8. Tietokantojen teoria</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Matemaattinen taustanav"><a href="/syksy-2023/content/osa-8/index.html#matemaattinen-tausta">Matemaattinen tausta</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Taulu relaationanav"><a href="/syksy-2023/content/osa-8/index.html#taulu-relaationa">Taulu relaationa</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Relaatio-operaatiotnav"><a href="/syksy-2023/content/osa-8/index.html#relaatio-operaatiot">Relaatio-operaatiot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Avaimet ja riippuvuudetnav"><a href="/syksy-2023/content/osa-8/index.html#avaimet-ja-riippuvuudet">Avaimet ja riippuvuudet</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Normaalimuodotnav"><a href="/syksy-2023/content/osa-8/index.html#normaalimuodot">Normaalimuodot</a></li>
+        
+            
+        
+        
+        
+    </ol>
+</nav>
+
+    <div class="page-content">
+        <div class="content">
+    <div class="table-of-content" id="tof" style="display: none;">
+    <ul>
+        
+        <li><a href="#tietokannan-käyttäminen">Tietokannan käyttäminen</a></li>
+        
+        <li><a href="#käyttöliittymä">Käyttöliittymä</a></li>
+        
+        <li><a href="#mitä-tehdä-missäkin">Mitä tehdä missäkin</a></li>
+        
+    </ul>
+</div>
+
+    <h1 id="5-tietokannat-ohjelmoinnissa">5. Tietokannat ohjelmoinnissa</h1>
+
+<h2 id="tietokannan-käyttäminen">Tietokannan käyttäminen</h2>
+
+<p>Python-kielen standardikirjastossa on moduuli <code class="language-html highlighter-rouge">sqlite3</code>, jonka avulla voidaan käyttää SQLite-tietokantaa. Seuraava koodi on pohja tietokannan käyttämiselle:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="kn">import</span> <span class="nn">sqlite3</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="s">"testi.db"</span><span class="p">)</span>
+<span class="n">db</span><span class="p">.</span><span class="n">isolation_level</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="c1"># tietokantakomennot
+</span></code></pre></div></div>
+
+<p>Koodi luo olion <code class="language-html highlighter-rouge">db</code>, jonka kautta voidaan käyttää tiedostossa <code class="language-html highlighter-rouge">testi.db</code> olevaa tietokantaa. Jos tiedostoa ei ole valmiina olemassa, tiedosto luodaan ja tietokanta on aluksi tyhjä.</p>
+
+<p>Koodi myös määrittelee, että <code class="language-html highlighter-rouge">isolation_level</code> on <code class="language-html highlighter-rouge">None</code>, mikä tarkoittaa, että kun tietokantaan tehdään muutoksia, ne tulevat voimaan välittömästi samaan tapaan kuin SQLite-tulkissa.</p>
+
+<h3 id="komentojen-suoritus">Komentojen suoritus</h3>
+
+<p>Metodi <code class="language-html highlighter-rouge">execute</code> suorittaa halutun SQL-komennon tietokannassa. Esimerkiksi seuraavat komennot luovat taulun <code class="language-html highlighter-rouge">Tuotteet</code> ja lisäävät sinne kolme riviä:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER)"</span><span class="p">)</span>
+
+<span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"INSERT INTO Tuotteet (nimi, hinta) VALUES ('selleri', 5)"</span><span class="p">)</span>
+<span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"INSERT INTO Tuotteet (nimi, hinta) VALUES ('nauris', 8)"</span><span class="p">)</span>
+<span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"INSERT INTO Tuotteet (nimi, hinta) VALUES ('lanttu', 4)"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Samalla tavalla voidaan myös hakea tietoa tietokannasta. Metodi <code class="language-html highlighter-rouge">fetchall</code> antaa kyselyn tulokset listana, jossa jokaista tulostaulun riviä vastaa tuple:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="n">tuotteet</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"SELECT nimi, hinta FROM Tuotteet"</span><span class="p">).</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tuotteet</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>[('selleri', 5), ('nauris', 8), ('lanttu', 4)]
+</code></pre></div></div>
+
+<p>Metodi <code class="language-html highlighter-rouge">fetchone</code> puolestaan palauttaa ensimmäisen tulosrivin tuplena. Tämä metodi on erityisen hyödyllinen kyselyissä, jotka palauttavat aina yhden rivin:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="n">hinta</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"SELECT MAX(hinta) FROM Tuotteet"</span><span class="p">).</span><span class="n">fetchone</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hinta</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>(8,)
+</code></pre></div></div>
+
+<h3 id="parametrit">Parametrit</h3>
+
+<p>Seuraava koodi kysyy käyttäjältä tuotteen nimeä ja ilmoittaa sitten tuotteen hinnan tai tiedon siitä, että tuotetta ei ole tietokannassa.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="n">nimi</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Tuotteen nimi: "</span><span class="p">)</span>
+<span class="n">hinta</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"SELECT hinta FROM Tuotteet WHERE nimi=?"</span><span class="p">,</span> <span class="p">[</span><span class="n">nimi</span><span class="p">]).</span><span class="n">fetchone</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">hinta</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Hinta on"</span><span class="p">,</span> <span class="n">hinta</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Ei löytynyt"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Tässä käyttäjän antama tieto yhdistetään kyselyyn <em>parametrina</em>: kyselyssä tiedon kohdalla on merkki <code class="language-html highlighter-rouge">?</code> ja sen kohdalle tuleva arvo annetaan listassa. Esimerkiksi jos käyttäjä antaa nimen <code class="language-html highlighter-rouge">nauris</code>, kyselystä tulee <code class="language-html highlighter-rouge">SELECT hinta FROM Tuotteet WHERE nimi='nauris'</code>. Tästä näkee, että merkkijonon tapauksessa <code class="language-html highlighter-rouge">'</code>-merkit lisätään automaattisesti oikealla tavalla.</p>
+
+<p>Seuraava koodi puolestaan lisää uuden tuotteen tietokantaan:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="n">nimi</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Tuotteen nimi: "</span><span class="p">)</span>
+<span class="n">hinta</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Tuotteen hinta: "</span><span class="p">)</span>
+<span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"INSERT INTO Tuotteet (nimi, hinta) VALUES (?, ?)"</span><span class="p">,</span> <span class="p">[</span><span class="n">nimi</span><span class="p">,</span> <span class="n">hinta</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>Kun parametreja on useita, ne tulevat listan arvoista samassa järjestyksessä.</p>
+
+<p>Parametrien avulla tieto liitetään varmasti oikealla tavalla SQL-komennon osaksi. Esimerkiksi jos tuotteen nimi on <code class="language-html highlighter-rouge">Pepe's Drink</code>, nimessä esiintyy <code class="language-html highlighter-rouge">'</code>-merkki ja oikea tapa ilmoittaa nimi komennossa on <code class="language-html highlighter-rouge">'Pepe\'s Drink'</code>. Kun tieto annetaan parametrina, tämä muutos tehdään automaattisesti. Erityisesti web-sovelluksissa parametrien käyttäminen estää myös SQL-injektion, jossa pahantahtoinen käyttäjä yrittää muuttaa komennon rakennetta. Tutustumme aiheeseen tarkemmin kurssilla <a href="https://hy-tsoha.github.io/materiaali/">Tietokantasovellus</a>.</p>
+
+<h3 id="virheenkäsittely">Virheenkäsittely</h3>
+
+<p>Tietokannassa suoritettava komento saattaa epäonnistua. Esimerkiksi seuraava komento epäonnistuu, jos taulu <code class="language-html highlighter-rouge">Tuotteet</code> on jo olemassa:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER)"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Tällöin ohjelman suoritus päättyy seuraavaan virheeseen:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>Traceback (most recent call last):
+  File "testi.py", line 6, in <span class="nt">&lt;module&gt;</span>
+    db.execute("CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER)")
+sqlite3.OperationalError: table Tuotteet already exists
+</code></pre></div></div>
+
+<p>Virhe voidaan käsitellä myös Python-koodin puolella vaikkapa näin:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">try</span><span class="p">:</span>
+    <span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER)"</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Taulua ei voitu luoda"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Tällöin ohjelman suoritus jatkuu eteenpäin eikä pääty virheeseen.</p>
+
+<h3 id="lisätyn-rivin-id-numero">Lisätyn rivin id-numero</h3>
+
+<p>Seuraava koodi ilmoittaa tietokantaan lisätyn rivin id-numeron:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="n">tulos</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"INSERT INTO Tuotteet (nimi, hinta) VALUES ('lanttu', 4)"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tulos</span><span class="p">.</span><span class="n">lastrowid</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Tästä on hyötyä, jos tietokantaan lisätään tämän jälkeen muita rivejä, joka viittaavat ensin lisättyyn riviin.</p>
+
+<h2 id="käyttöliittymä">Käyttöliittymä</h2>
+
+<p>Seuraava ohjelma toteuttaa käyttöliittymän, jonka avulla käyttäjä voi lisätä tietokantaan tuotteita, hakea tuotteen hinnan tai poistua ohjelmasta. Ohjelma olettaa, että tiedostossa <code class="language-html highlighter-rouge">testi.db</code> on valmiina olemassa taulu <code class="language-html highlighter-rouge">Tuotteet</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="kn">import</span> <span class="nn">sqlite3</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="s">"testi.db"</span><span class="p">)</span>
+<span class="n">db</span><span class="p">.</span><span class="n">isolation_level</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"1 - Lisää uusi tuote"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"2 - Hae tuotteen hinta"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"3 - Sulje ohjelma"</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">komento</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Anna komento: "</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">komento</span> <span class="o">==</span> <span class="s">"1"</span><span class="p">:</span>
+        <span class="n">nimi</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Tuotteen nimi: "</span><span class="p">)</span>
+        <span class="n">hinta</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Tuotteen hinta: "</span><span class="p">)</span>
+        <span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"INSERT INTO Tuotteet (nimi, hinta) VALUES (?,?)"</span><span class="p">,</span> <span class="p">[</span><span class="n">nimi</span><span class="p">,</span> <span class="n">hinta</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">komento</span> <span class="o">==</span> <span class="s">"2"</span><span class="p">:</span>
+        <span class="n">nimi</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Tuotteen nimi: "</span><span class="p">)</span>
+        <span class="n">hinta</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"SELECT hinta FROM Tuotteet WHERE nimi=?"</span><span class="p">,</span> <span class="p">[</span><span class="n">nimi</span><span class="p">]).</span><span class="n">fetchone</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">hinta</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Hinta on"</span><span class="p">,</span> <span class="n">hinta</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Ei löytynyt"</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">komento</span> <span class="o">==</span> <span class="s">"3"</span><span class="p">:</span>
+        <span class="k">break</span>
+</code></pre></div></div>
+
+<p>Ohjelman suoritus voi näyttää seuraavalta:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>1 - Lisää uusi tuote
+2 - Hae tuotteen hinta
+3 - Sulje ohjelma
+Anna komento: 2
+Tuotteen nimi: selleri
+Hinta on 5
+Anna komento: 2
+Tuotteen nimi: palsternakka
+Ei löytynyt
+Anna komento: 1
+Tuotteen nimi: palsternakka
+Tuotteen hinta: 9
+Anna komento: 2 
+Tuotteen nimi: palsternakka
+Hinta on 9
+Anna komento: 3
+</code></pre></div></div>
+
+<h3 id="koodin-rakenne-paremmaksi">Koodin rakenne paremmaksi</h3>
+
+<p>Usein pidetään hyvänä, että tietokannan käsittely ja käyttöliittymän toteutus ovat toisistaan erillään ohjelmassa. Seuraava koodi toteuttaa tämän niin, että moduuli <code class="language-html highlighter-rouge">tuotteet.py</code> käsittelee tietokantaa ja moduuli <code class="language-html highlighter-rouge">main.py</code> on pääohjelma, joka näyttää käyttöliittymän.</p>
+
+<p class="code-title">tuotteet.py</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="kn">import</span> <span class="nn">sqlite3</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="s">"testi.db"</span><span class="p">)</span>
+<span class="n">db</span><span class="p">.</span><span class="n">isolation_level</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="k">def</span> <span class="nf">lisaa_tuote</span><span class="p">(</span><span class="n">nimi</span><span class="p">,</span> <span class="n">hinta</span><span class="p">):</span>
+    <span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"INSERT INTO Tuotteet (nimi, hinta) VALUES (?,?)"</span><span class="p">,</span> <span class="p">[</span><span class="n">nimi</span><span class="p">,</span> <span class="n">hinta</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">hae_hinta</span><span class="p">(</span><span class="n">nimi</span><span class="p">):</span>
+    <span class="n">hinta</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"SELECT hinta FROM Tuotteet WHERE nimi=?"</span><span class="p">,</span> <span class="p">[</span><span class="n">nimi</span><span class="p">]).</span><span class="n">fetchone</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">hinta</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">hinta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</code></pre></div></div>
+
+<p class="code-title">main.py</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="kn">import</span> <span class="nn">tuotteet</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"1 - Lisää uusi tuote"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"2 - Hae tuotteen hinta"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"3 - Sulje ohjelma"</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">komento</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Anna komento: "</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">komento</span> <span class="o">==</span> <span class="s">"1"</span><span class="p">:</span>
+        <span class="n">nimi</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Tuotteen nimi: "</span><span class="p">)</span>
+        <span class="n">hinta</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Tuotteen hinta: "</span><span class="p">)</span>
+        <span class="n">tuotteet</span><span class="p">.</span><span class="n">lisaa_tuote</span><span class="p">(</span><span class="n">nimi</span><span class="p">,</span> <span class="n">hinta</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">komento</span> <span class="o">==</span> <span class="s">"2"</span><span class="p">:</span>
+        <span class="n">nimi</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Tuotteen nimi: "</span><span class="p">)</span>
+        <span class="n">hinta</span> <span class="o">=</span> <span class="n">tuotteet</span><span class="p">.</span><span class="n">hae_hinta</span><span class="p">(</span><span class="n">nimi</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">hinta</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Hinta on"</span><span class="p">,</span> <span class="n">hinta</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Ei löytynyt"</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">komento</span> <span class="o">==</span> <span class="s">"3"</span><span class="p">:</span>
+        <span class="k">break</span>
+</code></pre></div></div>
+
+<p>Tällaisessa toteutuksessa käyttöliittymässä ei näy mitään siitä, että tiedot tallennetaan nimenomaan SQLite-tietokantaan, vaan tallennustapaa voisi periaatteessa muuttaa ilman, että käyttöliittymään tulisi mitään muutoksia.</p>
+
+<p>Laajemmassa sovelluksessa olisi mielekästä jakaa tietokannan käsittely useampaan tiedostoon. Tällaisia sovelluksia tehdään myöhemmillä tietojenkäsittelytieteen kursseilla.</p>
+
+<h2 id="mitä-tehdä-missäkin">Mitä tehdä missäkin</h2>
+
+<p>Tietokannan ja koodin puolella voi usein tehdä samantapaisia asioita. Esimerkiksi seuraavassa on kaksi tapaa etsiä kalleimman tuotteen hinta tietokannasta:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="n">kallein</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"SELECT MAX(hinta) FROM Tuotteet"</span><span class="p">).</span><span class="n">fetchone</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="n">hinnat</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"SELECT hinta FROM Tuotteet"</span><span class="p">).</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">kallein</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">hinnat</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Ensimmäisessä tavassa haetaan kallein hinta tietokannan puolella SQL:n <code class="language-html highlighter-rouge">MAX</code>-funktiolla. Toisessa tavassa puolestaan haetaan tietokannasta kaikkien tuotteiden hinnat listaan ja etsitään sitten koodin puolella listan kallein hinta Pythonin <code class="language-html highlighter-rouge">max</code>-funktiolla.</p>
+
+<p>Näistä kahdesta tavasta ensimmäinen tapa on selkeästi parempi: ei ole hyvä hakea turhaa tietoa koodin puolelle ja tehdä käsittelyä, jonka voi tehdä helposti myös tietokannassa.</p>
+
+<p>Erityisesti kannattaa välttää tilannetta, jossa suoritetaan turhaan useita SQL-komentoja, vaikka vain yksi komento riittäisi. Esimerkiksi seuraavassa on huono tapa hakea tietokannasta jokaisen opettajan nimi ja kurssien määrä:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="n">opettajat</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"SELECT id, nimi FROM Opettajat"</span><span class="p">).</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">opettaja</span> <span class="ow">in</span> <span class="n">opettajat</span><span class="p">:</span>
+    <span class="n">maara</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"SELECT COUNT(*) FROM Kurssit WHERE opettaja_id=?"</span><span class="p">,</span> <span class="p">[</span><span class="n">opettaja</span><span class="p">[</span><span class="mi">0</span><span class="p">]]).</span><span class="n">fetchone</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">opettaja</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">maara</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>Koodi hakee ensin listaan kunkin opettajan id-numeron ja nimen ja sitten jokaisesta opettajasta erikseen niiden kurssien määrän, joita kyseinen opettaja opettaa. Koodi on kyllä toimiva mutta se tekee valtavasti turhaa työtä hakiessaan jokaisen tiedon erikseen. Parempi ratkaisu on muodostaa yksi kysely, joka hakee suoraan kaiken tarvittavan:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="n">tiedot</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"SELECT O.nimi, COUNT(*) FROM Opettajat O LEFT JOIN Kurssit K ON O.id = K.opettaja_id GROUP BY O.id"</span><span class="p">).</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">rivi</span> <span class="ow">in</span> <span class="n">tiedot</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">rivi</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">rivi</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>Tuloksena oleva kysely on monimutkaisempi, mutta sen avulla tietokantajärjestelmä voi optimoida kokonaisuutena halutun tiedon hakemisen ja toimittaa tiedon mahdollisimman tehokkaasti koodille.</p>
+
+<p>Kuitenkaan tietokannan puolella ei kannata tehdä kaikkea, mikä on teoriassa mahdollista. Tästä esimerkkinä on seuraava koodi, joka hakee tietokannasta tuloslistan, jossa pelaajat on järjestettynä pistemäärän ja nimen mukaan. Tulostuksessa pelaajista näytetään myös sija (1, 2, 3, jne.) listalla.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="n">lista</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"SELECT nimi, pisteet FROM Tulokset ORDER BY pisteet DESC, nimi"</span><span class="p">).</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">sija</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">tulos</span> <span class="ow">in</span> <span class="n">lista</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">sija</span><span class="p">,</span> <span class="n">tulos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tulos</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">sija</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<p>Tässä tapauksessa pelaajien sijat lasketaan koodin puolella muuttujan <code class="language-html highlighter-rouge">sija</code> avulla. Olisi mahdollista laatia monimutkainen SQL-kysely, jonka tulostaulussa on myös sijat, mutta tässä tapauksessa siitä tuskin olisi hyötyä, koska sijat voi laskea helposti ja tehokkaasti myös koodin puolella. Tällaisen kyselyn laatiminen on kuitenkin kiinnostava teoreettinen haaste, erityisesti käyttämättä ikkunafunktioita.</p>
+
+
+</div>
+        <div class="footer">
+    <img src=/syksy-2023/assets/img/HY_logo.png>
+    </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>
+    
+    7. Tietokannan ominaisuudet - Tietokantojen perusteet syksy 2023
+    
+  </title>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: {
+          scale: 87
+        }
+      });
+      </script>
+  <script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <link rel='stylesheet' type='text/css' media='screen' href=/syksy-2023/assets/css/main.css>
+  <link rel='stylesheet' type='text/css' media='screen' href=/syksy-2023/assets/css/syntax.css>
+
+  <script src=/syksy-2023/assets/js/main.js></script>
+
+</head>
+
+
+<body id="chapter">
+    
+<nav class="no-nav" id="side-nav" >
+    <button id="hide" onclick="hideSideNav()"> &#x2715;</button>
+    <button id="show" onclick="showSideNav()"> </button>
+    <h2>Tietokantojen perusteet syksy 2023</h2>
+    
+    <ol>
+
+        <li class="side-nav-obj" id="indexnav"><a href=/syksy-2023/index>Etusivu </a></li>
+        
+        
+        
+        <li class="side-nav-obj" id="Materiaalinav"><a href="/syksy-2023/pages/materiaali.html">Materiaali</a></li>
+        
+        
+        
+        
+        
+        <li class="side-nav-obj" id="Tehtävätnav"><a href="/syksy-2023/pages/tehtavat.html">Tehtävät</a></li>
+        
+        
+        
+        
+        
+        <li class="side-nav-obj" id="Tulokset ja palautenav"><a href="/syksy-2023/pages/tulokset_palaute.html">Tulokset ja palaute</a></li>
+        
+        
+        <br>
+        
+        
+        <li class="side-nav-obj" id="1. Johdantonav"><a href="/syksy-2023/content/osa-1/index.html">1. Johdanto</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Mikä on tietokantanav"><a href="/syksy-2023/content/osa-1/index.html#mikä-on-tietokanta">Mikä on tietokanta</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Tee-se-itse-tietokantanav"><a href="/syksy-2023/content/osa-1/index.html#tee-se-itse-tietokanta">Tee-se-itse-tietokanta</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Relaatiomalli ja SQL-kielinav"><a href="/syksy-2023/content/osa-1/index.html#relaatiomalli-ja-sql-kieli">Relaatiomalli ja SQL-kieli</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="2. SQL-kielen perusteetnav"><a href="/syksy-2023/content/osa-2/index.html">2. SQL-kielen perusteet</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Peruskomennotnav"><a href="/syksy-2023/content/osa-2/index.html#peruskomennot">Peruskomennot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Yhteenveto ja ryhmittelynav"><a href="/syksy-2023/content/osa-2/index.html#yhteenveto-ja-ryhmittely">Yhteenveto ja ryhmittely</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="SQLite-tietokantanav"><a href="/syksy-2023/content/osa-2/index.html#sqlite-tietokanta">SQLite-tietokanta</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="3. Monen taulun kyselytnav"><a href="/syksy-2023/content/osa-3/index.html">3. Monen taulun kyselyt</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Taulujen viittauksetnav"><a href="/syksy-2023/content/osa-3/index.html#taulujen-viittaukset">Taulujen viittaukset</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Liitostaulutnav"><a href="/syksy-2023/content/osa-3/index.html#liitostaulut">Liitostaulut</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="JOIN-syntaksinav"><a href="/syksy-2023/content/osa-3/index.html#join-syntaksi">JOIN-syntaksi</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="4. Lisää SQL-kielestänav"><a href="/syksy-2023/content/osa-4/index.html">4. Lisää SQL-kielestä</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Tyypit ja lausekkeetnav"><a href="/syksy-2023/content/osa-4/index.html#tyypit-ja-lausekkeet">Tyypit ja lausekkeet</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="NULL-arvotnav"><a href="/syksy-2023/content/osa-4/index.html#null-arvot">NULL-arvot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Tulosrivien rajausnav"><a href="/syksy-2023/content/osa-4/index.html#tulosrivien-rajaus">Tulosrivien rajaus</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Alikyselytnav"><a href="/syksy-2023/content/osa-4/index.html#alikyselyt">Alikyselyt</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Lisää tekniikoitanav"><a href="/syksy-2023/content/osa-4/index.html#lisää-tekniikoita">Lisää tekniikoita</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="5. Tietokannat ohjelmoinnissanav"><a href="/syksy-2023/content/osa-5/index.html">5. Tietokannat ohjelmoinnissa</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Tietokannan käyttäminennav"><a href="/syksy-2023/content/osa-5/index.html#tietokannan-käyttäminen">Tietokannan käyttäminen</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Käyttöliittymänav"><a href="/syksy-2023/content/osa-5/index.html#käyttöliittymä">Käyttöliittymä</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Mitä tehdä missäkinnav"><a href="/syksy-2023/content/osa-5/index.html#mitä-tehdä-missäkin">Mitä tehdä missäkin</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="6. Tietokannan suunnittelunav"><a href="/syksy-2023/content/osa-6/index.html">6. Tietokannan suunnittelu</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Suunnittelun periaatteetnav"><a href="/syksy-2023/content/osa-6/index.html#suunnittelun-periaatteet">Suunnittelun periaatteet</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Tiedon atomisuusnav"><a href="/syksy-2023/content/osa-6/index.html#tiedon-atomisuus">Tiedon atomisuus</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Toisteinen tietonav"><a href="/syksy-2023/content/osa-6/index.html#toisteinen-tieto">Toisteinen tieto</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Suunnitteluesimerkkinav"><a href="/syksy-2023/content/osa-6/index.html#suunnitteluesimerkki">Suunnitteluesimerkki</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="7. Tietokannan ominaisuudetnav"><a href="/syksy-2023/content/osa-7/index.html">7. Tietokannan ominaisuudet</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Tiedon eheysnav"><a href="/syksy-2023/content/osa-7/index.html#tiedon-eheys">Tiedon eheys</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Transaktiotnav"><a href="/syksy-2023/content/osa-7/index.html#transaktiot">Transaktiot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Kyselyjen suoritusnav"><a href="/syksy-2023/content/osa-7/index.html#kyselyjen-suoritus">Kyselyjen suoritus</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Indeksitnav"><a href="/syksy-2023/content/osa-7/index.html#indeksit">Indeksit</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="8. Tietokantojen teorianav"><a href="/syksy-2023/content/osa-8/index.html">8. Tietokantojen teoria</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Matemaattinen taustanav"><a href="/syksy-2023/content/osa-8/index.html#matemaattinen-tausta">Matemaattinen tausta</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Taulu relaationanav"><a href="/syksy-2023/content/osa-8/index.html#taulu-relaationa">Taulu relaationa</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Relaatio-operaatiotnav"><a href="/syksy-2023/content/osa-8/index.html#relaatio-operaatiot">Relaatio-operaatiot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Avaimet ja riippuvuudetnav"><a href="/syksy-2023/content/osa-8/index.html#avaimet-ja-riippuvuudet">Avaimet ja riippuvuudet</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Normaalimuodotnav"><a href="/syksy-2023/content/osa-8/index.html#normaalimuodot">Normaalimuodot</a></li>
+        
+            
+        
+        
+        
+    </ol>
+</nav>
+
+    <div class="page-content">
+        <div class="content">
+    <div class="table-of-content" id="tof" style="display: none;">
+    <ul>
+        
+        <li><a href="#tiedon-eheys">Tiedon eheys</a></li>
+        
+        <li><a href="#transaktiot">Transaktiot</a></li>
+        
+        <li><a href="#kyselyjen-suoritus">Kyselyjen suoritus</a></li>
+        
+        <li><a href="#indeksit">Indeksit</a></li>
+        
+    </ul>
+</div>
+
+    <h1 id="7-tietokannan-ominaisuudet">7. Tietokannan ominaisuudet</h1>
+
+<h2 id="tiedon-eheys">Tiedon eheys</h2>
+
+<p>Tiedon eheys viittaa siihen, että tietokannassa oleva tieto on paikkansa pitävää ja ristiriidatonta. Päävastuu tiedon laadusta on toki käyttäjällä tai sovelluksella, joka muuttaa tietokantaa, mutta myös tietokannan suunnittelija voi vaikuttaa asiaan lisäämällä tauluihin ehtoja, jotka tarkkailevat tietokantaan syötettävää tietoa.</p>
+
+<h3 id="sarakkeiden-ehdot">Sarakkeiden ehdot</h3>
+
+<p>Voimme määrittää taulun luonnin yhteydessä sarakkeisiin liittyviä ehtoja, joita tietokantajärjestelmä valvoo tiedon lisäämisen ja muuttamisen yhteydessä. Näillä ehdoilla voi ohjata sitä, millaista tietoa tietokantaan ilmestyy. Tyypillisiä ehtoja ovat seuraavat:</p>
+
+<h4 id="unique">UNIQUE</h4>
+
+<p>Ehto <code class="language-html highlighter-rouge">UNIQUE</code> tarkoittaa, että kyseisessä sarakkeessa tulee olla eri arvo joka rivillä. Esimerkiksi seuraavassa taulussa vaatimuksena on, että joka tuotteella on eri nimi:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Tuotteet</span> <span class="p">(</span><span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> <span class="n">nimi</span> <span class="nb">TEXT</span> <span class="k">UNIQUE</span><span class="p">,</span> <span class="n">hinta</span> <span class="nb">INTEGER</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Ehto <code class="language-html highlighter-rouge">UNIQUE</code> voi kohdistua myös useampaan sarakkeeseen, jolloin se merkitään erikseen sarakkeiden jälkeen:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Tuotteet</span> <span class="p">(</span><span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> <span class="n">nimi</span> <span class="nb">TEXT</span><span class="p">,</span> <span class="n">hinta</span> <span class="nb">INTEGER</span><span class="p">,</span> <span class="k">UNIQUE</span><span class="p">(</span><span class="n">nimi</span><span class="p">,</span><span class="n">hinta</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>Tämä tarkoittaa, että taulussa ei voi olla kahta riviä, joilla on sama nimi ja sama hinta.</p>
+
+<h4 id="not-null-ja-default">NOT NULL ja DEFAULT</h4>
+
+<p>Ehto <code class="language-html highlighter-rouge">NOT NULL</code> tarkoittaa, että kyseisessä sarakkeessa ei saa olla arvoa <code class="language-html highlighter-rouge">NULL</code>. Esimerkiksi seuraavassa taulussa tuotteen hinta ei saa olla tyhjä:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Tuotteet</span> <span class="p">(</span><span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> <span class="n">nimi</span> <span class="nb">TEXT</span><span class="p">,</span> <span class="n">hinta</span> <span class="nb">INTEGER</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Tähän liittyy myös määre <code class="language-html highlighter-rouge">DEFAULT</code>, jonka seurauksena sarake saa tietyn oletusarvon, jos sille ei anneta arvoa rivin lisäämisessä. Esimerkiksi voimme määrittää oletusarvon 0 näin:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Tuotteet</span> <span class="p">(</span><span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> <span class="n">nimi</span> <span class="nb">TEXT</span><span class="p">,</span> <span class="n">hinta</span> <span class="nb">INTEGER</span> <span class="k">DEFAULT</span> <span class="mi">0</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="check">CHECK</h4>
+
+<p>Yleisempi tapa luoda ehto on käyttää avainsanaa <code class="language-html highlighter-rouge">CHECK</code>, jonka jälkeen voi kirjoittaa minkä tahansa ehtolausekkeen. Esimerkiksi seuraava komento luo taulun tuotteista, jossa rivin ehtona on <code class="language-html highlighter-rouge">hinta &gt;= 0</code> eli hinta ei saa olla negatiivinen:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Tuotteet</span> <span class="p">(</span><span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> <span class="n">nimi</span> <span class="nb">TEXT</span><span class="p">,</span> <span class="n">hinta</span> <span class="nb">INTEGER</span><span class="p">,</span> <span class="k">CHECK</span> <span class="p">(</span><span class="n">hinta</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">));</span>
+</code></pre></div></div>
+
+<h3 id="ehtojen-valvonta">Ehtojen valvonta</h3>
+
+<p>Ehtojen hyötynä on, että tietokantajärjestelmä valvoo niitä ja kieltäytyy tekemästä lisäystä tai muutosta, joka rikkoisi ehdon. Seuraavassa on esimerkki tästä SQLitessä:</p>
+
+<div class="language-prompt highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="p">sqlite&gt; </span>CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER, CHECK (hinta &gt;= 0));
+<span class="p">sqlite&gt; </span>INSERT INTO Tuotteet(nimi,hinta) VALUES ('retiisi',4);
+<span class="p">sqlite&gt; </span>INSERT INTO Tuotteet(nimi,hinta) VALUES ('selleri',7);
+<span class="p">sqlite&gt; </span>INSERT INTO Tuotteet(nimi,hinta) VALUES ('nauris',-2);
+Error: CHECK constraint failed: Tuotteet
+<span class="p">sqlite&gt; </span>SELECT * FROM Tuotteet;
+1|retiisi|4
+2|selleri|7
+<span class="p">sqlite&gt; </span>UPDATE Tuotteet SET hinta=-2 WHERE id=2;
+Error: CHECK constraint failed: Tuotteet
+</code></pre></div></div>
+
+<p>Kun koetamme lisätä tauluun <code class="language-html highlighter-rouge">Tuotteet</code> rivin, jossa hinta on negatiivinen, tämä rikkoo ehdon <code class="language-html highlighter-rouge">hinta &gt;= 0</code> ja SQLite ei salli rivin lisäämistä vaan antaa virheen <code class="language-html highlighter-rouge">CHECK constraint failed: Tuotteet</code>. Samalla tavalla käy, jos koetamme muuttaa olemassa olevan rivin sarakkeen hinnan negatiiviseksi jälkeenpäin.</p>
+
+<h3 id="ehdot-ohjelmoinnissa">Ehdot ohjelmoinnissa</h3>
+
+<p>Seuraava esimerkki näyttää, miten taulussa olevaa ehtoa voidaan hyödyntää ohjelmoinnissa. Haluamme, että tietokannan jokaisella tuotteella on eri nimi, minkä vuoksi sarakkeessa <code class="language-html highlighter-rouge">nimi</code> on ehtona <code class="language-html highlighter-rouge">UNIQUE</code>:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Tuotteet</span> <span class="p">(</span><span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> <span class="n">nimi</span> <span class="nb">TEXT</span> <span class="k">UNIQUE</span><span class="p">,</span> <span class="n">hinta</span> <span class="nb">INTEGER</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Nyt tuotteen lisäämisen tietokantaan voi toteuttaa näin:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="n">nimi</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Anna nimi: "</span><span class="p">)</span>
+<span class="n">hinta</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Anna hinta: "</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"INSERT INTO Tuotteet (nimi, hinta) VALUES (?,?)"</span><span class="p">,</span> <span class="p">[</span><span class="n">nimi</span><span class="p">,</span> <span class="n">hinta</span><span class="p">])</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Lisäys ei onnistunut"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Tässä tapauksessa komento <code class="language-html highlighter-rouge">INSERT</code> epäonnistuu siinä tapauksessa, että taulussa on jo valmiina samanniminen tuote. Niinpä koodi voi <em>yrittää</em> lisätä tuotetta tutkimatta, onko tuote jo valmiina taulussa, ja jos tästä tulee virhe, tiedetään, että tuote oli valmiina.</p>
+
+<p>Tämä on selkeästi parempi toteutus kuin tutkia koodissa ennen lisäämistä <code class="language-html highlighter-rouge">SELECT</code>-kyselyllä, onko tuotetta jo tietokannassa, koska <code class="language-html highlighter-rouge">UNIQUE</code>-ehdon avulla tietokanta pitää luotettavasti huolen asiasta ja koodiakin tarvitaan vähemmän. Jos taulussa ei olisi <code class="language-html highlighter-rouge">UNIQUE</code>-ehtoa ja sovellus suorittaisi komennot <code class="language-html highlighter-rouge">SELECT</code> ja <code class="language-html highlighter-rouge">INSERT</code>, olisi mahdollista, että toinen tietokannan käyttäjä ehtisi lisätä välissä saman tuotteen tauluun, jolloin taulussa olisikin kaksi tuotetta samalla nimellä. Kuitenkaan <code class="language-html highlighter-rouge">UNIQUE</code>-ehdon kanssa näin ei voi tapahtua mitenkään.</p>
+
+<h3 id="viittausten-ehdot">Viittausten ehdot</h3>
+
+<p>Voimme liittää myös tauluihin ehtoja, jotka pitävät huolen siitä, että tauluissa olevat viittaukset viittaavat todellisiin riveihin. Tämä tapahtuu luomalla <em>viiteavain</em> (<em>foreign key</em>), joka ilmaisee, mihin taulussa oleva rivi viittaa.</p>
+
+<p>Tarkastellaan esimerkkinä seuraavia tauluja:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Opettajat</span> <span class="p">(</span><span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> <span class="n">nimi</span> <span class="nb">TEXT</span><span class="p">);</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Kurssit</span> <span class="p">(</span><span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> <span class="n">nimi</span> <span class="nb">TEXT</span><span class="p">,</span> <span class="n">opettaja_id</span> <span class="nb">INTEGER</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Tässä tarkoituksena on, että taulun <code class="language-html highlighter-rouge">Kurssit</code> sarake <code class="language-html highlighter-rouge">opettaja_id</code> viittaa taulun <code class="language-html highlighter-rouge">Opettajat</code> sarakkeeseen <code class="language-html highlighter-rouge">id</code>, mutta tietokannan käyttäjä voi antaa sarakkeen <code class="language-html highlighter-rouge">opettaja_id</code> arvoksi mitä tahansa (esim. luvun 123), jolloin tietokannan sisältö muuttuu epämääräiseksi.</p>
+
+<p>Voimme parantaa tilannetta kertomalla taulun <code class="language-html highlighter-rouge">Kurssit</code> luonnissa, että sarake <code class="language-html highlighter-rouge">opettaja_id</code> on viiteavain tauluun <code class="language-html highlighter-rouge">Opettajat</code>:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Kurssit</span> <span class="p">(</span><span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> <span class="n">nimi</span> <span class="nb">TEXT</span><span class="p">,</span> <span class="n">opettaja_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Opettajat</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Tämän jälkeen voimme luottaa siihen, että taulussa <code class="language-html highlighter-rouge">Kurssit</code> sarakkeen <code class="language-html highlighter-rouge">opettaja_id</code> arvot
+viittaavat todellisiin riveihin taulussa <code class="language-html highlighter-rouge">Opettajat</code>.</p>
+
+<p>Huomaa, että historiallisista syistä SQLite <em>ei</em> oletuksena valvo viiteavainten ehtoja, vaan meidän tulee ensin suorittaa seuraava komento:</p>
+
+<div class="language-prompt highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="p">sqlite&gt; </span>PRAGMA foreign_keys = ON;
+</code></pre></div></div>
+
+<p>Tämä on SQLiten erikoisuus, ja muissa tietokannoissa viiteavaimia valvotaan aina.</p>
+
+<p>Tässä on esimerkki viiteavaimen käyttämisestä:</p>
+
+<div class="language-prompt highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="p">sqlite&gt; </span>PRAGMA foreign_keys = ON;
+<span class="p">sqlite&gt; </span>CREATE TABLE Opettajat (id INTEGER PRIMARY KEY, nimi TEXT);
+<span class="p">sqlite&gt; </span>CREATE TABLE Kurssit (id INTEGER PRIMARY KEY, nimi TEXT, opettaja_id INTEGER
+   ...&gt;                       REFERENCES Opettajat);
+<span class="p">sqlite&gt; </span>INSERT INTO Opettajat (nimi) VALUES ('Kaila');
+<span class="p">sqlite&gt; </span>INSERT INTO Opettajat (nimi) VALUES ('Kivinen');
+<span class="p">sqlite&gt; </span>SELECT * FROM Opettajat;
+1|Kaila
+2|Kivinen
+<span class="p">sqlite&gt; </span>INSERT INTO Kurssit (nimi, opettaja_id) VALUES ('Laskennan mallit',2);
+<span class="p">sqlite&gt; </span>INSERT INTO Kurssit (nimi, opettaja_id) VALUES ('Ohjelmoinnin perusteet',123);
+Error: FOREIGN KEY constraint failed   
+</code></pre></div></div>
+
+<p>Taulussa <code class="language-html highlighter-rouge">Opettaja</code> on kaksi opettajaa, joiden id-numerot ovat 1 ja 2. Niinpä kun koetamme lisätä tauluun <code class="language-html highlighter-rouge">Kurssit</code> rivin, jossa <code class="language-html highlighter-rouge">opettaja_id</code> on 123, SQLite ei salli tätä vaan saamme virheilmoituksen <code class="language-html highlighter-rouge">FOREIGN KEY constraint failed</code>.</p>
+
+<h3 id="viittaukset-ja-poistot">Viittaukset ja poistot</h3>
+
+<p>Viittausten ehtoihin liittyy tavallisia sarakkeiden ehtoja mutkikkaampia tilanteita, koska viittaukset ovat kahden taulun välisiä. Erityisesti mitä tapahtuu, jos taulusta yritetään poistaa rivi, johon viitataan toisen taulun rivillä?</p>
+
+<p>Yleensä oletuksena tietokannoissa riviä ei voi poistaa, jos siihen on viittaus muualta. Esimerkiksi jos koetamme äskeisen esimerkin päätteeksi poistaa taulusta <code class="language-html highlighter-rouge">Opettajat</code> rivin 2, tämä ei onnistu, koska siihen viitataan taulussa <code class="language-html highlighter-rouge">Kurssit</code>:</p>
+
+<div class="language-prompt highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="p">sqlite&gt; </span>DELETE FROM Opettajat WHERE id=2;
+Error: FOREIGN KEY constraint failed
+</code></pre></div></div>
+
+<p>Halutessamme voimme kuitenkin määrittää taulun luonnissa tarkemmin, mitä tapahtuu tässä tilanteessa. Esimerkiksi yksi vaihtoehto on <code class="language-html highlighter-rouge">ON DELETE CASCADE</code>, mikä tarkoittaa, että rivin poistuessa myös siihen viittaavat rivit poistetaan. Saamme tämän aikaan näin:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Kurssit</span> <span class="p">(</span><span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> <span class="n">nimi</span> <span class="nb">TEXT</span><span class="p">,</span>
+                      <span class="n">opettaja_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Opettajat</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">CASCADE</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Nyt jos tietokannasta poistetaan opettaja, niin samalla poistetaan automaattisesti kaikki kurssit, joita hän opettaa. Tämä voi kuitenkin olla kyseenalainen vaihtoehto, koska tämän seurauksena tietokannan tauluista voi kadota yllättäen tietoa.</p>
+
+<p>Mahdollisia vaihtoehtoja <code class="language-html highlighter-rouge">ON DELETE</code> -osassa ovat:</p>
+
+<ul>
+  <li><code class="language-html highlighter-rouge">NO ACTION</code>: “älä tee mitään” (oletus)</li>
+  <li><code class="language-html highlighter-rouge">RESTRICT</code>: estä poistaminen</li>
+  <li><code class="language-html highlighter-rouge">CASCADE</code>: poista myös viittaavat rivit</li>
+  <li><code class="language-html highlighter-rouge">SET NULL</code>: muuta viittaukset arvoksi <code class="language-html highlighter-rouge">NULL</code></li>
+  <li><code class="language-html highlighter-rouge">SET DEFAULT</code>: muuta viittaukset oletusarvoksi</li>
+</ul>
+
+<p>Hämmentävä seikka on, että myös oletusvaihtoehto <code class="language-html highlighter-rouge">NO ACTION</code> estää rivin poistamisen, vaikka nimestä voisi päätellä muuta. Vaihtoehdot <code class="language-html highlighter-rouge">NO ACTION</code> ja <code class="language-html highlighter-rouge">RESTRICT</code> toimivat käytännössä lähes samalla tavalla, mutta tietokannasta riippuen niiden toiminnassa voi olla eroja joissain erikoistilanteissa.</p>
+
+<h2 id="transaktiot">Transaktiot</h2>
+
+<p><em>Transaktio</em> on joukko peräkkäisiä SQL-komentoja, jotka tietokantajärjestelmä lupaa suorittaa yhtenä kokonaisuutena. Tietokannan käyttäjä voi luottaa siihen, että joko (1) kaikki komennot suoritetaan ja muutokset jäävät pysyvästi tietokantaan tai (2) transaktio keskeytyy eivätkä komennot aiheuta mitään muutoksia tietokantaan.</p>
+
+<p>Transaktioiden yhteydessä esiintyy usein ihanteena kirjainyhdistelmä <em>ACID</em>, joka tulee seuraavista sanoista:</p>
+
+<ul>
+  <li><em>Atomicity</em>: Transaktiossa olevat komennot suoritetaan
+yhtenä kokonaisuutena.</li>
+  <li><em>Consistency</em>: Transaktio säilyttää tietokannan sisällön eheänä.</li>
+  <li><em>Isolation</em>: Transaktiot suoritetaan eristyksessä toisistaan.</li>
+  <li><em>Durability</em>: Loppuun viedyn transaktion tekemät muutokset jäävät pysyviksi.</li>
+</ul>
+
+<h3 id="transaktion-vaiheet">Transaktion vaiheet</h3>
+
+<p>Itse asiassa transaktio on hyvin arkipäiväinen asia tietokannan käyttämisessä, sillä oletuksena <em>jokainen</em> suoritettava SQL-komento on oma transaktionsa. Tarkastellaan esimerkiksi seuraavaa komentoa, joka kasvattaa jokaisen tuotteen hintaa yhdellä:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">UPDATE</span> <span class="n">Tuotteet</span> <span class="k">SET</span> <span class="n">hinta</span><span class="o">=</span><span class="n">hinta</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Koska komento suoritetaan transaktiona, voimme luottaa siihen, että joko jokaisen tuotteen hinta todella kasvaa yhdellä tai sitten minkään tuotteen hinta ei muutu. Jälkimmäinen voi tapahtua esimerkiksi silloin, kun sähköt katkeavat kesken päivityksen. Siinäkään tapauksessa ei siis voi käydä niin, että vain <em>osa</em> hinnoista muuttuu.</p>
+
+<p>Usein kuitenkin sana transaktio viittaa erityisesti siihen, että kokonaisuuteen kuuluu useampi SQL-komento. Tällöin annamme ensin komennon <code class="language-html highlighter-rouge">BEGIN</code>, joka aloittaa transaktion, sitten kaikki transaktioon kuuluvat komennot tavalliseen tapaan ja lopuksi komennon <code class="language-html highlighter-rouge">COMMIT</code>, joka päättää transaktion.</p>
+
+<p>Klassinen esimerkki transaktiosta on tilanne, jossa pankissa siirretään rahaa tililtä toiselle. Esimerkiksi seuraava transaktio siirtää 100 euroa Maijan tililtä Uolevin tilille:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">BEGIN</span><span class="p">;</span>
+<span class="k">UPDATE</span> <span class="n">Tilit</span> <span class="k">SET</span> <span class="n">saldo</span><span class="o">=</span><span class="n">saldo</span><span class="o">-</span><span class="mi">100</span> <span class="k">WHERE</span> <span class="n">omistaja</span><span class="o">=</span><span class="s1">'Maija'</span><span class="p">;</span>
+<span class="k">UPDATE</span> <span class="n">Tilit</span> <span class="k">SET</span> <span class="n">saldo</span><span class="o">=</span><span class="n">saldo</span><span class="o">+</span><span class="mi">100</span> <span class="k">WHERE</span> <span class="n">omistaja</span><span class="o">=</span><span class="s1">'Uolevi'</span><span class="p">;</span>
+<span class="k">COMMIT</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Transaktion ideana on, että mitään pysyvää muutosta ei tapahdu ennen komentoa <code class="language-html highlighter-rouge">COMMIT</code>. Niinpä yllä olevassa esimerkissä ei ole mahdollista, että Maija menettäisi 100 euroa mutta Uolevi ei saisi mitään. Joko kummankin tilin saldo muuttuu ja rahat siirtyvät onnistuneesti tai molemmat saldot säilyvät entisellään.</p>
+
+<p>Jos transaktio keskeytyy jostain syystä ennen komentoa <code class="language-html highlighter-rouge">COMMIT</code>, kaikki transaktiossa tehdyt muutokset peruuntuvat. Yksi syy transaktion keskeytymiseen on jokin häiriö tietokoneen toiminnassa (kuten sähköjen katkeaminen), mutta voimme myös itse halutessamme keskeyttää transaktion antamalla komennon <code class="language-html highlighter-rouge">ROLLBACK</code>.</p>
+
+<h3 id="transaktioiden-kokeilu">Transaktioiden kokeilu</h3>
+
+<p>Hyvä tapa saada ymmärrystä transaktioista on kokeilla käytännössä, miten ne toimivat. Tässä on esimerkkinä yksi keskustelu SQLiten kanssa:</p>
+
+<div class="language-prompt highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="p">sqlite&gt; </span>CREATE TABLE Tilit (id INTEGER PRIMARY KEY, omistaja TEXT, saldo INTEGER);
+<span class="p">sqlite&gt; </span>INSERT INTO Tilit (omistaja,saldo) VALUES ('Uolevi',350);
+<span class="p">sqlite&gt; </span>INSERT INTO Tilit (omistaja,saldo) VALUES ('Maija',600);
+<span class="p">sqlite&gt; </span>SELECT * FROM Tilit;
+1|Uolevi|350
+2|Maija|600
+<span class="p">sqlite&gt; </span>BEGIN;
+<span class="p">sqlite&gt; </span>UPDATE Tilit SET saldo=saldo-100 WHERE omistaja='Maija';
+<span class="p">sqlite&gt; </span>SELECT * FROM Tilit;
+1|Uolevi|350
+2|Maija|500
+<span class="p">sqlite&gt; </span>ROLLBACK;
+<span class="p">sqlite&gt; </span>SELECT * FROM Tilit;
+1|Uolevi|350
+2|Maija|600
+<span class="p">sqlite&gt; </span>BEGIN;
+<span class="p">sqlite&gt; </span>UPDATE Tilit SET saldo=saldo-100 WHERE omistaja='Maija';
+<span class="p">sqlite&gt; </span>UPDATE Tilit SET saldo=saldo+100 WHERE omistaja='Uolevi';
+<span class="p">sqlite&gt; </span>COMMIT;
+<span class="p">sqlite&gt; </span>SELECT * FROM Tilit;
+1|Uolevi|450
+2|Maija|500
+</code></pre></div></div>
+
+<p>Alkutilanteessa Uolevin tilillä on 350 euroa ja Maijan tilillä on 600 euroa. Ensimmäisessä transaktiossa poistamme ensin Maijan tililtä 100 euroa, mutta sen jälkeen tulemme toisiin ajatuksiin ja keskeytämme transaktion. Niinpä transaktiossa tehty muutos peruuntuu ja tilien saldot ovat samat kuin alkutilanteessa. Toisessa transaktiossa viemme kuitenkin transaktion loppuun, minkä seurauksena Uolevin tilillä on 450 euroa ja Maijan tilillä on 500 euroa.</p>
+
+<p>Huomaa, että transaktion sisällä muutokset kyllä näkyvät, vaikka niitä ei olisi tehty vielä pysyvästi tietokantaan. Esimerkiksi ensimmäisen transaktion <code class="language-html highlighter-rouge">SELECT</code>-kysely antaa Maijan tilin saldoksi 500 euroa, koska edellinen <code class="language-html highlighter-rouge">UPDATE</code>-komento muutti saldoa.</p>
+
+<h3 id="transaktiot-ohjelmoinnissa">Transaktiot ohjelmoinnissa</h3>
+
+<p>Transaktiokomentoja (<code class="language-html highlighter-rouge">BEGIN</code>, <code class="language-html highlighter-rouge">COMMIT</code>, jne.) voi suorittaa ohjelmoinnissa samaan tapaan kuin muitakin SQL-komentoja. Esimerkiksi seuraava koodi lisää tauluun <code class="language-html highlighter-rouge">Tuotteet</code> tuhat riviä for-silmukassa yhden transaktion sisällä:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"BEGIN"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"INSERT INTO Tuotteet (nimi, hinta) VALUES (?,?)"</span><span class="p">,</span> <span class="p">[</span><span class="s">"tuote"</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"COMMIT"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Koska koodi on transaktion sisällä, koodi joko lisää kaikki rivit tietokantaan tai ei yhtään riviä, jos transaktio epäonnistuu jostain syystä.</p>
+
+<p>Tässä tapauksessa transaktion sivuvaikutuksena on myös, että koodi toimii nopeammin, koska jokaista riviä ei lisätä erillisen transaktion sisällä vaan lisäys tapahtuu kokonaisuutena. Tämä auttaa tietokantaa toteuttamaan rivien lisääminen tehokkaammin.</p>
+
+<h3 id="rinnakkaiset-transaktiot">Rinnakkaiset transaktiot</h3>
+
+<p>Lisämaustetta transaktioiden käsittelyyn tuo se, että tietokannalla voi olla useita käyttäjiä,
+joilla on meneillään samanaikaisia transaktioita. Missä määrin eri käyttäjien transaktiot tulisi eristää toisistaan?</p>
+
+<p>Tämä on kysymys, johon ei ole yhtä oikeaa vastausta, vaan vastaus riippuu käyttötilanteesta ja myös tietokannan ominaisuuksista. Tavallaan paras ratkaisu olisi eristää transaktiot täydellisesti toisistaan, mutta toisaalta tämä voi haitata tietokannan käyttämistä.</p>
+
+<p>SQL-standardi määrittelee transaktioiden eristystasot seuraavasti:</p>
+
+<h4 id="taso-1-read-uncommitted">Taso 1 (read uncommitted)</h4>
+
+<p>On sallittua, että transaktio pystyy näkemään toisen transaktion tekemän muutoksen, vaikka toista transaktiota ei ole viety loppuun.</p>
+
+<h4 id="taso-2-read-committed">Taso 2 (read committed)</h4>
+
+<p>Toisin kuin tasolla 1, transaktio saa nähdä toisen transaktion tekemän muutoksen vain, jos toinen transaktio on viety loppuun.</p>
+
+<h4 id="taso-3-repeatable-read">Taso 3 (repeatable read)</h4>
+
+<p>Tason 2 vaatimus ja lisäksi jos transaktion aikana luetaan saman rivin sisältö useita kertoja,
+joka kerralla saadaan sama sisältö.</p>
+
+<h4 id="taso-4-serializable">Taso 4 (serializable)</h4>
+
+<p>Transaktiot ovat täysin eristettyjä ja komennot käyttäytyvät samoin kuin jos transaktiot olisi suoritettu peräkkäin yksi kerrallaan jossain järjestyksessä.</p>
+
+<h3 id="esimerkki">Esimerkki</h3>
+
+<p>Tarkastellaan tilannetta, jossa tuotteen 1 hinta on aluksi 8 ja kaksi käyttäjää suorittaa samaan aikaan komentoja transaktioiden sisällä (käyttäjän 1 komennot ovat vasemmalla ja käyttäjän 2 komennot ovat oikealla):</p>
+
+<div class="language-prompt highlighter-rouge"><div class="highlight"><pre class="syntax"><code>BEGIN;
+                                         BEGIN;
+                                         UPDATE Tuotteet SET hinta=5 WHERE id=1;
+SELECT hinta FROM Tuotteet WHERE id=1;
+                                         UPDATE Tuotteet SET hinta=7 WHERE id=1;
+                                         COMMIT;
+SELECT hinta FROM Tuotteet WHERE id=1;
+COMMIT;
+</code></pre></div></div>
+
+<p>Tasolla 1 käyttäjä 1 voi saada kyselyistä tulokset 5 ja 7, koska käyttäjän 2 tekemät muutokset voivat tulla näkyviin heti, vaikka käyttäjän 2 transaktioita ei ole viety loppuun.</p>
+
+<p>Tasolla 2 käyttäjä 1 voi saada kyselyistä tulokset 8 ja 7, koska ensimmäisen kyselyn kohdalla toista transaktiota ei ole viety loppuun, kun taas toisen kyselyn kohdalla se on viety loppuun.</p>
+
+<p>Tasoilla 3 ja 4 käyttäjä 1 saa kyselyistä tulokset 8 ja 8, koska tämä on tilanne ennen transaktion alkua eikä välissä loppuun viety transaktio saa muuttaa luettua rivin sisältöä.</p>
+
+<h3 id="transaktiot-käytännössä">Transaktiot käytännössä</h3>
+
+<p>Transaktioiden toteutustavat ja saatavilla olevat eristystasot riippuvat käytetystä tietokantajärjestelmästä. Esimerkiksi SQLitessä ainoa mahdollinen taso on 4, kun taas
+PostgreSQL toteuttaa tasot 2–4 ja oletuksena käytössä on taso 2.</p>
+
+<p>Eristystaso 4 on tavallaan selkeästi paras, koska silloin transaktioiden muutokset eivät voi
+näkyä mitenkään toisilleen. Miksi edes muut tasot ovat olemassa ja miksi esimerkiksi PostgreSQL:n oletustaso on 2?</p>
+
+<p>Hyvän eristämisen hintana on, että se voi hidastaa tai estää transaktioiden suorittamista, koska transaktion vieminen loppuun voisi aiheuttaa ristiriitaisen tilanteen. Toisaalta monissa käytännön tilanteissa riittää mainiosti heikompikin eristys, kunhan tietokannan käyttäjä on siitä tietoinen.</p>
+
+<p>Hyvää tietoa rinnakkaisten transaktioiden toiminnasta saa perehtymällä käytetyn tietokannan dokumentaatioon sekä testailemalla asioita itse käytännössä. Esimerkiksi voimme käynnistää itse <em>kaksi</em> SQLite-tulkkia, avata niillä saman tietokannan ja sen jälkeen kirjoittaa transaktioita sisältäviä komentoja ja tehdä havaintoja.</p>
+
+<p>Seuraava keskustelu näyttää edellisen esimerkin tuloksen kahdessa rinnakkain käynnissä olevassa SQLite-tulkissa:</p>
+
+<div class="language-prompt highlighter-rouge"><div class="highlight"><pre class="syntax"><code>BEGIN;
+                                         BEGIN;
+                                         UPDATE Tuotteet SET hinta=5 WHERE id=1;
+SELECT hinta FROM Tuotteet WHERE id=1;
+8
+                                         UPDATE Tuotteet SET hinta=7 WHERE id=1;
+                                         COMMIT;
+                                         Error: database is locked
+SELECT hinta FROM Tuotteet WHERE id=1;
+8
+COMMIT;
+</code></pre></div></div>
+
+<p>Tästä näkee, että ensimmäinen transaktio tosiaan saa kummastakin kyselystä tuloksen 8. Toista transaktiota ei sen sijaan saada vietyä loppuun, vaan tulee virheviesti <code class="language-html highlighter-rouge">Error: database is locked</code>, koska tietokanta on lukittuna samanaikaisen transaktion takia. Eristys toimii siis hyvin, mutta toista transaktiota pitäisi yrittää viedä loppuun uudestaan.</p>
+
+<p>Vertailun vuoksi tässä on vastaava keskustelu PostgreSQL-tulkeissa (tasolla 2):</p>
+
+<div class="language-prompt highlighter-rouge"><div class="highlight"><pre class="syntax"><code>BEGIN;
+                                         BEGIN;
+                                         UPDATE Tuotteet SET hinta=5 WHERE id=1;
+SELECT hinta FROM Tuotteet WHERE id=1;
+8
+                                         UPDATE Tuotteet SET hinta=7 WHERE id=1;
+                                         COMMIT;
+SELECT hinta FROM Tuotteet WHERE id=1;
+7
+COMMIT;
+</code></pre></div></div>
+
+<p>Nyt toisen transaktion muuttama arvo 7 ilmestyy ensimmäiseen transaktioon, mutta toisaalta molemmat transaktiot saadaan vietyä loppuun ongelmitta.</p>
+
+<h3 id="miten-transaktiot-toimivat">Miten transaktiot toimivat?</h3>
+
+<p>Transaktioiden toteuttaminen on kiehtova tekninen haaste tietokannoissa. Tavallaan transaktion tulee tehdä muutoksia tietokantaan, koska komennot voivat riippua edellisistä komennoista, mutta toisaalta mitään ei saa muuttaa pysyvästi ennen transaktion viemistä loppuun.</p>
+
+<p>Yksi keskeinen ajatus tietokantojen taustalla on tallentaa muutoksia kahdella tavalla. Ensin kuvaus muutoksesta kirjataan <em>lokitiedostoon</em> (<em>write-ahead log</em>), jota voi ajatella luettelona suoritetuista komennoista. Vasta tämän jälkeen muutokset tehdään tietokannan varsinaisiin tietorakenteisiin. Nyt jos jälkimmäisessä vaiheessa sattuu jotain yllättävää, muutokset ovat jo tallessa lokitiedostossa ja ne voidaan suorittaa myöhemmin uudestaan.</p>
+
+<p>Transaktioiden yhteydessä tietokantajärjestelmän täytyy myös pitää kirjaa siitä, mitkä muutokset ovat minkäkin meneillään olevan transaktion tekemiä. Käytännössä tauluihin voidaan tallentaa rivimuutoksia, jotka näkyvät vain tietyille transaktioille. Sitten jos transaktio pääsee loppuun asti, nämä muutokset liitetään taulun pysyväksi sisällöksi.</p>
+
+<h2 id="kyselyjen-suoritus">Kyselyjen suoritus</h2>
+
+<p>SQL-kieli on tietokannan käyttäjälle mukava kyselyjen tekemisessä, koska käyttäjän riittää kuvata, mitä tietoa hän haluaa hakea, ja tietokantajärjestelmä hoitaa loput. Niinpä tietokantajärjestelmän on tärkeää pystyä löytämään jokin tehokas tapa toteuttaa käyttäjän antama kysely ja toimittaa kyselyn tulokset käyttäjälle.</p>
+
+<h3 id="kyselyn-suunnitelma">Kyselyn suunnitelma</h3>
+
+<p>Monet tietokantajärjestelmät kertovat pyydettäessä suunnitelmansa, miten annettu kysely aiotaan suorittaa. Tämän avulla voimme tutkia tietokantajärjestelmän sisäistä toimintaa.</p>
+
+<p>Tarkastellaan esimerkkinä kyselyä, joka hakee retiisin tiedot taulusta <code class="language-html highlighter-rouge">Tuotteet</code>:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Tuotteet</span> <span class="k">WHERE</span> <span class="n">nimi</span><span class="o">=</span><span class="s1">'retiisi'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Kun laitamme SQLitessä kyselyn eteen sanan <code class="language-html highlighter-rouge">EXPLAIN</code>, saamme seuraavan tapaisen selostuksen suunnitelmasta:</p>
+
+<div class="language-prompt highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="p">sqlite&gt; </span>EXPLAIN SELECT * FROM Tuotteet WHERE nimi='retiisi';
+addr  opcode         p1    p2    p3    p4             p5  comment      
+----  -------------  ----  ----  ----  -------------  --  -------------
+0     Init           0     12    0                    00  Start at 12  
+1     OpenRead       0     2     0     3              00  root=2 iDb=0; Tuotteet
+2     Rewind         0     10    0                    00               
+3       Column         0     1     1                    00  r[1]=Tuotteet.nimi
+4       Ne             2     9     1     (BINARY)       52  if r[2]!=r[1] goto 9
+5       Rowid          0     3     0                    00  r[3]=rowid   
+6       Copy           1     4     0                    00  r[4]=r[1]    
+7       Column         0     2     5                    00  r[5]=Tuotteet.hinta
+8       ResultRow      3     3     0                    00  output=r[3..5]
+9     Next           0     3     0                    01               
+10    Close          0     0     0                    00               
+11    Halt           0     0     0                    00               
+12    Transaction    0     0     1     0              01  usesStmtJournal=0
+13    TableLock      0     2     0     Tuotteet       00  iDb=0 root=2 write=0
+14    String8        0     2     0     retiisi        00  r[2]='retiisi'
+15    Goto           0     1     0                    00 
+</code></pre></div></div>
+
+<p>SQLite muuttaa kyselyn tietokannan sisäiseksi <em>ohjelmaksi</em>, joka hakee tietoa tauluista. Tässä tapauksessa ohjelman suoritus alkaa riviltä 12, jossa alkaa transaktio, ja sitten rivillä 14 rekisteriin 2 sijoitetaan hakuehdossa oleva merkkijono “retiisi”. Tämän jälkeen suoritus siirtyy riville 1, jossa aloitetaan taulun <code class="language-html highlighter-rouge">Tuotteet</code> käsittely, ja rivit 2–9 muodostavat silmukan, joka etsii hakuehtoa vastaavat rivit taulusta.</p>
+
+<p>Voimme myös pyytää tiiviimmän suunnitelman laittamalla kyselyn eteen sanat <code class="language-html highlighter-rouge">EXPLAIN QUERY PLAN</code>. Tällöin tulos voi olla seuraava:</p>
+
+<div class="language-prompt highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="p">sqlite&gt; </span>EXPLAIN QUERY PLAN SELECT * FROM Tuotteet WHERE nimi='retiisi';
+0|0|0|SCAN TABLE Tuotteet
+</code></pre></div></div>
+
+<p>Tässä <code class="language-html highlighter-rouge">SCAN TABLE Tuotteet</code> tarkoittaa, että kysely käy läpi taulun <code class="language-html highlighter-rouge">Tuotteet</code> rivit.</p>
+
+<h3 id="kyselyn-optimointi">Kyselyn optimointi</h3>
+
+<p>Jos kyselyssä haetaan tietoa vain yhdestä taulusta, kysely on yleensä helppo suorittaa, mutta todelliset haasteet tulevat vastaan usean taulun kyselyissä. Tällöin tietokantajärjestelmän tulee osata <em>optimoida</em> kyselyn suorittamista eli muodostaa hyvä suunnitelma, jonka avulla halutut tiedot saadaan kerättyä tehokkaasti tauluista.</p>
+
+<p>Tarkastellaan esimerkkinä seuraavaa kyselyä, joka listaa kurssien ja opettajien nimet:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="n">K</span><span class="p">.</span><span class="n">nimi</span><span class="p">,</span> <span class="n">O</span><span class="p">.</span><span class="n">nimi</span> <span class="k">FROM</span> <span class="n">Kurssit</span> <span class="n">K</span><span class="p">,</span> <span class="n">Opettajat</span> <span class="n">O</span> <span class="k">WHERE</span> <span class="n">K</span><span class="p">.</span><span class="n">opettaja_id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Koska kysely kohdistuu kahteen tauluun, olemme ajatelleet kyselyn toiminnan niin, että se muodostaa ensin kaikki rivien yhdistelmät tauluista <code class="language-html highlighter-rouge">Kurssit</code> ja <code class="language-html highlighter-rouge">Opettajat</code> ja valitsee sitten ne rivit, joilla pätee ehto <code class="language-html highlighter-rouge">K.opettaja_id = O.id</code>. Tämä on hyvä ajattelutapa, mutta tämä <em>ei</em> vastaa sitä, miten kunnollinen tietokantajärjestelmä toimii.</p>
+
+<p>Ongelmana on, että tauluissa <code class="language-html highlighter-rouge">Kurssit</code> ja <code class="language-html highlighter-rouge">Opettajat</code> voi molemmissa olla suuri määrä rivejä. Esimerkiksi jos kummassakin taulussa on miljoona riviä, rivien yhdistelmiä olisi miljoona miljoonaa ja veisi valtavasti aikaa muodostaa ja käydä läpi kaikki yhdistelmät.</p>
+
+<p>Tässä tilanteessa tietokantajärjestelmän pitääkin ymmärtää, mitä käyttäjä oikeastaan on hakemassa ja miten kyselyssä annettu ehto rajoittaa tulosrivejä. Käytännössä riittää käydä läpi kaikki taulun <code class="language-html highlighter-rouge">Kurssit</code> rivit ja etsiä jokaisen rivin kohdalla jotenkin tehokkaasti yksittäinen haluttu rivi taulusta <code class="language-html highlighter-rouge">Opettajat</code>.</p>
+
+<p>Voimme taas pyytää SQLiteä selittämään kyselyn suunnitelman:</p>
+
+<div class="language-prompt highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="p">sqlite&gt; </span>EXPLAIN QUERY PLAN SELECT K.nimi, O.nimi FROM Kurssit K, Opettajat O WHERE K.opettaja_id = O.id;
+0|0|0|SCAN TABLE Kurssit AS K
+0|1|1|SEARCH TABLE Opettajat AS O USING INTEGER PRIMARY KEY (rowid=?)
+</code></pre></div></div>
+
+<p>Tämä kysely käy läpi taulun <code class="language-html highlighter-rouge">Kurssit</code> rivit (<code class="language-html highlighter-rouge">SCAN TABLE Kurssit</code>) ja hakee tietoa taulusta <code class="language-html highlighter-rouge">Opettajat</code> pääavaimen avulla (<code class="language-html highlighter-rouge">SEARCH TABLE Opettajat</code>). Jälkimmäinen tarkoittaa, että kun käsittelyssä on tietty taulun <code class="language-html highlighter-rouge">Kurssit</code> rivi, kysely hakee <em>tehokkaasti</em> taulusta <code class="language-html highlighter-rouge">Opettajat</code> rivin, jossa pääavain <code class="language-html highlighter-rouge">O.id</code> on sama kuin <code class="language-html highlighter-rouge">K.opettaja_id</code>.</p>
+
+<p>Mutta miten käytännössä taulusta <code class="language-html highlighter-rouge">Opettajat</code> voi hakea tehokkaasti? Tämä onnistuu käyttämällä indeksiä, joihin tutustumme heti seuraavaksi.</p>
+
+<h2 id="indeksit">Indeksit</h2>
+
+<p><em>Indeksi</em> on tietokannan taulun yhteyteen tallennettu hakemistorakenne, jonka tavoitteena on tehostaa tauluun liittyvien kyselyiden suorittamista. Indeksin avulla tietokantajärjestelmä voi selvittää tehokkaasti, missä päin taulua on rivejä, jotka täsmäävät tiettyyn hakuehtoon.</p>
+
+<p>Indeksiä voi ajatella samalla tavalla kuin kirjan lopussa olevaa hakemistoa, jossa kerrotaan hakusanoista, millä kirjan sivuilla ne esiintyvät. Hakemiston avulla löydämme tietyn sanan sijainnit paljon nopeammin kuin lukemalla koko kirjan läpi.</p>
+
+<h3 id="pääavaimen-indeksi">Pääavaimen indeksi</h3>
+
+<p>Kun tietokantaan luodaan taulu, sen pääavain saa automaattisesti indeksin. Tämän seurauksena voimme suorittaa tehokkaasti hakuja, joissa ehto liittyy pääavaimeen.</p>
+
+<p>Esimerkiksi kun luomme SQLitessä taulun</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Tuotteet</span> <span class="p">(</span><span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> <span class="n">nimi</span> <span class="nb">TEXT</span><span class="p">,</span> <span class="n">hinta</span> <span class="nb">INTEGER</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>niin taululle luodaan indeksi sarakkeelle <code class="language-html highlighter-rouge">id</code> ja voimme etsiä tehokkaasti tuotteita id-numeron perusteella. Tämän ansiosta esimerkiksi seuraava kysely toimii tehokkaasti:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="n">hinta</span> <span class="k">FROM</span> <span class="n">Tuotteet</span> <span class="k">WHERE</span> <span class="n">id</span><span class="o">=</span><span class="mi">3</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Voimme varmistaa tämän kysymällä kyselyn suunnitelman:</p>
+
+<div class="language-prompt highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="p">sqlite&gt; </span>EXPLAIN QUERY PLAN SELECT hinta FROM Tuotteet WHERE id=3;
+selectid    order       from        detail                                                   
+----------  ----------  ----------  ---------------------------------------------------------
+0           0           0           SEARCH TABLE Tuotteet USING INTEGER PRIMARY KEY (rowid=?)
+</code></pre></div></div>
+
+<p>Suunnitelmassa näkyy <code class="language-html highlighter-rouge">SEARCH TABLE</code>, mikä tarkoittaa, että kysely pystyy hakemaan taulusta tietoa tehokkaasti indeksin avulla.</p>
+
+<h3 id="indeksin-luominen">Indeksin luominen</h3>
+
+<p>Pääavaimen indeksi on kätevä, mutta voimme haluta myös etsiä tietoa jonkin muun sarakkeen perusteella. Esimerkiksi seuraava kysely hakee rivit sarakkeen <code class="language-html highlighter-rouge">hinta</code> perusteella:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="n">nimi</span> <span class="k">FROM</span> <span class="n">Tuotteet</span> <span class="k">WHERE</span> <span class="n">hinta</span><span class="o">=</span><span class="mi">4</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Tämä kysely <em>ei</em> ole oletuksena tehokas, koska sarakkeelle <code class="language-html highlighter-rouge">hinta</code> ei ole indeksiä. Näemme tämän pyytämällä taas selitystä kyselystä:</p>
+
+<div class="language-prompt highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="p">sqlite&gt; </span>EXPLAIN QUERY PLAN SELECT nimi FROM Tuotteet WHERE hinta=4;
+selectid    order       from        detail             
+----------  ----------  ----------  -------------------
+0           0           0           SCAN TABLE Tuotteet
+</code></pre></div></div>
+
+<p>Nyt suunnitelmassa näkyy <code class="language-html highlighter-rouge">SCAN TABLE</code>, mikä tarkoittaa, että kysely joutuu käymään läpi taulun kaikki rivit. Tämä on hidasta, jos taulussa on paljon rivejä.</p>
+
+<p>Voimme kuitenkin luoda uuden indeksin, joka tehostaa saraketta <code class="language-html highlighter-rouge">hinta</code> käyttäviä kyselyitä. Saamme luotua indeksin komennolla <code class="language-html highlighter-rouge">CREATE INDEX</code> näin:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">idx_hinta</span> <span class="k">ON</span> <span class="n">Tuotteet</span> <span class="p">(</span><span class="n">hinta</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Tässä <code class="language-html highlighter-rouge">idx_hinta</code> on indeksin nimi, jolla voimme viitata siihen myöhemmin. Indeksi toimii luonnin jälkeen täysin automaattisesti, eli tietokantajärjestelmä osaa käyttää sitä kyselyissä
+ja huolehtii sen päivittämisestä.</p>
+
+<p>Indeksin luomisen jälkeen voimme kysyä uudestaan kyselyn suunnitelmaa:</p>
+
+<div class="language-prompt highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="p">sqlite&gt; </span>EXPLAIN QUERY PLAN SELECT nimi FROM Tuotteet WHERE hinta=4;
+selectid    order       from        detail                                               
+----------  ----------  ----------  -----------------------------------------------------
+0           0           0           SEARCH TABLE Tuotteet USING INDEX idx_hinta (hinta=?)
+</code></pre></div></div>
+
+<p>Indeksin ansiosta suunnitelmassa ei lue enää <code class="language-html highlighter-rouge">SCAN TABLE</code> vaan <code class="language-html highlighter-rouge">SEARCH TABLE</code>. Suunnitelmassa näkyy myös, että aikomuksena on hyödyntää indeksiä <code class="language-html highlighter-rouge">idx_hinta</code>.</p>
+
+<h3 id="lisää-käyttötapoja">Lisää käyttötapoja</h3>
+
+<p>Voimme käyttää indeksiä myös kyselyissä, joissa haemme pienempiä tai suurempia arvoja. Esimerkiksi sarakkeelle <code class="language-html highlighter-rouge">hinta</code> luodun indeksin avulla voimme etsiä vaikkapa rivejä, joille pätee ehto <code class="language-html highlighter-rouge">hinta<span class="nt">&lt;3</span></code> tai <code class="language-html highlighter-rouge">hinta&gt;=8</code>.</p>
+
+<p>Indeksi on myös mahdollista luoda <em>usean</em> sarakkeen perusteella. Esimerkiksi voisimme luoda indeksin näin:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">idx_hinta</span> <span class="k">ON</span> <span class="n">Tuotteet</span> <span class="p">(</span><span class="n">hinta</span><span class="p">,</span><span class="n">nimi</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Tässä indeksissä rivit on järjestetty ensisijaisesti hinnan ja toissijaisesti nimen mukaan.
+Indeksi tehostaa hakuja, joissa hakuperusteena on joko pelkkä hinta tai yhdessä hinta ja nimi. Kuitenkaan indeksi ei tehosta hakuja, joissa hakuperusteena on pelkkä nimi.</p>
+
+<h3 id="miten-indeksi-toimii">Miten indeksi toimii?</h3>
+
+<p>Indeksi tarvitsee tuekseen hakemistorakenteen, josta voi hakea tehokkaasti rivejä sarakkeen
+arvon perusteella. Tämä voidaan toteuttaa esimerkiksi puurakenteena, jonka avaimina on sarakkeiden arvoja.</p>
+
+<p>Asiaan liittyvää teoriaa käsitellään tarkemmin kurssilla <em>Tietorakenteet ja algoritmit</em> binäärihakupuiden yhteydessä. Tyypillisiä tietokantojen yhteydessä käytettäviä puurakenteita ovat B-puu ja sen muunnelmat.</p>
+
+<h3 id="milloin-luoda-indeksi">Milloin luoda indeksi?</h3>
+
+<p>Periaatteessa voisi ajatella, että taulun jokaiselle sarakkeelle kannattaa luoda indeksi, jolloin monenlaiset kyselyt ovat nopeita. Tämä ei ole kuitenkaan käytännössä hyvä idea.</p>
+
+<p>Vaikka indeksit tehostavat kyselyitä, niissä on myös kaksi ongelmaa: indeksin hakemistorakenne vie tilaa ja indeksi myös hidastaa tiedon lisäämistä ja muuttamista. Jälkimmäinen johtuu siitä,
+että kun taulun sisältö muuttuu, niin muutos täytyy myös päivittää kaikkiin tauluun liittyviin indekseihin. Indeksiä ei siis kannata luoda huvin vuoksi.</p>
+
+<p>Hyvä syy indeksin luontiin on, että haluamme suorittaa usein tietynlaisia kyselyitä ja ne toimivat hitaasti, koska tietokantajärjestelmä joutuu käymään läpi turhaan jonkin taulun kaikki rivit kyselyn aikana. Tällöin voimme lisätä taululle indeksin, jonka avulla tällaiset kyselyt toimivat jatkossa tehokkaasti.</p>
+
+<p>Indekseillä on käytännössä suuri vaikutus tietokantojen tehokkuuteen. Moni tietokanta toimii hitaasti sen takia, että siitä puuttuu oleellisia indeksejä.</p>
+
+<p>Huomaa, että indeksit ovat myös yksi esimerkki siitä, miten toisteinen tieto voi tehostaa kyselyjä. Indekseissä kuitenkaan toisteista tietoa ei tallenneta tauluun vaan
+taulun ulkopuolelle erilliseen hakemistorakenteeseen.</p>
+
+
+</div>
+        <div class="footer">
+    <img src=/syksy-2023/assets/img/HY_logo.png>
+    </div>
+    </div>
+</body>
+
+</html>

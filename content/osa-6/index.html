@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>
+    
+    6. Tietokannan suunnittelu - Tietokantojen perusteet syksy 2023
+    
+  </title>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: {
+          scale: 87
+        }
+      });
+      </script>
+  <script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <link rel='stylesheet' type='text/css' media='screen' href=/syksy-2023/assets/css/main.css>
+  <link rel='stylesheet' type='text/css' media='screen' href=/syksy-2023/assets/css/syntax.css>
+
+  <script src=/syksy-2023/assets/js/main.js></script>
+
+</head>
+
+
+<body id="chapter">
+    
+<nav class="no-nav" id="side-nav" >
+    <button id="hide" onclick="hideSideNav()"> &#x2715;</button>
+    <button id="show" onclick="showSideNav()"> </button>
+    <h2>Tietokantojen perusteet syksy 2023</h2>
+    
+    <ol>
+
+        <li class="side-nav-obj" id="indexnav"><a href=/syksy-2023/index>Etusivu </a></li>
+        
+        
+        
+        <li class="side-nav-obj" id="Materiaalinav"><a href="/syksy-2023/pages/materiaali.html">Materiaali</a></li>
+        
+        
+        
+        
+        
+        <li class="side-nav-obj" id="Tehtävätnav"><a href="/syksy-2023/pages/tehtavat.html">Tehtävät</a></li>
+        
+        
+        
+        
+        
+        <li class="side-nav-obj" id="Tulokset ja palautenav"><a href="/syksy-2023/pages/tulokset_palaute.html">Tulokset ja palaute</a></li>
+        
+        
+        <br>
+        
+        
+        <li class="side-nav-obj" id="1. Johdantonav"><a href="/syksy-2023/content/osa-1/index.html">1. Johdanto</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Mikä on tietokantanav"><a href="/syksy-2023/content/osa-1/index.html#mikä-on-tietokanta">Mikä on tietokanta</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Tee-se-itse-tietokantanav"><a href="/syksy-2023/content/osa-1/index.html#tee-se-itse-tietokanta">Tee-se-itse-tietokanta</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Relaatiomalli ja SQL-kielinav"><a href="/syksy-2023/content/osa-1/index.html#relaatiomalli-ja-sql-kieli">Relaatiomalli ja SQL-kieli</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="2. SQL-kielen perusteetnav"><a href="/syksy-2023/content/osa-2/index.html">2. SQL-kielen perusteet</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Peruskomennotnav"><a href="/syksy-2023/content/osa-2/index.html#peruskomennot">Peruskomennot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Yhteenveto ja ryhmittelynav"><a href="/syksy-2023/content/osa-2/index.html#yhteenveto-ja-ryhmittely">Yhteenveto ja ryhmittely</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="SQLite-tietokantanav"><a href="/syksy-2023/content/osa-2/index.html#sqlite-tietokanta">SQLite-tietokanta</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="3. Monen taulun kyselytnav"><a href="/syksy-2023/content/osa-3/index.html">3. Monen taulun kyselyt</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Taulujen viittauksetnav"><a href="/syksy-2023/content/osa-3/index.html#taulujen-viittaukset">Taulujen viittaukset</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Liitostaulutnav"><a href="/syksy-2023/content/osa-3/index.html#liitostaulut">Liitostaulut</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="JOIN-syntaksinav"><a href="/syksy-2023/content/osa-3/index.html#join-syntaksi">JOIN-syntaksi</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="4. Lisää SQL-kielestänav"><a href="/syksy-2023/content/osa-4/index.html">4. Lisää SQL-kielestä</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Tyypit ja lausekkeetnav"><a href="/syksy-2023/content/osa-4/index.html#tyypit-ja-lausekkeet">Tyypit ja lausekkeet</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="NULL-arvotnav"><a href="/syksy-2023/content/osa-4/index.html#null-arvot">NULL-arvot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Tulosrivien rajausnav"><a href="/syksy-2023/content/osa-4/index.html#tulosrivien-rajaus">Tulosrivien rajaus</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Alikyselytnav"><a href="/syksy-2023/content/osa-4/index.html#alikyselyt">Alikyselyt</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Lisää tekniikoitanav"><a href="/syksy-2023/content/osa-4/index.html#lisää-tekniikoita">Lisää tekniikoita</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="5. Tietokannat ohjelmoinnissanav"><a href="/syksy-2023/content/osa-5/index.html">5. Tietokannat ohjelmoinnissa</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Tietokannan käyttäminennav"><a href="/syksy-2023/content/osa-5/index.html#tietokannan-käyttäminen">Tietokannan käyttäminen</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Käyttöliittymänav"><a href="/syksy-2023/content/osa-5/index.html#käyttöliittymä">Käyttöliittymä</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Mitä tehdä missäkinnav"><a href="/syksy-2023/content/osa-5/index.html#mitä-tehdä-missäkin">Mitä tehdä missäkin</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="6. Tietokannan suunnittelunav"><a href="/syksy-2023/content/osa-6/index.html">6. Tietokannan suunnittelu</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Suunnittelun periaatteetnav"><a href="/syksy-2023/content/osa-6/index.html#suunnittelun-periaatteet">Suunnittelun periaatteet</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Tiedon atomisuusnav"><a href="/syksy-2023/content/osa-6/index.html#tiedon-atomisuus">Tiedon atomisuus</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Toisteinen tietonav"><a href="/syksy-2023/content/osa-6/index.html#toisteinen-tieto">Toisteinen tieto</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Suunnitteluesimerkkinav"><a href="/syksy-2023/content/osa-6/index.html#suunnitteluesimerkki">Suunnitteluesimerkki</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="7. Tietokannan ominaisuudetnav"><a href="/syksy-2023/content/osa-7/index.html">7. Tietokannan ominaisuudet</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Tiedon eheysnav"><a href="/syksy-2023/content/osa-7/index.html#tiedon-eheys">Tiedon eheys</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Transaktiotnav"><a href="/syksy-2023/content/osa-7/index.html#transaktiot">Transaktiot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Kyselyjen suoritusnav"><a href="/syksy-2023/content/osa-7/index.html#kyselyjen-suoritus">Kyselyjen suoritus</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Indeksitnav"><a href="/syksy-2023/content/osa-7/index.html#indeksit">Indeksit</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="8. Tietokantojen teorianav"><a href="/syksy-2023/content/osa-8/index.html">8. Tietokantojen teoria</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Matemaattinen taustanav"><a href="/syksy-2023/content/osa-8/index.html#matemaattinen-tausta">Matemaattinen tausta</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Taulu relaationanav"><a href="/syksy-2023/content/osa-8/index.html#taulu-relaationa">Taulu relaationa</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Relaatio-operaatiotnav"><a href="/syksy-2023/content/osa-8/index.html#relaatio-operaatiot">Relaatio-operaatiot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Avaimet ja riippuvuudetnav"><a href="/syksy-2023/content/osa-8/index.html#avaimet-ja-riippuvuudet">Avaimet ja riippuvuudet</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Normaalimuodotnav"><a href="/syksy-2023/content/osa-8/index.html#normaalimuodot">Normaalimuodot</a></li>
+        
+            
+        
+        
+        
+    </ol>
+</nav>
+
+    <div class="page-content">
+        <div class="content">
+    <div class="table-of-content" id="tof" style="display: none;">
+    <ul>
+        
+        <li><a href="#suunnittelun-periaatteet">Suunnittelun periaatteet</a></li>
+        
+        <li><a href="#tiedon-atomisuus">Tiedon atomisuus</a></li>
+        
+        <li><a href="#toisteinen-tieto">Toisteinen tieto</a></li>
+        
+        <li><a href="#suunnitteluesimerkki">Suunnitteluesimerkki</a></li>
+        
+    </ul>
+</div>
+
+    <h1 id="6-tietokannan-suunnittelu">6. Tietokannan suunnittelu</h1>
+
+<h2 id="suunnittelun-periaatteet">Suunnittelun periaatteet</h2>
+
+<p>Tietokannan suunnittelussa meidän tulee päättää tietokannan rakenne: mitä tauluja tietokannassa on sekä mitä sarakkeita kussakin taulussa on. Tähän on sinänsä suuri määrä mahdollisuuksia, mutta tuntemalla muutaman periaatteen pääsee pitkälle.</p>
+
+<p>Hyvä tavoite suunnittelussa on, että tuloksena olevaa tietokantaa on mukavaa käyttää SQL-kielen avulla. Tietokannan rakenteen tulisi olla sellainen, että pystymme hakemaan ja muuttamaan tietoa näppärästi SQL-komennoilla.</p>
+
+<p>Tietokannan suunnittelun periaatteet ovat hyödyllisiä ja johtavat usein toimiviin ratkaisuihin. Kuitenkin aina kannattaa miettiä, mikä periaatteissa on taustalla ja milloin kannattaa mahdollisesti tehdä toisin. Tavoitteen tulisi olla aina se, että tietokanta on käyttötarkoitukseen sopiva, eikä että noudatetaan periaatteita ilman omaa ajattelua.</p>
+
+<h3 id="taulu-vs-luokka">Taulu vs. luokka</h3>
+
+<p>Tietokannan taulu ja olio-ohjelmoinnin luokka ovat samantapaisia käsitteitä. Molemmissa on kyse siitä, että määrittelemme tiedon <em>tyypin</em>. Taulun sarakkeet muistuttavat luokan attribuutteja, ja taulun rivi vastaa luokasta luotua oliota.</p>
+
+<p>Esimerkiksi seuraava SQL-komento ja Python-koodi vastaavat toisiaan:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Elokuvat</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> 
+    <span class="n">nimi</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">vuosi</span> <span class="nb">INTEGER</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">class</span> <span class="nc">Elokuva</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nimi</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">vuosi</span> <span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">nimi</span> <span class="o">=</span> <span class="n">nimi</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">vuosi</span> <span class="o">=</span> <span class="n">vuosi</span>
+</code></pre></div></div>
+
+<p>Huomaa, että luokassa ei ole attribuuttia <code class="language-html highlighter-rouge">id</code>, koska ohjelmoinnissa olioilla on viittaukset, joiden avulla ne voidaan yksilöidä.</p>
+
+<p>Rivin lisääminen tietokannan tauluun vastaa uuden olion muodostamista luokasta. Esimerkiksi seuraavat komennot vastaavat toisiaan:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Elokuvat</span> <span class="p">(</span><span class="n">nimi</span><span class="p">,</span><span class="n">vuosi</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">'Lumikki'</span><span class="p">,</span><span class="mi">1937</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Elokuvat</span> <span class="p">(</span><span class="n">nimi</span><span class="p">,</span><span class="n">vuosi</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">'Fantasia'</span><span class="p">,</span><span class="mi">1940</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Elokuvat</span> <span class="p">(</span><span class="n">nimi</span><span class="p">,</span><span class="n">vuosi</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">'Pinocchio'</span><span class="p">,</span><span class="mi">1940</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="n">a</span> <span class="o">=</span> <span class="n">Elokuva</span><span class="p">(</span><span class="s">"Lumikki"</span><span class="p">,</span><span class="mi">1937</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">Elokuva</span><span class="p">(</span><span class="s">"Fantasia"</span><span class="p">,</span><span class="mi">1940</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Elokuva</span><span class="p">(</span><span class="s">"Pinocchio"</span><span class="p">,</span><span class="mi">1940</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="yksi-vai-useita-tauluja">Yksi vai useita tauluja?</h3>
+
+<p>Ohjelmoinnissa kaikki saman tyyppiset oliot perustuvat samaan luokkaan, ja vastaavasti periaatteena tietokannan suunnittelussa on, että kaikki saman tyyppiset rivit ovat <em>yhdessä</em> taulussa. Tämän ansiosta voimme käsitellä rivejä kätevästi SQL-komennoilla.</p>
+
+<p>Esimerkiksi jos tietokannassa on elokuvia, hyvä ratkaisu on tallentaa kaikki elokuvat samaan tauluun <code class="language-html highlighter-rouge">Elokuvat</code>:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi        vuosi     
+----------  ----------  ----------
+1           Lumikki     1937      
+2           Fantasia    1940      
+3           Pinocchio   1940      
+4           Dumbo       1941      
+5           Bambi       1942    
+</code></pre></div></div>
+
+<p>Tästä taulusta voimme hakea esimerkiksi vuoden 1940 elokuvat näin:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="n">nimi</span> <span class="k">FROM</span> <span class="n">Elokuvat</span> <span class="k">WHERE</span> <span class="n">vuosi</span><span class="o">=</span><span class="mi">1940</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Mutta mitä kävisi, jos jakaisimmekin elokuvat moneen tauluun? Esimerkiksi voisimme jakaa elokuvat tauluihin vuosien mukaan. Tällöin taulussa <code class="language-html highlighter-rouge">Elokuvat1940</code> olisi vuoden 1940 elokuvat, ja voisimme hakea ne näin:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="n">nimi</span> <span class="k">FROM</span> <span class="n">Elokuvat1940</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Tällainen ratkaisu toimii niin kauan, kuin haluamme hakea vain tietyn vuoden elokuvia. Kuitenkin tietokanta muuttuu vaikeakäyttöiseksi heti, jos haluamme tehdä jotain muita hakuja. Esimerkiksi jos haluamme hakea kaikki elokuvat vuosilta 1940–1950, tarvitsemme useita kyselyjä:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="n">nimi</span> <span class="k">FROM</span> <span class="n">Elokuvat1940</span><span class="p">;</span>
+<span class="k">SELECT</span> <span class="n">nimi</span> <span class="k">FROM</span> <span class="n">Elokuvat1941</span><span class="p">;</span>
+<span class="k">SELECT</span> <span class="n">nimi</span> <span class="k">FROM</span> <span class="n">Elokuvat1942</span><span class="p">;</span>
+<span class="p">...</span>
+<span class="k">SELECT</span> <span class="n">nimi</span> <span class="k">FROM</span> <span class="n">Elokuvat1950</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Kuitenkin kun elokuvat ovat samassa taulussa, niin selviämme yhdellä kyselyllä:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="n">nimi</span> <span class="k">FROM</span> <span class="n">Elokuvat</span> <span class="k">WHERE</span> <span class="n">vuosi</span> <span class="k">BETWEEN</span> <span class="mi">1940</span> <span class="k">AND</span> <span class="mi">1950</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Kun elokuvat ovat yhdessä taulussa, pystymme käsittelemään niitä monipuolisesti yksittäisillä SQL-komennoilla, mikä ei olisi mahdollista, jos tauluja olisi useita.</p>
+
+<h3 id="viittausten-toteutus">Viittausten toteutus</h3>
+
+<p>Ohjelmoinnissa olion sisällä voi olla viittaus toiseen olioon, ja vastaavasti tietokannan taulun rivillä voi olla viittaus toiseen riviin. Kun jokaisella taulun rivillä on pääavaimena id-numero, riveihin on kätevää viitata muualta.</p>
+
+<h4 id="yksi-moneen--suhde">Yksi moneen -suhde</h4>
+
+<p>Tarkastellaan tilannetta, jossa tallennamme tietokantaan kursseja ja opettajia. Taulujen välillä on yksi moneen -suhde: jokaisella kurssilla on yksi opettaja, kun taas yhdellä opettajalla voi olla monta kurssia. Pythonissa voisimme luoda luokat näin:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">class</span> <span class="nc">Opettaja</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nimi</span> <span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">nimi</span> <span class="o">=</span> <span class="n">nimi</span>
+
+<span class="k">class</span> <span class="nc">Kurssi</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nimi</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">opettaja</span> <span class="p">:</span> <span class="n">Opettaja</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">nimi</span> <span class="o">=</span> <span class="n">nimi</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">opettaja</span> <span class="o">=</span> <span class="n">opettaja</span>
+</code></pre></div></div>
+
+<p>Vastaavasti voimme luoda tietokannan taulut näin:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Opettajat</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> 
+    <span class="n">nimi</span> <span class="nb">TEXT</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Kurssit</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">nimi</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">opettaja_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Opettajat</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>Taulussa <code class="language-html highlighter-rouge">Kurssit</code> sarake <code class="language-html highlighter-rouge">opettaja_id</code> viittaa tauluun <code class="language-html highlighter-rouge">Opettajat</code>, eli siinä on jonkin opettajan id-numero. Ilmaisemme viittauksen <code class="language-html highlighter-rouge">REFERENCES</code>-määreellä, joka kertoo, että sarakkeessa oleva kokonaisluku viittaa nimenomaan tauluun <code class="language-html highlighter-rouge">Opettajat</code>.</p>
+
+<p>Voisimme laittaa tauluihin tietoa vaikkapa seuraavasti:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Opettajat</span> <span class="p">(</span><span class="n">nimi</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">'Kaila'</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Opettajat</span> <span class="p">(</span><span class="n">nimi</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">'Kivinen'</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Opettajat</span> <span class="p">(</span><span class="n">nimi</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">'Laaksonen'</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Kurssit</span> <span class="p">(</span><span class="n">nimi</span><span class="p">,</span> <span class="n">opettaja_id</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">'Ohjelmoinnin perusteet'</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Kurssit</span> <span class="p">(</span><span class="n">nimi</span><span class="p">,</span> <span class="n">opettaja_id</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">'Ohjelmoinnin jatkokurssi'</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Kurssit</span> <span class="p">(</span><span class="n">nimi</span><span class="p">,</span> <span class="n">opettaja_id</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">'Tietokantojen perusteet'</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Kurssit</span> <span class="p">(</span><span class="n">nimi</span><span class="p">,</span> <span class="n">opettaja_id</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">'Tietorakenteet ja algoritmit'</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="monta-moneen--suhde">Monta moneen -suhde</h4>
+
+<p>Tarkastellaan sitten tilannetta, jossa useampi opettaja voi järjestää kurssin yhteisesti. Tällöin kyseessä on monta moneen -suhde, koska kurssilla voi olla monta opettajaa ja opettajalla voi olla monta kurssia.</p>
+
+<p>Pythonissa voisimme toteuttaa tämän muutoksen helposti muuttamalla luokkaa <code class="language-html highlighter-rouge">Kurssi</code> niin, että siinä on yhden opettajan sijasta lista opettajista:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">class</span> <span class="nc">Kurssi</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nimi</span> <span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">nimi</span> <span class="o">=</span> <span class="n">nimi</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">opettajat</span> <span class="o">=</span> <span class="p">[]</span>
+        
+    <span class="k">def</span> <span class="nf">lisaa_opettaja</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opettaja</span> <span class="p">:</span> <span class="n">Opettaja</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">opettajat</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">opettaja</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Tietokannoissa tilanne on kuitenkin toinen, koska emme voi tallentaa järkevästi taulun sarakkeeseen listaa viittauksista. Tämän sijasta meidän täytyy luoda uusi taulu viittauksille:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Opettajat</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">nimi</span> <span class="nb">TEXT</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Kurssit</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">nimi</span> <span class="nb">TEXT</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">KurssinOpettajat</span> <span class="p">(</span>
+    <span class="n">kurssi_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Kurssit</span><span class="p">,</span>
+    <span class="n">opettaja_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Opettaja</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>Muutoksena on, että taulussa <code class="language-html highlighter-rouge">Kurssit</code> ei ole enää viittausta tauluun <code class="language-html highlighter-rouge">Opettajat</code>, mutta sen sijaan tietokannassa on uusi taulu <code class="language-html highlighter-rouge">KurssinOpettajat</code>, joka viittaa kumpaankin tauluun. Jokainen rivi tässä rivissä kuvaa yhden suhteen muotoa “kurssilla <em>x</em> opettaa opettaja <em>y</em>”.</p>
+
+<p>Esimerkiksi voisimme ilmaista näin, että kurssilla on kaksi opettajaa:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Opettajat</span> <span class="p">(</span><span class="n">nimi</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">'Kivinen'</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Opettajat</span> <span class="p">(</span><span class="n">nimi</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">'Laaksonen'</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Kurssit</span> <span class="p">(</span><span class="n">nimi</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">'Tietorakenteet ja algoritmit'</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">KurssinOpettajat</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">KurssinOpettajat</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Huomaa, että voisimme käyttää tätä ratkaisua myös aiemmassa tilanteessa, jossa kurssilla on aina tasan yksi opettaja, joskin tietokannassa olisi silloin tavallaan turha taulu.</p>
+
+<h2 id="tiedon-atomisuus">Tiedon atomisuus</h2>
+
+<p><em>Periaate</em>:
+Tietokannan taulun jokaisessa sarakkeessa on yksittäinen eli <em>atominen</em> tieto, kuten yksi luku tai yksi merkkijono. Sarakkeessa ei saa olla listaa tiedoista.</p>
+
+<p>Tämä periaate helpottaa tietokannan käsittelyä SQL-komentojen avulla: kun jokainen tieto on omassa sarakkeessaan, niin pystymme viittaamaan tietoon kätevästi komennoissa.</p>
+
+<p>Kun tietokantaan halutaan tallentaa listoja, luodaan uusi taulu, jossa jokainen rivi on jonkin listan yksittäinen alkio, kuten äskeinen taulu <code class="language-html highlighter-rouge">KurssinOpettajat</code>. Mutta miksi emme voisi vain tallentaa listaa yhteen sarakkeeseen? Seuraava esimerkki selventää asiaa.</p>
+
+<h3 id="esimerkki">Esimerkki</h3>
+
+<h4 id="vaihe-1">Vaihe 1</h4>
+
+<p>Haluamme tallentaa tietokantaan opiskelijoiden tenttituloksia. Tentissä on neljä tehtävää, joista voi saada 0–6 pistettä. Voisimme koettaa tallentaa pisteet näin:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          opiskelija_id  pisteet   
+----------  -------------  ----------
+1           1              6,5,1,4   
+2           2              3,6,6,6   
+3           3              6,4,0,6  
+</code></pre></div></div>
+
+<p>Ideana on, että sarakkeessa <code class="language-html highlighter-rouge">pisteet</code> on merkkijono, jossa on lista pisteistä pilkuilla erotettuina. Tämä ratkaisu kuitenkin rikkoo periaatetta, että jokaisessa sarakkeessa on yksittäinen tieto. Mitä vikaa ratkaisussa on?</p>
+
+<p>Ratkaisun ongelmana on, että meidän on vaivalloista koettaa päästä pisteisiin käsiksi SQL-komennoissa, koska pisteet ovat merkkijonon sisällä. Esimerkiksi jos haluamme laskea jokaisen opiskelijan yhteispisteet, tarvitsemme seuraavan tapaisen kyselyn:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="n">opiskelija_id</span><span class="p">,</span> <span class="n">SUBSTR</span><span class="p">(</span><span class="n">pisteet</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span>
+                      <span class="n">SUBSTR</span><span class="p">(</span><span class="n">pisteet</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span>
+                      <span class="n">SUBSTR</span><span class="p">(</span><span class="n">pisteet</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span>
+                      <span class="n">SUBSTR</span><span class="p">(</span><span class="n">pisteet</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">Tulokset</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Tässä funktio <code class="language-html highlighter-rouge">SUBSTR</code> erottaa merkkijonosta tietyssä kohdassa olevan osajonon. Kysely on kuitenkin hankala ja lisäksi toimii vain, kun pisteitä on tasan neljä ja ne ovat yksinumeroisia. Tarvitsemme paremman tavan tallentaa pisteet.</p>
+
+<h4 id="vaihe-2">Vaihe 2</h4>
+
+<p>Seuraavassa taulussa pisteille on neljä saraketta, jolloin voimme käsitellä niitä yksitellen:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          opiskelija_id  pisteet1    pisteet2    pisteet3    pisteet4  
+----------  -------------  ----------  ----------  ----------  ----------
+1           1              6           5           1           4         
+2           2              3           6           6           6         
+3           3              6           4           0           6     
+</code></pre></div></div>
+
+<p>Tämän ansiosta saamme jo toteutettua kyselyn mukavammin:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="n">opiskelija_id</span><span class="p">,</span> <span class="n">pisteet1</span><span class="o">+</span><span class="n">pisteet2</span><span class="o">+</span><span class="n">pisteet3</span><span class="o">+</span><span class="n">pisteet4</span> <span class="k">FROM</span> <span class="n">Tulokset</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Tämä ratkaisu on selkeästi parempaan suuntaan, mutta siinä on edelleen ongelmia. Vaikka pisteet ovat eri sarakkeissa, oletuksena on edelleen, että tehtäviä on tasan neljä. Jos tehtävien määrä muuttuu, joudumme muuttamaan taulun rakennetta ja kaikkia pisteisiin liittyviä SQL-komentoja, mikä ei ole hyvä tilanne.</p>
+
+<h4 id="vaihe-3">Vaihe 3</h4>
+
+<p>Kun haluamme tallentaa listan tietokantaan, hyvä ratkaisu on tallentaa jokainen listan alkio omalle rivilleen. Tämän esimerkin tapauksessa voimme luoda taulun, jonka jokainen rivi ilmaisee tietyn opiskelijan pisteet tietyssä tehtävässä:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          opiskelija_id  tehtava_id  pisteet   
+----------  -------------  ----------  ----------
+1           1              1           6         
+2           1              2           5         
+3           1              3           1         
+4           1              4           4         
+5           2              1           3         
+6           2              2           6         
+7           2              3           6         
+8           2              4           6         
+9           3              1           6         
+10          3              2           4         
+11          3              3           0         
+12          3              4           6
+</code></pre></div></div>
+
+<p>Nyt voimme hakea kunkin opiskelijan yhteispisteet näin:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="n">opiskelija_id</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">pisteet</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">Tulokset</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">opiskelija_id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Tämä on <em>yleiskäyttöinen</em> kysely eli se toimii yhtä hyvin riippumatta tehtävien määrästä. Pystymme hyödyntämään summan laskemisessa funktiota <code class="language-html highlighter-rouge">SUM</code> sen sijaan, että meidän tulisi luetella kaikki tehtävät itse.</p>
+
+<p>Huomaa, että muutoksen seurauksena taulun rivien määrä kasvoi selvästi. Tätä ei kannata kuitenkaan hätkähtää: tietokantajärjestelmät on toteutettu niin, että ne toimivat hyvin, vaikka taulussa olisi paljon rivejä.</p>
+
+<h3 id="mikä-on-atomista-tietoa">Mikä on atomista tietoa?</h3>
+
+<p>Atomisen tiedon käsite ei ole hyvin määritelty. Selkeästi lista ei ole atominen tieto, mutta onko sitten vaikka merkkijonokaan, jossa on useita sanoja?</p>
+
+<p>Tarkastellaan esimerkkinä tilannetta, jossa taulun sarakkeessa on käyttäjän nimi. Onko tämä huonoa suunnittelua, koska samassa sarakkeessa on etu- ja sukunimi?</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi         
+----------  --------------
+1           Anna Virtanen
+2           Maija Korhonen
+3           Pasi Lahtinen
+</code></pre></div></div>
+
+<p>Voisimme myös tallentaa etu- ja sukunimen erikseen näin:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          etunimi     sukunimi  
+----------  ----------  ----------
+1           Anna        Virtanen
+2           Maija       Korhonen
+3           Pasi        Lahtinen
+</code></pre></div></div>
+
+<p>Riippuu tilanteesta, kumpi taulu on parempi. Jos järjestelmässä on erityisesti tarvetta etsiä tietoa etu- tai sukunimen perusteella (esimerkiksi etsiä kaikki käyttäjät, joiden etunimi on Anna), jälkimmäinen taulu on parempi. Kuitenkaan usein ei ole näin eikä ole mitään pahaa tallentaa samaan sarakkeeseen etu- ja sukunimi.</p>
+
+<p>Vastaavasti jos tietokantaan tallennetaan käyttäjän lähettämä viesti, siinä voi olla monia sanoja eli tavallaan viesti on lista sanoja, mutta on silti hyvä ratkaisu tallentaa koko viesti yhteen sarakkeeseen, koska viestiä käsitellään tietokannassa yhtenä kokonaisuutena. Olisi hyvin huono ratkaisu jakaa “atomisesti” viestin sanat omiin sarakkeisiin.</p>
+
+<p>Kannattaakin ajatella asiaa niin, että jos jotain tietoa on tarvetta käsitellä erillisenä SQL-komennoissa, niin se on atominen tieto, jonka tulee olla omassa sarakkeessa. Jos taas tietoon ei viitata SQL-komennoissa, se voi olla sarakkeessa osana laajempaa kokonaisuutta.</p>
+
+<h2 id="toisteinen-tieto">Toisteinen tieto</h2>
+
+<p><em>Periaate</em>:
+Jokainen tieto on tasan yhdessä paikassa tietokannassa. Tietokannassa ei ole tietoa, jonka voi laskea tai päätellä tietokannan muun sisällön perusteella.</p>
+
+<p>Tätä periaatetta seuraamalla tietokannan sisällön päivittäminen on helppoa, koska päivitys riittää tehdä yhteen paikkaan eikä se vaikuta tietokannan muihin osiin.</p>
+
+<h3 id="esimerkki-1">Esimerkki 1</h3>
+
+<p>Tallennamme järjestelmään käyttäjien lähettämiä viestejä seuraavasti tauluun <code class="language-html highlighter-rouge">Viestit</code>:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          kayttaja    viesti     
+----------  ----------  --------------
+1           Anna123     Missä olet?
+2           Joulupukki  Bussissa vielä
+3           Anna123     Meneekö kauan?
+4           Joulupukki  5 min   
+</code></pre></div></div>
+
+<p>Tämä on muuten toimiva ratkaisu, mutta tietokannan sisältöä on hankalaa päivittää, jos käyttäjä päättää vaihtaa nimeään. Esimerkiksi jos Anna123 haluaa muuttaa nimeään, muutos täytyy tehdä jokaiseen viestiin, jonka hän on lähettänyt.</p>
+
+<p>Parempi ratkaisu on toteuttaa tietokanta niin, että käyttäjän nimi on vain yhdessä paikassa. Luonteva paikka tälle on taulu <code class="language-html highlighter-rouge">Kayttajat</code>, joka sisältää käyttäjät:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi
+----------  ----------
+1           Anna123
+2           Joulupukki
+</code></pre></div></div>
+
+<p>Muissa tauluissa on vain viitteenä käyttäjän id-numero, joka on muuttumaton tieto. Esimerkiksi taulu <code class="language-html highlighter-rouge">Viestit</code> näyttää nyt tältä:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          kayttaja_id  viesti     
+----------  -----------  --------------
+1           1            Missä olet?
+2           2            Bussissa vielä
+3           1            Meneekö kauan?
+4           2            5 min   
+</code></pre></div></div>
+
+<p>Tämän jälkeen käyttäjän nimen muuttaminen on helppoa, koska muutos riittää tehdä taulun <code class="language-html highlighter-rouge">Kayttajat</code> yhteen riviin ja muutos päivittyy heti kaikkialle, koska muissa tauluissa viitataan edelleen oikeaan riviin.</p>
+
+<p>Tämä monimutkaistaa kyselyjä, koska meidän täytyy hakea tietoa useista tauluista, mutta ratkaisu on kuitenkin kokonaisuuden kannalta hyvä.</p>
+
+<h4 id="vieläkin-toisteisuutta">Vieläkin toisteisuutta?</h4>
+
+<p>Äskeisestä muutoksesta huolimatta tietokannassa saattaa esiintyä edelleen toisteisuutta. Esimerkiksi seuraavassa tilanteessa käyttäjät lähettävät samanlaisen viestin “Hei!”. Pitäisikö tietokannan rakennetta parantaa?</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          kayttaja_id  viesti
+----------  -----------  --------------
+1           1            Hei!
+2           2            Hei!
+</code></pre></div></div>
+
+<p>Tässä tapauksessa <em>ei</em> olisi hyvä idea toteuttaa tietokantaa niin, että jos kaksi käyttäjää lähettää saman sisältöisen viestin, viestin sisältö tallennetaan vain yhteen paikkaan.</p>
+
+<p>Vaikka viesteissä on sama sisältö, ne ovat erillisiä viestejä, joiden ei ole tarkoitus viitata samaan asiaan. Jos käyttäjä 1 muuttaa viestin sisältöä, muutoksen ei tule heijastua käyttäjän 2 viestiin, vaikka siinä sattuu olemaan tällä hetkellä sama sisältö.</p>
+
+<h3 id="esimerkki-2">Esimerkki 2</h3>
+
+<p>Tallennamme tietokantaan tietoa opiskelijoiden suorituksista. Tietokannasta voidaan kysyä, montako opintopistettä opiskelija on suorittanut.</p>
+
+<p>Seuraavassa tietokannassa jokaisen opiskelijan yhteyteen on tallennettu tieto, montako opintopistettä hän on suorittanut. Taulun <code class="language-html highlighter-rouge">Opiskelijat</code> sisältönä on:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi        op        
+----------  ----------  ----------
+1           Maija       20        
+2           Uolevi      10   
+</code></pre></div></div>
+
+<p>Taulussa <code class="language-html highlighter-rouge">Suoritukset</code> puolestaan on seuraavat rivit:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          opiskelija_id  kurssi_id   op        
+----------  -------------  ----------  ----------
+1           1              1           5         
+2           1              2           5         
+3           1              4           10        
+4           2              1           5         
+5           2              3           5         
+</code></pre></div></div>
+
+<p>Tämän ansiosta on helppoa hakea opiskelijan opintopisteiden yhteismäärä:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="n">op</span> <span class="k">FROM</span> <span class="n">Opiskelijat</span> <span class="k">WHERE</span> <span class="n">nimi</span><span class="o">=</span><span class="s1">'Maija'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Kuitenkin tietokannassa on toisteista tietoa: taulun <code class="language-html highlighter-rouge">Opiskelijat</code> sarakkeen <code class="language-html highlighter-rouge">op</code> sisältö voidaan laskea taulun <code class="language-html highlighter-rouge">Suoritukset</code> avulla. Ongelmana on, että jos lisäämme tai poistamme suorituksen, niin joudumme tekemään muutoksen kahteen eri tauluun. Jos muutos unohtuu tehdä tai epäonnistuu, tietokantaan tulee ristiriitaista tietoa.</p>
+
+<p>Pääsemme eroon toisteisesta tiedosta poistamalla sarakkeen <code class="language-html highlighter-rouge">op</code> taulusta <code class="language-html highlighter-rouge">Opiskelijat</code>:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi       
+----------  ---------- 
+1           Maija     
+2           Uolevi    
+</code></pre></div></div>
+
+<p>Tämän muutoksen seurauksena on vaikeampaa selvittää opiskelijan opintopisteet, koska meidän täytyy laskea tieto suorituksista lähtien:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="k">SUM</span><span class="p">(</span><span class="n">S</span><span class="p">.</span><span class="n">op</span><span class="p">)</span>
+<span class="k">FROM</span>
+  <span class="n">Suoritukset</span> <span class="n">S</span><span class="p">,</span> <span class="n">Opiskelijat</span> <span class="n">O</span>
+<span class="k">WHERE</span>
+  <span class="n">S</span><span class="p">.</span><span class="n">opiskelija_id</span><span class="o">=</span><span class="n">O</span><span class="p">.</span><span class="n">id</span> <span class="k">AND</span> <span class="n">O</span><span class="p">.</span><span class="n">nimi</span><span class="o">=</span><span class="s1">'Maija'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Tämä on kuitenkin kokonaisuutena hyvä muutos, koska nyt voimme huoletta muutella suorituksia ja luottaa siihen, että saamme aina haettua oikean tiedon opiskelijan opintopisteistä.</p>
+
+<h3 id="muutokset-vs-kyselyt">Muutokset vs. kyselyt</h3>
+
+<p>Vaikka ihanteena on, että tietokannassa ei ole toisteista tietoa, joskus kuitenkin toisteista tietoa tarvitaan hakujen tehostamiseksi. Toisteinen tieto vaikeuttaa tietokannan muuttamista mutta helpottaa kyselyjen tekemistä.</p>
+
+<p>Usein esiintyvä ilmiö tietojenkäsittelytieteessä on, että joudumme tasapainoilemaan sen kanssa,
+haluammeko muuttaa vai hakea tehokkaasti tietoa ja paljonko tilaa voimme käyttää. Tämä tulee tietokantojen lisäksi vastaan esimerkiksi algoritmien suunnittelussa.</p>
+
+<p>Jos tietokannassa ei ole toisteista tietoa, muutokset ovat helppoja, koska jokainen tieto on vain yhdessä paikassa eli riittää muuttaa vain yhden taulun yhtä riviä. Myös hyvänä puolena tietokanta vie vähän tilaa. Toisaalta kyselyt voivat olla monimutkaisia ja hitaita, koska halutut tiedot pitää kerätä kasaan eri puolilta tietokantaa.</p>
+
+<p>Kun sitten lisäämme toisteista tietoa, pystymme nopeuttamaan kyselyjä mutta toisaalta muutokset hidastuvat, koska muutettu tieto pitää päivittää useaan paikkaan. Samaan aikaan myös tietokannan tilankäyttö kasvaa toisteisen tiedon takia.</p>
+
+<p>Ei ole mitään yleistä sääntöä, paljonko toisteista tietoa kannattaa lisätä, vaan tämä riippuu tietokannan sisällöstä ja halutuista kyselyistä. Yksi hyvä tapa on aloittaa tilanteesta, jossa toisteista tietoa ei ole, ja lisätä sitten toisteista tietoa tarvittaessa, jos osoittautuu, että kyselyt eivät muuten ole riittävän tehokkaita.</p>
+
+<h2 id="suunnitteluesimerkki">Suunnitteluesimerkki</h2>
+
+<p>Tarkastellaan lopuksi laajempaa esimerkkiä, jossa tavoitteemme on suunnitella tietokanta Facebookin kaltaista yhteisöpalvelua varten. Tietokannan tulee mahdollistaa seuraavat toiminnot:</p>
+
+<ul>
+  <li>Käyttäjä voi kirjautua palveluun antamalla sähköpostiosoitteen ja salasanan.</li>
+  <li>Käyttäjällä on oma sivu, johon hän voi lähettää päivityksiä.</li>
+  <li>Käyttäjä voi lisätä profiiliinsa tietoa, kuten nimen, syntymäpäivän, asuinpaikan, jne.</li>
+  <li>Käyttäjä voi ystävystyä muiden palvelun käyttäjien kanssa.</li>
+  <li>Käyttäjä voi lähettää palveluun valokuvia ja valita yhden niistä profiilikuvaksi.</li>
+  <li>Käyttäjät voivat tykätä ja kommentoida toistensa päivityksiä ja kuvia.</li>
+  <li>Käyttäjät voivat lähettää toisilleen yksityisviestejä.</li>
+  <li>Palvelussa on myös ylläpitäjiä, joilla on enemmän oikeuksia kuin muilla käyttäjillä.</li>
+</ul>
+
+<h3 id="suunnittelun-vaiheet">Suunnittelun vaiheet</h3>
+
+<p>Tietokannan suunnittelu etenee yleensä pikkuhiljaa niin, että tietokantaan lisätään uusia tauluja ja sarakkeita aina, kun uusissa toiminnoissa on tarvetta niille.</p>
+
+<p>Seuraavaksi näemme, miten esimerkkitietokanta rakentuu vaihe vaiheelta vaadittujen toimintojen perusteella.</p>
+
+<h4 id="kirjautuminen-palveluun">Kirjautuminen palveluun</h4>
+
+<ul>
+  <li>Käyttäjä voi kirjautua palveluun antamalla sähköpostiosoitteen ja salasanan.</li>
+</ul>
+
+<p>Tämä on hyvin tavallinen toiminto, josta on hyvä aloittaa tietokannan suunnittelu. Tarvitsemme taulun, jossa on käyttäjän tunnus (sähköpostiosoite) ja salasana:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Kayttajat</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">tunnus</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">salasana</span> <span class="nb">TEXT</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="päivitykset-omalle-sivulle">Päivitykset omalle sivulle</h4>
+
+<ul>
+  <li>Käyttäjällä on oma sivu, johon hän voi lähettää päivityksiä.</li>
+</ul>
+
+<p>Tätä toimintoa varten tietokantaan täytyy pystyä tallentamaan käyttäjän päivityksiä. Hyvä ratkaisu on luoda taulu, joka sisältää kaikkien käyttäjien päivitykset id-numeron mukaan:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Paivitykset</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">kayttaja_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Kayttajat</span><span class="p">,</span>
+    <span class="n">viesti</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">aika</span> <span class="nb">DATETIME</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>Huomaa, että tietokantaan ei tarvitse tallentaa tietoa käyttäjän sivusta. Jokaisella käyttäjällä on sivu, joka sisältää käyttäjän päivitykset, mutta sivuun itsessään ei liity tietoa.</p>
+
+<h4 id="profiilin-tiedot">Profiilin tiedot</h4>
+
+<ul>
+  <li>Käyttäjä voi lisätä profiiliinsa tietoa, kuten nimen, syntymäpäivän, asuinpaikan, jne.</li>
+</ul>
+
+<p>Yksi tapa toteuttaa tämä toiminto olisi laajentaa taulua <code class="language-html highlighter-rouge">Kayttajat</code>:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Kayttajat</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">tunnus</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">salasana</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">nimi</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">syntymapaiva</span> <span class="nb">DATE</span><span class="p">,</span>
+    <span class="n">asuinpaikka</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="p">...</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>Tämä on sinänsä toimiva tapa, mutta tässä voi tulla ongelmaksi, että profiilissa voi olla paljon vaihtelevaa tietoa, jolloin tauluun <code class="language-html highlighter-rouge">Kayttajat</code> tulee suuri määrä sarakkeita. Tämän vuoksi teemme toisenlaisen ratkaisun ja luomme uuden taulun <code class="language-html highlighter-rouge">KayttajanTiedot</code>:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">KayttajanTiedot</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">kayttaja_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Kayttajat</span><span class="p">,</span>
+    <span class="n">avain</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">arvo</span> <span class="nb">TEXT</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>Nyt käyttäjän tietoja voidaan lisätä tähän tapaan:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">KayttajanTiedot</span> <span class="p">(</span><span class="n">kayttaja_id</span><span class="p">,</span> <span class="n">avain</span> <span class="nb">TEXT</span><span class="p">,</span> <span class="n">arvo</span> <span class="nb">TEXT</span><span class="p">)</span>
+            <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s1">'nimi'</span><span class="p">,</span><span class="s1">'Maija Virtanen'</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">KayttajanTiedot</span> <span class="p">(</span><span class="n">kayttaja_id</span><span class="p">,</span> <span class="n">avain</span> <span class="nb">TEXT</span><span class="p">,</span> <span class="n">arvo</span> <span class="nb">TEXT</span><span class="p">)</span>
+            <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s1">'syntymapaiva'</span><span class="p">,</span><span class="s1">'2000-01-01'</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">KayttajanTiedot</span> <span class="p">(</span><span class="n">kayttaja_id</span><span class="p">,</span> <span class="n">avain</span> <span class="nb">TEXT</span><span class="p">,</span> <span class="n">arvo</span> <span class="nb">TEXT</span><span class="p">)</span>
+            <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s1">'asuinpaikka'</span><span class="p">,</span><span class="s1">'Helsinki'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Tämän ratkaisu ansiosta tietokannan rakenteessa ei tarvitse määritellä, mitä kaikkea tietoa profiiliin mahdollisesti voidaan tallentaa, mutta tiedot on tallettu kuitenkin erillisinä.</p>
+
+<h4 id="ystävyyssuhteet">Ystävyyssuhteet</h4>
+
+<ul>
+  <li>Käyttäjä voi ystävystyä muiden palvelun käyttäjien kanssa.</li>
+</ul>
+
+<p>Tietokannassa täytyy olla tieto siitä, ketkä käyttäjät ovat ystäviä keskenään. Tämä onnistuu luomalla uusi taulu ystävyyssuhteita varten:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Ystavat</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">kayttaja1_id</span> <span class="k">REFERENCES</span> <span class="n">Kayttajat</span><span class="p">,</span>
+    <span class="n">kayttaja2_id</span> <span class="k">REFERENCES</span> <span class="n">Kayttajat</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>Tämä taulu viittaa kahdesti tauluun <code class="language-html highlighter-rouge">Kayttajat</code>, koska ystävyyssuhde liittyy kahteen käyttäjään.</p>
+
+<h4 id="valokuvien-lisääminen">Valokuvien lisääminen</h4>
+
+<ul>
+  <li>Käyttäjä voi lähettää palveluun valokuvia ja valita yhden niistä profiilikuvaksi.</li>
+</ul>
+
+<p>Valokuvien lisääminen voidaan toteuttaa samaan tapaan kuin päivitysten lisääminen:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Valokuvat</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">kayttaja_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Kayttajat</span><span class="p">,</span>
+    <span class="n">kuva</span> <span class="k">DATA</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>Tässä ei oteta tarkemmin kantaa siihen, miten valokuva tallennetaan palvelimelle, vaan sarakkeen tyyppinä on vain <code class="language-html highlighter-rouge">DATA</code>.</p>
+
+<p>Entä kuinka toteutamme profiilikuvan valitsemisen? Tähän on monia mahdollisia tapoja: voisimme lisätä tiedon asiasta tauluun <code class="language-html highlighter-rouge">Kayttajat</code> tai <code class="language-html highlighter-rouge">Valokuvat</code> tai luoda uuden taulun, joka kertoo, mikä kuva on kenenkin käyttäjän profiilikuva.</p>
+
+<p>Koska käyttäjällä on enintään yksi profiilikuva, uudelle taululle ei ole oikeastaan tarvetta. Päädymme lisäämään tiedon tauluun <code class="language-html highlighter-rouge">Kayttajat</code>, koska jos tieto olisi taulussa <code class="language-html highlighter-rouge">Valokuvat</code>, pitäisi jotenkin erikseen varmistaa, että usea kuva ei ole samaan aikaan profiilikuvana. Tämän seurauksena taulu <code class="language-html highlighter-rouge">Kayttajat</code> muuttuu näin:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Kayttajat</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">tunnus</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">salasana</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">kuva_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Valokuvat</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="tykkäykset-ja-kommentit">Tykkäykset ja kommentit</h4>
+
+<ul>
+  <li>Käyttäjät voivat tykätä ja kommentoida toistensa päivityksiä ja kuvia.</li>
+</ul>
+
+<p>Tämän toiminnon toteuttamiseen on monia mahdollisuuksia. Seuraavassa ratkaisussa taulu <code class="language-html highlighter-rouge">Tykkaykset</code> sisältää kaikki tykkäykset ja taulu <code class="language-html highlighter-rouge">Kommentit</code> sisältää kaikki kommentit.</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Tykkaykset</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">kayttaja_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Kayttajat</span><span class="p">,</span>
+    <span class="n">paivitys_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Paivitykset</span><span class="p">,</span>
+    <span class="n">kuva_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Valokuvat</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Kommentit</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">kayttaja_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Kayttajat</span><span class="p">,</span>
+    <span class="n">paivitys_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Paivitykset</span><span class="p">,</span>
+    <span class="n">kuva_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Valokuvat</span><span class="p">,</span>
+    <span class="n">viesti</span> <span class="nb">TEXT</span>
+    <span class="n">aika</span> <span class="nb">DATETIME</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>Ideana on, että jos tykkäys tai kommentti liittyy päivitykseen, niin sarake <code class="language-html highlighter-rouge">paivitys_id</code> osoittaa päivitykseen ja sarake <code class="language-html highlighter-rouge">kuva_id</code> on <code class="language-html highlighter-rouge">NULL</code>. Vastaavasti jos tykkäys tai kommentti liittyy kuvaan, sarake <code class="language-html highlighter-rouge">paivitys_id</code> on <code class="language-html highlighter-rouge">NULL</code> ja sarake <code class="language-html highlighter-rouge">kuva_id</code> osoittaa kuvaan.</p>
+
+<p>Vaihtoehtoinen ratkaisu olisi luoda kahden taulun sijasta neljä taulua niin, että päivitysten ja kuvien tiedot ovat omissa tauluissaan. Tämän etuna olisi, että riveillä ei ole <code class="language-html highlighter-rouge">NULL</code>-arvoja, mutta tämä toisaalta mutkistaisi tietokannan rakennetta.</p>
+
+<h4 id="yksityisviestit">Yksityisviestit</h4>
+
+<ul>
+  <li>Käyttäjät voivat lähettää toisilleen yksityisviestejä.</li>
+</ul>
+
+<p>Tämän toiminnon saamme toteutettua samalla tavalla kuin ystävystymisen lisäämällä uuden taulun, joka viittaa kahteen käyttäjään.</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Viestit</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">kayttaja1_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Kayttajat</span><span class="p">,</span>
+    <span class="n">kayttaja2_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Kayttajat</span><span class="p">,</span>
+    <span class="n">viesti</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">aika</span> <span class="nb">DATETIME</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>Tässä tulkintana on, että käyttäjä 1 on viestin lähettäjä ja käyttäjä 2 on viestin vastaanottaja.</p>
+
+<h4 id="ylläpitäjät">Ylläpitäjät</h4>
+
+<ul>
+  <li>Palvelussa on myös ylläpitäjiä, joilla on enemmän oikeuksia kuin muilla käyttäjillä.</li>
+</ul>
+
+<p>Tämän toiminnon toteuttamiseen on periaatteessa kaksi vaihtoehtoa: kaikki käyttäjät (myös ylläpitäjät) ovat samassa taulussa tai ylläpitäjät ovat erillisessä taulussa.</p>
+
+<p>Kokemus on osoittanut, että parempi ratkaisu on tallentaa kaikki käyttäjät samaan tauluun, koska käyttäjillä on kuitenkin yhteisiä toimintoja, joiden toteuttaminen olisi hankalaa, jos tietoa pitäisi etsiä eri tauluista riippuen käyttäjän asemasta. Käyttäjät voidaan tallentaa samaan tauluun, kun tauluun lisätään sarake, joka ilmaisee käyttäjän roolin.</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Kayttajat</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">tunnus</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">salasana</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">kuva_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Valokuvat</span><span class="p">,</span>
+    <span class="n">yllapitaja</span> <span class="nb">BOOLEAN</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="tietokannan-kuvaaminen">Tietokannan kuvaaminen</h3>
+
+<p>Tietokannan rakenteen kuvaamiseen on kaksi tavallista tapaa: graafinen tietokantakaavio, joka esittää taulujen suhteet, sekä SQL-skeema, jossa on taulujen luontikomennot.</p>
+
+<h4 id="tietokantakaavio">Tietokantakaavio</h4>
+
+<p>Tietokantakaavio on tietokannan graafinen esitys, jossa jokainen tietokannan taulu on laatikko, joka sisältää taulun nimen ja sarakkeet listana. Rivien viittaukset toisiinsa esitetään laatikoiden välisinä yhteyksinä.</p>
+
+<p>Tietokantakaavion piirtämiseen on monia vähän erilaisia tapoja. Seuraava kaavio on luotu netissä olevalla työkalulla <a href="https://dbdiagram.io/">dbdiagram.io</a>:</p>
+
+<p><img src="/syksy-2023/assets/kaavio.png" /></p>
+
+<p>Tässä merkki <code class="language-html highlighter-rouge">1</code> tarkoittaa, että sarakkeessa on eri arvo joka rivillä, ja merkki <code class="language-html highlighter-rouge">*</code> puolestaan tarkoittaa, että sarakkeessa voi olla sama arvo usealla rivillä.</p>
+
+<h4 id="sql-skeema">SQL-skeema</h4>
+
+<p>SQL-skeema sisältää <code class="language-html highlighter-rouge">CREATE TABLE</code> -komennot, joiden avulla tietokanta voidaan muodostaa. Seuraava SQL-skeema vastaa tietokantaamme:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Kayttajat</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">tunnus</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">salasana</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">kuva_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Valokuvat</span><span class="p">,</span>
+    <span class="n">yllapitaja</span> <span class="nb">BOOLEAN</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Paivitykset</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">kayttaja_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Kayttajat</span><span class="p">,</span>
+    <span class="n">viesti</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">aika</span> <span class="nb">DATETIME</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">KayttajanTiedot</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">kayttaja_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Kayttajat</span><span class="p">,</span>
+    <span class="n">avain</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">arvo</span> <span class="nb">TEXT</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Ystavat</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">kayttaja1_id</span> <span class="k">REFERENCES</span> <span class="n">Kayttajat</span><span class="p">,</span>
+    <span class="n">kayttaja2_id</span> <span class="k">REFERENCES</span> <span class="n">Kayttajat</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Valokuvat</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">kayttaja_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Kayttajat</span><span class="p">,</span>
+    <span class="n">kuva</span> <span class="k">DATA</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Tykkaykset</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">kayttaja_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Kayttajat</span><span class="p">,</span>
+    <span class="n">paivitys_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Paivitykset</span><span class="p">,</span>
+    <span class="n">kuva_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Valokuvat</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Kommentit</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">kayttaja_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Kayttajat</span><span class="p">,</span>
+    <span class="n">paivitys_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Paivitykset</span><span class="p">,</span>
+    <span class="n">kuva_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Valokuvat</span><span class="p">,</span>
+    <span class="n">viesti</span> <span class="nb">TEXT</span>
+    <span class="n">aika</span> <span class="nb">DATETIME</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Viestit</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">kayttaja1_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Kayttajat</span><span class="p">,</span>
+    <span class="n">kayttaja2_id</span> <span class="nb">INTEGER</span> <span class="k">REFERENCES</span> <span class="n">Kayttajat</span><span class="p">,</span>
+    <span class="n">viesti</span> <span class="nb">TEXT</span><span class="p">,</span>
+    <span class="n">aika</span> <span class="nb">DATETIME</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<!--
+Table Kayttajat as K {
+  id INTEGER [pk]
+  tunnus TEXT
+  salasana TEXT
+  kuva_id INTEGER
+  yllapitaja BOOLEAN
+}
+
+Ref: K.kuva_id > V.id
+
+Table Paivitykset as P {
+  id INTEGER [pk]
+  kayttaja_id INTEGER
+  viesti TEXT
+  aika DATETIME
+}
+
+Ref: P.kayttaja_id > K.id
+
+Table KayttajanTiedot as KT {
+  id INTEGER [pk]
+  kayttaja_id INTEGER
+  avain TEXT
+  arvo TEXT
+}
+
+Ref: KT.kayttaja_id > K.id
+
+Table Ystavat as Y {
+  id INTEGER [pk]
+  kayttaja1_id INTEGER
+  kayttaja2_id INTEGER
+}
+
+Ref: Y.kayttaja1_id > K.id
+Ref: Y.kayttaja2_id > K.id
+
+Table Valokuvat as V {
+  id INTEGER [pk]
+  kayttaja_id INTEGER
+  kuva DATA
+}
+
+Ref: V.kayttaja_id > K.id
+
+Table Tykkaykset as T{
+  id INTEGER [pk]
+  kayttaja_id INTEGER
+  paivitys_id INTEGER
+  kuva_id INTEGER
+}
+
+Ref: T.kayttaja_id > K.id
+Ref: T.paivitys_id > P.id
+Ref: T.kuva_id > V.id
+
+Table Kommentit as Z {
+  id INTEGER [pk]
+  kayttaja_id INTEGER
+  paivitys_id INTEGER
+  kuva_id INTEGER
+  viesti TEXT
+  aika DATETIME
+}
+
+Ref: Z.kayttaja_id > K.id
+Ref: Z.paivitys_id > P.id
+Ref: Z.kuva_id > V.id
+
+Table Viestit as W {
+  id INTEGER [pk]
+  kayttaja1_id INTEGER
+  kayttaja2_id INTEGER
+  viesti TEXT
+  aika DATETIME
+}
+
+Ref: W.kayttaja1_id > K.id
+Ref: W.kayttaja2_id > K.id
+-->
+
+
+</div>
+        <div class="footer">
+    <img src=/syksy-2023/assets/img/HY_logo.png>
+    </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>
+    
+    1. Johdanto - Tietokantojen perusteet syksy 2023
+    
+  </title>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: {
+          scale: 87
+        }
+      });
+      </script>
+  <script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <link rel='stylesheet' type='text/css' media='screen' href=/syksy-2023/assets/css/main.css>
+  <link rel='stylesheet' type='text/css' media='screen' href=/syksy-2023/assets/css/syntax.css>
+
+  <script src=/syksy-2023/assets/js/main.js></script>
+
+</head>
+
+
+<body id="chapter">
+    
+<nav class="no-nav" id="side-nav" >
+    <button id="hide" onclick="hideSideNav()"> &#x2715;</button>
+    <button id="show" onclick="showSideNav()"> </button>
+    <h2>Tietokantojen perusteet syksy 2023</h2>
+    
+    <ol>
+
+        <li class="side-nav-obj" id="indexnav"><a href=/syksy-2023/index>Etusivu </a></li>
+        
+        
+        
+        <li class="side-nav-obj" id="Materiaalinav"><a href="/syksy-2023/pages/materiaali.html">Materiaali</a></li>
+        
+        
+        
+        
+        
+        <li class="side-nav-obj" id="Tehtävätnav"><a href="/syksy-2023/pages/tehtavat.html">Tehtävät</a></li>
+        
+        
+        
+        
+        
+        <li class="side-nav-obj" id="Tulokset ja palautenav"><a href="/syksy-2023/pages/tulokset_palaute.html">Tulokset ja palaute</a></li>
+        
+        
+        <br>
+        
+        
+        <li class="side-nav-obj" id="1. Johdantonav"><a href="/syksy-2023/content/osa-1/index.html">1. Johdanto</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Mikä on tietokantanav"><a href="/syksy-2023/content/osa-1/index.html#mikä-on-tietokanta">Mikä on tietokanta</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Tee-se-itse-tietokantanav"><a href="/syksy-2023/content/osa-1/index.html#tee-se-itse-tietokanta">Tee-se-itse-tietokanta</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Relaatiomalli ja SQL-kielinav"><a href="/syksy-2023/content/osa-1/index.html#relaatiomalli-ja-sql-kieli">Relaatiomalli ja SQL-kieli</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="2. SQL-kielen perusteetnav"><a href="/syksy-2023/content/osa-2/index.html">2. SQL-kielen perusteet</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Peruskomennotnav"><a href="/syksy-2023/content/osa-2/index.html#peruskomennot">Peruskomennot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Yhteenveto ja ryhmittelynav"><a href="/syksy-2023/content/osa-2/index.html#yhteenveto-ja-ryhmittely">Yhteenveto ja ryhmittely</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="SQLite-tietokantanav"><a href="/syksy-2023/content/osa-2/index.html#sqlite-tietokanta">SQLite-tietokanta</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="3. Monen taulun kyselytnav"><a href="/syksy-2023/content/osa-3/index.html">3. Monen taulun kyselyt</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Taulujen viittauksetnav"><a href="/syksy-2023/content/osa-3/index.html#taulujen-viittaukset">Taulujen viittaukset</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Liitostaulutnav"><a href="/syksy-2023/content/osa-3/index.html#liitostaulut">Liitostaulut</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="JOIN-syntaksinav"><a href="/syksy-2023/content/osa-3/index.html#join-syntaksi">JOIN-syntaksi</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="4. Lisää SQL-kielestänav"><a href="/syksy-2023/content/osa-4/index.html">4. Lisää SQL-kielestä</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Tyypit ja lausekkeetnav"><a href="/syksy-2023/content/osa-4/index.html#tyypit-ja-lausekkeet">Tyypit ja lausekkeet</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="NULL-arvotnav"><a href="/syksy-2023/content/osa-4/index.html#null-arvot">NULL-arvot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Tulosrivien rajausnav"><a href="/syksy-2023/content/osa-4/index.html#tulosrivien-rajaus">Tulosrivien rajaus</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Alikyselytnav"><a href="/syksy-2023/content/osa-4/index.html#alikyselyt">Alikyselyt</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Lisää tekniikoitanav"><a href="/syksy-2023/content/osa-4/index.html#lisää-tekniikoita">Lisää tekniikoita</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="5. Tietokannat ohjelmoinnissanav"><a href="/syksy-2023/content/osa-5/index.html">5. Tietokannat ohjelmoinnissa</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Tietokannan käyttäminennav"><a href="/syksy-2023/content/osa-5/index.html#tietokannan-käyttäminen">Tietokannan käyttäminen</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Käyttöliittymänav"><a href="/syksy-2023/content/osa-5/index.html#käyttöliittymä">Käyttöliittymä</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Mitä tehdä missäkinnav"><a href="/syksy-2023/content/osa-5/index.html#mitä-tehdä-missäkin">Mitä tehdä missäkin</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="6. Tietokannan suunnittelunav"><a href="/syksy-2023/content/osa-6/index.html">6. Tietokannan suunnittelu</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Suunnittelun periaatteetnav"><a href="/syksy-2023/content/osa-6/index.html#suunnittelun-periaatteet">Suunnittelun periaatteet</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Tiedon atomisuusnav"><a href="/syksy-2023/content/osa-6/index.html#tiedon-atomisuus">Tiedon atomisuus</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Toisteinen tietonav"><a href="/syksy-2023/content/osa-6/index.html#toisteinen-tieto">Toisteinen tieto</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Suunnitteluesimerkkinav"><a href="/syksy-2023/content/osa-6/index.html#suunnitteluesimerkki">Suunnitteluesimerkki</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="7. Tietokannan ominaisuudetnav"><a href="/syksy-2023/content/osa-7/index.html">7. Tietokannan ominaisuudet</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Tiedon eheysnav"><a href="/syksy-2023/content/osa-7/index.html#tiedon-eheys">Tiedon eheys</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Transaktiotnav"><a href="/syksy-2023/content/osa-7/index.html#transaktiot">Transaktiot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Kyselyjen suoritusnav"><a href="/syksy-2023/content/osa-7/index.html#kyselyjen-suoritus">Kyselyjen suoritus</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Indeksitnav"><a href="/syksy-2023/content/osa-7/index.html#indeksit">Indeksit</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="8. Tietokantojen teorianav"><a href="/syksy-2023/content/osa-8/index.html">8. Tietokantojen teoria</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Matemaattinen taustanav"><a href="/syksy-2023/content/osa-8/index.html#matemaattinen-tausta">Matemaattinen tausta</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Taulu relaationanav"><a href="/syksy-2023/content/osa-8/index.html#taulu-relaationa">Taulu relaationa</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Relaatio-operaatiotnav"><a href="/syksy-2023/content/osa-8/index.html#relaatio-operaatiot">Relaatio-operaatiot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Avaimet ja riippuvuudetnav"><a href="/syksy-2023/content/osa-8/index.html#avaimet-ja-riippuvuudet">Avaimet ja riippuvuudet</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Normaalimuodotnav"><a href="/syksy-2023/content/osa-8/index.html#normaalimuodot">Normaalimuodot</a></li>
+        
+            
+        
+        
+        
+    </ol>
+</nav>
+
+    <div class="page-content">
+        <div class="content">
+    <div class="table-of-content" id="tof" style="display: none;">
+    <ul>
+        
+        <li><a href="#mikä-on-tietokanta">Mikä on tietokanta</a></li>
+        
+        <li><a href="#tee-se-itse-tietokanta">Tee-se-itse-tietokanta</a></li>
+        
+        <li><a href="#relaatiomalli-ja-sql-kieli">Relaatiomalli ja SQL-kieli</a></li>
+        
+    </ul>
+</div>
+
+    <h1 id="1-johdanto">1. Johdanto</h1>
+
+<h2 id="mikä-on-tietokanta">Mikä on tietokanta</h2>
+
+<p><em>Tietokanta</em> (<em>database</em>) on tietokoneella oleva kokoelma tietoa, johon voidaan suorittaa hakuja ja jonka sisältöä voidaan muuttaa. Tietokantoja ovat esimerkiksi:</p>
+
+<ul>
+  <li>nettisivuston käyttäjärekisteri</li>
+  <li>verkkokaupan tuotteet ja varastotilanne</li>
+  <li>pankin tiedot asiakkaista ja tilitapahtumista</li>
+  <li>päivittäin mitatut säätiedot eri paikoissa</li>
+  <li>lentoyhtiön lentoaikataulut ja varaustilanne</li>
+</ul>
+
+<p>Tietokantoja on nykyään valtavasti, ja useimmat ihmiset ovat tavallisen päivän aikana yhteydessä lukuisiin tietokantoihin.</p>
+
+<h3 id="tietokantojen-haasteet">Tietokantojen haasteet</h3>
+
+<p>Tietokantojen tekniseen toteutukseen liittyy monia haasteita, eikä hyvin toimivan tietokannan toteuttaminen ole helppo tehtävä. Keskeisiä haasteita ovat:</p>
+
+<h4 id="tiedon-määrä">Tiedon määrä</h4>
+
+<p>Monessa tietokannassa on suuri määrä tietoa, johon kohdistuu jatkuvasti hakuja ja muutoksia. Miten toteuttaa tietokanta niin, että tietoon pääsee käsiksi tehokkaasti?</p>
+
+<h4 id="samanaikaisuus">Samanaikaisuus</h4>
+
+<p>Tietokannalla on yleensä useita käyttäjiä, jotka voivat hakea ja muuttaa tietoa samaan aikaan.
+Mitä tietokannan toteutuksessa tulee ottaa huomioon tähän liittyen?</p>
+
+<h4 id="yllätykset">Yllätykset</h4>
+
+<p>Tietokannan sisällön tulisi säilyä järkevänä myös yllättävissä tilanteissa. Esimerkiksi mitä tapahtuu, jos sähköt katkeavat juuri silloin, kun tietoa ollaan muuttamassa?</p>
+
+<h3 id="tietokantajärjestelmät">Tietokantajärjestelmät</h3>
+
+<p><em>Tietokantajärjestelmä</em> pitää huolta tietokannan sisällöstä ja tarjoaa tietokannan käyttäjälle toiminnot, joiden avulla tietoa pystyy hakemaan ja muuttamaan. Huomaa, että termiä <em>tietokanta</em> käytetään usein myös silloin, kun viitataan tietokantajärjestelmään.</p>
+
+<p>Useimmat käytössä olevat tietokannat perustuvat relaatiomalliin ja SQL-kieleen, joihin tutustumme tällä kurssilla. Esimerkiksi MySQL, PostgreSQL ja SQLite ovat tällaisia tietokantajärjestelmiä. Näiden tietokantojen teoreettinen perusta syntyi 1970-luvulla.</p>
+
+<p>Termi <em>NoSQL</em> viittaa tietokantaan, joka perustuu muuhun kuin relaatiomalliin ja SQL-kieleen. Esimerkiksi MongoDB ja Redis ovat saavuttaneet viime aikoina suosiota. Tällä kurssilla emme kuitenkaan juurikaan käsittele NoSQL-tietokantoja.</p>
+
+<h2 id="tee-se-itse-tietokanta">Tee-se-itse-tietokanta</h2>
+
+<p>Ennen tutustumista olemassa oleviin tietokantajärjestelmiin on hyvä miettiä, mitä tarvetta tällaisille järjestelmille on. Miksi emme voisi vain toteuttaa tietokantaa itse vaikkapa tallentamalla tietokannan sisällön tekstitiedostoon sopivassa muodossa?</p>
+
+<h3 id="esimerkki">Esimerkki</h3>
+
+<p>Haluamme tallentaa tietokantaan tietoa kurssin opiskelijoiden ratkaisuista kurssin tehtäviin. Kun opiskelija lähettää ratkaisun, tietokantaan tallennetaan opiskelijanumero, tehtävän numero, ratkaisun lähetysaika sekä ratkaisun tuottama pistemäärä.</p>
+
+<p>Yksinkertainen tapa toteuttaa tietokanta on luoda yksi tekstitiedosto, jonka jokaisella rivillä on yksi lähetys. Aina kun joku opiskelija lähettää ratkaisun, tiedostoon lisätään yksi rivi. Voisimme käytännössä tallentaa tietokannan CSV-tiedostona tähän tapaan:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>012121212;1;2020-05-03 12:50:32;100
+012341234;1;2020-05-03 14:02:12;100
+012121212;2;2020-05-04 14:05:50;100
+012121212;3;2020-05-04 14:43:12;0
+012341234;2;2020-05-04 10:15:23;0
+012341234;2;2020-05-04 16:40:39;0
+013371337;1;2020-05-06 18:11:13;0
+012341234;2;2020-05-07 10:02:15;100
+</code></pre></div></div>
+
+<p>CSV-tiedostossa tietty erotinmerkki erottaa riveillä olevat kentät. Tässä tapauksessa erotinmerkkinä on puolipiste <code class="language-html highlighter-rouge">;</code>. Esimerkiksi tiedoston ensimmäinen rivi kertoo, että opiskelija 012121212 on lähettänyt ratkaisun tehtävään 1 ja saanut siitä 100 pistettä.</p>
+
+<p>Nyt jos haluamme vaikkapa selvittää jokaisen opiskelijan lähetysten määrän, voimme hoitaa asian näin Python-kielellä:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="n">count</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s">"lahetykset.csv"</span><span class="p">):</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="n">line</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">";"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">count</span><span class="p">:</span>
+        <span class="n">count</span><span class="p">[</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">count</span><span class="p">[</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Ohjelma antaa seuraavan tuloksen:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>{'012121212': 3, '012341234': 4, '013371337': 1}
+</code></pre></div></div>
+
+<p>Tämä tarkoittaa, että opiskelija 012121212 on lähettänyt kolme ratkaisua, opiskelija 012341234 on lähettänyt neljä ratkaisua ja opiskelija 013371337 on lähettänyt yhden ratkaisun.</p>
+
+<h3 id="mahdolliset-ongelmat">Mahdolliset ongelmat</h3>
+
+<p>Tällainen CSV-tiedostoa käyttävä tietokanta on periaatteessa toimiva, mutta sen käyttäminen voi johtaa ongelmiin:</p>
+
+<h4 id="tiedon-määrä-1">Tiedon määrä</h4>
+
+<p>Kun tiedon määrä kasvaa, tiedon hakeminen CSV-tiedostosta voi muodostua ongelmaksi. Tämä johtuu siitä, että joudumme useimmissa tilanteissa käymään läpi koko tiedoston sisällön alusta loppuun, kun haluamme saada haettua tietyn asian.</p>
+
+<p>Esimerkiksi jos haluamme selvittää, minkä pistemäärän opiskelija 012341234 on saanut tehtävästä 2, joudumme käymään läpi tiedoston <em>kaikki</em> rivit, jotta löydämme oikeat rivit. Joudumme tekemään näin, koska rivit ovat sekalaisessa järjestyksessä eikä meillä ole etukäteen tietoa, missä haluamamme rivit ovat.</p>
+
+<p>Tiedoston läpikäynti ei ole ongelma, jos tiedosto on pieni. Esimerkiksi jos tiedostossa on sata riviä, läpikäynti sujuu hyvin nopeasti. Mutta tiedoston koon kasvaessa alkaa olla työlästä käydä kaikki rivit läpi aina, kun haluamme saada selville jotain tiedostosta.</p>
+
+<h4 id="samanaikaisuus-1">Samanaikaisuus</h4>
+
+<p>Mitä tapahtuu, jos kaksi opiskelijaa lähettävät ratkaisun samaan aikaan? Tällöin tiedoston loppuun pitäisi tulla kaksi riviä tietoa seuraavaan tapaan:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>012341234;3;2020-05-07 15:42:02;0
+013371337;7;2020-05-07 15:42:02;0
+</code></pre></div></div>
+
+<p>Jos käy huonosti, voi kuitenkin käydä näin:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>012341234;3;2020013371337;7;2020-05-07 15:42:02;0
+-05-07 15:42:02;0
+</code></pre></div></div>
+
+<p>Tässä ensimmäinen prosessi kirjoittaa ensin tiedoston loppuun <code class="language-html highlighter-rouge">012341234;3;2020</code>, sitten toinen prosessi kirjoittaa väliin <code class="language-html highlighter-rouge">013371337;7;2020-05-07 15:42:02;0</code> ja lopuksi ensimmäinen prosessi kirjoittaa <code class="language-html highlighter-rouge">-05-07 15:42:02;0</code>. Tämän seurauksena tiedoston rakenne menee sekaisin.</p>
+
+<p>Kun tiedostoon kirjoitetaan tietoa, ei ole itsestään selvää, että tieto menee perille yhtenäisenä, jos joku muu koettaa kirjoittaa samaan aikaan. Tämä riippuu tiedostojärjestelmästä, tiedon määrästä ja tiedoston käsittelytavasta.</p>
+
+<h4 id="yllätykset-1">Yllätykset</h4>
+
+<p>Tarkastellaan tilannetta, jossa haluamme poistaa tietokannasta opiskelijan 012341234 lähetykset. Voimme tehdä tämän lukemalla ensin kaikki rivit muistiin ja kirjoittamalla sitten takaisin
+tiedostoon kaikki rivit, joissa opiskelija ei ole 012341234.</p>
+
+<p>Mitä jos sähköt katkeavat juuri, kun olemme kirjoittaneet puolet riveistä takaisin? Kun käynnistämme tietokannan uudestaan, huomaamme, että tiedostossa on vain puolet riveistä ja loput ovat kadonneet eikä meillä ole keinoa saada niitä takaisin.</p>
+
+<h3 id="mitä-opimme-tästä">Mitä opimme tästä?</h3>
+
+<p>Yksinkertainen tekstitiedosto ei ole sinänsä huono tapa tallentaa tietoa, mutta se ei sovellu kaikkiin käyttötarkoituksiin. Tämän vuoksi tarvitsemme erillisiä tietokantajärjestelmiä, joihin tutustumme tällä kurssilla.</p>
+
+<p>Tietokantajärjestelmien kehittäjät ovat miettineet tarkasti, miten järjestelmä kannattaa toteuttaa, jotta tietoon pääsee käsiksi tehokkaasti, samanaikaiset käyttäjät eivät aiheuta ongelmia eikä tietoa katoa yllättävissä tilanteissa. Kun käytämme tietokantajärjestelmää, meidän ei tarvitse huolehtia tästä kaikesta itse.</p>
+
+<h2 id="relaatiomalli-ja-sql-kieli">Relaatiomalli ja SQL-kieli</h2>
+
+<p>Tällä kurssilla tutustumme tietokantoihin relaatiomallin ja SQL-kielen kautta. Relaatiomallin ytimessä on kaksi perusideaa:</p>
+
+<ol>
+  <li>Kaikki tieto tallennetaan tauluihin riveinä, jotka voivat viitata toisiinsa.</li>
+  <li>Tietokannan käyttäjä käsittelee tietoa SQL-kielellä, joka kätkee käyttäjältä tietokannan sisäisen toiminnan yksityiskohdat.</li>
+</ol>
+
+<h3 id="tietokannan-rakenne">Tietokannan rakenne</h3>
+
+<p>Relaatiomallissa tietokanta muodostuu <em>tauluista</em> (<em>table</em>), joissa on kiinteät <em>sarakkeet</em> (<em>column</em>). Tauluihin tallennetaan tietoa <em>riveinä</em> (<em>row</em>), joilla on tietyt arvot sarakkeissa. Jokaisessa taulussa on kokoelma tiettyyn asiaan liittyvää tietoa.</p>
+
+<p>Seuraavassa kuvassa on esimerkki tietokannasta, jota voisi käyttää osana verkkokaupan toteutusta. Tauluissa <code class="language-html highlighter-rouge">Tuotteet</code>, <code class="language-html highlighter-rouge">Asiakkaat</code> ja <code class="language-html highlighter-rouge">Ostokset</code> on tietoa tuotteista, asiakkaista ja heidän ostoskoriensa sisällöstä.</p>
+
+<table class="db-table">
+<thead>
+  <tr><th colspan="3" id="table-title">Tuotteet</th></tr>
+  <tr><th width="30">id</th><th width="100">nimi</th><th width="70">hinta</th></tr>
+</thead>
+<tbody>
+  <tr><td>1</td><td>retiisi</td><td>7</td></tr>
+  <tr><td>2</td><td>porkkana</td><td>5</td></tr>
+  <tr><td>3</td><td>nauris</td><td>4</td></tr>
+  <tr><td>4</td><td>lanttu</td><td>8</td></tr>
+  <tr><td>5</td><td>selleri</td><td>4</td></tr>
+</tbody>
+</table>
+
+<table class="db-table">
+<thead>
+  <tr><th colspan="2" id="table-title">Asiakkaat</th></tr>
+  <tr><th width="30">id</th><th width="100">nimi</th></tr>
+</thead>
+<tbody>
+  <tr><td>1</td><td>Uolevi</td></tr>
+  <tr><td>2</td><td>Maija</td></tr>
+  <tr><td>3</td><td>Aapeli</td></tr>
+</tbody>
+</table>
+
+<table class="db-table">
+<thead>
+  <tr><th colspan="2" id="table-title">Ostokset</th></tr>
+  <tr><th width="100">asiakas_id</th><th width="100">tuote_id</th></tr>
+</thead>
+<tbody>
+  <tr><td>1</td><td>2</td></tr>
+  <tr><td>1</td><td>5</td></tr>
+  <tr><td>2</td><td>1</td></tr>
+  <tr><td>2</td><td>4</td></tr>
+  <tr><td>2</td><td>5</td></tr>
+</tbody>
+</table>
+
+<p>Tauluissa <code class="language-html highlighter-rouge">Tuotteet</code> ja <code class="language-html highlighter-rouge">Asiakkaat</code> jokaisella rivillä on yksilöllinen id-numero, jonka avulla niihin voi viitata. Tämä on yleinen tapa tietokantojen suunnittelussa. Tämän ansiosta taulussa <code class="language-html highlighter-rouge">Ostokset</code> voidaan esittää id-numeroiden avulla, mitä tuotteita kukin asiakas on valinnut. Tässä esimerkissä Uolevin korissa on porkkana ja selleri ja Maijan korissa on retiisi, lanttu ja selleri.</p>
+
+<h3 id="sql-kieli">SQL-kieli</h3>
+
+<p><em>SQL</em> (<em>Structured Query Language</em>) on vakiintunut tapa käsitellä tietokannan sisältöä.
+Kielessä on komentoja, joiden avulla tietokannan käyttäjä (esimerkiksi tietokantaa käyttävä ohjelmoija) voi lisätä, hakea, muuttaa ja poistaa tietoa.</p>
+
+<p>SQL-komennot muodostuvat avainsanoista (kuten <code class="language-html highlighter-rouge">SELECT</code> ja <code class="language-html highlighter-rouge">WHERE</code>), taulujen ja sarakkeiden nimistä sekä muista arvoista. Esimerkiksi komento</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="n">hinta</span> <span class="k">FROM</span> <span class="n">Tuotteet</span> <span class="k">WHERE</span> <span class="n">nimi</span><span class="o">=</span><span class="s1">'retiisi'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>hakee tietokannan tuotteista retiisin hinnan. Komentojen lopussa on puolipiste <code class="language-html highlighter-rouge">;</code> ja voimme käyttää välilyöntejä ja rivinvaihtoja haluamallamme tavalla. Esimerkiksi voisimme kirjoittaa äskeisen komennon myös näin usealle riville:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">hinta</span>
+<span class="k">FROM</span>
+  <span class="n">Tuotteet</span>
+<span class="k">WHERE</span>
+  <span class="n">nimi</span><span class="o">=</span><span class="s1">'retiisi'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Tutustumme SQL-kieleen tarkemmin materiaalin luvuissa 2–4.</p>
+
+<p>SQL-kieli syntyi 1970-luvulla, ja siinä on paljon muistumia <em>vanhan ajan ohjelmoinnista</em>.
+Tällaisia piirteitä ovat esimerkiksi:</p>
+
+<ul>
+  <li>Avainsanat ovat kokonaisia englannin kielen sanoja, ja komennot muistuttavat englannin kielen lauseita.</li>
+  <li>Avainsanoissa kirjainkoolla ei ole väliä. Esimerkiksi <code class="language-html highlighter-rouge">SELECT</code>, <code class="language-html highlighter-rouge">select</code> ja <code class="language-html highlighter-rouge">Select</code> tarkoittavat samaa. Avainsanat on tapana kirjoittaa kokonaan suurilla kirjaimilla.</li>
+  <li>Merkki <code class="language-html highlighter-rouge">=</code> tarkoittaa sekä asetusta että yhtäsuuruusvertailua (nykyään ohjelmoinnissa yhtäsuuruusvertailu on yleensä <code class="language-html highlighter-rouge">==</code>).</li>
+</ul>
+
+<p>SQL-kielestä on olemassa <em>standardeja</em>, jotka pyrkivät antamaan yhteisen pohjan kielelle. Käytännössä jokainen SQL-kielen toteutus toimii kuitenkin hieman omalla tavallaan. Tällä kurssilla keskitymme SQL:n ominaisuuksiin, jotka ovat yleisesti käytettävissä eri tietokannoissa.</p>
+
+<h3 id="tietokannan-sisäinen-toiminta">Tietokannan sisäinen toiminta</h3>
+
+<p>Tietokantajärjestelmän tehtävänä on käsitellä käyttäjän antamat SQL-komennot. Esimerkiksi kun käyttäjä antaa komennon, joka hakee tietoa tietokannasta, tietokantajärjestelmän tulee löytää jokin hyvä tapa käsitellä komento ja toimittaa tulokset takaisin käyttäjälle mahdollisimman nopeasti.</p>
+
+<p>SQL-kielen hienoutena on, että käyttäjän riittää <em>kuvailla</em>, mitä tietoa hän haluaa, minkä jälkeen tietokantajärjestelmä hoitaa likaisen työn ja hankkii tiedot tietokannan uumenista. Tämä on mukavaa käyttäjälle, koska hänen ei tarvitse tietää mitään tietokannan sisäisestä toiminnasta
+vaan voi luottaa tietokantajärjestelmään.</p>
+
+<p>Tietokantajärjestelmän toteuttaminen on vaikea tehtävä, koska järjestelmän täytyy sekä osata käsitellä tehokkaasti SQL-komentoja että huolehtia siitä, että kaikki toimii oikein samanaikaisilla käyttäjillä ja yllättävissä tilanteissa. Tällä kurssilla tutustumme tietokantoihin lähinnä tietokannan käyttäjän näkökulmasta emmekä perehdy niiden sisäiseen toimintaan.</p>
+
+
+</div>
+        <div class="footer">
+    <img src=/syksy-2023/assets/img/HY_logo.png>
+    </div>
+    </div>
+</body>
+
+</html>

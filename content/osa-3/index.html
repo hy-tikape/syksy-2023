@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>
+    
+    3. Monen taulun kyselyt - Tietokantojen perusteet syksy 2023
+    
+  </title>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: {
+          scale: 87
+        }
+      });
+      </script>
+  <script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <link rel='stylesheet' type='text/css' media='screen' href=/syksy-2023/assets/css/main.css>
+  <link rel='stylesheet' type='text/css' media='screen' href=/syksy-2023/assets/css/syntax.css>
+
+  <script src=/syksy-2023/assets/js/main.js></script>
+
+</head>
+
+
+<body id="chapter">
+    
+<nav class="no-nav" id="side-nav" >
+    <button id="hide" onclick="hideSideNav()"> &#x2715;</button>
+    <button id="show" onclick="showSideNav()"> </button>
+    <h2>Tietokantojen perusteet syksy 2023</h2>
+    
+    <ol>
+
+        <li class="side-nav-obj" id="indexnav"><a href=/syksy-2023/index>Etusivu </a></li>
+        
+        
+        
+        <li class="side-nav-obj" id="Materiaalinav"><a href="/syksy-2023/pages/materiaali.html">Materiaali</a></li>
+        
+        
+        
+        
+        
+        <li class="side-nav-obj" id="Tehtävätnav"><a href="/syksy-2023/pages/tehtavat.html">Tehtävät</a></li>
+        
+        
+        
+        
+        
+        <li class="side-nav-obj" id="Tulokset ja palautenav"><a href="/syksy-2023/pages/tulokset_palaute.html">Tulokset ja palaute</a></li>
+        
+        
+        <br>
+        
+        
+        <li class="side-nav-obj" id="1. Johdantonav"><a href="/syksy-2023/content/osa-1/index.html">1. Johdanto</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Mikä on tietokantanav"><a href="/syksy-2023/content/osa-1/index.html#mikä-on-tietokanta">Mikä on tietokanta</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Tee-se-itse-tietokantanav"><a href="/syksy-2023/content/osa-1/index.html#tee-se-itse-tietokanta">Tee-se-itse-tietokanta</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Relaatiomalli ja SQL-kielinav"><a href="/syksy-2023/content/osa-1/index.html#relaatiomalli-ja-sql-kieli">Relaatiomalli ja SQL-kieli</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="2. SQL-kielen perusteetnav"><a href="/syksy-2023/content/osa-2/index.html">2. SQL-kielen perusteet</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Peruskomennotnav"><a href="/syksy-2023/content/osa-2/index.html#peruskomennot">Peruskomennot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Yhteenveto ja ryhmittelynav"><a href="/syksy-2023/content/osa-2/index.html#yhteenveto-ja-ryhmittely">Yhteenveto ja ryhmittely</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="SQLite-tietokantanav"><a href="/syksy-2023/content/osa-2/index.html#sqlite-tietokanta">SQLite-tietokanta</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="3. Monen taulun kyselytnav"><a href="/syksy-2023/content/osa-3/index.html">3. Monen taulun kyselyt</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Taulujen viittauksetnav"><a href="/syksy-2023/content/osa-3/index.html#taulujen-viittaukset">Taulujen viittaukset</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Liitostaulutnav"><a href="/syksy-2023/content/osa-3/index.html#liitostaulut">Liitostaulut</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="JOIN-syntaksinav"><a href="/syksy-2023/content/osa-3/index.html#join-syntaksi">JOIN-syntaksi</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="4. Lisää SQL-kielestänav"><a href="/syksy-2023/content/osa-4/index.html">4. Lisää SQL-kielestä</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Tyypit ja lausekkeetnav"><a href="/syksy-2023/content/osa-4/index.html#tyypit-ja-lausekkeet">Tyypit ja lausekkeet</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="NULL-arvotnav"><a href="/syksy-2023/content/osa-4/index.html#null-arvot">NULL-arvot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Tulosrivien rajausnav"><a href="/syksy-2023/content/osa-4/index.html#tulosrivien-rajaus">Tulosrivien rajaus</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Alikyselytnav"><a href="/syksy-2023/content/osa-4/index.html#alikyselyt">Alikyselyt</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Lisää tekniikoitanav"><a href="/syksy-2023/content/osa-4/index.html#lisää-tekniikoita">Lisää tekniikoita</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="5. Tietokannat ohjelmoinnissanav"><a href="/syksy-2023/content/osa-5/index.html">5. Tietokannat ohjelmoinnissa</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Tietokannan käyttäminennav"><a href="/syksy-2023/content/osa-5/index.html#tietokannan-käyttäminen">Tietokannan käyttäminen</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Käyttöliittymänav"><a href="/syksy-2023/content/osa-5/index.html#käyttöliittymä">Käyttöliittymä</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Mitä tehdä missäkinnav"><a href="/syksy-2023/content/osa-5/index.html#mitä-tehdä-missäkin">Mitä tehdä missäkin</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="6. Tietokannan suunnittelunav"><a href="/syksy-2023/content/osa-6/index.html">6. Tietokannan suunnittelu</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Suunnittelun periaatteetnav"><a href="/syksy-2023/content/osa-6/index.html#suunnittelun-periaatteet">Suunnittelun periaatteet</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Tiedon atomisuusnav"><a href="/syksy-2023/content/osa-6/index.html#tiedon-atomisuus">Tiedon atomisuus</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Toisteinen tietonav"><a href="/syksy-2023/content/osa-6/index.html#toisteinen-tieto">Toisteinen tieto</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Suunnitteluesimerkkinav"><a href="/syksy-2023/content/osa-6/index.html#suunnitteluesimerkki">Suunnitteluesimerkki</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="7. Tietokannan ominaisuudetnav"><a href="/syksy-2023/content/osa-7/index.html">7. Tietokannan ominaisuudet</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Tiedon eheysnav"><a href="/syksy-2023/content/osa-7/index.html#tiedon-eheys">Tiedon eheys</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Transaktiotnav"><a href="/syksy-2023/content/osa-7/index.html#transaktiot">Transaktiot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Kyselyjen suoritusnav"><a href="/syksy-2023/content/osa-7/index.html#kyselyjen-suoritus">Kyselyjen suoritus</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Indeksitnav"><a href="/syksy-2023/content/osa-7/index.html#indeksit">Indeksit</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="8. Tietokantojen teorianav"><a href="/syksy-2023/content/osa-8/index.html">8. Tietokantojen teoria</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Matemaattinen taustanav"><a href="/syksy-2023/content/osa-8/index.html#matemaattinen-tausta">Matemaattinen tausta</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Taulu relaationanav"><a href="/syksy-2023/content/osa-8/index.html#taulu-relaationa">Taulu relaationa</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Relaatio-operaatiotnav"><a href="/syksy-2023/content/osa-8/index.html#relaatio-operaatiot">Relaatio-operaatiot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Avaimet ja riippuvuudetnav"><a href="/syksy-2023/content/osa-8/index.html#avaimet-ja-riippuvuudet">Avaimet ja riippuvuudet</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Normaalimuodotnav"><a href="/syksy-2023/content/osa-8/index.html#normaalimuodot">Normaalimuodot</a></li>
+        
+            
+        
+        
+        
+    </ol>
+</nav>
+
+    <div class="page-content">
+        <div class="content">
+    <div class="table-of-content" id="tof" style="display: none;">
+    <ul>
+        
+        <li><a href="#taulujen-viittaukset">Taulujen viittaukset</a></li>
+        
+        <li><a href="#liitostaulut">Liitostaulut</a></li>
+        
+        <li><a href="#join-syntaksi">JOIN-syntaksi</a></li>
+        
+    </ul>
+</div>
+
+    <h1 id="3-monen-taulun-kyselyt">3. Monen taulun kyselyt</h1>
+
+<h2 id="taulujen-viittaukset">Taulujen viittaukset</h2>
+
+<p>Keskeinen idea tietokannoissa on, että taulun rivi voi viitata toisen taulun riviin. Tällöin voimme muodostaa kyselyn, joka kerää tietoa useista tauluista viittausten perusteella. Käytännössä viittauksena on yleensä toisessa taulussa olevan rivin id-numero.</p>
+
+<h3 id="esimerkki">Esimerkki</h3>
+
+<p>Tarkastellaan esimerkkinä tilannetta, jossa tietokannassa on tietoa kursseista ja niiden opettajista. Oletamme, että jokaisella kurssilla on yksi opettaja ja sama opettaja voi opettaa monta kurssia.</p>
+
+<p>Tallennamme tauluun <code class="language-html highlighter-rouge">Opettajat</code> tietoa opettajista. Jokaisella opettajalla on id-numero, jolla voimme viitata siihen.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi      
+----------  ----------
+1           Kaila     
+2           Luukkainen
+3           Kivinen   
+4           Laaksonen 
+</code></pre></div></div>
+
+<p>Taulussa <code class="language-html highlighter-rouge">Kurssit</code> on puolestaan tietoa kursseista ja jokaisen kurssin kohdalla viittaus kurssin opettajaan.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi              opettaja_id
+----------  ----------------  -----------
+1           Laskennan mallit  3          
+2           Ohjelmoinnin per  1          
+3           Ohjelmoinnin jat  1          
+4           Tietokantojen pe  4          
+5           Tietorakenteet j  3        
+</code></pre></div></div>
+
+<p>Voimme nyt hakea kurssit opettajineen seuraavalla kyselyllä, joka hakee tietoa samaan aikaan tauluista <code class="language-html highlighter-rouge">Kurssit</code> ja <code class="language-html highlighter-rouge">Opettajat</code>:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">Kurssit</span><span class="p">.</span><span class="n">nimi</span><span class="p">,</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">nimi</span>
+<span class="k">FROM</span>
+  <span class="n">Kurssit</span><span class="p">,</span> <span class="n">Opettajat</span>
+<span class="k">WHERE</span>
+  <span class="n">Kurssit</span><span class="p">.</span><span class="n">opettaja_id</span> <span class="o">=</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Koska kyselyssä on monta taulua, ilmoitamme sarakkeiden taulut. Esimerkiksi <code class="language-html highlighter-rouge">Kurssit.nimi</code> viittaa taulun <code class="language-html highlighter-rouge">Kurssit</code> sarakkeeseen <code class="language-html highlighter-rouge">nimi</code>.</p>
+
+<p>Kysely antaa seuraavan tuloksen:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi              nimi      
+----------------  ----------
+Laskennan mallit  Kivinen   
+Ohjelmoinnin per  Kaila     
+Ohjelmoinnin jat  Kaila     
+Tietokantojen pe  Laaksonen 
+Tietorakenteet j  Kivinen 
+</code></pre></div></div>
+
+<h3 id="mitä-tässä-tapahtui">Mitä tässä tapahtui?</h3>
+
+<p>Yllä olevassa kyselyssä uutena asiana on, että kysely koskee useaa taulua (<code class="language-html highlighter-rouge">FROM Kurssit, Opettajat</code>), mutta mitä tämä tarkoittaa oikeastaan?</p>
+
+<p>Ideana on, että kun kyselyssä on monta taulua, kyselyn tulosrivien lähtökohtana ovat <em>kaikki</em> tavat valita rivien yhdistelmiä tauluista. Tämän jälkeen <code class="language-html highlighter-rouge">WHERE</code>-osan ehdoilla voi määrittää, mitkä yhdistelmät ovat kiinnostuksen kohteena.</p>
+
+<p>Hyvä tapa saada ymmärrystä monen taulun kyselyn toiminnasta on tarkastella ensin kyselyä, joka hakee kaikki sarakkeet ja jossa ei ole <code class="language-html highlighter-rouge">WHERE</code>-osaa. Yllä olevassa esimerkkitilanteessa tällainen kysely on seuraava:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="o">*</span>
+<span class="k">FROM</span>
+  <span class="n">Kurssit</span><span class="p">,</span> <span class="n">Opettajat</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Koska taulussa <code class="language-html highlighter-rouge">Kurssit</code> on 5 riviä ja taulussa <code class="language-html highlighter-rouge">Opettajat</code> on 4 riviä, kyselyn tulostaulussa on 5 * 4 = 20 riviä. Tulostaulu sisältää kaikki mahdolliset tavat valita ensin jokin rivi taulusta <code class="language-html highlighter-rouge">Kurssit</code> ja sitten jokin rivi taulusta <code class="language-html highlighter-rouge">Opettajat</code>:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi              opettaja_id  id          nimi      
+----------  ----------------  -----------  ----------  ----------
+1           Laskennan mallit  3            1           Kaila     
+1           Laskennan mallit  3            2           Luukkainen
+1           Laskennan mallit  3            3           Kivinen   
+1           Laskennan mallit  3            4           Laaksonen 
+2           Ohjelmoinnin per  1            1           Kaila     
+2           Ohjelmoinnin per  1            2           Luukkainen
+2           Ohjelmoinnin per  1            3           Kivinen   
+2           Ohjelmoinnin per  1            4           Laaksonen 
+3           Ohjelmoinnin jat  1            1           Kaila     
+3           Ohjelmoinnin jat  1            2           Luukkainen
+3           Ohjelmoinnin jat  1            3           Kivinen   
+3           Ohjelmoinnin jat  1            4           Laaksonen 
+4           Tietokantojen pe  4            1           Kaila     
+4           Tietokantojen pe  4            2           Luukkainen
+4           Tietokantojen pe  4            3           Kivinen   
+4           Tietokantojen pe  4            4           Laaksonen 
+5           Tietorakenteet j  3            1           Kaila     
+5           Tietorakenteet j  3            2           Luukkainen
+5           Tietorakenteet j  3            3           Kivinen   
+5           Tietorakenteet j  3            4           Laaksonen 
+</code></pre></div></div>
+
+<p>Suurin osa tulosriveistä ei ole kuitenkaan kiinnostavia, koska ne eivät liity toisiinsa mitenkään. Esimerkiksi ensimmäinen tulosrivi kertoo vain, että on olemassa kurssi Laskennan mallit ja toisaalta on olemassa opettaja Kaila. Tämän vuoksi rajaamme hakua niin, että opettajan id-numeron tulee olla sama kummankin taulun riveissä:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="o">*</span>
+<span class="k">FROM</span>
+  <span class="n">Kurssit</span><span class="p">,</span> <span class="n">Opettajat</span>
+<span class="k">WHERE</span>
+  <span class="n">Kurssit</span><span class="p">.</span><span class="n">opettaja_id</span> <span class="o">=</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Tämän seurauksena kysely alkaa antaa mielekkäitä tuloksia:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi              opettaja_id  id          nimi      
+----------  ----------------  -----------  ----------  ----------
+1           Laskennan mallit  3            3           Kivinen   
+2           Ohjelmoinnin per  1            1           Kaila     
+3           Ohjelmoinnin jat  1            1           Kaila     
+4           Tietokantojen pe  4            4           Laaksonen 
+5           Tietorakenteet j  3            3           Kivinen   
+</code></pre></div></div>
+
+<p>Tämän jälkeen voimme vielä parantaa kyselyä valitsemalla meitä kiinnostavat sarakkeet:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">Kurssit</span><span class="p">.</span><span class="n">nimi</span><span class="p">,</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">nimi</span>
+<span class="k">FROM</span>
+  <span class="n">Kurssit</span><span class="p">,</span> <span class="n">Opettajat</span>
+<span class="k">WHERE</span>
+  <span class="n">Kurssit</span><span class="p">.</span><span class="n">opettaja_id</span> <span class="o">=</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Näin päädymme samaan tulokseen kuin aiemmin:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi              nimi      
+----------------  ----------
+Laskennan mallit  Kivinen   
+Ohjelmoinnin per  Kaila     
+Ohjelmoinnin jat  Kaila     
+Tietokantojen pe  Laaksonen 
+Tietorakenteet j  Kivinen 
+</code></pre></div></div>
+
+<h3 id="lisää-ehtoja-kyselyssä">Lisää ehtoja kyselyssä</h3>
+
+<p>Monen taulun kyselyissä <code class="language-html highlighter-rouge">WHERE</code>-osa kytkee toisiinsa meitä kiinnostavat taulujen rivit, mutta lisäksi voimme laittaa <code class="language-html highlighter-rouge">WHERE</code>-osaan muita ehtoja samaan tapaan kuin ennenkin. Esimerkiksi voimme suorittaa seuraavan kyselyn:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">Kurssit</span><span class="p">.</span><span class="n">nimi</span><span class="p">,</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">nimi</span>
+<span class="k">FROM</span>
+  <span class="n">Kurssit</span><span class="p">,</span> <span class="n">Opettajat</span>
+<span class="k">WHERE</span>
+  <span class="n">Kurssit</span><span class="p">.</span><span class="n">opettaja_id</span> <span class="o">=</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">id</span> <span class="k">AND</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">nimi</span> <span class="o">=</span> <span class="s1">'Kivinen'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Näin saamme haettua kurssit, joiden opettajana on Kivinen:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi              nimi      
+----------------  ----------
+Laskennan mallit  Kivinen   
+Tietorakenteet j  Kivinen 
+</code></pre></div></div>
+
+<h3 id="taulujen-lyhyet-nimet">Taulujen lyhyet nimet</h3>
+
+<p>Voimme tiivistää monen taulun kyselyä antamalla tauluille vaihtoehtoiset lyhyet nimet, joiden avulla voimme viitata niihin kyselyssä. Esimerkiksi kysely</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">Kurssit</span><span class="p">.</span><span class="n">nimi</span><span class="p">,</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">nimi</span>
+<span class="k">FROM</span>
+  <span class="n">Kurssit</span><span class="p">,</span> <span class="n">Opettajat</span>
+<span class="k">WHERE</span>
+  <span class="n">Kurssit</span><span class="p">.</span><span class="n">opettaja_id</span> <span class="o">=</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>voidaan esittää lyhemmin näin:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">K</span><span class="p">.</span><span class="n">nimi</span><span class="p">,</span> <span class="n">O</span><span class="p">.</span><span class="n">nimi</span>
+<span class="k">FROM</span>
+  <span class="n">Kurssit</span> <span class="k">AS</span> <span class="n">K</span><span class="p">,</span> <span class="n">Opettajat</span> <span class="k">AS</span> <span class="n">O</span>
+<span class="k">WHERE</span>
+  <span class="n">K</span><span class="p">.</span><span class="n">opettaja_id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Sana <code class="language-html highlighter-rouge">AS</code> ei ole pakollinen, eli voimme lyhentää kyselyä lisää:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">K</span><span class="p">.</span><span class="n">nimi</span><span class="p">,</span> <span class="n">O</span><span class="p">.</span><span class="n">nimi</span>
+<span class="k">FROM</span>
+  <span class="n">Kurssit</span> <span class="n">K</span><span class="p">,</span> <span class="n">Opettajat</span> <span class="n">O</span>
+<span class="k">WHERE</span>
+  <span class="n">K</span><span class="p">.</span><span class="n">opettaja_id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="saman-taulun-toistaminen">Saman taulun toistaminen</h3>
+
+<p>Monen taulun kyselyssä voi esiintyä myös monta kertaa sama taulu, kunhan niille annetaan eri nimet. Esimerkiksi seuraava kysely hakee kaikki tavat valita kahden opettajan <em>pari</em>:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="n">A</span><span class="p">.</span><span class="n">nimi</span><span class="p">,</span> <span class="n">B</span><span class="p">.</span><span class="n">nimi</span> <span class="k">FROM</span> <span class="n">Opettajat</span> <span class="n">A</span><span class="p">,</span> <span class="n">Opettajat</span> <span class="n">B</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Kyselyn tulos on seuraava:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi        nimi      
+----------  ----------
+Kaila       Kaila     
+Kaila       Luukkainen
+Kaila       Kivinen   
+Kaila       Laaksonen 
+Luukkainen  Kaila     
+Luukkainen  Luukkainen
+Luukkainen  Kivinen   
+Luukkainen  Laaksonen 
+Kivinen     Kaila     
+Kivinen     Luukkainen
+Kivinen     Kivinen   
+Kivinen     Laaksonen 
+Laaksonen   Kaila     
+Laaksonen   Luukkainen
+Laaksonen   Kivinen   
+Laaksonen   Laaksonen 
+</code></pre></div></div>
+
+<h2 id="liitostaulut">Liitostaulut</h2>
+
+<p>Taulujen välillä esiintyy yleensä kahdenlaisia suhteita:</p>
+
+<ol>
+  <li>
+    <p><em>Yksi moneen -suhde</em>:
+Taulun A rivi liittyy enintään yhteen taulun B riviin.
+Taulun B rivi voi liittyä useaan taulun A riviin.</p>
+  </li>
+  <li>
+    <p><em>Monta moneen -suhde</em>:
+Taulun A rivi voi liittyä useaan taulun B riviin.
+Taulun B rivi voi liittyä useaan taulun A riviin.</p>
+  </li>
+</ol>
+
+<p>Tapauksessa 1 voimme lisätä tauluun A sarakkeen, joka viittaa tauluun B, kuten teimme edellisen osion esimerkissä. Tapauksessa 2 tilanne on kuitenkin hankalampi, koska yksittäinen viittaus kummankaan taulun rivissä ei riittäisi. Ratkaisuna on luoda kolmas <em>liitostaulu</em>, joka sisältää tiedot viittauksista.</p>
+
+<h3 id="esimerkki-1">Esimerkki</h3>
+
+<p>Tarkastellaan esimerkkinä tilannetta, jossa verkkokaupassa on tuotteita ja asiakkaita ja jokainen asiakas on valinnut tiettyjä tuotteita ostoskoriin. Tietyn asiakkaan korissa voi olla useita tuotteita, ja toisaalta tietty tuote voi olla usean asiakkaan korissa.</p>
+
+<p>Rakennamme tietokannan niin, että siinä on kolme taulua: <code class="language-html highlighter-rouge">Tuotteet</code>, <code class="language-html highlighter-rouge">Asiakkaat</code> ja <code class="language-html highlighter-rouge">Ostokset</code>. Liitostaulu <code class="language-html highlighter-rouge">Ostokset</code> ilmaisee, mitä tuotteita on kunkin asiakkaan ostoskorissa. Sen jokainen rivi esittää yhden parin muotoa “asiakkaan <em>x</em> korissa on tuote <em>y</em>”.</p>
+
+<p>Oletamme, että taulujen sisällöt ovat seuraavat:</p>
+
+<table class="db-table">
+<thead>
+  <tr><th colspan="3" id="table-title">Tuotteet</th></tr>
+  <tr><th width="30">id</th><th width="100">nimi</th><th width="70">hinta</th></tr>
+</thead>
+<tbody>
+  <tr><td>1</td><td>retiisi</td><td>7</td></tr>
+  <tr><td>2</td><td>porkkana</td><td>5</td></tr>
+  <tr><td>3</td><td>nauris</td><td>4</td></tr>
+  <tr><td>4</td><td>lanttu</td><td>8</td></tr>
+  <tr><td>5</td><td>selleri</td><td>4</td></tr>
+</tbody>
+</table>
+
+<table class="db-table">
+<thead>
+  <tr><th colspan="2" id="table-title">Asiakkaat</th></tr>
+  <tr><th width="30">id</th><th width="100">nimi</th></tr>
+</thead>
+<tbody>
+  <tr><td>1</td><td>Uolevi</td></tr>
+  <tr><td>2</td><td>Maija</td></tr>
+  <tr><td>3</td><td>Aapeli</td></tr>
+</tbody>
+</table>
+
+<table class="db-table">
+<thead>
+  <tr><th colspan="2" id="table-title">Ostokset</th></tr>
+  <tr><th width="100">asiakas_id</th><th width="100">tuote_id</th></tr>
+</thead>
+<tbody>
+  <tr><td>1</td><td>2</td></tr>
+  <tr><td>1</td><td>5</td></tr>
+  <tr><td>2</td><td>1</td></tr>
+  <tr><td>2</td><td>4</td></tr>
+  <tr><td>2</td><td>5</td></tr>
+</tbody>
+</table>
+
+<p>Nyt voimme hakea asiakkaat ja tuotteet seuraavasti:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">nimi</span><span class="p">,</span> <span class="n">T</span><span class="p">.</span><span class="n">nimi</span>
+<span class="k">FROM</span>
+  <span class="n">Asiakkaat</span> <span class="n">A</span><span class="p">,</span> <span class="n">Tuotteet</span> <span class="n">T</span><span class="p">,</span> <span class="n">Ostokset</span> <span class="n">O</span>
+<span class="k">WHERE</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">asiakas_id</span> <span class="k">AND</span> <span class="n">T</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">tuote_id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Kyselyn ideana on hakea tauluista <code class="language-html highlighter-rouge">Asiakkaat</code> ja <code class="language-html highlighter-rouge">Tuotteet</code> taulun <code class="language-html highlighter-rouge">Ostokset</code> rivejä vastaavat tiedot. Jotta saamme mielekkäitä tuloksia, kytkemme rivit yhteen kahden ehdon avulla. Kysely tuottaa seuraavan tulostaulun:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi        nimi      
+----------  ----------
+Uolevi      porkkana  
+Uolevi      selleri   
+Maija       retiisi   
+Maija       lanttu    
+Maija       selleri   
+</code></pre></div></div>
+
+<h3 id="miten-kysely-toimii">Miten kysely toimii?</h3>
+
+<p>Voimme taas tutkia kyselyn toimintaa hakemalla kaikki sarakkeet ja poistamalla ehdot:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="o">*</span>
+<span class="k">FROM</span>
+  <span class="n">Asiakkaat</span> <span class="n">A</span><span class="p">,</span> <span class="n">Tuotteet</span> <span class="n">T</span><span class="p">,</span> <span class="n">Ostokset</span> <span class="n">O</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Tämän kyselyn tulostaulussa on kaikki tavat valita jokin asiakas, tuote ja ostokset. Tulostaulussa on 5 * 3 * 5 = 75 riviä ja se alkaa näin:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi        id          nimi        hinta       asiakas_id  tuote_id  
+----------  ----------  ----------  ----------  ----------  ----------  ----------
+1           Uolevi      1           retiisi     7           1           2         
+1           Uolevi      1           retiisi     7           1           5         
+1           Uolevi      1           retiisi     7           2           1         
+1           Uolevi      1           retiisi     7           2           4         
+1           Uolevi      1           retiisi     7           2           5         
+1           Uolevi      2           porkkana    5           1           2         
+1           Uolevi      2           porkkana    5           1           5         
+1           Uolevi      2           porkkana    5           2           1         
+1           Uolevi      2           porkkana    5           2           4         
+1           Uolevi      2           porkkana    5           2           5         
+1           Uolevi      3           nauris      4           1           2         
+1           Uolevi      3           nauris      4           1           5         
+1           Uolevi      3           nauris      4           2           1         
+1           Uolevi      3           nauris      4           2           4         
+1           Uolevi      3           nauris      4           2           5         
+...
+</code></pre></div></div>
+
+<p>Sitten kun lisäämme kyselyyn ehdot, saamme rajattua kiinnostavat rivit:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="o">*</span>
+<span class="k">FROM</span>
+  <span class="n">Asiakkaat</span> <span class="n">A</span><span class="p">,</span> <span class="n">Tuotteet</span> <span class="n">T</span><span class="p">,</span> <span class="n">Ostokset</span> <span class="n">O</span>
+<span class="k">WHERE</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">asiakas_id</span> <span class="k">AND</span> <span class="n">T</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">tuote_id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi        id          nimi        hinta       asiakas_id  tuote_id  
+----------  ----------  ----------  ----------  ----------  ----------  ----------
+1           Uolevi      2           porkkana    5           1           2         
+1           Uolevi      5           selleri     4           1           5         
+2           Maija       1           retiisi     7           2           1         
+2           Maija       4           lanttu      8           2           4         
+2           Maija       5           selleri     4           2           5     
+</code></pre></div></div>
+
+<p>Kun vielä määritämme halutut sarakkeet, tuloksena on lopullinen kysely:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">nimi</span><span class="p">,</span> <span class="n">T</span><span class="p">.</span><span class="n">nimi</span>
+<span class="k">FROM</span>
+  <span class="n">Asiakkaat</span> <span class="n">A</span><span class="p">,</span> <span class="n">Tuotteet</span> <span class="n">T</span><span class="p">,</span> <span class="n">Ostokset</span> <span class="n">O</span>
+<span class="k">WHERE</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">asiakas_id</span> <span class="k">AND</span> <span class="n">T</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">tuote_id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi        nimi      
+----------  ----------
+Uolevi      porkkana  
+Uolevi      selleri   
+Maija       retiisi   
+Maija       lanttu    
+Maija       selleri   
+</code></pre></div></div>
+
+<h3 id="lisää-ehtoja-kyselyyn">Lisää ehtoja kyselyyn</h3>
+
+<p>Voimme lisätä kyselyyn lisää ehtoja, jos haluamme saada selville muuta ostoskoreista. Esimerkiksi seuraava kysely hakee Maijan korissa olevat tuotteet:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">T</span><span class="p">.</span><span class="n">nimi</span>
+<span class="k">FROM</span>
+  <span class="n">Asiakkaat</span> <span class="n">A</span><span class="p">,</span> <span class="n">Tuotteet</span> <span class="n">T</span><span class="p">,</span> <span class="n">Ostokset</span> <span class="n">O</span>
+<span class="k">WHERE</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">asiakas_id</span> <span class="k">AND</span> <span class="n">T</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">tuote_id</span> <span class="k">AND</span> <span class="n">A</span><span class="p">.</span><span class="n">nimi</span> <span class="o">=</span> <span class="s1">'Maija'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi      
+----------
+retiisi   
+lanttu    
+selleri   
+</code></pre></div></div>
+
+<p>Seuraava kysely puolestaan kertoo, keiden korissa on selleri:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">nimi</span>
+<span class="k">FROM</span>
+  <span class="n">Asiakkaat</span> <span class="n">A</span><span class="p">,</span> <span class="n">Tuotteet</span> <span class="n">T</span><span class="p">,</span> <span class="n">Ostokset</span> <span class="n">O</span>
+<span class="k">WHERE</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">asiakas_id</span> <span class="k">AND</span> <span class="n">T</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">tuote_id</span> <span class="k">AND</span> <span class="n">T</span><span class="p">.</span><span class="n">nimi</span> <span class="o">=</span> <span class="s1">'selleri'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi      
+----------
+Uolevi    
+Maija    
+</code></pre></div></div>
+
+<h3 id="yhteenveto-tauluista">Yhteenveto tauluista</h3>
+
+<p>Voimme käyttää koostefunktioita ja ryhmittelyä myös usean taulun kyselyissä. Ne käsittelevät tulostaulua samalla periaatteella kuin yhden taulun kyselyissä.</p>
+
+<h4 id="esimerkki-2">Esimerkki</h4>
+
+<p>Tarkastellaan edelleen tietokantaa, jossa on tuotteita, asiakkaita ja ostoksia:</p>
+
+<table class="db-table">
+<thead>
+  <tr><th colspan="3" id="table-title">Tuotteet</th></tr>
+  <tr><th width="30">id</th><th width="100">nimi</th><th width="70">hinta</th></tr>
+</thead>
+<tbody>
+  <tr><td>1</td><td>retiisi</td><td>7</td></tr>
+  <tr><td>2</td><td>porkkana</td><td>5</td></tr>
+  <tr><td>3</td><td>nauris</td><td>4</td></tr>
+  <tr><td>4</td><td>lanttu</td><td>8</td></tr>
+  <tr><td>5</td><td>selleri</td><td>4</td></tr>
+</tbody>
+</table>
+
+<table class="db-table">
+<thead>
+  <tr><th colspan="2" id="table-title">Asiakkaat</th></tr>
+  <tr><th width="30">id</th><th width="100">nimi</th></tr>
+</thead>
+<tbody>
+  <tr><td>1</td><td>Uolevi</td></tr>
+  <tr><td>2</td><td>Maija</td></tr>
+  <tr><td>3</td><td>Aapeli</td></tr>
+</tbody>
+</table>
+
+<table class="db-table">
+<thead>
+  <tr><th colspan="2" id="table-title">Ostokset</th></tr>
+  <tr><th width="100">asiakas_id</th><th width="100">tuote_id</th></tr>
+</thead>
+<tbody>
+  <tr><td>1</td><td>2</td></tr>
+  <tr><td>1</td><td>5</td></tr>
+  <tr><td>2</td><td>1</td></tr>
+  <tr><td>2</td><td>4</td></tr>
+  <tr><td>2</td><td>5</td></tr>
+</tbody>
+</table>
+
+<p>Seuraava kysely luo yhteenvedon, joka näyttää jokaisesta asiakkaasta, montako tuotetta hänen ostoskorissaan on ja mikä on tuotteiden yhteishinta.</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">nimi</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="n">T</span><span class="p">.</span><span class="n">id</span><span class="p">),</span> <span class="k">SUM</span><span class="p">(</span><span class="n">T</span><span class="p">.</span><span class="n">hinta</span><span class="p">)</span>
+<span class="k">FROM</span>
+  <span class="n">Asiakkaat</span> <span class="n">A</span><span class="p">,</span> <span class="n">Tuotteet</span> <span class="n">T</span><span class="p">,</span> <span class="n">Ostokset</span> <span class="n">O</span>
+<span class="k">WHERE</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">asiakas_id</span> <span class="k">AND</span> <span class="n">T</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">tuote_id</span>
+<span class="k">GROUP</span> <span class="k">BY</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Kyselyn tulos on seuraava:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi        COUNT(T.id)  SUM(T.hinta)
+----------  -----------  ------------
+Uolevi      2            9           
+Maija       3            19          
+</code></pre></div></div>
+
+<p>Uolevin korissa on siis 2 tavaraa, joiden yhteishinta on 9, ja Maijan korissa on 3 tavaraa, joiden yhteishinta on 19.</p>
+
+<h4 id="miten-kysely-toimii-1">Miten kysely toimii?</h4>
+
+<p>Kyselyn perusta on tässä:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="o">*</span>
+<span class="k">FROM</span>
+  <span class="n">Asiakkaat</span> <span class="n">A</span><span class="p">,</span> <span class="n">Tuotteet</span> <span class="n">T</span><span class="p">,</span> <span class="n">Ostokset</span> <span class="n">O</span>
+<span class="k">WHERE</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">asiakas_id</span> <span class="k">AND</span> <span class="n">T</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">tuote_id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi        id          nimi        hinta       asiakas_id  tuote_id  
+----------  ----------  ----------  ----------  ----------  ----------  ----------
+1           Uolevi      2           porkkana    5           1           2         
+1           Uolevi      5           selleri     4           1           5         
+2           Maija       1           retiisi     7           2           1         
+2           Maija       4           lanttu      8           2           4         
+2           Maija       5           selleri     4           2           5     
+</code></pre></div></div>
+
+<p>Kun kyselyyn lisätään ryhmittely <code class="language-html highlighter-rouge">GROUP BY A.id</code>, rivit jakautuvat kahteen ryhmään sarakkeen <code class="language-html highlighter-rouge">A.id</code> mukaan:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi        id          nimi        hinta       asiakas_id  tuote_id  
+----------  ----------  ----------  ----------  ----------  ----------  ----------
+1           Uolevi      2           porkkana    5           1           2         
+1           Uolevi      5           selleri     4           1           5         
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi        id          nimi        hinta       asiakas_id  tuote_id  
+----------  ----------  ----------  ----------  ----------  ----------  ----------
+2           Maija       1           retiisi     7           2           1         
+2           Maija       4           lanttu      8           2           4         
+2           Maija       5           selleri     4           2           5     
+</code></pre></div></div>
+
+<p>Näille ryhmille lasketaan sitten tuotteiden määrä <code class="language-html highlighter-rouge">COUNT(T.id)</code> sekä ostosten yhteishinta <code class="language-html highlighter-rouge">SUM(T.hinta)</code>.</p>
+
+<p>Huomaa, että kyselyssä ryhmittely tapahtuu sarakkeen <code class="language-html highlighter-rouge">A.id</code> mukaan, mutta kyselyssä haetaan sarake <code class="language-html highlighter-rouge">A.nimi</code>. Tämä on sinänsä järkevää, koska sarake <code class="language-html highlighter-rouge">A.id</code> määrää sarakkeen <code class="language-html highlighter-rouge">A.nimi</code>, ja kysely toimii mainiosti SQLitessä. Muissa tietokannoissa vaatimuksena voi kuitenkin olla, että sellaisenaan haettavan sarakkeen tulee aina esiintyä myös ryhmittelyssä. Tällöin ryhmittelyn tulisi olla <code class="language-html highlighter-rouge">GROUP BY A.id, A.nimi</code>.</p>
+
+<h4 id="puuttuvan-rivin-ongelma">Puuttuvan rivin ongelma</h4>
+
+<p>Kysely toimii sinänsä hyvin, mutta jotain puuttuu:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi        COUNT(T.id)  SUM(T.hinta)
+----------  -----------  ------------
+Uolevi      2            9           
+Maija       3            19          
+</code></pre></div></div>
+
+<p>Kyselyn puutteena on vielä, että tuloksissa ei ole lainkaan kolmatta tietokannassa olevaa asiakasta eli Aapelia. Koska Aapelin korissa ei ole mitään, Aapelin rivi ei yhdisty minkään muun rivin kanssa eikä pääse osaksi tulostaulua.</p>
+
+<p>Olemme törmänneet ongelmaan, mutta onneksi löydämme siihen ratkaisun pian.</p>
+
+<h2 id="join-syntaksi">JOIN-syntaksi</h2>
+
+<p>Tähän mennessä olemme hakeneet tietoa tauluista listaamalla taulut kyselyn <code class="language-html highlighter-rouge">FROM</code>-osassa, mikä toimii yleensä hyvin. Kuitenkin joskus on tarpeen vaihtoehtoinen <code class="language-html highlighter-rouge">JOIN</code>-syntaksi. Siitä on hyötyä silloin, kun kyselyn tuloksesta näyttää “puuttuvan” tietoa.</p>
+
+<h3 id="kyselytavat">Kyselytavat</h3>
+
+<p>Seuraavassa on kaksi tapaa toteuttaa sama kysely, ensin käyttäen ennestään tuttua tapaa ja sitten käyttäen <code class="language-html highlighter-rouge">JOIN</code>-syntaksia.</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">Kurssit</span><span class="p">.</span><span class="n">nimi</span><span class="p">,</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">nimi</span>
+<span class="k">FROM</span>
+  <span class="n">Kurssit</span><span class="p">,</span> <span class="n">Opettajat</span>
+<span class="k">WHERE</span>
+  <span class="n">Kurssit</span><span class="p">.</span><span class="n">opettaja_id</span> <span class="o">=</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">Kurssit</span><span class="p">.</span><span class="n">nimi</span><span class="p">,</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">nimi</span>
+<span class="k">FROM</span>
+  <span class="n">Kurssit</span> <span class="k">JOIN</span> <span class="n">Opettajat</span> <span class="k">ON</span> <span class="n">Kurssit</span><span class="p">.</span><span class="n">opettaja_id</span> <span class="o">=</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><code class="language-html highlighter-rouge">JOIN</code>-syntaksissa taulujen nimien välissä esiintyy sana <code class="language-html highlighter-rouge">JOIN</code> ja lisäksi taulujen rivit toisiinsa kytkevä ehto annetaan erillisessä <code class="language-html highlighter-rouge">ON</code>-osassa.</p>
+
+<p>Tässä tapauksessa <code class="language-html highlighter-rouge">JOIN</code>-syntaksi on vain vaihtoehtoinen tapa toteuttaa kysely eikä se tuo mitään uutta. Kuitenkin näemme seuraavaksi, miten voimme laajentaa syntaksia niin, että se antaa meille uusia mahdollisuuksia kyselyissä.</p>
+
+<h3 id="esimerkki-3">Esimerkki</h3>
+
+<p>Tarkastellaan esimerkkinä tilannetta, jossa tietokannassa on tutut taulut <code class="language-html highlighter-rouge">Kurssit</code> ja <code class="language-html highlighter-rouge">Opettajat</code>, mutta taulussa <code class="language-html highlighter-rouge">Kurssit</code> yhdeltä kurssilta puuttuu opettaja:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi              opettaja_id
+----------  ----------------  -----------
+1           Laskennan mallit  3          
+2           Ohjelmoinnin per  1          
+3           Ohjelmoinnin jat  1          
+4           Tietokantojen pe             
+5           Tietorakenteet j  3          
+</code></pre></div></div>
+
+<p>Rivin 4 sarakkeessa <code class="language-html highlighter-rouge">opettaja_id</code> on arvo <code class="language-html highlighter-rouge">NULL</code>, joten jos suoritamme jommankumman äskeisen kyselyn, ongelmaksi tulee, että rivi 4 ei täsmää mihinkään taulun <code class="language-html highlighter-rouge">Opettajat</code> riviin. Tämän seurauksena tulostauluun ei tule riviä kurssista Tietokantojen perusteet:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi              nimi      
+----------------  ----------
+Laskennan mallit  Kivinen   
+Ohjelmoinnin per  Kaila     
+Ohjelmoinnin jat  Kaila     
+Tietorakenteet j  Kivinen 
+</code></pre></div></div>
+
+<p>Ratkaisu ongelmaan on käyttää <code class="language-html highlighter-rouge">LEFT JOIN</code> -syntaksia, joka tarkoittaa, että mikäli jokin vasemman taulun rivi ei yhdisty mihinkään oikean taulun riviin, kyseinen vasemman taulun rivi pääsee silti mukaan yhdeksi riviksi tulostauluun. Kyseisellä rivillä jokaisen oikeaan tauluun perustuvan sarakkeen arvona on <code class="language-html highlighter-rouge">NULL</code>.</p>
+
+<p>Tässä tapauksessa voimme toteuttaa kyselyn näin:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">Kurssit</span><span class="p">.</span><span class="n">nimi</span><span class="p">,</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">nimi</span>
+<span class="k">FROM</span>
+  <span class="n">Kurssit</span> <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">Opettajat</span> <span class="k">ON</span> <span class="n">Kurssit</span><span class="p">.</span><span class="n">opettaja_id</span> <span class="o">=</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Nyt tulostauluun ilmestyy myös kurssi Tietokantojen perusteet ilman opettajaa:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi              nimi      
+----------------  ----------
+Laskennan mallit  Kivinen   
+Ohjelmoinnin per  Kaila     
+Ohjelmoinnin jat  Kaila     
+Tietokantojen pe            
+Tietorakenteet j  Kivinen
+</code></pre></div></div>
+
+<h3 id="miten-kysely-toimii-2">Miten kysely toimii?</h3>
+
+<p>Jälleen hyvä tapa saada selkoa kyselystä on yksinkertaistaa sitä:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="o">*</span>
+<span class="k">FROM</span>
+  <span class="n">Kurssit</span> <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">Opettajat</span> <span class="k">ON</span> <span class="n">Kurssit</span><span class="p">.</span><span class="n">opettaja_id</span> <span class="o">=</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi              opettaja_id  id          nimi      
+----------  ----------------  -----------  ----------  ----------
+1           Laskennan mallit  3            3           Kivinen   
+2           Ohjelmoinnin per  1            1           Kaila     
+3           Ohjelmoinnin jat  1            1           Kaila     
+4           Tietokantojen pe                                     
+5           Tietorakenteet j  3            3           Kivinen  
+</code></pre></div></div>
+
+<p>Tästä näkee, että koska vasemman taulun rivi 4 ei täsmää mihinkään oikean taulun riviin, niin kyseisestä rivistä tulee tulostauluun yksi rivi, jossa jokainen sarake oikean taulun osuudessa on <code class="language-html highlighter-rouge">NULL</code>.</p>
+
+<h3 id="join-kyselyperhe">JOIN-kyselyperhe</h3>
+
+<p>Itse asiassa <code class="language-html highlighter-rouge">JOIN</code>-kyselystä on olemassa peräti neljä eri muunnelmaa:</p>
+
+<ul>
+  <li><code class="language-html highlighter-rouge">JOIN</code>: toimii kuten tavallinen kahden taulun kysely</li>
+  <li><code class="language-html highlighter-rouge">LEFT JOIN</code>: jos vasemman taulun rivi ei yhdisty mihinkään oikean taulun riviin,
+se valitaan kuitenkin mukaan erikseen</li>
+  <li><code class="language-html highlighter-rouge">RIGHT JOIN</code>: jos oikean taulun rivi ei yhdisty mihinkään vasemman taulun riviin,
+se valitaan kuitenkin mukaan erikseen</li>
+  <li><code class="language-html highlighter-rouge">FULL JOIN</code>: sekä vasemmasta että oikeasta taulusta valitaan erikseen mukaan
+rivit, jotka eivät yhdisty toisen taulun riviin</li>
+</ul>
+
+<p>SQLiten rajoituksena on kuitenkin, että vain kaksi ensimmäistä kyselytapaa ovat mahdollisia. Onneksi <code class="language-html highlighter-rouge">LEFT JOIN</code> on yleensä se, mitä haluamme.</p>
+
+<h3 id="on-vs-where">ON vs. WHERE</h3>
+
+<p>Sana <code class="language-html highlighter-rouge">ON</code> on oleellinen <code class="language-html highlighter-rouge">LEFT JOIN</code> -kyselyssä, koska se asettaa ehdon niin, että mukaan otetaan myös vasemman taulun ylimääräiset rivit:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">Kurssit</span><span class="p">.</span><span class="n">nimi</span><span class="p">,</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">nimi</span>
+<span class="k">FROM</span>
+  <span class="n">Kurssit</span> <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">Opettajat</span> <span class="k">ON</span> <span class="n">Kurssit</span><span class="p">.</span><span class="n">opettaja_id</span> <span class="o">=</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi              nimi      
+----------------  ----------
+Laskennan mallit  Kivinen   
+Ohjelmoinnin per  Kaila     
+Ohjelmoinnin jat  Kaila     
+Tietokantojen pe            
+Tietorakenteet j  Kivinen
+</code></pre></div></div>
+
+<p>Jos käytämme sen sijasta sanaa <code class="language-html highlighter-rouge">WHERE</code>, ylimääräiset rivit jäävät pois:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">Kurssit</span><span class="p">.</span><span class="n">nimi</span><span class="p">,</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">nimi</span>
+<span class="k">FROM</span>
+  <span class="n">Kurssit</span> <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">Opettajat</span>
+<span class="k">WHERE</span>
+  <span class="n">Kurssit</span><span class="p">.</span><span class="n">opettaja_id</span> <span class="o">=</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi              nimi      
+----------------  ----------
+Laskennan mallit  Kivinen   
+Ohjelmoinnin per  Kaila     
+Ohjelmoinnin jat  Kaila     
+Tietorakenteet j  Kivinen
+</code></pre></div></div>
+
+<p>Sinänsä kyselyssä voi esiintyä sekä <code class="language-html highlighter-rouge">ON</code> että <code class="language-html highlighter-rouge">WHERE</code>:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">Kurssit</span><span class="p">.</span><span class="n">nimi</span><span class="p">,</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">nimi</span>
+<span class="k">FROM</span>
+  <span class="n">Kurssit</span> <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">Opettajat</span> <span class="k">ON</span> <span class="n">Kurssit</span><span class="p">.</span><span class="n">opettaja_id</span> <span class="o">=</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">id</span>
+<span class="k">WHERE</span>
+  <span class="n">Kurssit</span><span class="p">.</span><span class="n">nimi</span> <span class="o">&lt;&gt;</span> <span class="s1">'Ohjelmoinnin perusteet'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Tällöin <code class="language-html highlighter-rouge">ON</code>-osa hoitaa taulujen yhdistämisen ja <code class="language-html highlighter-rouge">WHERE</code>-osa rajaa tuloksia lisää:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi              nimi      
+----------------  ----------
+Laskennan mallit  Kivinen   
+Ohjelmoinnin jat  Kaila     
+Tietokantojen pe            
+Tietorakenteet j  Kivinen   
+</code></pre></div></div>
+
+<p>Jos molemmat ehdot ovatkin <code class="language-html highlighter-rouge">ON</code>-osassa, kyselyn tulos muuttuu taas:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">Kurssit</span><span class="p">.</span><span class="n">nimi</span><span class="p">,</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">nimi</span>
+<span class="k">FROM</span>
+  <span class="n">Kurssit</span> <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">Opettajat</span> <span class="k">ON</span> <span class="n">Kurssit</span><span class="p">.</span><span class="n">opettaja_id</span> <span class="o">=</span> <span class="n">Opettajat</span><span class="p">.</span><span class="n">id</span> <span class="k">AND</span> 
+                                 <span class="n">Kurssit</span><span class="p">.</span><span class="n">nimi</span> <span class="o">&lt;&gt;</span> <span class="s1">'Ohjelmoinnin perusteet'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi              nimi      
+----------------  ----------
+Laskennan mallit  Kivinen   
+Ohjelmoinnin per            
+Ohjelmoinnin jat  Kaila     
+Tietokantojen pe            
+Tietorakenteet j  Kivinen   
+</code></pre></div></div>
+
+<h3 id="yhteenveto-toimivaksi">Yhteenveto toimivaksi</h3>
+
+<p>Nyt voimme pureutua aiempaan ongelmaan, jossa yhteenvetokyselystä puuttui tietoa. Tietokannassamme on edelleen seuraavat taulut:</p>
+
+<table class="db-table">
+<thead>
+  <tr><th colspan="3" id="table-title">Tuotteet</th></tr>
+  <tr><th width="30">id</th><th width="100">nimi</th><th width="70">hinta</th></tr>
+</thead>
+<tbody>
+  <tr><td>1</td><td>retiisi</td><td>7</td></tr>
+  <tr><td>2</td><td>porkkana</td><td>5</td></tr>
+  <tr><td>3</td><td>nauris</td><td>4</td></tr>
+  <tr><td>4</td><td>lanttu</td><td>8</td></tr>
+  <tr><td>5</td><td>selleri</td><td>4</td></tr>
+</tbody>
+</table>
+
+<table class="db-table">
+<thead>
+  <tr><th colspan="2" id="table-title">Asiakkaat</th></tr>
+  <tr><th width="30">id</th><th width="100">nimi</th></tr>
+</thead>
+<tbody>
+  <tr><td>1</td><td>Uolevi</td></tr>
+  <tr><td>2</td><td>Maija</td></tr>
+  <tr><td>3</td><td>Aapeli</td></tr>
+</tbody>
+</table>
+
+<table class="db-table">
+<thead>
+  <tr><th colspan="2" id="table-title">Ostokset</th></tr>
+  <tr><th width="100">asiakas_id</th><th width="100">tuote_id</th></tr>
+</thead>
+<tbody>
+  <tr><td>1</td><td>2</td></tr>
+  <tr><td>1</td><td>5</td></tr>
+  <tr><td>2</td><td>1</td></tr>
+  <tr><td>2</td><td>4</td></tr>
+  <tr><td>2</td><td>5</td></tr>
+</tbody>
+</table>
+
+<p>Muodostimme yhteenvedon ostoskoreista seuraavalla kyselyllä:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">nimi</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="n">T</span><span class="p">.</span><span class="n">id</span><span class="p">),</span> <span class="k">SUM</span><span class="p">(</span><span class="n">T</span><span class="p">.</span><span class="n">hinta</span><span class="p">)</span>
+<span class="k">FROM</span>
+  <span class="n">Asiakkaat</span> <span class="n">A</span><span class="p">,</span> <span class="n">Tuotteet</span> <span class="n">T</span><span class="p">,</span> <span class="n">Ostokset</span> <span class="n">O</span>
+<span class="k">WHERE</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">asiakas_id</span> <span class="k">AND</span> <span class="n">T</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">tuote_id</span>
+<span class="k">GROUP</span> <span class="k">BY</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Kuitenkin ongelmaksi tuli, että Aapeli puuttuu yhteenvedosta:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi        COUNT(T.id)  SUM(T.hinta)
+----------  -----------  ------------
+Uolevi      2            9
+Maija       3            19
+</code></pre></div></div>
+
+<h4 id="ratkaisu">Ratkaisu</h4>
+
+<p>Ongelman syynä on, että Aapelin ostoskori on <em>tyhjä</em> eli kun kysely valitsee yhdistelmiä taulujen riveistä, ei ole mitään sellaista riviä, jolla esiintyisi Aapeli. Ratkaisu ongelmaan on käyttää <code class="language-html highlighter-rouge">LEFT JOIN</code> -syntaksia näin:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">nimi</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="n">T</span><span class="p">.</span><span class="n">id</span><span class="p">),</span> <span class="k">SUM</span><span class="p">(</span><span class="n">T</span><span class="p">.</span><span class="n">hinta</span><span class="p">)</span>
+<span class="k">FROM</span>
+  <span class="n">Asiakkaat</span> <span class="n">A</span> <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">Ostokset</span> <span class="n">O</span> <span class="k">ON</span> <span class="n">A</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">asiakas_id</span>
+              <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">Tuotteet</span> <span class="n">T</span> <span class="k">ON</span> <span class="n">T</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">tuote_id</span>
+<span class="k">GROUP</span> <span class="k">BY</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Nyt myös Aapeli ilmestyy mukaan yhteenvetoon:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi        COUNT(T.id)  SUM(T.hinta)
+----------  -----------  ------------
+Uolevi      2            9           
+Maija       3            19          
+Aapeli      0                     
+</code></pre></div></div>
+
+<p>Koska Aapelin ostoskorissa ei ole tuotteita, hintojen summaksi tulee <code class="language-html highlighter-rouge">NULL</code>. Voimme vielä parantaa kyselyä <code class="language-html highlighter-rouge">IFNULL</code>-funktion avulla:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">nimi</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="n">T</span><span class="p">.</span><span class="n">id</span><span class="p">),</span> <span class="n">IFNULL</span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="n">T</span><span class="p">.</span><span class="n">hinta</span><span class="p">),</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">FROM</span>
+  <span class="n">Asiakkaat</span> <span class="n">A</span> <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">Ostokset</span> <span class="n">O</span> <span class="k">ON</span> <span class="n">A</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">asiakas_id</span>
+              <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">Tuotteet</span> <span class="n">T</span> <span class="k">ON</span> <span class="n">T</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">tuote_id</span>
+<span class="k">GROUP</span> <span class="k">BY</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Tämän seurauksena mahdollinen <code class="language-html highlighter-rouge">NULL</code> muuttuu arvoksi 0:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi        COUNT(T.id)  IFNULL(SUM(T.hinta),0)
+----------  -----------  ----------------------
+Uolevi      2            9           
+Maija       3            19          
+Aapeli      0            0
+</code></pre></div></div>
+
+<p>Palaamme <code class="language-html highlighter-rouge">NULL</code>-arvojen käsittelyyn tarkemmin myöhemmin.</p>
+
+<h4 id="miten-kysely-toimii-3">Miten kysely toimii?</h4>
+
+<p>Kun kyselyssä on useita <code class="language-html highlighter-rouge">LEFT JOIN</code> -osia, tulkintana on, että ne yhdistävät tauluja vasemmalta oikealle. Yllä olevassa kyselyssä voimme ajatella, että ensimmäinen vaihe yhdistää taulut <code class="language-html highlighter-rouge">Asiakkaat</code> ja <code class="language-html highlighter-rouge">Ostokset</code>:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="o">*</span>
+<span class="k">FROM</span>
+  <span class="n">Asiakkaat</span> <span class="n">A</span> <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">Ostokset</span> <span class="n">O</span> <span class="k">ON</span> <span class="n">A</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">asiakas_id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi        asiakas_id  tuote_id  
+----------  ----------  ----------  ----------
+1           Uolevi      1           2         
+1           Uolevi      1           5         
+2           Maija       2           1         
+2           Maija       2           4         
+2           Maija       2           5         
+3           Aapeli    
+</code></pre></div></div>
+
+<p>Toinen vaihe puolestaan yhdistää yllä olevan tulostaulun ja taulun <code class="language-html highlighter-rouge">Tuotteet</code>:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="o">*</span>
+<span class="k">FROM</span>
+  <span class="n">Asiakkaat</span> <span class="n">A</span> <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">Ostokset</span> <span class="n">O</span> <span class="k">ON</span> <span class="n">A</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">asiakas_id</span>
+              <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">Tuotteet</span> <span class="n">T</span> <span class="k">ON</span> <span class="n">T</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">tuote_id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi        asiakas_id  tuote_id    id          nimi        hinta     
+----------  ----------  ----------  ----------  ----------  ----------  ----------
+1           Uolevi      1           2           2           porkkana    5         
+1           Uolevi      1           5           5           selleri     4         
+2           Maija       2           1           1           retiisi     7         
+2           Maija       2           4           4           lanttu      8         
+2           Maija       2           5           5           selleri     4         
+3           Aapeli      
+</code></pre></div></div>
+
+<p>Molemmissa vaiheissa Aapeli pääsee osaksi tulostaulua,
+koska kyseinen rivi ei täsmää minkään oikean taulun rivin kanssa.</p>
+
+
+</div>
+        <div class="footer">
+    <img src=/syksy-2023/assets/img/HY_logo.png>
+    </div>
+    </div>
+</body>
+
+</html>

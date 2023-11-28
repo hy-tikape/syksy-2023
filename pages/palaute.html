@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>
+    
+    Palautteen yhteenveto - Tietokantojen perusteet syksy 2023
+    
+  </title>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: {
+          scale: 87
+        }
+      });
+      </script>
+  <script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <link rel='stylesheet' type='text/css' media='screen' href=/syksy-2023/assets/css/main.css>
+  <link rel='stylesheet' type='text/css' media='screen' href=/syksy-2023/assets/css/syntax.css>
+
+  <script src=/syksy-2023/assets/js/main.js></script>
+
+</head>
+
+
+<body id="chapter">
+    
+<nav class="no-nav" id="side-nav" >
+    <button id="hide" onclick="hideSideNav()"> &#x2715;</button>
+    <button id="show" onclick="showSideNav()"> </button>
+    <h2>Tietokantojen perusteet syksy 2023</h2>
+    
+    <ol>
+
+        <li class="side-nav-obj" id="indexnav"><a href=/syksy-2023/index>Etusivu </a></li>
+        
+        
+        
+        <li class="side-nav-obj" id="Materiaalinav"><a href="/syksy-2023/pages/materiaali.html">Materiaali</a></li>
+        
+        
+        
+        
+        
+        <li class="side-nav-obj" id="Tehtävätnav"><a href="/syksy-2023/pages/tehtavat.html">Tehtävät</a></li>
+        
+        
+        
+        
+        
+        <li class="side-nav-obj" id="Tulokset ja palautenav"><a href="/syksy-2023/pages/tulokset_palaute.html">Tulokset ja palaute</a></li>
+        
+        
+        <br>
+        
+        
+        <li class="side-nav-obj" id="1. Johdantonav"><a href="/syksy-2023/content/osa-1/index.html">1. Johdanto</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Mikä on tietokantanav"><a href="/syksy-2023/content/osa-1/index.html#mikä-on-tietokanta">Mikä on tietokanta</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Tee-se-itse-tietokantanav"><a href="/syksy-2023/content/osa-1/index.html#tee-se-itse-tietokanta">Tee-se-itse-tietokanta</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Relaatiomalli ja SQL-kielinav"><a href="/syksy-2023/content/osa-1/index.html#relaatiomalli-ja-sql-kieli">Relaatiomalli ja SQL-kieli</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="2. SQL-kielen perusteetnav"><a href="/syksy-2023/content/osa-2/index.html">2. SQL-kielen perusteet</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Peruskomennotnav"><a href="/syksy-2023/content/osa-2/index.html#peruskomennot">Peruskomennot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Yhteenveto ja ryhmittelynav"><a href="/syksy-2023/content/osa-2/index.html#yhteenveto-ja-ryhmittely">Yhteenveto ja ryhmittely</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="SQLite-tietokantanav"><a href="/syksy-2023/content/osa-2/index.html#sqlite-tietokanta">SQLite-tietokanta</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="3. Monen taulun kyselytnav"><a href="/syksy-2023/content/osa-3/index.html">3. Monen taulun kyselyt</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Taulujen viittauksetnav"><a href="/syksy-2023/content/osa-3/index.html#taulujen-viittaukset">Taulujen viittaukset</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Liitostaulutnav"><a href="/syksy-2023/content/osa-3/index.html#liitostaulut">Liitostaulut</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="JOIN-syntaksinav"><a href="/syksy-2023/content/osa-3/index.html#join-syntaksi">JOIN-syntaksi</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="4. Lisää SQL-kielestänav"><a href="/syksy-2023/content/osa-4/index.html">4. Lisää SQL-kielestä</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Tyypit ja lausekkeetnav"><a href="/syksy-2023/content/osa-4/index.html#tyypit-ja-lausekkeet">Tyypit ja lausekkeet</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="NULL-arvotnav"><a href="/syksy-2023/content/osa-4/index.html#null-arvot">NULL-arvot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Tulosrivien rajausnav"><a href="/syksy-2023/content/osa-4/index.html#tulosrivien-rajaus">Tulosrivien rajaus</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Alikyselytnav"><a href="/syksy-2023/content/osa-4/index.html#alikyselyt">Alikyselyt</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Lisää tekniikoitanav"><a href="/syksy-2023/content/osa-4/index.html#lisää-tekniikoita">Lisää tekniikoita</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="5. Tietokannat ohjelmoinnissanav"><a href="/syksy-2023/content/osa-5/index.html">5. Tietokannat ohjelmoinnissa</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Tietokannan käyttäminennav"><a href="/syksy-2023/content/osa-5/index.html#tietokannan-käyttäminen">Tietokannan käyttäminen</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Käyttöliittymänav"><a href="/syksy-2023/content/osa-5/index.html#käyttöliittymä">Käyttöliittymä</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Mitä tehdä missäkinnav"><a href="/syksy-2023/content/osa-5/index.html#mitä-tehdä-missäkin">Mitä tehdä missäkin</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="6. Tietokannan suunnittelunav"><a href="/syksy-2023/content/osa-6/index.html">6. Tietokannan suunnittelu</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Suunnittelun periaatteetnav"><a href="/syksy-2023/content/osa-6/index.html#suunnittelun-periaatteet">Suunnittelun periaatteet</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Tiedon atomisuusnav"><a href="/syksy-2023/content/osa-6/index.html#tiedon-atomisuus">Tiedon atomisuus</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Toisteinen tietonav"><a href="/syksy-2023/content/osa-6/index.html#toisteinen-tieto">Toisteinen tieto</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Suunnitteluesimerkkinav"><a href="/syksy-2023/content/osa-6/index.html#suunnitteluesimerkki">Suunnitteluesimerkki</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="7. Tietokannan ominaisuudetnav"><a href="/syksy-2023/content/osa-7/index.html">7. Tietokannan ominaisuudet</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Tiedon eheysnav"><a href="/syksy-2023/content/osa-7/index.html#tiedon-eheys">Tiedon eheys</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Transaktiotnav"><a href="/syksy-2023/content/osa-7/index.html#transaktiot">Transaktiot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Kyselyjen suoritusnav"><a href="/syksy-2023/content/osa-7/index.html#kyselyjen-suoritus">Kyselyjen suoritus</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Indeksitnav"><a href="/syksy-2023/content/osa-7/index.html#indeksit">Indeksit</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="8. Tietokantojen teorianav"><a href="/syksy-2023/content/osa-8/index.html">8. Tietokantojen teoria</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Matemaattinen taustanav"><a href="/syksy-2023/content/osa-8/index.html#matemaattinen-tausta">Matemaattinen tausta</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Taulu relaationanav"><a href="/syksy-2023/content/osa-8/index.html#taulu-relaationa">Taulu relaationa</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Relaatio-operaatiotnav"><a href="/syksy-2023/content/osa-8/index.html#relaatio-operaatiot">Relaatio-operaatiot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Avaimet ja riippuvuudetnav"><a href="/syksy-2023/content/osa-8/index.html#avaimet-ja-riippuvuudet">Avaimet ja riippuvuudet</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Normaalimuodotnav"><a href="/syksy-2023/content/osa-8/index.html#normaalimuodot">Normaalimuodot</a></li>
+        
+            
+        
+        
+        
+    </ol>
+</nav>
+
+    <div class="page-content">
+        <div class="content">
+    <div class="table-of-content" id="tof" style="display: none;">
+    <ul>
+        
+    </ul>
+</div>
+
+    <h1 id="palautteen-yhteenveto">Palautteen yhteenveto</h1>
+
+<p>Kurssipalautteen antoi 146 opiskelijaa.</p>
+
+<p>Tällä hetkellä monet kurssin opiskelijat ovat tyytyväisiä kurssiin, ja kurssin toteutustapa tulee säilymään samana myös tulevaisuudessa. Palautteessa on monia hyödyllisiä kommentteja ja ehdotuksia, joiden avulla kurssia pystytään kehittämään tulevaisuudessa.</p>
+
+<p>Palautteen perusteella kurssin suurin kehitystarve liittyy NoSQL-tietokantojen ja tietokantojen teorian opettamiseen. Ensi vuonna kurssin materiaali siirretään uudelle alustalle, minkä yhteydessä materiaalia kehitetään erityisesti näihin aiheisiin liittyen. Materiaaliin on tarkoitus myös täydentää joitakin SQL-kielen ominaisuuksia.</p>
+
+<p>Tulevaisuudessa on suunnitelmana myös kehittää kurssin tehtäviä. Ohjelmointitehtävät tulevat siirtymään toiselle alustalle, jossa on mahdollista suorittaa koodi ja testata sen toimintaa kattavammin. Kurssille on tulossa uudet tehtävät NoSQL-tietokantoihin ja tietokantojen teoriaan liittyen.</p>
+
+<h2 id="numeerinen-palaute">Numeerinen palaute</h2>
+
+<p>Arvioi seuraavia väitteitä (1 = täysin eri mieltä, 5 = täysin samaa mieltä):</p>
+
+<ul>
+  <li>Osaamistavoitteet olivat selvät: 4.59</li>
+  <li>Toteutustapa tuki oppimistani: 4.52</li>
+  <li>Materiaalit tukivat oppimistani: 4.37</li>
+  <li>Arviointi mittasi oppimistani: 4.50</li>
+</ul>
+
+<p>Kurssin raskaus (1 = turhan kevyt, 5 = turhan raskas):</p>
+
+<ul>
+  <li>Työmäärältään opintojakso oli: 3.05</li>
+</ul>
+
+<p>Kurssin kokonaisarvosana:</p>
+
+<ul>
+  <li>Minkä arvosanan annat kurssille kokonaisuutena? 4.48</li>
+</ul>
+
+<h2 id="sanallinen-palaute">Sanallinen palaute</h2>
+
+<h3 id="miten-kehittäisit-kurssia">Miten kehittäisit kurssia?</h3>
+
+<ul>
+  <li>Tehtävien nollaus mikäli kurssi ei ole mennyt aiemmilla kerroilla läpi.</li>
+  <li>Tasks -tehtävässä 4 voisi olla jokin neuvo, miten SQLite-tulkin saa avattua samaan tietokantaan Windows-koneilla.</li>
+  <li>SQL-tehtäviin ehkä lisää esimerkkejä, 60 ensimmäistä oli helpohkoja, sitten vaikeusaste kohosi nopeasti, ehkä liian nopeasti.</li>
+  <li>SQL Trainerissa olisi voinut olla muutakin käskyjä kuin SELECT.</li>
+  <li>Enpä osaa sanoa. Vähän ehkä tuntui, että suuri osa tehtävistä ei vaikeutunut vaan pistemäärällä kontrolloitiin enemmän työntekoa kuin osaamista, ja sitten siellä tehtävien loppupäässä vaikeustason nousu jyrkkeni jossain kohtaa rajusti.  Mutta voi olla että tultiin vain minun omaksumiskykyni rajalle.</li>
+  <li>Materiaaleissa voisi olla enemmänkin esimerkkejä.</li>
+  <li>Enemmän konkreettisia projektityylisiä tehtäviä</li>
+  <li>I used google translate for the course, as I don’t speak Finnish.</li>
+  <li>Ei ehdotuksia.</li>
+  <li>Myös muista järjestelmistä voisi olla lyhyitä videoita</li>
+  <li>Eos</li>
+  <li>Mielestäni kurssi oli näinkin melko toimiva. Ehkä vielä laajentaisin materiaalia lisäesimerkein.</li>
+  <li>Paremmin avatuksi, mikä tehtävissä meni väärin, jos meni.</li>
+  <li>Bisqwit’s Extra on todella hyvä selittämään asioita! Haluaisin katsoa niitä videoita enemmän. Videomateriaali olisi ollut kiva varsinkin niissä vaikeimissa tehtävissä tai vihjeet ylipäätään miten tämä pitäisi lähteä käyntiin (siellä oli kyllä muutama video, mutta esim tehtävä 3 meni ainakin itellä enemmän aikaa tehdä ku en tiennyt miten sen pitäisi lähteä käyntiin sit ku googlasin vähän niin sain vihdoinkin sen tehty) . Tämä on vain extra, koska se on vain ajan määrästä. Teoria oli todella hyvä en muuttaisi sitä mitenkään, ehkä siel vois liittää linkkejä lisää materiaaliin (netistä) mistä voisi syventää sitä tietoa tai sit hankimaan niitä vihjeet !</li>
+  <li>En oikeastaan mitenkään. Rakastin SQL Trainerin ideaa ja toteutusta!</li>
+  <li>eos</li>
+  <li>Esimerkkejä olisi voinut olla kurssimateriaalissa vielä enemmän. Esimerkiksi sisäkkäiset koonnit oli hieman vaikea hahmottaa ja niitä tarvittiin paljon tehtävissä. SQLTrainer:in loppupään tehtävät tuntuivat liian vaikeilta ja aikaavieviltä kurssin tasoon ja opintopistemäärään nähden. Tasks-tehtävien ohjeistus olisi saanut olla laajempi, jotta olisi saanut selkeän käsityksen hyvistä toteutustavoista eri tyyppisissä tehtävissä. Nyt en ole varma, olisiko osan tehtävistä saanut ratkaistua helpommin toisella tavalla. Olin epävarma sen suhteen, mitkä asiat kannattaa ratkaista käyttäen SQL:ää ja mitkä Pythonilla.</li>
+  <li>Kenties tehtävien ratkaisuun olisi voinut tarjota enemmänkin esimerkkejä joko videoina tai tekstiartikkeleina. Nyt Trainer-tehtävien loppupää tuntui aikamoiselle suolle, kun niiden kaltaisien tehtävien ratkaisuun ei oikein ollut kurssimateriaalia tukena. Tasks puolestaan oli erinomainen, kenties kurssin tavoitteita tukisikin se, että painopistettä siirrettäisiin enemmän Tasks-tyyppisiin laajempiin sovelluksiin.</li>
+  <li>Kurssimateriaaliin voisi lisätä tietoa ikkunafunktioiden käytöstä.</li>
+  <li>Task tehtävien videot olivat loistavia. Mini-luento Mondosta olisi mukava lisäys.</li>
+  <li>Kurssi oli kokonaisuudessaan todella hyvä. Ainoa turhauttava osuus oli monivalintatehtävä, joka ei tuntunut mittaavan osaamista. Muissa tehtävissä tehtävän teko oli isossa roolissa oppimisessa, mutta tuossa tehtävässä tehtävä ei tukenut millään tavalla ymmärryksen lisäämistä.</li>
+  <li>sivuilla voisi olla drop-down menu jota klikkaamalla saisi lisäesimerkin auki asiasta mutta jota ei tarvitsisi välttämättä lukea peruskonseptin ymmärtämiseksi</li>
+  <li>Käsitellään hieman enemmän nosql ja sql tietokantojen eroja ja syitä miksi molemmat ovat olemassa. Hyvät ja huonot puolet.</li>
+  <li>Itse tykkäisin, jos kurssin voisi suorittaa kahden periodin välisenä aikana eikä yhdessä periodissa. Videot task osioissa olivat todella hyviä apuja, jos tämmöisiä esimerkki videoita saisi enemmänkin se olisi mielestäni hyvä.</li>
+  <li>Kurssimateriaalista voisi olla enemmän apua tehtävien tekemiseen, ettei tarvitse joka Taskiin ja SQL-tehtävään koluta Discordia avun löytämiseksi vaan voisi oivaltaa itse. Asioita voisi myös selittää paremmin kurssimateriaalissa, että opeteltavia asioita voisi yhdistää tehtävissä harjoiteltaviin asioihin. Nyt monet tärkeätkin tiedot ovat jääneet materiaalissa yhden virkkeen mittaisiksi kryptisiksi viittauksiksi, jotka olisi pitänyt vain osata bongata materiaalin seasta ja yhdistää tehtävissä kysyttyihin asioihin. Ja toisaalta monimutkaisten SQL-kyselyiden laatimiseen ei anneta kovin selkeitä apuja, esim. alikyselyiden syntaksin selittäminen jää ylimalkaiseksi. Lisäksi monesta-moneen -suhteeseen liittyvien tietokantasuunnittelun ongelmien ratkaisemiseen olisi materiaalissa voinut olla enemmän työkaluja.  Varsinkin kun kurssin aikataulu on tiukka, niin monet asiat jäävät hatariksi, koska ne on pitänyt opetella yrityksen ja erehdyksen ja satunnaisten Googlen ja YouTuben kautta löydettyjen materiaalien kautta. Eli ei ole voinut soveltaa systemaattista otetta asioiden opetteluun, kun liian vaikeisiin asioihin edetään liian nopeasti ilman, että perus SQL-kyselyitä olisi ehtinyt harjoitella ja sisäistää syntaksi. Kun aikaa tehtävien tekemiseen on vain se 7 viikkoa, niin ei dokumentaation selaamista ja YouTube-ohjevideoita SQL-alikyselyiden rakentamisesta ole aikaa katsoa loputtomiin, kun tehtävätkin pitäisi tehdä, jotta saa riittävästi pisteitä. Kurssin omat opetusvideot auttoivat vähän alkuun, mutta niistä ei ollut apua enää siinä vaiheessa, kun vaikkapa Tasks 2:n joutuu laatimaan monimutkaisia taulukoiden välisiä viittaussuhteita ja tekemään monimutkaisia SQL-kyselyitä ja tiedonsyöttöä tietokantaan.  Tasks 2 -tehtävä on aivan liian työläs ja monimutkainen, ja sitä olisi hyvä keventää tai sitten siitä pitäisi saada helpommin pisteitä. Tietoa lisäävien funktioiden toimiviksi saamisessa voi kestää todella pitkään, kun puutteellisen opetusmateriaalin vuoksi joutuu käyttämään yritystä ja erehdystä, mutta pisteitä saa vasta toimivista hakufunktioista. Funktioiden laatimisessa taas tulee helposti vastaan toinen toistaan monimutkaisempia ongelmia, kun taulukoiden viittaukset eivät toimikaan odotetusti, funktiot eivät tulosta oikeantyyppisiä arvoja tai tarvitaan monimutkainen SQL-kysely, jota ei ole ehtinyt opettelemaan SQL trainerissä. Itse totesin, että kannattaa mieluummin tehdä muut Tasks-tehtävät ensin ja varmistaa läpipääsy niiden avulla, eikä jäädä jumittamaan tietokannan suunnittelutehtävän kanssa. Olisi ollut parempi, että tietokannan suunnittelutehtävä olisi jaettu kahteen eri tehtävään, jossa toisessa pitää suunnitella yksinkertaisempi tietokanta yksinkertaisemmilla funktioilla ja toisessa monimutkaisempi.  Lisäksi kurssin pisteytys on todella tiukka: 60 p molemmista osuuksista arvosanaa 1 varten vaatii todella paljon työtä, joten jää aika hämäräksi että millä tavalla arvosana 5 sitten erottuu vaikka arvosanasta 3.</li>
+  <li>Antaisin enemmän vaihtoehtoja tehdä esimerkiksi enemmän SQL-trainer -, tai Tasks tehtäviä. Kummastakin voisi saada 110 pistettä, mutta kokonaisuudessaan voisi maksimissaan saada tuon 200.</li>
+  <li>Lisää esimerkkejä</li>
+  <li>Mielestäni kurssin materiaalit ja tehtävät oli hyvin toteutettu. Lisäksi oli hienoa pystyä koko ajan seuraamaan omaa edistymistään tehtävien kanssa ilman tarkastusviiveitä.</li>
+  <li>En mitääm, kurssi on toteutettu hyvin ja toimivasti.</li>
+  <li>ei kehitettävää, kurssi oli täydellinen</li>
+  <li>Task tehtävissä voisi olla mielestäni lisäksi vähän helpompiakin tehtäviä</li>
+  <li>Ennosaa sanoa</li>
+  <li>Kurssi oli mielestäni yllättävän hyvin toteutettu eikä mitään suuria kehitysideoita tule mieleen</li>
+  <li>Kiitos kurssista :)</li>
+  <li>Kurssimateriaali kattavaa ja tukee hyvin tehtäviä, ei mieleen tulevaa moitittavaa.</li>
+  <li>En nyt nopeasti keksi mitään kehitettävää, oli kokonaisuudessaan oikein toimiva kurssi.</li>
+  <li>mongodb-osuus oli turha eikä sillä tehty mitään. joko mongodb:tä pitäisi käyttää johonkin tai sitten sitä ei pitäisi olla mukana lainkaan. pelkkä peruskomentojen googlettelu on turhauttavaa jos taitoja ei pääse ikinä soveltamaan.</li>
+  <li>Nykyinen sisältö tuntuu sopivalta, en muuttaisi mitään.</li>
+  <li>Task tehtäviin liittyvät videot olivat erittäin hyödyllisiä, joten lyhyitä videoita voisi olla myös verkkomateriaalin yhteydessä.</li>
+  <li>Enemmän videoita taskiin ja sql traineriin.</li>
+  <li>I liked the course as it was.</li>
+  <li>En osaa sanoa. Hyvä kurssi oli</li>
+  <li>Lisäisin Tasks-tehtäviin ohjeet, miten tehtävässä 4 saa komentokehotteen päälle</li>
+  <li>Avoimen kautta toimittavaa hyväksilukua voisi avata selkeämmin että miten se toimii</li>
+  <li>Tällä hetkellä haasteet tehtävissä on liiankin yhteydessä tukeen; ehkä hint-systeemi? Olkoon niiden julkaisu tietyn pvm. jälkeen tai fixed amount jota voi käyttää. emt.</li>
+  <li>Tämä on hyvä jo nyt</li>
+  <li>Tasks-tehtävä 6 ei aivan toiminut. Mongo-tulkki oli hankala käyttää (jos edes käytin oikeaa tulkkia), sillä siinä oli aikakatkaisu ja tulkki antoi mielestäni vaihtelevia tuloksia, vaikka kirjoittamani komennot oli samat. Hämmentävästi tasks-tarkistus antoi pisteitä kirjoittamastani koodista, vaikka mongo-tulkissa ei tullutkaan oikeaa vastausta. Lisäksi mielestäni kirjoitin vastauksen väärin tasks-tehtävään (piti tulostaa vain nimi ja palkka, mutta tulostikin kaikki tiedot), mutta sain kuitenkin taskissa pisteitä. Tämän takia laitoin “arviointimenetelmät mittaavat oppimistani” vain kolmosen, sillä mulle jäi epäselväksi oliko vastaukseni nyt oikein, vaikka pisteitä tulikin.</li>
+  <li>Lisää tasks-tehtäviä, joissa ohjelmoidaan oikeaa ohjelmaa tietokantoja hyödyntäen!</li>
+  <li>Task-tehtävien alusta on hieman takkuava välillä. Tuntuu, että se voisi toimia paremminkin. Muuten kurssin toteutus on onnistunut. Materiaali on selkeää ja helposti yhdistettävissä tehtävien eri osa-alueisiin. Tämä tuki oppimista!</li>
+  <li>Kommer inte på något speciellt som jag skulle ändra på. Tycker YouTube-videorna var bra så kanske fler av dem!</li>
+  <li>Materiaalissa voisi olla mainittu mitkä tehtävät liittyvät mihinkin materiaaliin.</li>
+  <li>Teoriakysymykset oli jotenkin todella vaikeita. Vaikka näihin yritti internetin avulla kaivaa vastauksia niin jäin aika tyhjän päälle.</li>
+  <li>Minusta kurssi oli oikein hyvä enkä nyt keksi mitään kehittämisen aihetta. Materiaali oli kattavaa ja ohjevideot auttoivat rutkasti.</li>
+  <li>Tietokantojen teoriaan liittyvässä materiaalissa olisi voinut enemmän esimerkkejä ja käytännön esimerkkejä. Yleisesti sisältö oli kuitenkin hyvää ja helposti lähestyttävää.</li>
+  <li>Aliotsikkoja SQLtrainer tehtävien aiheille tehtävien listassa.</li>
+  <li>Task 5 monivalintatehtävä oli itselle todella haastava ja ärsyttävä, siihen toivoisin jotain helpotusta/muutosta.</li>
+  <li>Kurssi tuntui pakolla vääntämiseltä. Ehkä tehtäviä voisi olla hieman vähemmän.</li>
+  <li>Olisi kiva, jos olisi linux-käyttiksellä nuo apuvideot.</li>
+  <li>Tasks 3 -tehtävä olisi mielestäni kaivannut jonkinlaista ohjeistusvideota, jota tehtävissä 1 ja 2 oli. Myös loppupään sql-trainer tehtäviin voisi lisätä materiaaleihin joitain vinkkejä. Kokonaisuudessaan kuitenkin hyvä ja toimiva kurssi.</li>
+  <li>Kurssilla voisi olla jonkinlaisia luentoja tai video demoja, jotka auttaisivat ainakin omaa oppimistani paremmin.</li>
+  <li>Mooc-ympäristöön voisi kehittää suositellun aikataulun kurssitehtävien ja materiaalien läpikäymiseen. Itsellä oli ajoittain ongelmia omassa aikatauluttamisessa, joten olisi ollut mukava seurata tiettyä ohjelmaa.</li>
+  <li>Tasks-osion tehtävän 2 courses.credits_by_teacher-testiä voisi ehkä muuttaa siten, että se ei niin helposti antaisi oikeaa vastausta kaikenlaisista vääristä toteutuksista. (Esim. tuo arvostelu-kohdan main.py moduulin testi olisi parempi.)</li>
+  <li>Mielestäni kurssin toteutustapa oli mainio, harjoitus tekee mestarin! Joillekin osallistujille saattaa olla vaikeaa asentaa VSC ja suorittaa tehtäviä siinä ympäristössä, mutta siihenkin oli kuitenkin hyvät ohjeet, ja apuakin taitaa saada Discordista. Ihan OK kurssi!</li>
+  <li>Kurssi oli tällaisenaan toimiva. Tehtävät ja materiaalit tukivat hyvin oppimista ja tehtäviä oli hyvin eri tasoisille ja tavoitteisille opiskelijoille.</li>
+  <li>Juuri hyvä näin!</li>
+  <li>En keksi kehitettävää.</li>
+  <li>Olisin kaivannut vielä enemmän käytännön esimerkkejä tietokannan suunnitteluun liittyen.</li>
+  <li>Kurssiin tuli lisähaastetta, sillä olen käynyt ohjelmoinnin kurssit aikanaan (10 v sitten) opiskelemalla Javaa. Python oli täysin uusi tuttavuus. Onneksi videot olivat tasoa väännetään rautalangasta asiat.</li>
+  <li>Kurssi oli mielestäni todella hyvä. Asiat selitettiin auki mutta oppimiseen kuitenkin rohkaistiin tehtävillä jotka vaativat materiaalin sisäistämistä.</li>
+  <li>Joissakin SQL-tehtävissä oli hieman epäselvä tehtävänanto, esim. tehtävässä 95.</li>
+  <li>Olisi hyvä jos SQL Trainer pysyisi kirjautuneena sisään kun sulkee selaimen ja avaa sen uudelleen.</li>
+  <li>Kurssin sisältö oli hyvin hyödyllinen omasta näkökulmastani, ja kurssi oli ehkä opintopistemäärään nähden vähän helpohko. Iso ongelma oli epäselvyys siinä, miten ne, joilla ei ole yliopiston tunnuksia pääsevät antamaan kurssipalautteen. Kurssin sivujen mukaan palautteenanto oli yksi komponentti kurssiarvostelussa, ja siitä kokonaisuudesta, johon palautteenanto kuului oli tarjolla 5 pistettä, jolla olisi merkitystä arvosanaan. Sivuilla ei kerrottu milloin palautelomake tulee sähköpostiin, sanottiin vain että se tulee sen jälkeen, kun on ilmoittautunut kurssille (missä vaiheessa sen jälkeen???). Sitten se palautelomake lopulta tuli 28.10. lauantaina, kun kurssin suorittamisen DL olisi ilmeisesti 29.10. sunnuntaina. Ennen lomakkeen saamista, olisiko siinä pitänyt alkaa varmuuden vuoksi tehdä viimeisiä tehtäviä loppuun varmistaakseen haluamansa arvosanan, kun ei ollut tietoa MILLOIN tämä lomake tulee sähköpostiin? Lisäksi eivät ihmiset ole sähköpostin äärellä välttämättä viikonloppuisin. Pointti ei ole se, vaikuttaako palautteen antaminen lopulta pisteisiin vai saako ne 5 pistettä mahdollisesti automaattisesti klikkaamalla nappulaa, jossa kuittaa kurssin osion 7 suoritetuksi (en vieläkään tiedä saako), sillä opiskelija ei voi TIETÄÄ sitä, ennen kuin klikkaa kyseistä nappulaa. Käytin tämän byrokratia-/prosessiasian selvittelyyn lopulta eri tavoin noin 1,5 tuntia aikaani, mm. olemalla yhteydessä avoimen yliopiston helpdeskiin, kiertelemällä kehää yliopiston sivuilla sekä yrittämällä aktivoida yliopiston käyttäjätunnukset, jos asia vaikka sitä kautta olisi hoitunut (sekin palvelu oli teknisesti nurin ainakin 26-27.10. joten se siitä). Minusta tuntuu aivan käsittämättömältä, että tällaisia itsestäänselviä kurssin suorittamiseen liittyviä asioita ei osata kirjata selkeästi näkyviin kurssin sivuille. Itselläni on tohtoritason koulutus ja monet korkeasti kouluttautuneet tuttavani ovat myös ihmetelleet avoimen yliopiston kurssien teknistä byrokratiaa, sillä useimmiten kurssin vaikein osuus on joko ilmoittautuminen tai suoritusten saaminen rekisteröityä. Parantakaa siis tässä kurssin suorittamisen prosessipuolessa selventämällä asioita kurssin nettisivuilla!</li>
+  <li>En itse keksi mitään kehitettävää.</li>
+  <li>Opetusvideoita voisi olla enemmän</li>
+  <li>Materiaalissa enemmän esimerkkejä</li>
+  <li>Materiaaleja voisi vielä kehittää niin, että myös SQL-harjoitusten vaikeimpiin osiin olisi hieman enemmän ohjausta. Itse pohtiminen ja tutkiminen on toki arvokasta, mutta nyt sai googlettaa jonkin verran ymmärtääkseen, mitä mallivastauksessa tapahtuu, kun tekniikkaa ei oltu varsinaisesti avattu kurssimateriaaleissa.</li>
+  <li>Task 5 tehtävän monivalinnat olivat minusta vähän liiankin vaikeita.</li>
+  <li>SQL trainer tehtävät olivat hieman liian haastavia verrattuna opintomateriaaliin.</li>
+  <li>Mielestäni erittäin laadukas ja paljon eritasoisia tehtäviä helpoista haastaviin</li>
+  <li>Teoriaosuudet paremmin toteutettuna kuin osasuoritus, joista et saa tietoa mikä on väärin. Voisin vaikka vannoa että kaikki on oikein, mutta se ei mene läpi, joten virheiden korjaaminen on käytännössä täysin mahdotonta. Tällöin lienee parasta vain tehdä skripti, joka kokeilee järjestyksessä kaikki vastausvaihtoehdot läpi, mutta nyt ei ollut aikaa siihen.  Ehkä task 2:ssa olisi voinut olla selkeämmät ohjeet tietokannan tekemiseen. Minulla meni siihen taskiin helposti moninkertainen aika verrattuna muihin tehtäviin, ihan vain ajatusvirheiden ja sekoilujen takia ja jouduin muokkaamaan tietokantaa tai koodia muutamaan kertaan.</li>
+  <li>Materiaaleissa voisi olla enemmän tietoa tietokantoja kuvaavista kaavioista</li>
+  <li>Ei kehitettävää</li>
+  <li>Sain apuja siihen miten ja missä järjestyksessä tehtävät kannattaa suorittaa vasta Discordin puolella. Kurssin esimerkki aikataulun voisi lisätä kurssin sivuille!</li>
+  <li>Ehkä tasks-tehtäviä voisi olla enemmän.</li>
+  <li>Tietokantojen teoria -osuudessa voisi paremmin selittää ja antaa esimerkkejä eri normaalimuodoista. Kurssimateriaalista olisi hyvä löytyä tietoa ja esimerkkejä MongoDB:stä, koska siitä oli myös tehtävä.</li>
+  <li>En osaa sanoa kehitettävää kurssille. Kurssin taso oli hyvä ja olin tyytyväinen tehtäviin ja opetusmateriaaliin.</li>
+  <li>Kurssi oli opintopisteisiin nähden aivan liian lyhyt. Mielestäni kurssilla voitaisiin käsitellä enemmän asioita, kuten tietokantojen teknillistä toteutusta tai matemaattista taustaa syvemmin.</li>
+  <li>Tehtävät olivat sinänsä hyviä, mutta etenkin ensimmäisessä puolikkaassa materiaalin suhde tehtävien vaativuuteen oli vähän epämääräinen. Asioita voisi havainnoida ja taustoittaa enemmän.</li>
+  <li>lisää esimerkkivideoita tehtävistä</li>
+  <li>Minusta teoriaosiota olisi voinut merkittävästi parantaa. Liikaa epämääräisiä ilmaisuja ja liiallista tiivistämistä väärissä paikoissa. Etenkin teoriakyselyn viimeistä osiota oli vaikea tehdä materiaalin pohjalta (2. ja 3. normaalimuotoja en kyennyt ymmärtämään materiaalin pohjalta)</li>
+  <li>Ei minulla ole parannusehdotuksia. Kurssi oli selkeästi rakennettu ja tehtävät hyviä.</li>
+  <li>Lisäisin teoria puolta, jotta olisi paremmat lähtökohdat vaikeampiin tehtäviin.</li>
+  <li>Oppimistavoitteita ja -metodeja olisi hyvä selkeyttää. Tuntuu, että siitä huolimatta, että kurssisuorituksia sai koottua, ei asia aivan iskostu tajuntaan. Tuntuu, että syys-seuraussuhteet jäävät hieman pimentoon. Myös ohjelmien laataamisista saisi olla paremmat ohjeet. En saanut task 4 tehtävää tehtyä lainkaan, sillä en millään ymmärtänyt mistä sql-tulkin saa ladattua oikealla tavalla - materiaalissa olevat ohjeet ovat todella niukat, enkä lopulta löytänyt oikeaa siitä huolimatt, että kokeilin monia eri latauksia ja googletin ohjeita lisää. Koitin selvittää, eikä asiaan vaan tullut selvyyttä. Turhauduin kokeillessa asiaa, jonka pitäisi mielestäni olla yksinkertaisempaa. Siispä hampaat irvessä jouduin nöyrtymään omaan osaamattomuuteeni siinä kohtaa ja luovutin. Huippua, että kurssin saa tehdä täysin omaan tahtiin!</li>
+  <li>Mongodb:n osalta kurssimateriaalissa olisi voinut olla hieman opastusta. Nyt piti kaikki tieto kaivaa netistä.</li>
+  <li>Kaipasin jonkinlaista yhteenvetoa kurssilla läpikäydyistä asioista, esimerkiksi jokaisen osion lopussa.</li>
+  <li>Tasks tehtäviin hyppääminen oli melko kulttuurishokki trainer tehtäviin verrattuna. Tätä eroa voisi koittaa pienentää jollain tapaa.</li>
+  <li>Lisäisin materiaaliin maininnan, että GROUP BY -komento ryhmittelee kaikki null-arvot yhteen. Tämän ongelman tajuamiseen ja korjaamiseen kului harmillisen paljon aikaa.</li>
+  <li>Pidin tehtävistä eniten, koska ne vaativat sinua avaamaan VS-koodin ja työskentelemään “todellisessa ympäristössä”. Olitpa sitten aloittelija tai kokenut, sillä ei ole väliä, mielestäni sinun pitäisi työskennellä “todellisessa ympäristössä” alusta alkaen, ehkä voit tehdä ensimmäiset 20 SQL-harjoitusta selaimessa, sitten sinun pitäisi siirtyä VS-koodiin.  Jos olisi toteutus, kuten TMC-koodissa, jossa voit saada palvelinpohjaisia testejä VS-koodin kautta, se olisi hienoa. Samalla tavalla kuin Python-kurssit on järjestetty.</li>
+  <li>Ehkä hieman lisää materiaaleja nimenomaan tehtävien ratkaisun avustamiseen.</li>
+  <li>Mielestäni ei ole kehitettävää. Kokonaisuus on oikein hyvä</li>
+  <li>SQLTrainer-tehtäville voisi ilmoittaa vaikeustason. Kutakin palautusta kohti voisi laittaa jonkinlaisen järjestelmän, joka mittaisi kuinka tehokas kysely on. Sitten voisi verrata omaa vastausta mallivastauksen kanssa (kunhan on riittävän toimiva ratkaisu).</li>
+  <li>Tasks-tehtävistä löytyvät apuvideot olivat hyödyllisiä ja mielestäni niitä voisi olla myös lisää. Esim. NoSQL ja MongoDB:n käyttö oli hieman vaikea hahmottaa pelkän tekstin perusteella.</li>
+  <li>Kurssimateriaalit SQL-trainer tehtävien tekemiseen ei ollut kovin kattava - siinä olisi voinut olla enemmänkin. Toki netistä löytyvä muu materiaali auttoi.</li>
+  <li>Kurssin materiaali oli koottu ja muotoiltu loistavasti, näin hyvin jäsennettyyn materiaaliin en muista ennen törmänneeni. Asiat löytyivät loogisesti oikeiden otsikoiden alta ja tehtävien tekeminen oli tämän ansiosta jouhevaa. Kerrankin ei joudu poukkoilemaan sivustolta toiselle kurssimateriaalia lukiessa.  Yleensä suosisin ehdottomasti tekstimateriaalia, mutta tasks-tehtäviin liityneet videot toimivat myös mainiosti. Ainoa kohta, jossa olisin kaivannut tarkennusta, oli materiaalin kappale 8. Tietokantojen teoria. Mielestäni matemaattisesti tarkat määritelmät esitellyille joukoille olisivat olleet paikallaan ennen esimerkkejä. Esim. karteesisen tulon kohdalla olisi siis voinut olla määritelmä S_1 x S_2 x … x S_k = {(s_1, s_2, …, s_k) | for all i in {1,2,…,k}: s_i in S_i} ennen esimerkkejä. Ainakin liitoksen kohdalla tarkan määritelmän puutos johti turhaan arvailuun tehtäviä tehdessä.</li>
+  <li>kurssi materiaalista tuntui puuttuvan neuvoja soveltaviin sql trainer tehtäviin.</li>
+  <li>Voisi tarkentaa, mikä oppimateriaalin kappale liittyy mihinkin Tasks-tehtävään, ja paljonko työtä suurinpiirtein pitäisi olla tehtynä joka periodin viikon mennessä</li>
+  <li>Bisqwit:in Youtube-videot olivat äärimmäisen helppoja seurata hyvän editoinnin ja selostuksen toimesta, enkä olisi varmastikaan saanut suurta osaa tehtävistä suoritettua ilman kyseisiä videoita. Lisää näitä kaikille kursseille, kiitos.  Python-ohjelmoinnista voisi olla hieman lisää materiaalia kurssissa, etenkin tuple- ja list-tyyppien eroista.  SQL trainerista voisi pienellä CSS-muokkailulla tehdä paljon mobiiliystävällisemmän. Itse tein enemmistön SQL trainereista älypuhelimella ja vaikka ohjelma toimi oikein hyvin näinkin, olisi kuitenkin sivun käyttoliittymän sommittelussa hieman parantamisen varaa. Yksinkertainen koodiformatointi-nappula olisi myös tervetullut.</li>
+  <li>Työmäärä oli suuri opintopisteisiin nähden.</li>
+  <li>en osaa sanoa</li>
+  <li>Laajempien tasks-tehtävien tehtävänantoa voisi selkeyttää, pilkkoa pienempiin osiin</li>
+  <li>Kurssin osio joka käsitteli tietokantojen teoriaa oli minulle hieman epäselvää. Enemmän käytännön esimerkkejä tässä aiheessa olisi saattanut avata asiaa enemmän.</li>
+  <li>Diskord on erittäin tarpeellinen tuki kurssille, kiitos siitä.</li>
+  <li>En osaa sanoa, kurssi järjestettiin mielestäni hyvin ja työmäärä oli sopiva.</li>
+  <li>Materiaaliin lisäksi pidempiä esimerkkejä.</li>
+  <li>Ehkä jotain videoluentoja</li>
+  <li>videoita</li>
+  <li>The knowledge related to Normal forms in the database theory is difficult to understand. More explanations and examples would be appreciated.</li>
+  <li>Enemmän esimerkkejä materiaaliin.</li>
+  <li>Enemmän opetusvideoita</li>
+  <li>Tehtävä, jossa piti kääntää sql-lausekkeita MongoDB:lle oli turhauttava lähinnä ohjeistetun MongoDB-tulkin vuoksi. En tiedä käytinkö lopulta tulkkia väärästä paikasta, mutta mielestäni myös Discordissa ohjeisettiin samaan. Eli se jossa tulkki ei ollutkaan pelkkä tulkki vaan ajastettu tutorial, johon piti joko kliksutella lisäaikaa tai aloittaa jatkuvasti alusta. Tähän voisin keksiä jostakin paremman ratkaisun, jossa nätä voisi harjoitella aidosti ajan kanssa. Lisäksi huomasin, että rakentamani tietokanta ei välttämättä ollutkaan täysin minun tekemä. Jos kokeilin tehdä harjoituksen tietokannan Työntekijät niin sieltä saattoi löytyä tietoa jo ennen kun ehdin itse lisätä sinne mitään. Eli joku muu teki (ehkä samaa aikaa) saman nimistä tietokantaa, eikä se suinkaan ollut lokaali koneellani vaan jossakin Mongon palvelimella. Jos lisäsin tietokannan perään numerosarjan esim Tyontekijat1111, niin pääsin sentään rakentamaan tietokantaa tyhjästä. Lopulta aikarajojen takia jatkuvaan uudelleen ajatukseen meni sen verran hermo, että viimeisiin kohtiin en tarkistanut oikeellisuutta tulkista ollenkaan vaan kirjoitin koodit pelkän dokumentaation turvin ja toivoin parasta.  Kaikilta muilta osin kurssi oli erinomainen. Muutama loppupään SQL-trainerin tehtävä jäi tekemättä. Aiheita sivuttiin meteriaalissa, mutta en silti päässyt niistä täysin jyvälle. Yleisesti omaan makuuni oli enemmän laajemmat kokonaisuudet Task tehtävissä, joissa pääsi yhdistämään SQL:ää ja Pythonia.</li>
+  <li>Materiaali tuki hyvin kurssin alun helpompia tehtäviä, mutta materiaalissa olisi voinut olla enemmän esimerkkejä ja ohjeita vaikeampien tehtävien tekoon.</li>
+  <li>Ohjevideot olivat tarpeen (samoin Discordin aikaisemmat keskustelut auttoivat paljon), kiitos niistä. Ehkä voisi lisätä lyhyen videon myös Task 3:een, ja Task 4:n video voisi alkaa siitä miten tiedosto tallennetaan ja sitten avataan SQLite-tulkissa (vaikka tiedän, että tämä tieto löytyy myös muualta)</li>
+  <li>Task-tehtävien tehtävänantoa voitaisiin paikoittain täsmentää. Esimerkiksi Task 1:ssä voitaisiin tuoda tarkemmin ilmi se, että missä muodossa pyöräilty matka halutaan palauttaa nyt tehtävänanto herättää mielestäni ylimääräisiä kysymyksiä siitä, että mitä tehtävässä oikeasti haetaan.</li>
+  <li>en tiedä en jaksa ajatella enää</li>
+  <li>Videot olivat hyviä Task-tehtävien suorittamisessa. Vielä enemmän yleistä teoriaa ja esimerkkejä SQL-trainer tehtäviä varten olisi voinut olla.</li>
+  <li>Mielestäni tehtävät oli selkeitä ja niitä oli sopivasti. Osan tekeminen kesti aika pitkään, minkä takia työmäärä tuntui ajoittain rankalta. Materiaaleista voisi jo löytyä jotain apuja “vaikeimpien” tehtävien tekemiseen discordin lisäksi.</li>
+  <li>En osaa sanoa. Oli hyvä ja kattava kokonaisuus</li>
+  <li>Lisäisin materiaalia tietokantojen teoriaan ja matemaattiseen puoleen. Tuntui että sen osalta materiaali jäi hieman vajaaksi ja epäselväksi.</li>
+  <li>enemmän helppoja tehtäviä alkuun</li>
+  <li>En keksi kehitettävää, kurssi tuntui oikein hyvältä.</li>
+  <li>Hieman keventäisin tasks-tehtävien osuutta arvioinnissa. Itselleni ne olivat ainakin työläitä.</li>
+  <li>Ei mitään tiettyä korjattavaa.</li>
+  <li>En mitenkään</li>
+  <li>Nosql tietokannan opettelu lopussa tuntui hieman turhalta. Teorian opiskelun tarkoitus jäi myös vähän epäselväksi.</li>
+  <li>SQL-trainer tehtäviä voisi olla lisää. Kurssin helpot tehtävät olivat hyvinkin helppoja, ja vaikeat (SQL-trainer) tehtävät ainakin itselläni hermoja raastavia… Hyvä tapa harjoitella oli luoda omia tauluja ja kokeilla niiden avulla hakuja SQLiten sisällä (kurssimateriaalissa saatettiin vinkata tekemään näin).</li>
+  <li>Milestäni kurssissa ei ole kehitettävää, kaikki sujui hienosti</li>
+  <li>En osaa sanoa.</li>
+</ul>
+
+<h3 id="muita-huomioita">Muita huomioita</h3>
+
+<ul>
+  <li>Ei ole</li>
+  <li>Kurssin toteutustapa on opiskelijaystävällinen. Oman edistyksen jatkuva pisteyttäminen on tehokas motivaattori. Arvostettavaa on myös se, että opiskelija saa käytännössä itse päättää kurssiarvosanansa (arvosteluun ei sisälly satunnaisuutta kuten tenttikursseilla). Kurssin vapaamuotoisuus tekee opiskelusta pitkälti stressitöntä, mikä on harvinainen luksus.</li>
+  <li>Tykkäsin mongodbn pikaisesta esittelystä.</li>
+  <li>Kurssi vei seksihalut. En tiedä, onko se tietokantojen yleisempikin ilmiö vai vaan kurssin, töiden ja lapsiperhe-elämän aikaansaama yhteisvaikutus.</li>
+  <li>Ohjeistus oli selkeä etenkin TASK osion youtube videot!</li>
+  <li>Kurssin viimeisellä tehtäväsivulla ollut linkki Norppaan ei auennut sisäänkirjautumisen jälkeen ollenkaan Edgellä tai Firefoxilla.  Sähköpostiin tullut Norppa-viestin linkki onneksi aukesi Chromella. Muuten olisi jäänyt palaute antamatta.</li>
+  <li>Loistavat ja selkeät materiaalit sekä kurssitoteutus.</li>
+  <li>Ei muuta kuin iso kiitos hyvästä setistä. Mihin sitä olisikaan päässyt jos tällaista herkkua olisi ollut tarjolla viime vuosituhannella… Nykynuoriso ei tiedä kuinka hyvin niillä on asiat :D</li>
+  <li>Kaikenkaikkiaan tosi hyvä kurssi ja varsinkin Task-tehtävien tietokantojen suunnittelu ja ohjelmointirajapinnan toteutus oli todella antoisaa.</li>
+  <li>Oli kiva että discord kanava oli auki. Koin sen hyödylliseksi, että pystyi lukemaan vanhoja viestejä. Opastus videot olivat myös hyviä.</li>
+  <li>Monivalintatehtävää lukuunottamatta kurssi oli todella hyvä, sekä kirjallinen että videomateriaali tuki oppimista ja tehtävät olivat kiinnostavia ja kehittäviä.</li>
+  <li>Kattava materiaali ja intuitiivinen sivusto</li>
+  <li>Kurssi oli oikein mukava ja hyödyllinen.</li>
+  <li>Kiitos mielenkiintoisesta kurssista!</li>
+  <li>An english version of the course would be great for worldwide Mooc learners.</li>
+  <li>Hyvä kokonaisuus</li>
+  <li>Pidin siitä, että kurssin pystyi tekemään täysin kotoa ja arvosanan määräytyminen oli läpinäkyvää.</li>
+  <li>Mielestäni materiaalit olivat hyvät ja selkeät. Kurssi oli mielestäni kaikinpuolin hyvin toteutettu.</li>
+  <li>Materiaali oli pääosin todella hyvää, erityismaininta Task-videoista! Todella hyvin selitetty ja demonstroitu. Tästä oli suuri apu tehtävissä, ja niiden aloittaminen tuntui helpommalta, mikä tehosti oppimista.</li>
+  <li>Kokonaisuutena monipuolinen ja kiva kurssi, jossa oppi paljon.</li>
+  <li>Mielenkiintoista asiaa. Kiitos kurssista!</li>
+  <li>Materiaali ja opetusvideot olivat hyvät!</li>
+  <li>Kiitos hyvästä materiaalista.</li>
+  <li>SQL trainerin vaikeampien kysymysten vaatimia taitoja ei opetettu materiaalissa lainkaan</li>
+  <li>Hauska kurssi :D</li>
+  <li>En tiennyt SQL- tai Python-kielistä kurssin alussa juurikaan mitään ja koen oppineeni paljon. Kiitokset kurssista!</li>
+  <li>oppimismateriaalit ovat todella hyviä!</li>
+  <li>Koodaamista koskevat käytännön selitykset olivat pääosin selkeitä ja hyviä.</li>
+  <li>Tasks tehtävien apuvideot olivat hyviä</li>
+  <li>Kiva kun sai tehdä tehtäviä eikä tarvinnut stressata koetta, opin paremmin näin. kova työ palkitaan myös.</li>
+  <li>Fantastinen Suomen kielen käyttö kurssikielenä. Materiaalin läpi käyminen riittää kurssin läpäisyyn sopivalla työmäärällä, upeaa!</li>
+  <li>Opetusvideot task-tehtävissä tukivat oppimista</li>
+  <li>Huomasin, että MongoDB-tehtävässä minulla oli pari virhettä, mutta olin silti saanut tehtävistä pisteet. Korjasin ne sitten huomattuani. Yhdessä kohdassa olin kirjoittanut lausekkeita People-tietokantaan enkä Tyontekijät-tietokantaan. Johtuen siitä, että olin Mongon dokumentaatiosta kopioinut lausekkeen, jota lähdin muokkaamaan. Toisessa tapauksessa oli vähän samaa vikaa, eli olin kopioinut osan lausekkeesta, jota lähdin muokkaamaan. Jälkikäteen huomasin, että koodini päättyi kahteen }}-merkkiin, vaikka sen olisi pitänyt päättyä ])-merkkeihin. Eli varmaan tarkastusmekanismi on tarkistanut löytyykö koodista tietyt kohdat, mutta kaikilta osin mekanismi ei pystynyt olemaan aukoton.</li>
+</ul>
+
+</div>
+        <div class="footer">
+    <img src=/syksy-2023/assets/img/HY_logo.png>
+    </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>
+    
+    4. Lisää SQL-kielestä - Tietokantojen perusteet syksy 2023
+    
+  </title>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: {
+          scale: 87
+        }
+      });
+      </script>
+  <script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <link rel='stylesheet' type='text/css' media='screen' href=/syksy-2023/assets/css/main.css>
+  <link rel='stylesheet' type='text/css' media='screen' href=/syksy-2023/assets/css/syntax.css>
+
+  <script src=/syksy-2023/assets/js/main.js></script>
+
+</head>
+
+
+<body id="chapter">
+    
+<nav class="no-nav" id="side-nav" >
+    <button id="hide" onclick="hideSideNav()"> &#x2715;</button>
+    <button id="show" onclick="showSideNav()"> </button>
+    <h2>Tietokantojen perusteet syksy 2023</h2>
+    
+    <ol>
+
+        <li class="side-nav-obj" id="indexnav"><a href=/syksy-2023/index>Etusivu </a></li>
+        
+        
+        
+        <li class="side-nav-obj" id="Materiaalinav"><a href="/syksy-2023/pages/materiaali.html">Materiaali</a></li>
+        
+        
+        
+        
+        
+        <li class="side-nav-obj" id="Tehtävätnav"><a href="/syksy-2023/pages/tehtavat.html">Tehtävät</a></li>
+        
+        
+        
+        
+        
+        <li class="side-nav-obj" id="Tulokset ja palautenav"><a href="/syksy-2023/pages/tulokset_palaute.html">Tulokset ja palaute</a></li>
+        
+        
+        <br>
+        
+        
+        <li class="side-nav-obj" id="1. Johdantonav"><a href="/syksy-2023/content/osa-1/index.html">1. Johdanto</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Mikä on tietokantanav"><a href="/syksy-2023/content/osa-1/index.html#mikä-on-tietokanta">Mikä on tietokanta</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Tee-se-itse-tietokantanav"><a href="/syksy-2023/content/osa-1/index.html#tee-se-itse-tietokanta">Tee-se-itse-tietokanta</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Relaatiomalli ja SQL-kielinav"><a href="/syksy-2023/content/osa-1/index.html#relaatiomalli-ja-sql-kieli">Relaatiomalli ja SQL-kieli</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="2. SQL-kielen perusteetnav"><a href="/syksy-2023/content/osa-2/index.html">2. SQL-kielen perusteet</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Peruskomennotnav"><a href="/syksy-2023/content/osa-2/index.html#peruskomennot">Peruskomennot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Yhteenveto ja ryhmittelynav"><a href="/syksy-2023/content/osa-2/index.html#yhteenveto-ja-ryhmittely">Yhteenveto ja ryhmittely</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="SQLite-tietokantanav"><a href="/syksy-2023/content/osa-2/index.html#sqlite-tietokanta">SQLite-tietokanta</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="3. Monen taulun kyselytnav"><a href="/syksy-2023/content/osa-3/index.html">3. Monen taulun kyselyt</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Taulujen viittauksetnav"><a href="/syksy-2023/content/osa-3/index.html#taulujen-viittaukset">Taulujen viittaukset</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Liitostaulutnav"><a href="/syksy-2023/content/osa-3/index.html#liitostaulut">Liitostaulut</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="JOIN-syntaksinav"><a href="/syksy-2023/content/osa-3/index.html#join-syntaksi">JOIN-syntaksi</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="4. Lisää SQL-kielestänav"><a href="/syksy-2023/content/osa-4/index.html">4. Lisää SQL-kielestä</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Tyypit ja lausekkeetnav"><a href="/syksy-2023/content/osa-4/index.html#tyypit-ja-lausekkeet">Tyypit ja lausekkeet</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="NULL-arvotnav"><a href="/syksy-2023/content/osa-4/index.html#null-arvot">NULL-arvot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Tulosrivien rajausnav"><a href="/syksy-2023/content/osa-4/index.html#tulosrivien-rajaus">Tulosrivien rajaus</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Alikyselytnav"><a href="/syksy-2023/content/osa-4/index.html#alikyselyt">Alikyselyt</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Lisää tekniikoitanav"><a href="/syksy-2023/content/osa-4/index.html#lisää-tekniikoita">Lisää tekniikoita</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="5. Tietokannat ohjelmoinnissanav"><a href="/syksy-2023/content/osa-5/index.html">5. Tietokannat ohjelmoinnissa</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Tietokannan käyttäminennav"><a href="/syksy-2023/content/osa-5/index.html#tietokannan-käyttäminen">Tietokannan käyttäminen</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Käyttöliittymänav"><a href="/syksy-2023/content/osa-5/index.html#käyttöliittymä">Käyttöliittymä</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Mitä tehdä missäkinnav"><a href="/syksy-2023/content/osa-5/index.html#mitä-tehdä-missäkin">Mitä tehdä missäkin</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="6. Tietokannan suunnittelunav"><a href="/syksy-2023/content/osa-6/index.html">6. Tietokannan suunnittelu</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Suunnittelun periaatteetnav"><a href="/syksy-2023/content/osa-6/index.html#suunnittelun-periaatteet">Suunnittelun periaatteet</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Tiedon atomisuusnav"><a href="/syksy-2023/content/osa-6/index.html#tiedon-atomisuus">Tiedon atomisuus</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Toisteinen tietonav"><a href="/syksy-2023/content/osa-6/index.html#toisteinen-tieto">Toisteinen tieto</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Suunnitteluesimerkkinav"><a href="/syksy-2023/content/osa-6/index.html#suunnitteluesimerkki">Suunnitteluesimerkki</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="7. Tietokannan ominaisuudetnav"><a href="/syksy-2023/content/osa-7/index.html">7. Tietokannan ominaisuudet</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Tiedon eheysnav"><a href="/syksy-2023/content/osa-7/index.html#tiedon-eheys">Tiedon eheys</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Transaktiotnav"><a href="/syksy-2023/content/osa-7/index.html#transaktiot">Transaktiot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Kyselyjen suoritusnav"><a href="/syksy-2023/content/osa-7/index.html#kyselyjen-suoritus">Kyselyjen suoritus</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Indeksitnav"><a href="/syksy-2023/content/osa-7/index.html#indeksit">Indeksit</a></li>
+        
+            
+        
+        
+        
+        
+        <li class="side-nav-obj" id="8. Tietokantojen teorianav"><a href="/syksy-2023/content/osa-8/index.html">8. Tietokantojen teoria</a></li>
+        
+        
+            
+            <li class="side-nav-sub-obj" id="Matemaattinen taustanav"><a href="/syksy-2023/content/osa-8/index.html#matemaattinen-tausta">Matemaattinen tausta</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Taulu relaationanav"><a href="/syksy-2023/content/osa-8/index.html#taulu-relaationa">Taulu relaationa</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Relaatio-operaatiotnav"><a href="/syksy-2023/content/osa-8/index.html#relaatio-operaatiot">Relaatio-operaatiot</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Avaimet ja riippuvuudetnav"><a href="/syksy-2023/content/osa-8/index.html#avaimet-ja-riippuvuudet">Avaimet ja riippuvuudet</a></li>
+        
+            
+            <li class="side-nav-sub-obj" id="Normaalimuodotnav"><a href="/syksy-2023/content/osa-8/index.html#normaalimuodot">Normaalimuodot</a></li>
+        
+            
+        
+        
+        
+    </ol>
+</nav>
+
+    <div class="page-content">
+        <div class="content">
+    <div class="table-of-content" id="tof" style="display: none;">
+    <ul>
+        
+        <li><a href="#tyypit-ja-lausekkeet">Tyypit ja lausekkeet</a></li>
+        
+        <li><a href="#null-arvot">NULL-arvot</a></li>
+        
+        <li><a href="#tulosrivien-rajaus">Tulosrivien rajaus</a></li>
+        
+        <li><a href="#alikyselyt">Alikyselyt</a></li>
+        
+        <li><a href="#lisää-tekniikoita">Lisää tekniikoita</a></li>
+        
+    </ul>
+</div>
+
+    <h1 id="4-lisää-sql-kielestä">4. Lisää SQL-kielestä</h1>
+
+<h2 id="tyypit-ja-lausekkeet">Tyypit ja lausekkeet</h2>
+
+<p>SQL-kielessä esiintyy tyyppejä ja lausekkeita samaan tapaan kuin ohjelmoinnissa. Olemme jo nähneet monia esimerkkejä SQL-komennoista, mutta nyt on hyvä hetki tutustua syvällisemmin kielen rakenteeseen.</p>
+
+<p>Jokainen tietokantajärjestelmä toteuttaa tyypit ja lausekkeet vähän omalla tavallaan ja tietokantojen toiminnassa on paljon pieniä eroja. Niinpä aiheeseen liittyvät yksityiskohdat kannattaa tarkastaa käytetyn tietokannan dokumentaatiosta.</p>
+
+<h3 id="tyypit">Tyypit</h3>
+
+<p>Taulun määrittelyssä jokaiselle sarakkeelle annetaan tyyppi:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Elokuvat</span><span class="p">(</span><span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> <span class="n">nimi</span> <span class="nb">TEXT</span><span class="p">,</span> <span class="n">vuosi</span> <span class="nb">INTEGER</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Tässä sarakkeen <code class="language-html highlighter-rouge">nimi</code> tyyppi on <code class="language-html highlighter-rouge">TEXT</code> (merkkijono) ja sarakkeen <code class="language-html highlighter-rouge">vuosi</code> tyyppi on <code class="language-html highlighter-rouge">INTEGER</code> (kokonaisluku). Nämä ovat yleisimmät tyypit, jotka ovat saatavilla näillä nimillä monissa tietokannoissa. Esimerkkejä muista yleisistä tyypeistä ovat <code class="language-html highlighter-rouge">TIMESTAMP</code> (ajanhetki), <code class="language-html highlighter-rouge">REAL</code> (liukuluku) ja <code class="language-html highlighter-rouge">BLOB</code> (raakadata).</p>
+
+<h4 id="text-vs-varchar">TEXT vs. VARCHAR</h4>
+
+<p>Perinteikäs tapa tallentaa merkkijono SQL:ssä on käyttää tyyppiä <code class="language-html highlighter-rouge">VARCHAR</code>, jossa annetaan suluissa merkkijonon maksimipituus. Esimerkiksi tyyppi <code class="language-html highlighter-rouge">VARCHAR(10)</code> tarkoittaa, että merkkijonossa voi olla enintään 10 merkkiä.</p>
+
+<p>Tämä on muistuma vanhan ajan ohjelmoinnista, jossa merkkijono saatettiin esittää kiinteän pituisena merkkitaulukkona. Tyyppi <code class="language-html highlighter-rouge">TEXT</code> on kuitenkin mukavampi, koska siinä ei tarvitse keksiä maksimipituutta.</p>
+
+<h4 id="sqliten-tyypit">SQLiten tyypit</h4>
+
+<p>Erikoinen piirre SQLiten toteutuksessa on, että taulun määrittelyssä esiintyvä tyyppi on vain ohje, mitä tyyppiä sarakkeessa tulisi olla. Voimme kuitenkin olla välittämättä ohjeesta ja vaikkapa tallentaa kokonaisluvun kohdalle merkkijonon:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Elokuvat</span> <span class="p">(</span><span class="n">nimi</span><span class="p">,</span><span class="n">vuosi</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">'Lumikki'</span><span class="p">,</span><span class="s1">'abc'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Lisäksi tyypin nimenä voi olla <em>mikä tahansa</em> merkkijono, vaikka SQLitessä ei olisi sellaista tyyppiä. Tämän avulla voimme esimerkiksi määritellä sarakkeen, johon on tarkoitus tallentaa ajanhetki:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Tapahtumat</span><span class="p">(</span><span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> <span class="n">paiva</span> <span class="nb">TIMESTAMP</span><span class="p">,</span> <span class="n">viesti</span> <span class="nb">TEXT</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>SQLitessä ei ole tyyppiä <code class="language-html highlighter-rouge">TIMESTAMP</code>, vaan ajanhetkiä käsitellään merkkijonoina, mutta tässä kuitenkin sarakkeen tyyppi ilmaisee, mitä siihen on tarkoitus tallentaa.</p>
+
+<h3 id="lausekkeet">Lausekkeet</h3>
+
+<p>Lauseke on SQL-komennon osa, jolla on tietty arvo.
+Esimerkiksi kyselyssä</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="n">hinta</span> <span class="k">FROM</span> <span class="n">Tuotteet</span> <span class="k">WHERE</span> <span class="n">nimi</span><span class="o">=</span><span class="s1">'retiisi'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>on neljä lauseketta: <code class="language-html highlighter-rouge">hinta</code>, <code class="language-html highlighter-rouge">nimi</code>, <code class="language-html highlighter-rouge">'retiisi'</code> ja <code class="language-html highlighter-rouge">nimi='retiisi'</code>. Lausekkeet <code class="language-html highlighter-rouge">hinta</code> ja <code class="language-html highlighter-rouge">nimi</code> saavat arvonsa rivin sarakkeesta, lauseke <code class="language-html highlighter-rouge">'retiisi'</code> on merkkijonovakio ja lauseke <code class="language-html highlighter-rouge">nimi='retiisi'</code> on totuusarvoinen.</p>
+
+<p>Voimme rakentaa monimutkaisempia lausekkeita samaan tapaan kuin ohjelmoinnissa. Esimerkiksi kysely</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="n">hinta</span><span class="o">*</span><span class="mi">5</span> <span class="k">FROM</span> <span class="n">Tuotteet</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>antaa jokaisen tuotteen hinnan viisinkertaisena ja kysely</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="n">nimi</span> <span class="k">FROM</span> <span class="n">Tuotteet</span> <span class="k">WHERE</span> <span class="n">hinta</span><span class="o">%</span><span class="mi">2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>hakee tuotteet, joiden hinta on parillinen.</p>
+
+<p>Hyvä tapa testata SQL:n lausekkeiden toimintaa on keskustella tietokannan kanssa tekemällä kyselyitä, jotka eivät hae tietoa mistään taulusta vaan laskevat vain tietyn lausekkeen arvon. Keskustelu voi näyttää vaikkapa seuraavalta:</p>
+
+<div class="language-prompt highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="p">sqlite&gt; </span>SELECT 2*(1+3);
+8
+<span class="p">sqlite&gt; </span>SELECT 'tes' || 'ti';
+testi
+<span class="p">sqlite&gt; </span>SELECT 3 &lt; 5;
+1
+</code></pre></div></div>
+
+<p>Ensimmäinen kysely laskee lausekkeen <code class="language-html highlighter-rouge">2*(1+3)</code> arvon. Toinen kysely yhdistää <code class="language-html highlighter-rouge">||</code>-operaattorilla
+merkkijonot <code class="language-html highlighter-rouge">'tes'</code> ja <code class="language-html highlighter-rouge">'ti'</code> merkkijonoksi <code class="language-html highlighter-rouge">'testi'</code>. Kolmas kysely puolestaan määrittää ehtolausekkeen <code class="language-html highlighter-rouge">3 <span class="nt">&lt;</span> <span class="nt">5</span></code> arvon. Tästä näkee, että SQLitessä kokonaisluku ilmaisee totuusarvon: 1 on tosi ja 0 on epätosi.</p>
+
+<p>Monet SQL:n lausekkeisiin liittyvät asiat ovat tuttuja ohjelmoinnista:</p>
+
+<ul>
+  <li>laskutoimitukset: <code class="language-html highlighter-rouge">+</code>, <code class="language-html highlighter-rouge">-</code>, <code class="language-html highlighter-rouge">*</code>, <code class="language-html highlighter-rouge">/</code>, <code class="language-html highlighter-rouge">%</code></li>
+  <li>vertaileminen: <code class="language-html highlighter-rouge">=</code>, <code class="language-html highlighter-rouge"><span class="nt">&lt;&gt;</span></code>, <code class="language-html highlighter-rouge"><span class="nt">&lt;</span></code>, <code class="language-html highlighter-rouge"><span class="nt">&lt;</span><span class="err">=</span></code>, <code class="language-html highlighter-rouge">&gt;</code>, <code class="language-html highlighter-rouge">&gt;=</code></li>
+  <li>ehtojen yhdistys: <code class="language-html highlighter-rouge">AND</code>, <code class="language-html highlighter-rouge">OR</code>, <code class="language-html highlighter-rouge">NOT</code></li>
+</ul>
+
+<p>Näiden lisäksi SQL:ssä on kuitenkin myös erikoisempia ominaisuuksia, joiden tuntemisesta on välillä hyötyä. Seuraavassa on joitakin niistä:</p>
+
+<h4 id="between">BETWEEN</h4>
+
+<p>Lauseke <code class="language-html highlighter-rouge">x BETWEEN a AND b</code> on tosi, jos <code class="language-html highlighter-rouge">x</code> on vähintään <code class="language-html highlighter-rouge">a</code> ja enintään <code class="language-html highlighter-rouge">b</code>. Esimerkiksi kysely</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Tuotteet</span> <span class="k">WHERE</span> <span class="n">hinta</span> <span class="k">BETWEEN</span> <span class="mi">4</span> <span class="k">AND</span> <span class="mi">6</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>hakee tuotteet, joiden hinta on vähintään 4 ja korkeintaan 6. Voimme toki kirjoittaa samalla tavalla toimivan kyselyn myös näin:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Tuotteet</span> <span class="k">WHERE</span> <span class="n">hinta</span> <span class="o">&gt;=</span> <span class="mi">4</span> <span class="k">AND</span> <span class="n">hinta</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="case">CASE</h4>
+
+<p>Rakenne <code class="language-html highlighter-rouge">CASE</code> mahdollistaa ehtolausekkeen tekemisen. Siinä voi olla yksi tai useampi <code class="language-html highlighter-rouge">WHEN</code>-osa sekä mahdollinen <code class="language-html highlighter-rouge">ELSE</code>-osa. Esimerkiksi kysely</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="n">nimi</span><span class="p">,</span> <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">hinta</span><span class="o">&gt;</span><span class="mi">5</span> <span class="k">THEN</span> <span class="s1">'kallis'</span> <span class="k">ELSE</span> <span class="s1">'halpa'</span> <span class="k">END</span> <span class="k">FROM</span> <span class="n">Tuotteet</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>hakee kunkin tuotteen nimen sekä tiedon siitä, onko tuote kallis vai halpa. Tässä tuote on kallis, jos sen hinta on yli 5, ja muuten halpa.</p>
+
+<h4 id="in">IN</h4>
+
+<p>Lauseke <code class="language-html highlighter-rouge">x IN (...)</code> on tosi, jos <code class="language-html highlighter-rouge">x</code> on jokin annetuista arvoista. Esimerkiksi kysely</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Tuotteet</span> <span class="k">WHERE</span> <span class="n">nimi</span> <span class="k">IN</span> <span class="p">(</span><span class="s1">'lanttu'</span><span class="p">,</span><span class="s1">'nauris'</span><span class="p">,</span><span class="s1">'selleri'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>hakee tuotteet, joiden nimi on lanttu, nauris tai selleri.</p>
+
+<h4 id="like">LIKE</h4>
+
+<p>Lauseke <code class="language-html highlighter-rouge">s LIKE p</code> on tosi, jos merkkijono <code class="language-html highlighter-rouge">s</code> vastaa kuvausta <code class="language-html highlighter-rouge">p</code>. Kuvauksessa voi käyttää erikoismerkkejä <code class="language-html highlighter-rouge">_</code> (mikä tahansa yksittäinen merkki) sekä <code class="language-html highlighter-rouge">%</code> (mikä tahansa määrä mitä tahansa merkkejä). Esimerkiksi kysely</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Tuotteet</span> <span class="k">WHERE</span> <span class="n">nimi</span> <span class="k">LIKE</span> <span class="s1">'%ri%'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>hakee tuotteet, joiden nimen osana esiintyy merkkijono “ri” (kuten nauris ja selleri).</p>
+
+<h3 id="funktiot">Funktiot</h3>
+
+<p>Lausekkeiden osana voi esiintyä myös funktioita samaan tapaan kuin ohjelmoinnissa. Tässä on esimerkkinä joitakin SQLiten funktioita:</p>
+
+<ul>
+  <li><code class="language-html highlighter-rouge">ABS(x)</code> antaa luvun <code class="language-html highlighter-rouge">x</code> itseisarvon</li>
+  <li><code class="language-html highlighter-rouge">LENGTH(s)</code> antaa merkkijonon <code class="language-html highlighter-rouge">s</code> pituuden</li>
+  <li><code class="language-html highlighter-rouge">LOWER(s)</code> muuttaa merkkijonon <code class="language-html highlighter-rouge">s</code> kirjaimet pieniksi</li>
+  <li><code class="language-html highlighter-rouge">MAX(x,y)</code> antaa suuremman luvuista <code class="language-html highlighter-rouge">x</code> ja <code class="language-html highlighter-rouge">y</code></li>
+  <li><code class="language-html highlighter-rouge">MIN(x,y)</code> antaa pienemmän luvuista <code class="language-html highlighter-rouge">x</code> ja <code class="language-html highlighter-rouge">y</code></li>
+  <li><code class="language-html highlighter-rouge">RANDOM()</code> antaa satunnaisen luvun</li>
+  <li><code class="language-html highlighter-rouge">ROUND(x,d)</code> antaa luvun <code class="language-html highlighter-rouge">x</code> pyöristettynä <code class="language-html highlighter-rouge">d</code> desimaalin tarkkuudelle</li>
+  <li><code class="language-html highlighter-rouge">SUBSTR(s,a,b)</code> antaa merkkijonon <code class="language-html highlighter-rouge">s</code> kohdasta <code class="language-html highlighter-rouge">a</code> alkaen <code class="language-html highlighter-rouge">b</code> merkkiä</li>
+  <li><code class="language-html highlighter-rouge">UPPER(s)</code> muuttaa merkkijonon <code class="language-html highlighter-rouge">s</code> kirjaimet suuriksi</li>
+</ul>
+
+<p>Esimerkiksi kysely</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Tuotteet</span> <span class="k">WHERE</span> <span class="k">LENGTH</span><span class="p">(</span><span class="n">nimi</span><span class="p">)</span><span class="o">=</span><span class="mi">6</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>hakee tuotteet, joiden nimessä on kuusi kirjainta (kuten lanttu ja nauris). Kysely</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="n">SUBSTR</span><span class="p">(</span><span class="n">nimi</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">Tuotteet</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">SUBSTR</span><span class="p">(</span><span class="n">nimi</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>ryhmittelee tuotteet ensimmäisen kirjaimen mukaan ja ilmoittaa kullakin kirjaimella alkavien tuotteiden määrät. Kysely</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Tuotteet</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">RANDOM</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>puolestaan antaa rivit <em>satunnaisessa</em> järjestyksessä, koska järjestys ei perustu minkään sarakkeen sisältöön vaan satunnaiseen arvoon.</p>
+
+<h4 id="order-by-ja-lausekkeet">ORDER BY ja lausekkeet</h4>
+
+<p>Voisi kuvitella, että kyselyssä</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Tuotteet</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="mi">1</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>rivit järjestetään lausekkeen <code class="language-html highlighter-rouge">1</code> mukaan. Koska lausekkeen arvo on joka rivillä <code class="language-html highlighter-rouge">1</code>, tämä ei tuottaisi mitään erityistä järjestystä. Näin ei kuitenkaan ole, vaan <code class="language-html highlighter-rouge">1</code> järjestää rivit ensimmäisen sarakkeen mukaan, <code class="language-html highlighter-rouge">2</code> toisen sarakkeen mukaan, jne. Tämä on siis vaihtoehtoinen tapa ilmaista sarake, johon järjestys perustuu.</p>
+
+<p>Kuitenkin jos <code class="language-html highlighter-rouge">ORDER BY</code> -osassa oleva lauseke on jotain muuta kuin yksittäinen luku (kuten <code class="language-html highlighter-rouge">RANDOM()</code>), rivit järjestetään kyseisen lausekkeen mukaisesti.</p>
+
+<h2 id="null-arvot">NULL-arvot</h2>
+
+<p><code class="language-html highlighter-rouge">NULL</code> on erityinen arvo, joka ilmaisee, että taulun sarakkeessa ei ole tietoa tai jokin kyselyn osa ei tuottanut tietoa. <code class="language-html highlighter-rouge">NULL</code> on tietyissä tilanteissa kätevä, mutta voi aiheuttaa myös yllätyksiä.</p>
+
+<p><code class="language-html highlighter-rouge">NULL</code> on selkeästi eri asia kuin luku 0. Jos <code class="language-html highlighter-rouge">NULL</code> esiintyy laskun osana, niin koko laskun tulokseksi tulee <code class="language-html highlighter-rouge">NULL</code>. SQLite-tulkki näyttää tällöin vain tyhjän rivin:</p>
+
+<div class="language-prompt highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="p">sqlite&gt; </span>SELECT NULL;
+
+<span class="p">sqlite&gt; </span>SELECT 5+NULL;
+
+<span class="p">sqlite&gt; </span>SELECT 2*NULL+1;
+
+</code></pre></div></div>
+
+<p>Myöskään tavallinen vertailu ei tuota tulosta, jos verrattavana on <code class="language-html highlighter-rouge">NULL</code>:</p>
+
+<div class="language-prompt highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="p">sqlite&gt; </span>SELECT 5 = NULL;
+
+<span class="p">sqlite&gt; </span>SELECT 5 &lt;&gt; NULL;
+
+</code></pre></div></div>
+
+<p>Tämä on yllättävää, koska yleensä lausekkeille <code class="language-html highlighter-rouge">a</code> ja <code class="language-html highlighter-rouge">b</code> pätee joko <code class="language-html highlighter-rouge">a = b </code> tai <code class="language-html highlighter-rouge">a <span class="nt">&lt;&gt;</span> b</code>. Voimme kuitenkin tutkia erityisen syntaksin <code class="language-html highlighter-rouge">IS NULL</code> avulla, onko lausekkeen arvo <code class="language-html highlighter-rouge">NULL</code>:</p>
+
+<div class="language-prompt highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="p">sqlite&gt; </span>SELECT 5 IS NULL;
+0
+<span class="p">sqlite&gt; </span>SELECT NULL IS NULL;
+1
+</code></pre></div></div>
+
+<h3 id="sarakkeen-puuttuva-tieto">Sarakkeen puuttuva tieto</h3>
+
+<p><code class="language-html highlighter-rouge">NULL</code>-arvon yksi käyttötarkoitus on ilmaista, että jossain sarakkeessa ei ole tietoa. Esimerkiksi seuraavassa taulussa <code class="language-html highlighter-rouge">Elokuvat</code> Dumbon vuosi puuttuu, joten sen kohdalla on <code class="language-html highlighter-rouge">NULL</code>:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi        vuosi     
+----------  ----------  ----------
+1           Lumikki     1937      
+2           Fantasia    1940      
+3           Pinocchio   1940      
+4           Dumbo                 
+5           Bambi       1942  
+</code></pre></div></div>
+
+<p>Kun haemme ensin vuoden 1940 elokuvat ja sitten kaikki elokuvat muilta vuosilta, saamme seuraavat tulokset:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Elokuvat</span> <span class="k">WHERE</span> <span class="n">vuosi</span><span class="o">=</span><span class="mi">1940</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi        vuosi     
+----------  ----------  ----------
+2           Fantasia    1940      
+3           Pinocchio   1940      
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Elokuvat</span> <span class="k">WHERE</span> <span class="n">vuosi</span><span class="o">&lt;&gt;</span><span class="mi">1940</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi        vuosi     
+----------  ----------  ----------
+1           Lumikki     1937      
+5           Bambi       1942      
+</code></pre></div></div>
+
+<p>Koska Dumbolla ei ole vuotta, emme saa sitä kummassakaan kyselyssä, mikä on yllättävä ilmiö. Voimme kuitenkin hakea näin elokuvat, joilla ei ole vuotta:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Elokuvat</span> <span class="k">WHERE</span> <span class="n">vuosi</span> <span class="k">IS</span> <span class="k">NULL</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi        vuosi     
+----------  ----------  ----------
+4           Dumbo            
+</code></pre></div></div>
+
+<h3 id="null-arvo-koostefunktiossa">NULL-arvo koostefunktiossa</h3>
+
+<p>Kun koostefunktion sisällä on lauseke (kuten sarake), riviä ei lasketa mukaan, jos lausekkeen arvo on <code class="language-html highlighter-rouge">NULL</code>. Tarkastellaan esimerkkinä seuraavaa taulua <code class="language-html highlighter-rouge">Tyontekijat</code>:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi        yritys      palkka    
+----------  ----------  ----------  ----------
+1           Anna        Google      8000      
+2           Liisa       Google      7500      
+3           Kaaleppi    Amazon            
+4           Uolevi      Amazon      
+5           Maija       Google      9500      
+</code></pre></div></div>
+
+<p>Taulussa Googlen työntekijöillä on ilmoitettu palkka, mutta Amazonin työntekijöillä ei. Koostefunktio <code class="language-html highlighter-rouge">COUNT(palkka)</code> laskee mukaan vain rivit, joissa palkka on ilmoitettu:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="n">palkka</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">Tyontekijat</span> <span class="k">WHERE</span> <span class="n">yritys</span><span class="o">=</span><span class="s1">'Google'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>COUNT(palkka)
+-------------
+3
+
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="n">palkka</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">Tyontekijat</span> <span class="k">WHERE</span> <span class="n">yritys</span><span class="o">=</span><span class="s1">'Amazon'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>COUNT(palkka)
+-------------
+0
+</code></pre></div></div>
+
+<p>Kun sitten laskemme palkkojen summia koostefunktiolla <code class="language-html highlighter-rouge">SUM(palkka)</code>, saamme seuraavat tulokset:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="k">SUM</span><span class="p">(</span><span class="n">palkka</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">Tyontekijat</span> <span class="k">WHERE</span> <span class="n">yritys</span><span class="o">=</span><span class="s1">'Google'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>SUM(palkka)
+-----------
+25000      
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="k">SUM</span><span class="p">(</span><span class="n">palkka</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">Tyontekijat</span> <span class="k">WHERE</span> <span class="n">yritys</span><span class="o">=</span><span class="s1">'Amazon'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>SUM(palkka)
+-----------
+
+</code></pre></div></div>
+
+<p>Tämä on vähän yllättävää, koska voisi myös odottaa tyhjän summan olevan 0 eikä <code class="language-html highlighter-rouge">NULL</code>.</p>
+
+<h3 id="null-arvon-muuttaminen">NULL-arvon muuttaminen</h3>
+
+<p>Funktio <code class="language-html highlighter-rouge">IFNULL(a,b)</code> palauttaa arvon <code class="language-html highlighter-rouge">a</code>, jos <code class="language-html highlighter-rouge">a</code> ei ole <code class="language-html highlighter-rouge">NULL</code>, ja muuten arvon <code class="language-html highlighter-rouge">b</code>:</p>
+
+<div class="language-prompt highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="p">sqlite&gt; </span>SELECT IFNULL(5,0);
+IFNULL(5,0)
+-----------
+5          
+<span class="p">sqlite&gt; </span>SELECT IFNULL(NULL,0);
+IFNULL(NULL,0)
+--------------
+0
+</code></pre></div></div>
+
+<p>Yllä oleva tapa on tyypillinen tapa käyttää funktiota: kun toinen parametri on 0, niin funktio muuttaa mahdollisen <code class="language-html highlighter-rouge">NULL</code>-arvon nollaksi. Tästä on hyötyä esimerkiksi <code class="language-html highlighter-rouge">LEFT JOIN</code> -kyselyissä
+<code class="language-html highlighter-rouge">SUM</code>-funktion kanssa.</p>
+
+<p>Yleisempi funktio on <code class="language-html highlighter-rouge">COALESCE(...)</code>, jolle annetaan lista arvoista. Funktio palauttaa listan ensimmäisen arvon, joka ei ole <code class="language-html highlighter-rouge">NULL</code>, tai arvon <code class="language-html highlighter-rouge">NULL</code>, jos jokainen arvo on <code class="language-html highlighter-rouge">NULL</code>. Jos funktiolla on kaksi parametria, se toimii samoin kuin <code class="language-html highlighter-rouge">IFNULL</code>.</p>
+
+<div class="language-prompt highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="p">sqlite&gt; </span>SELECT COALESCE(1,2,3);
+COALESCE(1,2,3)
+---------------
+1              
+<span class="p">sqlite&gt; </span>SELECT COALESCE(NULL,2,3);
+COALESCE(NULL,2,3)
+------------------
+2                 
+<span class="p">sqlite&gt; </span>SELECT COALESCE(NULL,NULL,3);
+COALESCE(NULL,NULL,3)
+---------------------
+3                    
+<span class="p">sqlite&gt; </span>SELECT COALESCE(NULL,NULL,NULL);
+COALESCE(NULL,NULL,NULL)
+------------------------
+
+</code></pre></div></div>
+
+<h2 id="tulosrivien-rajaus">Tulosrivien rajaus</h2>
+
+<p>Kun lisäämme kyselyn loppuun <code class="language-html highlighter-rouge">LIMIT x</code>, kysely antaa vain <code class="language-html highlighter-rouge">x</code> ensimmäistä tulosriviä. Esimerkiksi <code class="language-html highlighter-rouge">LIMIT 3</code> tarkoittaa, että kysely antaa kolme ensimmäistä tulosriviä.</p>
+
+<p>Yleisempi muoto on <code class="language-html highlighter-rouge">LIMIT x OFFSET y</code>, mikä tarkoittaa, että haluamme <code class="language-html highlighter-rouge">x</code> riviä kohdasta <code class="language-html highlighter-rouge">y</code> alkaen (0-indeksoituna). Esimerkiksi <code class="language-html highlighter-rouge">LIMIT 3 OFFSET 1</code> tarkoittaa, että kysely antaa toisen, kolmannen ja neljännen tulosrivin.</p>
+
+<p>Tarkastellaan esimerkkinä kyselyä, joka hakee tuotteita halvimmasta kalleimpaan:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Tuotteet</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">hinta</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Kyselyn tuloksena on seuraava tulostaulu:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi        hinta     
+----------  ----------  ----------
+3           nauris      2
+5           selleri     4         
+2           porkkana    5         
+1           retiisi     7         
+4           lanttu      8         
+</code></pre></div></div>
+
+<p>Saamme haettua kolme halvinta tuotetta seuraavasti:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Tuotteet</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">hinta</span> <span class="k">LIMIT</span> <span class="mi">3</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Kyselyn tulos on seuraava:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi        hinta     
+----------  ----------  ----------
+3           nauris      2         
+5           selleri     4         
+2           porkkana    5      
+</code></pre></div></div>
+
+<p>Seuraava kysely puolestaan hakee kolme halvinta tuotetta toiseksi halvimmasta tuotteesta alkaen:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Tuotteet</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">hinta</span> <span class="k">LIMIT</span> <span class="mi">3</span> <span class="k">OFFSET</span> <span class="mi">1</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Tämän kyselyn tulos on seuraava:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi        hinta     
+----------  ----------  ----------
+5           selleri     4         
+2           porkkana    5         
+1           retiisi     7    
+</code></pre></div></div>
+
+<h2 id="alikyselyt">Alikyselyt</h2>
+
+<p><em>Alikysely</em> on SQL-komennon osana oleva lauseke, jonka arvo syntyy jonkin kyselyn perusteella.
+Voimme rakentaa alikyselyjä samaan tapaan kuin varsinaisia kyselyjä ja toteuttaa niiden avulla hakuja, joita olisi vaikea saada aikaan muuten.</p>
+
+<h3 id="esimerkki">Esimerkki</h3>
+
+<p>Tarkastellaan esimerkkinä tilannetta, jossa tietokannassa on pelaajien tuloksia taulussa <code class="language-html highlighter-rouge">Tulokset</code>. Oletamme, että taulun sisältö on seuraava:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi        tulos     
+----------  ----------  ----------
+1           Uolevi      120       
+2           Maija       80        
+3           Liisa       120       
+4           Aapeli      45        
+5           Kaaleppi    115    
+</code></pre></div></div>
+
+<p>Haluamme nyt selvittää ne pelaajat, jotka ovat saavuttaneet korkeimman tuloksen, eli kyselyn tulisi palauttaa Uolevi ja Liisa. Saamme tämän aikaan alikyselyllä seuraavasti:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">nimi</span><span class="p">,</span> <span class="n">tulos</span>
+<span class="k">FROM</span>
+  <span class="n">Tulokset</span>
+<span class="k">WHERE</span>
+  <span class="n">tulos</span> <span class="o">=</span> <span class="p">(</span><span class="k">SELECT</span> <span class="k">MAX</span><span class="p">(</span><span class="n">tulos</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">Tulokset</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Kyselyn tuloksena on:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi        tulos     
+----------  ----------
+Uolevi      120       
+Liisa       120       
+</code></pre></div></div>
+
+<p>Tässä kyselyssä alikysely on <code class="language-html highlighter-rouge">SELECT MAX(tulos) FROM Tulokset</code>, joka antaa suurimman taulussa olevan tuloksen eli tässä tapauksessa arvon 120. Huomaa, että alikysely tulee kirjoittaa sulkujen sisään, jotta se ei sekoitu pääkyselyyn.</p>
+
+<h3 id="alikyselyn-laatiminen">Alikyselyn laatiminen</h3>
+
+<p>Alikysely voi esiintyä melkein missä tahansa kohtaa kyselyssä, ja se voi tilanteesta riippuen palauttaa yksittäisen arvon, listan arvoista tai kokonaisen taulun.</p>
+
+<h4 id="alikysely-sarakkeessa">Alikysely sarakkeessa</h4>
+
+<p>Seuraavassa kyselyssä alikyselyn avulla luodaan kolmas sarake, joka näyttää pelaajan tuloksen eron ennätystulokseen:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">nimi</span><span class="p">,</span> <span class="n">tulos</span><span class="p">,</span> <span class="p">(</span><span class="k">SELECT</span> <span class="k">MAX</span><span class="p">(</span><span class="n">tulos</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">Tulokset</span><span class="p">)</span><span class="o">-</span><span class="n">tulos</span>
+<span class="k">FROM</span>
+  <span class="n">Tulokset</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi        tulos       (SELECT MAX(tulos) FROM Tulokset)-tulos
+----------  ----------  ---------------------------------------
+Uolevi      120         0                                      
+Maija       80          40                                     
+Liisa       120         0                                      
+Aapeli      45          75                                     
+Kaaleppi    115         5   
+</code></pre></div></div>
+
+<h4 id="alikysely-tauluna">Alikysely tauluna</h4>
+
+<p>Seuraavassa kyselyssä alikysely luo taulun, jossa on kolme parasta tulosta.
+Näiden tulosten summa (120+120+115) lasketaan pääkyselyssä.</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="k">SUM</span><span class="p">(</span><span class="n">tulos</span><span class="p">)</span>
+<span class="k">FROM</span>
+  <span class="p">(</span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Tulokset</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">tulos</span> <span class="k">DESC</span> <span class="k">LIMIT</span> <span class="mi">3</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>SUM(tulos)
+----------
+355
+</code></pre></div></div>
+
+<p>Tässä avainsana <code class="language-html highlighter-rouge">LIMIT</code> rajaa tulostaulua niin, että siinä on vain kolme ensimmäistä riviä.</p>
+
+<p>Huomaa, että yhtä kyselyä käyttämällä saisimme väärän tuloksen:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="k">SUM</span><span class="p">(</span><span class="n">tulos</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">Tulokset</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">tulos</span> <span class="k">DESC</span> <span class="k">LIMIT</span> <span class="mi">3</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>SUM(tulos)
+----------
+480     
+</code></pre></div></div>
+
+<p>Tässä tulostaulussa on vain yksi rivi, jossa on kaikkien tulosten summa (480). Niinpä kyselyn lopussa oleva <code class="language-html highlighter-rouge">LIMIT 3</code> ei vaikuta mitenkään tulokseen.</p>
+
+<h4 id="alikysely-listana">Alikysely listana</h4>
+
+<p>Seuraava kysely hakee pelaajat, joiden tulos kuuluu kolmen parhaimman joukkoon. Alikysely palauttaa listan tuloksista IN-lauseketta varten.</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">nimi</span>
+<span class="k">FROM</span>
+  <span class="n">Tulokset</span>
+<span class="k">WHERE</span>
+  <span class="n">tulos</span> <span class="k">IN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">tulos</span> <span class="k">FROM</span> <span class="n">Tulokset</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">tulos</span> <span class="k">DESC</span> <span class="k">LIMIT</span> <span class="mi">3</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi      
+----------
+Uolevi    
+Liisa     
+Kaaleppi  
+</code></pre></div></div>
+
+<h3 id="riippuva-alikysely">Riippuva alikysely</h3>
+
+<p>Alikysely on mahdollista toteuttaa myös niin, että sen toiminta riippuu pääkyselyssä käsiteltävästä rivistä. Näin on seuraavassa kyselyssä:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">nimi</span><span class="p">,</span> <span class="n">tulos</span><span class="p">,</span> <span class="p">(</span><span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">Tulokset</span> <span class="k">WHERE</span> <span class="n">tulos</span> <span class="o">&gt;</span> <span class="n">T</span><span class="p">.</span><span class="n">tulos</span><span class="p">)</span>
+<span class="k">FROM</span>
+  <span class="n">Tulokset</span> <span class="n">T</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Tämän kysely laskee jokaiselle pelaajalle, monenko pelaajan tulos on parempi kuin pelaajan oma tulos. Esimerkiksi Maijalle vastaus on 3, koska Uolevin, Liisan ja Kaalepin tulos on parempi. Kysely antaa seuraavan tuloksen:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>nimi        tulos       (SELECT COUNT(*) FROM Tulokset WHERE tulos &gt; T.tulos)
+----------  ----------  -----------------------------------------------------
+Uolevi      120         0                                                    
+Maija       80          3                                                    
+Liisa       120         0                                                    
+Aapeli      45          4                                                    
+Kaaleppi    115         2                                                    
+</code></pre></div></div>
+
+<p>Koska taulu <code class="language-html highlighter-rouge">Tulokset</code> esiintyy kahdessa roolissa alikyselyssä, pääkyselyn taululle on annettu nimi <code class="language-html highlighter-rouge">T</code>. Tämän ansiosta alikyselyssä on selvää, että halutaan laskea rivejä, joiden tulos on parempi kuin pääkyselyssä käsiteltävän rivin tulos.</p>
+
+<h3 id="milloin-käyttää-alikyselyä">Milloin käyttää alikyselyä?</h3>
+
+<p>Melko usein alikysely on vaihtoehtoinen tapa toteuttaa kysely, jonka voisi tehdä jotenkin muutenkin. Esimerkiksi molemmat seuraavat kyselyt hakevat tuotteiden nimet asiakkaan 1 ostoskorissa:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">T</span><span class="p">.</span><span class="n">nimi</span>
+<span class="k">FROM</span>
+  <span class="n">Tuotteet</span> <span class="n">T</span><span class="p">,</span> <span class="n">Ostokset</span> <span class="n">O</span>
+<span class="k">WHERE</span>
+  <span class="n">T</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">O</span><span class="p">.</span><span class="n">tuote_id</span> <span class="k">AND</span> <span class="n">O</span><span class="p">.</span><span class="n">asiakas_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">nimi</span>
+<span class="k">FROM</span>
+  <span class="n">Tuotteet</span>
+<span class="k">WHERE</span>
+  <span class="n">id</span> <span class="k">IN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">tuote_id</span> <span class="k">FROM</span> <span class="n">Ostokset</span> <span class="k">WHERE</span> <span class="n">asiakas_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Ensimmäinen kysely on tyypillinen kahden taulun kysely, kun taas toinen kysely valikoi tuotteet alikyselyn avulla. Kumpi kysely on parempi?</p>
+
+<p>Ensimmäinen kysely on parempi, koska tämä on tarkoitettu tapa hakea SQL:ssä tietoa tauluista viittausten avulla. Toinen kysely toimii sinänsä, mutta se poikkeaa totutusta eikä tietokantajärjestelmä myöskään pysty ehkä suorittamaan sitä yhtä tehokkaasti.</p>
+
+<p>Alikyselyä kannattaa käyttää vain silloin, kun siihen on todellinen syy. Jos kyselyn voi tehdä helposti usean taulun kyselyllä, tämä on yleensä parempi ratkaisu.</p>
+
+<h2 id="lisää-tekniikoita">Lisää tekniikoita</h2>
+
+<p>Tässä osiossa on lisää näytteitä SQL:n mahdollisuuksista. Näistä tekniikoista on hyötyä joidenkin SQL Trainerin vaikeiden tehtävien ratkaisemisessa.</p>
+
+<h3 id="kumulatiivinen-summa">Kumulatiivinen summa</h3>
+
+<p>Hyödyllinen taito SQL:ssä on osata laskea <em>kumulatiivinen summa</em> eli jokaiselle riville summa sarakkeen luvuista kyseiselle riville asti. Tarkastellaan esimerkiksi seuraavaa taulua:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          tulos
+----------  ----------
+1           200
+2           100
+3           400
+4           100
+</code></pre></div></div>
+
+<p>Voimme laskea kumulatiivisen summan kahden taulun kyselyllä näin:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">id</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">B</span><span class="p">.</span><span class="n">tulos</span><span class="p">)</span>
+<span class="k">FROM</span>
+  <span class="n">Tulokset</span> <span class="n">A</span><span class="p">,</span> <span class="n">Tulokset</span> <span class="n">B</span>
+<span class="k">WHERE</span>
+  <span class="n">B</span><span class="p">.</span><span class="n">id</span> <span class="o">&lt;=</span> <span class="n">A</span><span class="p">.</span><span class="n">id</span>
+<span class="k">GROUP</span> <span class="k">BY</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          SUM(B.tulos)
+----------  ------------
+1           200         
+2           300         
+3           700         
+4           800       
+</code></pre></div></div>
+
+<p>Tässä on ideana, että summa lasketaan taulun <code class="language-html highlighter-rouge">A</code> riville ja taulusta <code class="language-html highlighter-rouge">B</code> haetaan kaikki rivit, joiden <code class="language-html highlighter-rouge">id</code> on pienempi tai sama kuin taulun <code class="language-html highlighter-rouge">A</code> rivillä. Halutut summat saadaan laskettua <code class="language-html highlighter-rouge">SUM</code>-funktiolla ryhmittelyn jälkeen.</p>
+
+<p>Vastaavaa tekniikkaa voi käyttää muissakin tilanteissa, jos haluamme laskea tuloksen, joka riippuu jotenkin kaikista “pienemmistä” riveistä taulussa.</p>
+
+<h3 id="sisäkkäiset-koosteet">Sisäkkäiset koosteet</h3>
+
+<p>Tarkastellaan tilannetta, jossa haluamme selvittää, mikä on suurin määrä elokuvia, jotka ovat ilmestyneet samana vuonna. Esimerkiksi seuraavassa taulussa haluttu tulos on 2, koska vuonna 1940 ilmestyi kaksi elokuvaa.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi        vuosi     
+----------  ----------  ----------
+1           Lumikki     1937      
+2           Fantasia    1940      
+3           Pinocchio   1940      
+4           Dumbo       1941      
+5           Bambi       1942      
+</code></pre></div></div>
+
+<p>Tämä on vähän hankalalta vaikuttava tilanne, koska meidän tulisi tehdä sisäkkäin kyselyt <code class="language-html highlighter-rouge">COUNT</code>, joka laskee ilmestymismääriä, ja sitten <code class="language-html highlighter-rouge">MAX</code>, joka hakee suurimman arvon. SQL ei salli kuitenkaan kyselyä <code class="language-html highlighter-rouge">SELECT MAX(COUNT(vuosi))</code> tai vastaavaa.</p>
+
+<p>Voimme ottaa kuitenkin lähtökohdaksi kyselyn,
+joka ryhmittelee elokuvat vuoden mukaan ja hakee jokaisesta ryhmästä
+elokuvien määrän:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">Elokuvat</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">vuosi</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>COUNT(*)  
+----------
+1         
+2         
+1         
+1       
+</code></pre></div></div>
+
+<p>Näistä luvuista pitää vielä saada haettua suurin, mikä onnistuu alikyselyn avulla. Tässä tapauksessa kätevä tapa on käyttää alikyselyä niin, että sen tulos on pääkyselyn <code class="language-html highlighter-rouge">FROM</code>-osassa, jolloin alikysely luo taulun, josta pääkysely hakee tietoa:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="k">MAX</span><span class="p">(</span><span class="k">c</span><span class="p">)</span> <span class="k">FROM</span> <span class="p">(</span><span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">c</span> <span class="k">FROM</span> <span class="n">Elokuvat</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">vuosi</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>MAX(c)    
+----------
+2       
+</code></pre></div></div>
+
+<p>Entä voisiko tehtävän ratkaista ilman alikyselyä? Kyllä, koska voimme järjestää tulokset suurimmasta pienimpään ja valita tulostaulun ensimmäisen rivin:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">c</span> <span class="k">FROM</span> <span class="n">Elokuvat</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">vuosi</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="k">c</span> <span class="k">DESC</span> <span class="k">LIMIT</span> <span class="mi">1</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>c         
+----------
+2          
+</code></pre></div></div>
+
+<h3 id="sijaluvut">Sijaluvut</h3>
+
+<p>Tarkastellaan taulua, jossa on pelaajia ja heidän tuloksiaan:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          nimi        tulos     
+----------  ----------  ----------
+1           Aapeli      45        
+2           Kaaleppi    115       
+3           Liisa       120       
+4           Maija       80        
+5           Uolevi      120   
+</code></pre></div></div>
+
+<p>Tavoitteena on hakea rivit järjestyksessä tuloksen mukaan suurimmasta pienempään ja ilmoittaa lisäksi kunkin rivin <em>sijaluku</em>. Yksi tapa toteuttaa tämä on tehdä alikysely, joka laskee, monellako rivillä tulos on parempi, jolloin sija on yhtä suurempi kuin alikyselyn tulos:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="p">(</span><span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">Tulokset</span> <span class="k">WHERE</span> <span class="n">tulos</span> <span class="o">&gt;</span> <span class="n">T</span><span class="p">.</span><span class="n">tulos</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span> <span class="n">sija</span><span class="p">,</span> <span class="n">nimi</span><span class="p">,</span> <span class="n">tulos</span>
+<span class="k">FROM</span>
+  <span class="n">Tulokset</span> <span class="n">T</span>
+<span class="k">ORDER</span> <span class="k">BY</span>
+  <span class="n">tulos</span> <span class="k">DESC</span><span class="p">,</span> <span class="n">nimi</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>sija        nimi        tulos     
+----------  ----------  ----------
+1           Liisa       120       
+1           Uolevi      120       
+3           Kaaleppi    115       
+4           Maija       80        
+5           Aapeli      45   
+</code></pre></div></div>
+
+<p>Samalla idealla voidaan laskea sijaluvut myös niin, että jokaisella on eri sija ja yhtä suuren tuloksen tapauksessa aakkosjärjestys ratkaisee sijan:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="p">(</span><span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">Tulokset</span> <span class="k">WHERE</span> <span class="n">tulos</span> <span class="o">&gt;</span> <span class="n">T</span><span class="p">.</span><span class="n">tulos</span> <span class="k">OR</span> <span class="p">(</span><span class="n">tulos</span> <span class="o">=</span> <span class="n">T</span><span class="p">.</span><span class="n">tulos</span> <span class="k">AND</span> <span class="n">nimi</span> <span class="o">&lt;</span> <span class="n">T</span><span class="p">.</span><span class="n">nimi</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span> <span class="n">sija</span><span class="p">,</span> <span class="n">nimi</span><span class="p">,</span> <span class="n">tulos</span>
+<span class="k">FROM</span>
+  <span class="n">Tulokset</span> <span class="n">T</span>
+<span class="k">ORDER</span> <span class="k">BY</span>
+  <span class="n">tulos</span> <span class="k">DESC</span><span class="p">,</span> <span class="n">nimi</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>sija        nimi        tulos     
+----------  ----------  ----------
+1           Liisa       120       
+2           Uolevi      120       
+3           Kaaleppi    115       
+4           Maija       80        
+5           Aapeli      45   
+</code></pre></div></div>
+
+<p>Vaihtoehtoinen tapa laskea sijalukuja on ikkunafunktio, jos käytetty tietokanta sallii sen. Esimerkiksi SQLiten uusissa versioissa ikkunafunktioiden <code class="language-html highlighter-rouge">RANK</code> ja <code class="language-html highlighter-rouge">ROW_NUMBER</code> avulla voidaan laskea vastaavat sijaluvut kuin äskeisissä esimerkeissä.</p>
+
+<h3 id="listojen-vertailu">Listojen vertailu</h3>
+
+<p>Tarkastellaan taulua, johon on tallennettu listojen sisältö. Esimerkiksi seuraavassa taulussa lista 1 sisältää luvut [2, 4, 5], lista 2 sisältää luvut [3, 5] ja lista 3 sisältää luvut [2, 4, 5]:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>id          lista_id    luku     
+----------  ----------  ----------
+1           1           2         
+2           1           4         
+3           1           5         
+4           2           3         
+5           2           5         
+6           3           2         
+7           3           4         
+8           3           5     
+</code></pre></div></div>
+
+<p>Seuraava kysely laskee jokaiselle listaparille, montako <em>yhteistä</em> tulosta niillä on:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="syntax"><code><span class="k">SELECT</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">lista_id</span><span class="p">,</span> <span class="n">B</span><span class="p">.</span><span class="n">lista_id</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<span class="k">FROM</span>
+  <span class="n">Listat</span> <span class="n">A</span><span class="p">,</span> <span class="n">Listat</span> <span class="n">B</span>
+<span class="k">WHERE</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">luku</span><span class="o">=</span><span class="n">B</span><span class="p">.</span><span class="n">luku</span>
+<span class="k">GROUP</span> <span class="k">BY</span>
+  <span class="n">A</span><span class="p">.</span><span class="n">lista_id</span><span class="p">,</span> <span class="n">B</span><span class="p">.</span><span class="n">lista_id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="syntax"><code>lista_id    lista_id    COUNT(*)  
+----------  ----------  ----------
+1           1           3         
+1           2           1         
+1           3           3         
+2           1           1         
+2           2           2         
+2           3           1         
+3           1           3         
+3           2           1         
+3           3           3     
+</code></pre></div></div>
+
+<p>Tästä selviää, että esimerkiksi listoilla 1 ja 2 on yksi yhteinen luku (5) ja listoilla 1 ja 3 on kolme yhteistä lukua (2, 4, 5). Tällaista kyselyä laajentamalla voidaan vaikkapa vertailla, onko kahdella listalla täysin sama sisältö. Näin on silloin, kun listoilla on yhtä monta lukua ja yhteisten lukujen määrä on yhtä suuri kuin yksittäisen listan lukujen määrä.</p>
+
+
+</div>
+        <div class="footer">
+    <img src=/syksy-2023/assets/img/HY_logo.png>
+    </div>
+    </div>
+</body>
+
+</html>
